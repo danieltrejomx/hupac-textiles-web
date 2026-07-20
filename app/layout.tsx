@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/Providers";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -16,7 +17,7 @@ const plexMono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: "HUPAC TEXTILES — Uniformes empresariales. Nuestro negocio es tu imagen.",
-  description: "Empresa 100% mexicana fundada en 2005. Más de 43 mil clientes y 7 millones de prendas. Bordado, serigrafía, sublimación e impresión directa. Cotiza por WhatsApp.",
+  description: "Empresa 100% mexicana fundada en 2005. Más de 43 mil clientes y 7 millones de prendas. Bordado, serigrafía, sublimación e impresión directa.",
 };
 
 export default function RootLayout({
@@ -26,10 +27,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body
-        className={`${archivo.variable} ${plexMono.variable} antialiased`}
-      >
-        {children}
+      <body className={`${archivo.variable} ${plexMono.variable} antialiased`}>
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

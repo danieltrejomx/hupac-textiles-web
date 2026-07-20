@@ -12,6 +12,8 @@ export interface Product {
   descripcion: string;
   composicion: string;
   gramaje: string;
+  precioUnitario: number;
+  precioMayoreo?: number;
   tallas: string[];
   detalles: string[];
   tecnicas: string[];
@@ -28,6 +30,8 @@ export const PRODUCTS: Product[] = [
     descripcion: 'Playera de corte clásico confeccionada en 100% algodón de peso completo. Ideal para uniformes industriales, comerciales y promocionales de gran durabilidad.',
     composicion: '100% Algodón peinado',
     gramaje: '190 g/m²',
+    precioUnitario: 110,
+    precioMayoreo: 95,
     tallas: ['CH', 'M', 'G', 'XG', '2EG'],
     detalles: [
       'Cuello en tejido de punto con costura doble reforzada',
@@ -55,6 +59,8 @@ export const PRODUCTS: Product[] = [
     descripcion: 'Prenda versátil de tacto suave y frescura superior. Disponible en 17 colores de línea y cortes para toda la familia.',
     composicion: '100% Algodón',
     gramaje: '155 g/m²',
+    precioUnitario: 95,
+    precioMayoreo: 85,
     tallas: ['CH', 'M', 'G', 'XG', '2EG'],
     detalles: [
       'Silueta confort regular',
@@ -80,6 +86,8 @@ export const PRODUCTS: Product[] = [
     descripcion: 'Polo ejecutiva clásica con cuello y puños tejidos. Aletilla reforzada de 3 botones al tono, excelente opción para imagen corporativa elegante.',
     composicion: '100% Algodón Piqué',
     gramaje: '230 g/m²',
+    precioUnitario: 180,
+    precioMayoreo: 165,
     tallas: ['CH', 'M', 'G', 'XG', '2EG'],
     detalles: [
       'Cuello y puños en tejido rib de alta resistencia',
@@ -106,6 +114,8 @@ export const PRODUCTS: Product[] = [
     descripcion: 'Playera tipo polo con corte ergonómico asiluetado para dama. Aletilla estilizada de 4 botones al tono para un estilo impecable.',
     composicion: '100% Algodón Piqué',
     gramaje: '230 g/m²',
+    precioUnitario: 175,
+    precioMayoreo: 160,
     tallas: ['CH', 'M', 'G', 'XG'],
     detalles: [
       'Corte curvo en cintura para ajuste femenino cómodo',
@@ -131,6 +141,8 @@ export const PRODUCTS: Product[] = [
     descripcion: 'Línea Supreme con mezcla de algodón peinado y poliéster para cero encogimiento y secado rápido. Fit regular moderno.',
     composicion: '50% Algodón peinado / 50% Poliéster',
     gramaje: '210 g/m²',
+    precioUnitario: 210,
+    precioMayoreo: 190,
     tallas: ['CH', 'M', 'G', 'XG', '2EG'],
     detalles: [
       'Hombros reforzados con pespunte doble',
@@ -156,6 +168,8 @@ export const PRODUCTS: Product[] = [
     descripcion: 'Conjunto de uniforme operativo de alta durabilidad. Camisa ejecutiva/operativa combinada con pantalón duradero de mezclilla o gabardina.',
     composicion: 'Camisa: Algodón/Poliéster 145 g/m² · Pantalón: Mezclilla 12-14 oz/yd²',
     gramaje: '145 g/m² (Camisa) / 14 oz (Pantalón)',
+    precioUnitario: 450,
+    precioMayoreo: 410,
     tallas: ['CH', 'M', 'G', 'XG', '2EG', '3EG'],
     detalles: [
       'Disponible en corte Dama y Caballero',

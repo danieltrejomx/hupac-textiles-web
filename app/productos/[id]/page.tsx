@@ -1,14 +1,17 @@
 'use client';
 import { useState, use } from 'react';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { useRouter, notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getProductById } from '@/data/products';
+import { useCart } from '@/context/CartContext';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const product = getProductById(id);
+  const router = useRouter();
+  const { addToCart } = useCart();
 
   if (!product) {
     notFound();
@@ -18,16 +21,38 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [selectedSize, setSelectedSize] = useState(product.tallas[0]);
   const [quantity, setQuantity] = useState(12);
 
-  const isOscuro = ['#132A52', '#2456C4', '#B22234', '#17222B', '#3A3F46', '#27364B', '#5A2D63'].includes(selectedColor.hex);
+  // Price calculation
+  const unitPrice = quantity >= 50 && product.precioMayoreo ? product.precioMayoreo : product.precioUnitario;
+  const totalPrice = unitPrice * quantity;
 
-  const whatsappMessage = encodeURIComponent(
-    `Hola HUPAC TEXTILES, me interesa cotizar:\n` +
-    `• Prenda: ${product.nombre} (${product.estilo})\n` +
-    `• Color: ${selectedColor.nombre}\n` +
-    `• Talla: ${selectedSize}\n` +
-    `• Cantidad aproximada: ${quantity} piezas\n` +
-    `• Composición: ${product.composicion}`
-  );
+  const handleAddToCart = () => {
+    addToCart({
+      productId: product.id,
+      nombre: product.nombre,
+      estilo: product.estilo,
+      color: selectedColor.nombre,
+      colorHex: selectedColor.hex,
+      talla: selectedSize,
+      cantidad: quantity,
+      precioUnitario: unitPrice,
+      imagen: selectedColor.imagen || product.imagenPrincipal,
+    });
+  };
+
+  const handleBuyNow = () => {
+    addToCart({
+      productId: product.id,
+      nombre: product.nombre,
+      estilo: product.estilo,
+      color: selectedColor.nombre,
+      colorHex: selectedColor.hex,
+      talla: selectedSize,
+      cantidad: quantity,
+      precioUnitario: unitPrice,
+      imagen: selectedColor.imagen || product.imagenPrincipal,
+    });
+    router.push('/checkout');
+  };
 
   return (
     <>
@@ -142,7 +167,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
               </div>
             </div>
 
-            {/* Columna Derecha: Detalles, Tallas, Cantidad y Botones de Acción */}
+            {/* Columna Derecha: Detalles, Precios, Tallas, Cantidad y Botones de Acción */}
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <div>
                 <span className="eyebrow" style={{ marginBottom: '8px' }}>Ficha de Producto</span>
@@ -152,6 +177,43 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 <p style={{ color: 'var(--rey)', fontWeight: 600, fontSize: '1.05rem', marginBottom: '16px' }}>
                   {product.subtitulo}
                 </p>
+
+                {/* Bloque de Precio */}
+                <div style={{ 
+                  backgroundColor: '#f0f6ff', 
+                  padding: '16px 20px', 
+                  borderRadius: '14px', 
+                  border: '1px solid #bfdbfe',
+                  marginBottom: '20px',
+                  display: 'flex',
+                  alignItems: 'baseline',
+                  justifyContent: 'space-between',
+                  flexWrap: 'wrap',
+                  gap: '10px'
+                }}>
+                  <div>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>
+                      Precio por pieza:
+                    </span>
+                    <span style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--marino)' }}>
+                      ${unitPrice} <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--texto-2)' }}>MXN</span>
+                    </span>
+                    {product.precioMayoreo && quantity >= 50 && (
+                      <span style={{ fontSize: '0.75rem', backgroundColor: '#dcfce7', color: '#15803d', fontWeight: 700, padding: '2px 8px', borderRadius: '10px', marginLeft: '8px' }}>
+                        ¡Precio Mayoreo Aplicado!
+                      </span>
+                    )}
+                  </div>
+
+                  <div style={{ textAlign: 'right' }}>
+                    <span style={{ fontSize: '0.85rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>
+                      Total ({quantity} pzs):
+                    </span>
+                    <span style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--rey)' }}>
+                      ${totalPrice.toLocaleString('es-MX')} <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>MXN</span>
+                    </span>
+                  </div>
+                </div>
 
                 <p style={{ color: 'var(--texto-2)', lineHeight: 1.6, marginBottom: '24px' }}>
                   {product.descripcion}
@@ -249,11 +311,11 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 {/* Selección de Cantidad */}
                 <div style={{ marginBottom: '28px' }}>
                   <label style={{ display: 'block', fontWeight: 700, color: 'var(--marino)', marginBottom: '10px', fontSize: '0.95rem' }}>
-                    3. Cantidad estimada de piezas:
+                    3. Cantidad de piezas:
                   </label>
                   <div style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid #cbd5e1', borderRadius: '10px', overflow: 'hidden', backgroundColor: '#ffffff' }}>
                     <button 
-                      onClick={() => setQuantity(Math.max(1, quantity - 6))}
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
                       style={{ width: '40px', height: '40px', border: 'none', backgroundColor: '#f1f5f9', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 700, color: 'var(--marino)' }}
                     >
                       -
@@ -265,7 +327,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       style={{ width: '60px', height: '40px', border: 'none', textAlign: 'center', fontWeight: 700, fontSize: '1rem', color: 'var(--marino)', outline: 'none' }}
                     />
                     <button 
-                      onClick={() => setQuantity(quantity + 6)}
+                      onClick={() => setQuantity(quantity + 1)}
                       style={{ width: '40px', height: '40px', border: 'none', backgroundColor: '#f1f5f9', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 700, color: 'var(--marino)' }}
                     >
                       +
@@ -274,7 +336,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   <span style={{ marginLeft: '12px', fontSize: '0.85rem', color: 'var(--texto-2)' }}>piezas</span>
                 </div>
 
-                {/* Detalles y Técnicas */}
+                {/* Detalles y Confección */}
                 <div style={{ marginBottom: '28px', borderTop: '1px solid #e2e8f0', paddingTop: '16px' }}>
                   <h4 style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--marino)', marginBottom: '8px' }}>Detalles de Confección:</h4>
                   <ul style={{ paddingLeft: '20px', margin: 0, fontSize: '0.85rem', color: 'var(--texto-2)', lineHeight: 1.6 }}>
@@ -285,13 +347,10 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 </div>
               </div>
 
-              {/* Botones de Acción */}
+              {/* Nuevos Botones E-Commerce: Comprar Ahora y Agregar al Carrito */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <a
-                  href={`https://wa.me/525612870780?text=${whatsappMessage}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn ws"
+                <button
+                  onClick={handleBuyNow}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -299,37 +358,39 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     gap: '10px',
                     padding: '16px 24px',
                     borderRadius: '12px',
-                    fontSize: '1rem',
-                    fontWeight: 700,
-                    textDecoration: 'none',
-                    textAlign: 'center'
+                    fontSize: '1.05rem',
+                    fontWeight: 800,
+                    backgroundColor: '#16a34a',
+                    color: '#ffffff',
+                    border: 'none',
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 14px rgba(22, 163, 74, 0.3)',
+                    transition: 'transform 0.15s ease'
                   }}
                 >
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2Zm5.6 14.2c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.3-4.8-4.3-5-4.5-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.6.7-.4 1 .6 1 1.3 1.8 2.2 2.4.7.4 1.1.6 1.3.4.2-.1.7-.8.9-1.1.2-.3.4-.2.7-.1.3.1 1.8.9 2.1 1 .3.2.5.2.6.4 0 .1 0 .7-.2 1.5Z"/>
-                  </svg>
-                  Cotizar esta variante por WhatsApp
-                </a>
+                  ⚡ Comprar Ahora (${totalPrice.toLocaleString('es-MX')} MXN)
+                </button>
 
-                <Link
-                  href="/#configurador"
-                  className="btn"
+                <button
+                  onClick={handleAddToCart}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    gap: '10px',
                     padding: '14px 24px',
                     borderRadius: '12px',
                     fontSize: '0.95rem',
-                    fontWeight: 600,
-                    textDecoration: 'none',
+                    fontWeight: 700,
                     backgroundColor: 'var(--marino)',
                     color: '#ffffff',
-                    textAlign: 'center'
+                    border: 'none',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.15s ease'
                   }}
                 >
-                  Personalizar con mi Logo en el Configurador
-                </Link>
+                  🛒 Agregar al Carrito
+                </button>
               </div>
 
             </div>
