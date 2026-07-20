@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -6,7 +5,7 @@ export default function Footer() {
     <footer>
       <div className="foot-in">
         <div className="foot-brand">
-          <Link href="#inicio" className="logo" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '12px' }}>
+          <Link href="/#inicio" className="logo" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '12px' }}>
             <img src="/images/img_9.png" alt="HUPAC TEXTILES" style={{ width: '150px', objectFit: 'contain' }}/>
           </Link>
           <p>Av. Laguna Luna 30, Col. Cumbria,<br/>Cuautitlán Izcalli, Estado de México, C.P. 54740.</p>
@@ -14,17 +13,17 @@ export default function Footer() {
         </div>
         <div>
           <h5>Sitio</h5>
-          <Link href="#nosotros">Nosotros</Link>
-          <Link href="#catalogo">Catálogo</Link>
-          <Link href="#configurador">Configurador</Link>
-          <Link href="#distribuidores">Distribuidores</Link>
+          <Link href="/#nosotros">Nosotros</Link>
+          <Link href="/#catalogo">Catálogo</Link>
+          <Link href="/#configurador">Configurador</Link>
+          <Link href="/#distribuidores">Distribuidores</Link>
         </div>
         <div>
           <h5>Personalización</h5>
-          <Link href="#servicios">Bordado industrial</Link>
-          <Link href="#servicios">Serigrafía</Link>
-          <Link href="#servicios">Sublimación</Link>
-          <Link href="#servicios">Impresión directa</Link>
+          <Link href="/#servicios">Bordado industrial</Link>
+          <Link href="/#servicios">Serigrafía</Link>
+          <Link href="/#servicios">Sublimación</Link>
+          <Link href="/#servicios">Impresión directa</Link>
         </div>
         <div>
           <h5>Contacto</h5>
