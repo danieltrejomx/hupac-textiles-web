@@ -58,13 +58,13 @@ nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);backdrop-
 .mobile-nav-btn.act{color:var(--rey);background:var(--cielo)}
 
 /* ---------- ESTRUCTURA ---------- */
-section{max-width:1280px;margin:0 auto;padding:96px 28px;width:100%}
+section{max-width:1280px;margin:0 auto;padding:96px 28px;width:100%;box-sizing:border-box;overflow:hidden}
 section.full{max-width:none;padding-left:0;padding-right:0}
 .eyebrow{font-family:var(--mono);font-size:12.5px;font-weight:600;letter-spacing:.16em;color:var(--rey);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:18px}
 .eyebrow::before{content:"";width:34px;height:2px;background:var(--rey)}
 h1{font-weight:840;font-stretch:110%;font-size:clamp(38px,5vw,62px);line-height:1.04;letter-spacing:-.015em;color:var(--marino)}
 h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-height:1.12;letter-spacing:-.01em;color:var(--marino);margin-bottom:14px}
-.sec-head{max-width:740px;margin-bottom:52px}
+.sec-head{max-width:740px;margin-bottom:52px;width:100%;box-sizing:border-box}
 .sec-head p{color:var(--texto-2);font-size:17px}
 
 /* ---------- HERO ---------- */
@@ -108,17 +108,17 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .frase{font-weight:800;font-stretch:108%;font-size:clamp(22px,2.4vw,30px);color:var(--marino);border-left:4px solid var(--rey);padding-left:20px;margin:26px 0 8px;line-height:1.25}
 
 /* ---------- CATÁLOGO ---------- */
-.grid-prod{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.prod{background:#fff;border:1px solid var(--linea);border-radius:14px;overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s;display:flex;flex-direction:column;min-width:0}
-.prod:hover{transform:translateY(-4px);box-shadow:var(--sombra);border-color:var(--cielo-2)}
-.prod-foto{background:var(--nube);height:260px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
-.prod-foto img{width:100%;height:100%;object-fit:contain;object-position:center}
-.prod-tag{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:10px;font-weight:600;background:#fff;border:1px solid var(--linea);color:var(--marino);border-radius:6px;padding:4px 8px}
-.prod-info{padding:18px 18px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
-.prod-info h3{font-weight:750;font-size:17px;color:var(--marino)}
+.grid-prod{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:24px;width:100%;box-sizing:border-box}
+.prod{background:#fff;border:1px solid var(--linea);border-radius:16px;overflow:hidden;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;display:flex;flex-direction:column;min-width:0;width:100%;box-sizing:border-box}
+.prod:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(19,42,82,.12);border-color:var(--cielo-2)}
+.prod-foto{background:var(--nube);height:280px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;width:100%}
+.prod-foto img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.prod-tag{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:11px;font-weight:600;background:rgba(255,255,255,0.92);backdrop-filter:blur(4px);border:1px solid var(--linea);color:var(--marino);border-radius:6px;padding:4px 10px;z-index:2}
+.prod-info{padding:20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.prod-info h3{font-weight:750;font-size:18px;color:var(--marino);margin:0}
 .prod-spec{font-family:var(--mono);font-size:12px;color:var(--texto-2)}
-.prod-colores{display:flex;gap:7px;margin-top:auto;padding-top:8px}
-.cdot{width:18px;height:18px;border-radius:50%;border:1px solid var(--linea)}
+.prod-colores{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:12px}
+.cdot{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,0.1);flex-shrink:0}
 
 /* ---------- PRODUCTOS / TÉCNICAS ---------- */
 .tecnicas{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
@@ -206,7 +206,6 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .mobile-overlay{display:none}
 }
 @media(max-width:1080px){
-  .grid-prod{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tecnicas{grid-template-columns:repeat(3,1fr)}
   .grid-ind{grid-template-columns:repeat(3,1fr)}
 }
@@ -220,7 +219,7 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   section{padding:64px 20px}
 }
 @media(max-width:640px){
-  .grid-prod{grid-template-columns:minmax(0,1fr)}
+  .grid-prod{grid-template-columns:1fr}
   .tecnicas{grid-template-columns:1fr 1fr}
   .grid-ind{grid-template-columns:1fr 1fr}
   .stats{grid-template-columns:1fr 1fr}
