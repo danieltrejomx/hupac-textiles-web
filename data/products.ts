@@ -109,7 +109,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Cuello de punto reforzado', 'Doble costura en dobladillos', 'Tapa costura de hombro a hombro'],
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia', 'Bordado'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -152,7 +152,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Silueta confort regular', 'Tejido pre-encogido', 'Tacto suave'],
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -195,7 +195,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Cuello V estructurado', 'Doble costura', 'Fácil de lavar'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -220,7 +220,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Sin mangas', 'Sisas ribeteadas', 'Tacto suave'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -246,7 +246,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG', '3EG'],
     detalles: ['Grosor máximo y calidez', 'Corte amplio confortable', 'Cuello rib grueso'],
     tecnicas: ['Serigrafía', 'Bordado', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -285,7 +285,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Silueta entallada femenina', 'Tacto suave peinado', 'Excelente caída'],
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -319,7 +319,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Escote en V fino', 'Corte para dama entallado', 'Fresco y ligero'],
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -349,7 +349,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Corte olímpico espalda', 'Tejido jaspeado y liso', 'Ligereza excepcional'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Fiusha Neón', hex: '#FF007F' },
       { nombre: 'Blanco', hex: '#FFFFFF' },
@@ -380,7 +380,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Silueta corta a la cintura', 'Corte amplio holgado', 'Fresco y juvenil'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -407,7 +407,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Efecto jaspeado "Snow"', 'Escote en V estilizado', 'Tacto ultra suave'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Jaspe Negro', hex: '#2A2D34' },
       { nombre: 'Jaspe Acero', hex: '#707A8A' },
@@ -432,7 +432,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['ECH(04)', 'CH(06)', 'MD(08)', 'GD(10/12)', 'EG(14/16)'],
     detalles: ['Doble costura de refuerzo', 'Tintes suaves', 'Corte amplio escolar'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -467,7 +467,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Algodón peinado premium', 'Tacto terso', 'Fit moderno'],
     tecnicas: ['Impresión Directa (DTG)', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -495,7 +495,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['ECH(04)', 'CH(06)', 'MD(08)', 'GD(10/12)', 'EG(14/16)'],
     detalles: ['Silueta entallada juvenil', 'Cuello elástico fino', 'Tacto suave'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -525,7 +525,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Tacto algodón', 'Sublimación perfecta', 'Fácil secado'],
     tecnicas: ['Sublimación total', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' }
     ],
@@ -546,7 +546,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Mezcla suave y fuerte', 'Frescura diaria', 'Resistente a lavadas continuas'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_4.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -577,7 +577,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Cuello tejido clásico', 'Aletilla de 3 botones', 'Ideal para bordados corporativos'],
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_5.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -617,7 +617,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Silueta femenina entallada', 'Aletilla de 4 botones finos', 'Cuello tejido rib'],
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_6.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -657,7 +657,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Textura efecto nieve', 'Tela ultra fresca', 'Ideal para calor'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Jaspe Negro', hex: '#2A2D34' },
       { nombre: 'Jaspe Acero', hex: '#707A8A' },
@@ -685,7 +685,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Manga larga formal', 'Puño tejido rib', 'Aletilla con 3 botones'],
     tecnicas: ['Bordado', 'Serigrafía'],
-    imagenPrincipal: '/images/img_5.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -711,7 +711,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Textura jaspeada ultra suave', 'Costura lateral moderna', 'Cuello fino al tono'],
     tecnicas: ['Serigrafía', 'Termotransferencia', 'Sublimación (tonos claros)'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Rey Jaspe', hex: '#355FC4' },
@@ -746,7 +746,7 @@ export const PRODUCTS: Product[] = [
     },
     detalles: ['Cuello de alta calidad', 'Resistente a arrugas', ' Fit regular fit'],
     tecnicas: ['Bordado', 'Serigrafía'],
-    imagenPrincipal: '/images/img_7.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -769,7 +769,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Corte entallado dama', 'Aletilla fina', 'Secado rápido'],
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_7.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -800,7 +800,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['ECH(04)', 'CH(06)', 'MD(08)'],
     detalles: ['Tejido transpirable de algodón', 'Puños ribeteados confortables', 'Costuras reforzadas para niños'],
     tecnicas: ['Bordado', 'Serigrafía'],
-    imagenPrincipal: '/images/img_5.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -830,7 +830,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['GD(10/12)', 'EG(14/16)'],
     detalles: ['Corte confortable regular juvenil', 'Resistente a deformación', 'Alta solidez al frote'],
     tecnicas: ['Bordado', 'Serigrafía'],
-    imagenPrincipal: '/images/img_5.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -860,7 +860,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Manga larga con puños acanalados', 'Tejido pesado abrigador', 'Costuras reforzadas en hombros'],
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/img_3.webp',
+    imagenPrincipal: '/images/no-image.svg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
