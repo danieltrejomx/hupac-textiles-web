@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter, notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { getProductById } from '@/data/products';
+import { getProductById, getProductPrice } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -22,7 +22,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
   const [quantity, setQuantity] = useState(12);
 
   // Price calculation
-  const unitPrice = quantity >= 50 && product.precioMayoreo ? product.precioMayoreo : product.precioUnitario;
+  const unitPrice = getProductPrice(product, selectedColor.nombre, selectedSize, quantity);
   const totalPrice = unitPrice * quantity;
 
   const handleAddToCart = () => {
@@ -193,24 +193,35 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 }}>
                   <div>
                     <span style={{ fontSize: '0.85rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>
-                      Precio por pieza:
+                      Precio unitario (sin IVA):
                     </span>
                     <span style={{ fontSize: '1.8rem', fontWeight: 800, color: 'var(--marino)' }}>
-                      ${unitPrice} <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--texto-2)' }}>MXN</span>
+                      ${unitPrice.toFixed(2)} <span style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--texto-2)' }}>MXN</span>
                     </span>
-                    {product.precioMayoreo && quantity >= 50 && (
-                      <span style={{ fontSize: '0.75rem', backgroundColor: '#dcfce7', color: '#15803d', fontWeight: 700, padding: '2px 8px', borderRadius: '10px', marginLeft: '8px' }}>
-                        ¡Precio Mayoreo Aplicado!
-                      </span>
-                    )}
+                    <span style={{ 
+                      fontSize: '0.75rem', 
+                      backgroundColor: quantity >= 504 ? '#cffafe' : (quantity >= 72 ? '#dcfce7' : '#fee2e2'), 
+                      color: quantity >= 504 ? '#083344' : (quantity >= 72 ? '#15803d' : '#991b1b'), 
+                      fontWeight: 700, 
+                      padding: '2px 8px', 
+                      borderRadius: '10px', 
+                      marginLeft: '8px',
+                      display: 'inline-block',
+                      marginTop: '4px'
+                    }}>
+                      {quantity >= 504 ? 'Mayoreo +504 pzs' : (quantity >= 72 ? 'Mayoreo 72-503 pzs' : 'Mayoreo 12-71 pzs')}
+                    </span>
                   </div>
 
                   <div style={{ textAlign: 'right' }}>
                     <span style={{ fontSize: '0.85rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>
-                      Total ({quantity} pzs):
+                      Total ({quantity} pzs, sin IVA):
                     </span>
                     <span style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--rey)' }}>
-                      ${totalPrice.toLocaleString('es-MX')} <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>MXN</span>
+                      ${totalPrice.toLocaleString('es-MX', { minimumFractionDigits: 2 })} <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>MXN</span>
+                    </span>
+                    <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block', marginTop: '2px' }}>
+                      + ${(totalPrice * 0.16).toLocaleString('es-MX', { minimumFractionDigits: 2 })} IVA
                     </span>
                   </div>
                 </div>
@@ -315,7 +326,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                   </label>
                   <div style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid #cbd5e1', borderRadius: '10px', overflow: 'hidden', backgroundColor: '#ffffff' }}>
                     <button 
-                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      onClick={() => setQuantity(Math.max(12, quantity - 1))}
                       style={{ width: '40px', height: '40px', border: 'none', backgroundColor: '#f1f5f9', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 700, color: 'var(--marino)' }}
                     >
                       -
@@ -323,7 +334,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     <input 
                       type="number" 
                       value={quantity} 
-                      onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                      onChange={(e) => setQuantity(Math.max(12, parseInt(e.target.value) || 12))}
                       style={{ width: '60px', height: '40px', border: 'none', textAlign: 'center', fontWeight: 700, fontSize: '1rem', color: 'var(--marino)', outline: 'none' }}
                     />
                     <button 
@@ -334,6 +345,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     </button>
                   </div>
                   <span style={{ marginLeft: '12px', fontSize: '0.85rem', color: 'var(--texto-2)' }}>piezas</span>
+                  <span style={{ display: 'block', fontSize: '0.75rem', color: '#991b1b', fontWeight: 600, marginTop: '8px' }}>
+                    * El mayoreo aplica a partir de 12 piezas por modelo.
+                  </span>
                 </div>
 
                 {/* Detalles y Confección */}

@@ -31,7 +31,8 @@ export default function CheckoutPage() {
 
   const enviosGratis = subtotal >= 1500 || cart.length === 0;
   const costoEnvio = enviosGratis ? 0 : 180;
-  const total = subtotal + costoEnvio;
+  const iva = subtotal * 0.16;
+  const total = subtotal + iva + costoEnvio;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -64,6 +65,7 @@ export default function CheckoutPage() {
         })),
         totalItems,
         subtotal,
+        iva,
         envio: costoEnvio,
         total,
         metodoPago: 'Mercado Pago (Tarjeta de Crédito/Débito)',
@@ -274,8 +276,13 @@ export default function CheckoutPage() {
 
                   <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.9rem' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--texto-2)' }}>
-                      <span>Subtotal:</span>
-                      <span>${subtotal.toLocaleString('es-MX')} MXN</span>
+                      <span>Subtotal (sin IVA):</span>
+                      <span>${subtotal.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN</span>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--texto-2)' }}>
+                      <span>IVA (16%):</span>
+                      <span>${iva.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN</span>
                     </div>
 
                     <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--texto-2)' }}>
@@ -284,8 +291,8 @@ export default function CheckoutPage() {
                     </div>
 
                     <div style={{ borderTop: '2px solid #e2e8f0', paddingTop: '12px', marginTop: '8px', display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 800, color: 'var(--marino)' }}>
-                      <span>Total:</span>
-                      <span style={{ color: 'var(--rey)' }}>${total.toLocaleString('es-MX')} MXN</span>
+                      <span>Total (con IVA):</span>
+                      <span style={{ color: 'var(--rey)' }}>${total.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN</span>
                     </div>
                   </div>
                 </div>
