@@ -20,8 +20,8 @@ const CATEGORIES_META: Record<string, { titulo: string; descripcion: string; fil
   }
 };
 
-export default function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = use(params);
+export default function CategoryPage({ params }: { params: { slug: string } }) {
+  const slug = params?.slug;
   const meta = CATEGORIES_META[slug];
 
   if (!meta) {

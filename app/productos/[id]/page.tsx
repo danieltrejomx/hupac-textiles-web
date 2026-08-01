@@ -7,8 +7,8 @@ import Footer from '@/components/Footer';
 import { getProductById, getProductPrice } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 
-export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function ProductDetailPage({ params }: { params: { id: string } }) {
+  const id = params?.id;
   const product = getProductById(id);
   const router = useRouter();
   const { addToCart } = useCart();
