@@ -55,7 +55,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: '110px', paddingBottom: '90px', backgroundColor: '#f8fafc', minHeight: '85vh' }}>
+      <main style={{ paddingTop: '32px', paddingBottom: '70px', backgroundColor: '#f8fafc', minHeight: '85vh' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 28px' }}>
           
           {/* Breadcrumbs */}

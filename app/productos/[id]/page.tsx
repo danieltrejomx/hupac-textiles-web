@@ -57,7 +57,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: '100px', paddingBottom: '80px', minHeight: '80vh', backgroundColor: '#f8fafc' }}>
+      <main style={{ paddingTop: '32px', paddingBottom: '60px', minHeight: '80vh', backgroundColor: '#f8fafc' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px' }}>
           
           {/* Breadcrumbs */}

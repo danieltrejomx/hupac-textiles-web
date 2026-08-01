@@ -117,7 +117,7 @@ export default function CheckoutPage() {
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: '100px', paddingBottom: '80px', backgroundColor: '#f8fafc', minHeight: '85vh' }}>
+      <main style={{ paddingTop: '32px', paddingBottom: '80px', backgroundColor: '#f8fafc', minHeight: '85vh' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
           
           <h1 style={{ fontFamily: 'var(--fuente-titulos)', color: 'var(--marino)', fontSize: '2.2rem', marginBottom: '8px' }}>
