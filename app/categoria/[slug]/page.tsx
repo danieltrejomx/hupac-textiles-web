@@ -7,16 +7,54 @@ import Footer from '@/components/Footer';
 import { PRODUCTS, Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 
-const CATEGORIES_META: Record<string, { titulo: string; descripcion: string; filtro: (p: Product) => boolean }> = {
+const CATEGORIES_META: Record<string, { titulo: string; descripcion: string; emoji: string; filtro: (p: Product) => boolean }> = {
   'playeras': {
     titulo: 'Playeras y Polos de Línea',
+    emoji: '👕',
     descripcion: 'Catálogo completo de confección textil: playeras de peso completo 100% algodón, manga corta, manga larga, cuello V y polos piqué.',
-    filtro: (p) => p.categoria !== 'calzado' && p.categoria !== 'accesorios'
+    filtro: (p) => !p.categoria || p.categoria === 'textiles'
   },
   'calzado': {
-    titulo: '🥾 Calzado de Seguridad e Industrial',
+    titulo: 'Calzado de Seguridad e Industrial',
+    emoji: '🥾',
     descripcion: 'Línea Duty Gear de botas industriales waterproof, dieléctricas, tenis deportivos de seguridad con casquillo y suelas antiderrapantes.',
     filtro: (p) => p.categoria === 'calzado' || p.categoria === 'accesorios'
+  },
+  'cabeza': {
+    titulo: 'Protección para la Cabeza',
+    emoji: '⛑️',
+    descripcion: 'Cascos dieléctricos, protectores faciales, orejeras, tapones auditivos, cofias y capuchas antiflama para protección craneal y auditiva.',
+    filtro: (p) => p.categoria === 'cabeza'
+  },
+  'visual': {
+    titulo: 'Protección Visual',
+    emoji: '🥽',
+    descripcion: 'Lentes de seguridad, goggles, sobre lentes y monogoggles para protección ocular en ambientes industriales.',
+    filtro: (p) => p.categoria === 'visual'
+  },
+  'manos': {
+    titulo: 'Protección para Manos y Brazos',
+    emoji: '🧤',
+    descripcion: 'Guantes de nylon, nitrilo, carnaza, anticorte, electricistas, soldadores y desechables para todo tipo de trabajo.',
+    filtro: (p) => p.categoria === 'manos'
+  },
+  'ropa-trabajo': {
+    titulo: 'Ropa de Trabajo y Uniformes',
+    emoji: '🦺',
+    descripcion: 'Chalecos de alta visibilidad, overoles, fajas lumbares, ropa de mezclilla, mandiles, mangas de carnaza e impermeables industriales.',
+    filtro: (p) => p.categoria === 'ropa-trabajo'
+  },
+  'alturas': {
+    titulo: 'Protección a las Alturas',
+    emoji: '🔗',
+    descripcion: 'Arneses de cuerpo completo, líneas de vida y puntos fijos de anclaje para trabajo seguro en altura.',
+    filtro: (p) => p.categoria === 'alturas'
+  },
+  'vial': {
+    titulo: 'Limitación Vial',
+    emoji: '🚧',
+    descripcion: 'Trafitambos, postes limitadores, mallas delimitadoras, conos viales y cintas de precaución para señalización de zonas de obra.',
+    filtro: (p) => p.categoria === 'vial'
   }
 };
 
@@ -80,8 +118,8 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
             gap: '20px'
           }}>
             <div style={{ maxWidth: '720px' }}>
-              <span className="eyebrow" style={{ marginBottom: '8px' }}>Catálogo Especializado</span>
-              <h1 style={{ fontSize: '2.2rem', color: 'var(--marino)', margin: '0 0 10px 0' }}>{meta.titulo}</h1>
+              <span className="eyebrow" style={{ marginBottom: '8px' }}>Catálogo Especializado · EPC & Uniformes</span>
+              <h1 style={{ fontSize: '2.2rem', color: 'var(--marino)', margin: '0 0 10px 0' }}>{meta.emoji} {meta.titulo}</h1>
               <p style={{ color: 'var(--texto-2)', fontSize: '1.05rem', margin: 0, lineHeight: 1.5 }}>
                 {meta.descripcion}
               </p>

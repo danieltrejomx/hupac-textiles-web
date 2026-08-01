@@ -7,7 +7,7 @@ export default function CatalogCarousel() {
   const textilesScrollRef = useRef<HTMLDivElement>(null);
   const footwearScrollRef = useRef<HTMLDivElement>(null);
 
-  const textilesProducts = PRODUCTS.filter((p) => p.categoria !== 'calzado' && p.categoria !== 'accesorios');
+  const textilesProducts = PRODUCTS.filter((p) => !p.categoria || p.categoria === 'textiles');
   const footwearProducts = PRODUCTS.filter((p) => p.categoria === 'calzado' || p.categoria === 'accesorios');
 
   const scroll = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
@@ -280,6 +280,69 @@ export default function CatalogCarousel() {
             }}
           >
             {footwearProducts.map(renderProductCard)}
+          </div>
+        </div>
+
+        {/* ================= SECCIÓN EPC: GRID DE CATEGORÍAS ================= */}
+        <div style={{ marginTop: '72px' }}>
+          <div style={{ marginBottom: '28px' }}>
+            <span className="eyebrow" style={{ color: '#b45309' }}>Equipo de Protección y Trabajo</span>
+            <h2 style={{ marginBottom: '6px', fontSize: '1.8rem' }}>🛡️ Catálogo EPC Completo</h2>
+            <p style={{ color: 'var(--texto-2)', margin: 0, fontSize: '0.95rem' }}>
+              Equipo de protección colectiva e individual certificado: cascos, lentes, guantes, ropa industrial, arneses y señalización vial.
+            </p>
+          </div>
+
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
+            gap: '16px'
+          }}>
+            {[
+              { slug: 'cabeza', emoji: '⛑️', titulo: 'Protección para la Cabeza', desc: 'Cascos, protectores faciales, orejeras, tapones, cofias', color: '#fef3c7', accent: '#d97706', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
+              { slug: 'visual', emoji: '🥽', titulo: 'Protección Visual', desc: 'Lentes de seguridad, goggles, sobre lentes', color: '#e0f2fe', accent: '#0284c7', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
+              { slug: 'manos', emoji: '🧤', titulo: 'Protección para Manos', desc: 'Guantes nitrilo, carnaza, anticorte, soldador', color: '#fce7f3', accent: '#db2777', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
+              { slug: 'ropa-trabajo', emoji: '🦺', titulo: 'Ropa de Trabajo', desc: 'Chalecos, overoles, mezclilla, mandiles, impermeables', color: '#dcfce7', accent: '#16a34a', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
+              { slug: 'alturas', emoji: '🔗', titulo: 'Protección a las Alturas', desc: 'Arneses, líneas de vida, puntos de anclaje', color: '#ede9fe', accent: '#7c3aed', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
+              { slug: 'vial', emoji: '🚧', titulo: 'Limitación Vial', desc: 'Conos, trafitambos, mallas, cintas, postes', color: '#fee2e2', accent: '#dc2626', count: PRODUCTS.filter(p => p.categoria === 'vial').length }
+            ].map(cat => (
+              <Link
+                key={cat.slug}
+                href={`/categoria/${cat.slug}`}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <div
+                  style={{
+                    backgroundColor: cat.color,
+                    border: `1.5px solid ${cat.accent}22`,
+                    borderRadius: '16px',
+                    padding: '22px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '10px',
+                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                    cursor: 'pointer'
+                  }}
+                  onMouseEnter={e => {
+                    (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-3px)';
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 20px ${cat.accent}22`;
+                  }}
+                  onMouseLeave={e => {
+                    (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+                    (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
+                  }}
+                >
+                  <div style={{ fontSize: '2rem' }}>{cat.emoji}</div>
+                  <div>
+                    <div style={{ fontWeight: 800, fontSize: '1rem', color: '#0f172a', marginBottom: '4px' }}>{cat.titulo}</div>
+                    <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: 1.4 }}>{cat.desc}</div>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
+                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: cat.accent }}>Ver {cat.count} productos →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
 
