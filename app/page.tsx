@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import StatsBanner from '@/components/StatsBanner';
+import CatalogCarousel from '@/components/CatalogCarousel';
 import About from '@/components/About';
 import Services from '@/components/Services';
 import Configurator from '@/components/Configurator';
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <StatsBanner />
+      <CatalogCarousel />
       <About />
       <Services />
       <Configurator />
