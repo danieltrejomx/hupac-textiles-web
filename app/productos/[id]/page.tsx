@@ -29,7 +29,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     addToCart({
       productId: product.id,
       nombre: product.nombre,
-      estilo: product.estilo,
+      estilo: product.estilo || product.sku || '',
       color: selectedColor.nombre,
       colorHex: selectedColor.hex,
       talla: selectedSize,
@@ -43,7 +43,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
     addToCart({
       productId: product.id,
       nombre: product.nombre,
-      estilo: product.estilo,
+      estilo: product.estilo || product.sku || '',
       color: selectedColor.nombre,
       colorHex: selectedColor.hex,
       talla: selectedSize,
@@ -106,7 +106,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                 
                 {/* Badge de Estilo */}
                 <span className="prod-tag" style={{ position: 'absolute', top: '16px', right: '16px' }}>
-                  {product.estilo}
+                  {product.estilo || product.sku}
                 </span>
 
                 {/* Badge de Color Seleccionado */}

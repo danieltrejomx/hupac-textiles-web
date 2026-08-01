@@ -20,6 +20,7 @@ export interface SizePriceConfig {
 export interface Product {
   id: string;
   sku: string;
+  estilo?: string;
   nombre: string;
   subtitulo: string;
   descripcion: string;
