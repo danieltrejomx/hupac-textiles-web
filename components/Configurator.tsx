@@ -122,10 +122,65 @@ export default function Configurator() {
           
           <div className="grupo rv">
             <label className="tit">3 · Logotipo del cliente</label>
-            <label className="upload" htmlFor="fileLogo">
-              <b>Subir logotipo</b>
-              <span>PNG, JPG o SVG · Se coloca al instante sobre la prenda</span>
-              <input type="file" id="fileLogo" accept="image/*" onChange={handleFileChange} />
+            <label 
+              className="upload-dropzone" 
+              htmlFor="fileLogo"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '24px 20px',
+                backgroundColor: logo ? '#f0f9ff' : 'var(--nube)',
+                border: logo ? '2px stroke #3b82f6' : '2px dashed #93c5fd',
+                borderRadius: '16px',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                textAlign: 'center',
+                position: 'relative'
+              }}
+            >
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '12px',
+                backgroundColor: logo ? '#dbeafe' : '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '12px',
+                boxShadow: '0 4px 10px rgba(36, 86, 196, 0.08)',
+                color: 'var(--rey)',
+                fontSize: '1.4rem'
+              }}>
+                {logo ? '✓' : '☁️'}
+              </div>
+
+              <span style={{ fontSize: '0.98rem', fontWeight: 750, color: 'var(--marino)', display: 'block', marginBottom: '4px' }}>
+                {logo ? '¡Logotipo cargado con éxito!' : 'Subir tu logotipo'}
+              </span>
+
+              <span style={{ fontSize: '0.82rem', color: 'var(--texto-2)', display: 'block', maxWidth: '340px', lineHeight: 1.4 }}>
+                {logo 
+                  ? 'Haz clic aquí si deseas cambiar la imagen elegida.' 
+                  : 'Formatos soportados: PNG, JPG o SVG (transparente recomendado).'
+                }
+              </span>
+
+              <span style={{
+                marginTop: '12px',
+                fontSize: '0.78rem',
+                backgroundColor: logo ? '#15803d' : 'var(--rey)',
+                color: '#ffffff',
+                fontWeight: 700,
+                padding: '6px 16px',
+                borderRadius: '20px',
+                display: 'inline-block'
+              }}>
+                {logo ? 'Reemplazar imagen' : 'Explorar archivos'}
+              </span>
+
+              <input type="file" id="fileLogo" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
             </label>
           </div>
           
