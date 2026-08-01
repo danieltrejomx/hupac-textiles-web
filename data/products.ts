@@ -22,6 +22,7 @@ export interface Product {
   sku: string;
   estilo?: string;
   nombre: string;
+  categoria?: 'textiles' | 'calzado' | 'accesorios';
   subtitulo: string;
   descripcion: string;
   composicion: string;
@@ -32,6 +33,10 @@ export interface Product {
   imagenPrincipal: string;
   colores: ProductColor[];
   precios: Record<string, SizePriceConfig>;
+  precioDirecto?: number;
+  suela?: string;
+  tipoNorma?: string;
+  corrida?: string;
 }
 
 export function getColorGroup(colorName: string): 'Blanco' | 'Claro' | 'Oscuro' | 'Colores' {
@@ -49,6 +54,7 @@ export function getColorGroup(colorName: string): 'Blanco' | 'Claro' | 'Oscuro' 
 
 export function getSizeGroup(talla: string, precios: Record<string, any>): string {
   const keys = Object.keys(precios);
+  if (keys.length === 0) return '';
   if (keys.length === 1) return keys[0];
   
   const t = talla.toUpperCase().trim();
@@ -80,6 +86,8 @@ export function getSizeGroup(talla: string, precios: Record<string, any>): strin
 }
 
 export function getProductPrice(product: Product, colorName: string, size: string, quantity: number): number {
+  if (product.precioDirecto) return product.precioDirecto;
+  
   const sizeGroup = getSizeGroup(size, product.precios);
   const sizeConfig = product.precios[sizeGroup];
   if (!sizeConfig) return 0;
@@ -879,8 +887,473 @@ export const PRODUCTS: Product[] = [
         Colores: { '12-71': 77.00, '72-503': 75.46, '504+': 73.15 }
       }
     }
+  },
+  // --- CATEGORÍA CALZADO Y ACCESORIOS DE SEGURIDAD ---
+  {
+    id: 'calzado-1427-dominion-phylon-tpu',
+    sku: '1427',
+    nombre: 'Bota Dominion Phylon / TPU Waterproof',
+    categoria: 'calzado',
+    subtitulo: 'Bota Industrial Waterproof · Tipo II+III',
+    descripcion: 'Bota de seguridad industrial waterproof con tecnología Dominion Phylon/TPU. Ofrece máxima protección, ligereza e impermeabilidad.',
+    composicion: 'Micropiel Negro/Azul, Micropiel Negro/Amarillo',
+    gramaje: 'Suela Phylon / TPU',
+    tallas: ['23', '24', '25', '26', '27', '28', '29', '30'],
+    detalles: ['Norma Tipo II+III', 'Suela Negra/Azul o Negra/Amarillo', 'Resistente al agua (Waterproof)'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Negro/Azul', hex: '#1e293b' },
+      { nombre: 'Negro/Amarillo', hex: '#eab308' }
+    ],
+    precios: {},
+    precioDirecto: 613.00,
+    suela: 'Negro/Azul y Negro/Amarillo',
+    tipoNorma: 'II+III',
+    corrida: '23-30'
+  },
+  {
+    id: 'calzado-1417-dominion-phylon-tpu',
+    sku: '1417',
+    nombre: 'Bota Dominion Phylon / TPU Bull Fight',
+    categoria: 'calzado',
+    subtitulo: 'Bota de Seguridad Bull Fight · Tipo II+III',
+    descripcion: 'Bota de seguridad alta durabilidad confeccionada en piel Bull Fight café o negro con suela de TPU negro.',
+    composicion: 'Bull Fight Café / Bull Fight Negro',
+    gramaje: 'Suela TPU Negro',
+    tallas: ['23', '24', '25', '26', '27', '28', '29', '30'],
+    detalles: ['Norma Tipo II+III', 'Suela TPU antiderrapante', 'Waterproof'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Bull Fight Café', hex: '#78350f' },
+      { nombre: 'Bull Fight Negro', hex: '#17222B' }
+    ],
+    precios: {},
+    precioDirecto: 628.00,
+    suela: 'TPU NEGRO',
+    tipoNorma: 'II+III',
+    corrida: '23-30'
+  },
+  {
+    id: 'calzado-1437-dominion-phylon-tpu',
+    sku: '1437',
+    nombre: 'Bota Dominion Phylon / TPU Cuña',
+    categoria: 'calzado',
+    subtitulo: 'Bota Industrial Dieléctrica · Tipo II+III',
+    descripcion: 'Bota ergonómica de seguridad con suela TPU cuña gris o cuña negro-azul. Diseñada para largas jornadas de trabajo.',
+    composicion: 'Micro Negro / Cuña Gris o Negro-Azul',
+    gramaje: 'Suela TPU Negro',
+    tallas: ['23', '24', '25', '26', '27', '28', '29', '30'],
+    detalles: ['Norma Tipo II+III', 'Suela TPU Negro', 'Capellada transpirable'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Micro Negro/Cuña Gris', hex: '#475569' },
+      { nombre: 'Micro Negro/Cuña Negro-Azul', hex: '#1e3a8a' }
+    ],
+    precios: {},
+    precioDirecto: 628.00,
+    suela: 'TPU NEGRO',
+    tipoNorma: 'II+III',
+    corrida: '23-30'
+  },
+  {
+    id: 'calzado-2203-mark-2-pu-tpu',
+    sku: '2203',
+    nombre: 'Bota Mark 2 PU/TPU Rosa (Dama)',
+    categoria: 'calzado',
+    subtitulo: 'Bota Industrial para Dama · Tipo II+III',
+    descripcion: 'Bota de seguridad diseñada para dama con detalles en rosa, suela bidensidad PU/TPU y protección dieléctrica.',
+    composicion: 'Micro Negro / Rosa',
+    gramaje: 'Suela PU/TPU Rosa Bidensidad',
+    tallas: ['22', '23', '24', '25', '26', '27'],
+    detalles: ['Norma Tipo II+III para dama', 'Waterproof', 'Suela Rosa Bidensidad'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Micro Negro/Rosa', hex: '#f43f5e' }
+    ],
+    precios: {},
+    precioDirecto: 541.00,
+    suela: 'PU/TPU Rosa Bidensidad',
+    tipoNorma: 'II+III',
+    corrida: '22-27'
+  },
+  {
+    id: 'calzado-3638-mark-2-pu-tpu-negro',
+    sku: '3638-N',
+    nombre: 'Bota Mark 2 PU/TPU Negro',
+    categoria: 'calzado',
+    subtitulo: 'Bota Industrial Bidensidad · Tipo II+III',
+    descripcion: 'Bota industrial resistente en micro negro con suela bidensidad PU/TPU Negro.',
+    composicion: 'Micro Negro',
+    gramaje: 'Suela PU/TPU Negro',
+    tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Norma Tipo II+III', 'Waterproof', 'Excelente agarre'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Micro Negro', hex: '#17222B' }
+    ],
+    precios: {},
+    precioDirecto: 570.00,
+    suela: 'PU/TPU Negro',
+    tipoNorma: 'II+III',
+    corrida: '22-31'
+  },
+  {
+    id: 'calzado-3638-mark-2-pu-tpu-cafe',
+    sku: '3638-C',
+    nombre: 'Bota Mark 2 PU/TPU Crazy Café',
+    categoria: 'calzado',
+    subtitulo: 'Bota Industrial Crazy Café · Tipo II+III',
+    descripcion: 'Bota de seguridad premium en acabado Crazy Café con suela PU/TPU traslúcida.',
+    composicion: 'Crazy Café',
+    gramaje: 'Suela PU/TPU Traslúcido',
+    tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Norma Tipo II+III', 'Waterproof', 'Piel Crazy resistente'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Crazy Café', hex: '#92400e' }
+    ],
+    precios: {},
+    precioDirecto: 617.00,
+    suela: 'PU/TPU Traslúcido',
+    tipoNorma: 'II+III',
+    corrida: '22-31'
+  },
+  {
+    id: 'calzado-2236-mark-2-pu-tpu-chelsea',
+    sku: '2236',
+    nombre: 'Bota Chelsea Mark 2 Piel Grasso Café',
+    categoria: 'calzado',
+    subtitulo: 'Bota de Casquillo Sin Agujetas · Tipo II+III',
+    descripcion: 'Calzado de seguridad tipo Chelsea en piel grasso café con elásticos laterales y suela bidensidad traslúcida.',
+    composicion: 'Piel Grasso Café',
+    gramaje: 'Suela PU/TPU Traslúcido',
+    tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Estilo Chelsea elástico', 'Fácil de calzar', 'Norma Tipo II+III'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Piel Grasso Café', hex: '#78350f' }
+    ],
+    precios: {},
+    precioDirecto: 582.00,
+    suela: 'PU/TPU Traslúcido',
+    tipoNorma: 'II+III',
+    corrida: '22-31'
+  },
+  {
+    id: 'calzado-3728-mark-2-napa-cafe',
+    sku: '3728-C',
+    nombre: 'Bota Mark 2 Napa Café',
+    categoria: 'calzado',
+    subtitulo: 'Bota Industrial Napa · Tipo II+III',
+    descripcion: 'Bota industrial liviana en acabado Napa Café suave con suela PU/TPU Negro.',
+    composicion: 'Napa Café',
+    gramaje: 'Suela PU/TPU Negro',
+    tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Norma Tipo II+III', 'Tacto suave napa', 'Alta tracción'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Napa Café', hex: '#854d0e' }
+    ],
+    precios: {},
+    precioDirecto: 572.00,
+    suela: 'PU/TPU Negro',
+    tipoNorma: 'II+III',
+    corrida: '22-31'
+  },
+  {
+    id: 'calzado-3728-mark-2-micro-negro',
+    sku: '3728-N',
+    nombre: 'Bota Mark 2 Micro Negro',
+    categoria: 'calzado',
+    subtitulo: 'Bota Industrial Robusta · Tipo II+III',
+    descripcion: 'Bota de trabajo en micro negro de alta duración con suela bidensidad.',
+    composicion: 'Micro Negro',
+    gramaje: 'Suela PU/TPU Negro',
+    tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Norma Tipo II+III', 'Antiderrapante', 'Confort interior'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Micro Negro', hex: '#17222B' }
+    ],
+    precios: {},
+    precioDirecto: 559.00,
+    suela: 'PU/TPU Negro',
+    tipoNorma: 'II+III',
+    corrida: '22-31'
+  },
+  {
+    id: 'calzado-2211-mark-2-bidensidad',
+    sku: '2211',
+    nombre: 'Bota Mark 2 Negro / Azul',
+    categoria: 'calzado',
+    subtitulo: 'Bota Dieléctrica Bidensidad · Tipo II+III',
+    descripcion: 'Bota de seguridad clásica con vivos en azul y suela PU/TPU de alta resistencia bidensidad.',
+    composicion: 'Piel Negro / Azul',
+    gramaje: 'Suela PU/TPU Bidensidad',
+    tallas: ['25', '26', '27', '28', '29', '30'],
+    detalles: ['Norma Tipo II+III', 'Protección dieléctrica', 'Ergonómica'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Negro/Azul', hex: '#1d4ed8' }
+    ],
+    precios: {},
+    precioDirecto: 628.00,
+    suela: 'PU/TPU Bidensidad',
+    tipoNorma: 'II+III',
+    corrida: '25-30'
+  },
+  {
+    id: 'calzado-4031-mark-2-metatarsal',
+    sku: '4031',
+    nombre: 'Bota Mark 2 Metatarsal Piel Negro',
+    categoria: 'calzado',
+    subtitulo: 'Bota de Seguridad con Solapa Metatarsal · Tipo II+III',
+    descripcion: 'Bota especializada con protector metatarsal integrado de máxima seguridad en empeine.',
+    composicion: 'Piel Negro con Solapa Metatarsal',
+    gramaje: 'Suela PU/TPU Negro Bidensidad',
+    tallas: ['25', '26', '27', '28', '29', '30'],
+    detalles: ['Protector metatarsal para empeine', 'Norma Tipo II+III', 'Alta protección contra impactos'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Piel Negro', hex: '#17222B' }
+    ],
+    precios: {},
+    precioDirecto: 639.00,
+    suela: 'PU/TPU Negro Bidensidad',
+    tipoNorma: 'II+III',
+    corrida: '25-30'
+  },
+  {
+    id: 'calzado-8427-kenny-phylon-tpu',
+    sku: '8427',
+    nombre: 'Bota Kenny Phylon / TPU',
+    categoria: 'calzado',
+    subtitulo: 'Bota Industrial Ligera Kenny · Tipo II+III',
+    descripcion: 'Calzado de seguridad tipo sneaker industrial super ligero con suela de Phylon y suela exterior TPU.',
+    composicion: 'Micropiel Negro/Azul o Negro/Amarillo',
+    gramaje: 'Suela Phylon / TPU',
+    tallas: ['25', '26', '27', '28', '29', '30'],
+    detalles: ['Súper ligera', 'Norma Tipo II+III', 'Suela amortiguadora Phylon'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Negro/Azul', hex: '#2563eb' },
+      { nombre: 'Negro/Amarillo', hex: '#eab308' }
+    ],
+    precios: {},
+    precioDirecto: 537.00,
+    suela: 'Phylon ngo/tpu azul o amarillo',
+    tipoNorma: 'II+III',
+    corrida: '25-30'
+  },
+  {
+    id: 'calzado-6427-shark-phylon-tpu-caballero',
+    sku: '6427-C',
+    nombre: 'Calzado Shark Phylon/TPU Malla Tejida',
+    categoria: 'calzado',
+    subtitulo: 'Tenis de Seguridad Deportivo Malla · Tipo II',
+    descripcion: 'Tenis de seguridad estilo deportivo confeccionado en malla tejida ultra transpirable con casquillo de protección.',
+    composicion: 'Malla Tejida Transpirable',
+    gramaje: 'Suela Phylon / TPU',
+    tallas: ['23', '24', '25', '26', '27', '28', '29', '30'],
+    detalles: ['Malla tejida ultra fresca', 'Estilo sneaker deportivo', 'Norma Tipo II'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Negro/Amarillo', hex: '#eab308' },
+      { nombre: 'Negro/Azul', hex: '#2563eb' }
+    ],
+    precios: {},
+    precioDirecto: 510.00,
+    suela: 'Phylon ngo/tpu amarillo o azul',
+    tipoNorma: 'II',
+    corrida: '23-30'
+  },
+  {
+    id: 'calzado-6427-shark-phylon-tpu-fiusha',
+    sku: '6427-F',
+    nombre: 'Calzado Shark Phylon/TPU Fiusha (Dama)',
+    categoria: 'calzado',
+    subtitulo: 'Tenis de Seguridad para Dama · Tipo II',
+    descripcion: 'Tenis de seguridad deportivo para dama en malla tejida con vivos en color fiusha y casquillo protector.',
+    composicion: 'Malla Tejida Transpirable',
+    gramaje: 'Suela Phylon / TPU Fiusha',
+    tallas: ['23', '24', '25', '26', '27'],
+    detalles: ['Horma femenina', 'Suela Phylon Fiusha', 'Norma Tipo II'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Negro/Fiusha', hex: '#ec4899' }
+    ],
+    precios: {},
+    precioDirecto: 510.00,
+    suela: 'Phylon ngo/tpu Fiusha',
+    tipoNorma: 'II',
+    corrida: '23-27'
+  },
+  {
+    id: 'calzado-800-ken-phylon-anticlavo',
+    sku: '800',
+    nombre: 'Calzado Ken Phylon / Anticlavo',
+    categoria: 'calzado',
+    subtitulo: 'Tenis de Seguridad Tipo Calcetín Anticlavo · Tipo II+III',
+    descripcion: 'Tenis industrial tipo calcetín con plantilla anticlavo y suela de EVA hule flexible.',
+    composicion: 'Calcetín Negro Ajustable',
+    gramaje: 'Suela EVA Hule Negro',
+    tallas: ['25', '26', '27', '28', '29', '30'],
+    detalles: ['Ajuste tipo calcetín slip-on', 'Protección anticlavo integrada', 'Norma Tipo II+III'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Calcetín Negro', hex: '#17222B' }
+    ],
+    precios: {},
+    precioDirecto: 479.00,
+    suela: 'EVA hule negro',
+    tipoNorma: 'II+III',
+    corrida: '25-30'
+  },
+  {
+    id: 'calzado-8606-gripp-phylon-tpu',
+    sku: '8606',
+    nombre: 'Bota Gripp Phylon / TPU',
+    categoria: 'calzado',
+    subtitulo: 'Bota de Alta Tracción Gripp · Tipo II+III',
+    descripcion: 'Bota de seguridad con huella Gripp antideslizante en suela Phylon/TPU.',
+    composicion: 'Micropiel Negro/Azul o Negro/Amarillo',
+    gramaje: 'Suela Phylon / TPU',
+    tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Diseño antiderrapante Gripp', 'Norma Tipo II+III', 'Ligera e impermeable'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Negro/Azul', hex: '#2563eb' },
+      { nombre: 'Negro/Amarillo', hex: '#eab308' }
+    ],
+    precios: {},
+    precioDirecto: 608.00,
+    suela: 'Phylon ngo/tpu azul o amarillo',
+    tipoNorma: 'II+III',
+    corrida: '22-31'
+  },
+  {
+    id: 'calzado-6997-balboa-hule-acrilo-nitrilo',
+    sku: '6997',
+    nombre: 'Bota Balboa Hule Acrilo-Nitrilo',
+    categoria: 'calzado',
+    subtitulo: 'Bota Petrolera / Química de Hule Nitrilo · Tipo II+III',
+    descripcion: 'Bota de caña alta en piel engrasada café con suela de hule acrilo-nitrilo resistente a aceites y químicos.',
+    composicion: 'Piel Engrasada Café',
+    gramaje: 'Suela Hule Acrilo-Nitrilo',
+    tallas: ['23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Resistente a hidrocarburos y aceites', 'Estilo petrolero de caña alta', 'Norma Tipo II+III'],
+    tecnicas: ['Protección Industrial Especializada'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Piel Engrasada Café', hex: '#78350f' }
+    ],
+    precios: {},
+    precioDirecto: 672.00,
+    suela: 'Hule acrilo-nitrilo',
+    tipoNorma: 'II+III',
+    corrida: '23-31'
+  },
+  {
+    id: 'calzado-1367-monster-2-cafe',
+    sku: '1367-C',
+    nombre: 'Bota Monster 2 Piel Grasso Café',
+    categoria: 'calzado',
+    subtitulo: 'Bota Híbrida Phylon/Nitrilo Waterproof · Tipo II+III',
+    descripcion: 'Bota industrial de alto rendimiento Monster 2 en piel grasso café con suela antideslizante Phylon/Hule.',
+    composicion: 'Piel Grasso Café',
+    gramaje: 'Suela Phylon / Hule Acrilo-Nitrilo',
+    tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Waterproof a prueba de agua', 'Suela acrilo-nitrilo resistente', 'Norma Tipo II+III'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Piel Grasso Café', hex: '#78350f' }
+    ],
+    precios: {},
+    precioDirecto: 675.00,
+    suela: 'Phylon / Hule',
+    tipoNorma: 'II+III',
+    corrida: '22-31'
+  },
+  {
+    id: 'calzado-1367-monster-2-negro',
+    sku: '1367-N',
+    nombre: 'Bota Monster 2 Micro Negro',
+    categoria: 'calzado',
+    subtitulo: 'Bota Híbrida Phylon/Nitrilo Waterproof · Tipo II+III',
+    descripcion: 'Bota Monster 2 en micro negro con suela Phylon/Hule acrilo-nitrilo y máxima amortiguación.',
+    composicion: 'Micro Negro',
+    gramaje: 'Suela Phylon / Hule Acrilo-Nitrilo',
+    tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+    detalles: ['Waterproof', 'Alta durabilidad', 'Norma Tipo II+III'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Micro Negro', hex: '#17222B' }
+    ],
+    precios: {},
+    precioDirecto: 664.00,
+    suela: 'Phylon / Hule',
+    tipoNorma: 'II+III',
+    corrida: '22-31'
+  },
+  // --- ACCESORIOS DE SEGURIDAD ---
+  {
+    id: 'accesorio-proteccion-metatarsal',
+    sku: 'ACC-META',
+    nombre: 'Protección Metatarsal Externa',
+    categoria: 'accesorios',
+    subtitulo: 'Accesorio de Seguridad sobre Calzado',
+    descripcion: 'Protector metatarsal externo adaptable a calzado industrial para brindar protección adicional en el empeine contra impactos pesados.',
+    composicion: 'Polímero Termoplástico de Alto Impacto',
+    gramaje: 'Accesorio Adaptable',
+    tallas: ['Unica'],
+    detalles: ['Adaptable a cualquier bota', 'Resistente a fuertes impactos de objetos caídos', 'Fácil colocación'],
+    tecnicas: ['Protección Industrial'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Negro Industrial', hex: '#17222B' }
+    ],
+    precios: {},
+    precioDirecto: 60.00
+  },
+  {
+    id: 'accesorio-plantillas-pu-duty-gear',
+    sku: 'ACC-PLAN',
+    nombre: 'Plantillas Ergonómicas de PU Duty Gear',
+    categoria: 'accesorios',
+    subtitulo: 'Plantilla de Confort Antifatiga en Poliuretano',
+    descripcion: 'Plantilla de PU termoformada antifatiga, diseñada para brindar máximo confort en largas jornadas de pie.',
+    composicion: 'Poliuretano (PU) de Alta Densidad',
+    gramaje: 'Plantilla Anatómica',
+    tallas: ['22-24', '25-27', '28-30'],
+    detalles: ['Soporte de arco anatómico', 'Absorción de impacto en talón', 'Mínimo de compra: 60 pares'],
+    tecnicas: ['Confort Laboral'],
+    imagenPrincipal: '/images/no-image.svg',
+    colores: [
+      { nombre: 'Amarillo/Negro', hex: '#eab308' }
+    ],
+    precios: {},
+    precioDirecto: 48.90
   }
 ];
+
 
 export function getProductById(id: string): Product | undefined {
   return PRODUCTS.find(p => p.id === id);

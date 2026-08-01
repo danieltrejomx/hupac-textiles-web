@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { PRODUCTS, Product } from '@/data/products';
 
 export default function CatalogCarousel() {
-  const [filterCategory, setFilterCategory] = useState<'todos' | 'playeras' | 'polos'>('todos');
+  const [filterCategory, setFilterCategory] = useState<'todos' | 'playeras' | 'polos' | 'calzado' | 'accesorios'>('todos');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const filteredProducts = PRODUCTS.filter((p) => {
-    if (filterCategory === 'playeras') return !p.nombre.toLowerCase().includes('polo');
+    if (filterCategory === 'playeras') return p.categoria !== 'calzado' && p.categoria !== 'accesorios' && !p.nombre.toLowerCase().includes('polo');
     if (filterCategory === 'polos') return p.nombre.toLowerCase().includes('polo');
+    if (filterCategory === 'calzado') return p.categoria === 'calzado';
+    if (filterCategory === 'accesorios') return p.categoria === 'accesorios';
     return true;
   });
 
@@ -24,7 +26,7 @@ export default function CatalogCarousel() {
   };
 
   return (
-    <section id="catalogo" style={{ backgroundColor: '#ffffff', borderTop: '1px solid var(--linea)', borderBottom: '1px solid var(--linea)' }}>
+    <section id="catalogo" style={{ backgroundColor: '#ffffff', borderTop: '1px solid var(--linea)', borderBottom: '1px solid var(--linea)', padding: '60px 0' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 28px' }}>
         
         {/* Header con título y controles de filtro + flechas de navegación */}
@@ -37,20 +39,20 @@ export default function CatalogCarousel() {
           gap: '20px'
         }}>
           <div>
-            <span className="eyebrow">Catálogo HUPAC Textiles</span>
-            <h2 style={{ marginBottom: '8px' }}>Modelos Destacados de Línea</h2>
+            <span className="eyebrow">Catálogo HUPAC Textiles & Duty Gear</span>
+            <h2 style={{ marginBottom: '8px' }}>Catálogo General de Productos</h2>
             <p style={{ color: 'var(--texto-2)', margin: 0, fontSize: '1rem' }}>
-              Explora nuestra variedad de playeras de peso completo, cuello redondo, cuello V y playeras tipo polo.
+              Explora nuestras líneas de confección textil y la nueva línea industrial de calzado de seguridad y accesorios.
             </p>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
             {/* Selector de categoría */}
-            <div style={{ display: 'inline-flex', backgroundColor: 'var(--nube)', padding: '4px', borderRadius: '12px', border: '1px solid var(--linea)' }}>
+            <div style={{ display: 'inline-flex', backgroundColor: 'var(--nube)', padding: '4px', borderRadius: '12px', border: '1px solid var(--linea)', flexWrap: 'wrap', gap: '4px' }}>
               <button
                 onClick={() => setFilterCategory('todos')}
                 style={{
-                  padding: '8px 16px',
+                  padding: '8px 14px',
                   borderRadius: '8px',
                   border: 'none',
                   backgroundColor: filterCategory === 'todos' ? '#ffffff' : 'transparent',
@@ -67,7 +69,7 @@ export default function CatalogCarousel() {
               <button
                 onClick={() => setFilterCategory('playeras')}
                 style={{
-                  padding: '8px 16px',
+                  padding: '8px 14px',
                   borderRadius: '8px',
                   border: 'none',
                   backgroundColor: filterCategory === 'playeras' ? '#ffffff' : 'transparent',
@@ -79,12 +81,12 @@ export default function CatalogCarousel() {
                   transition: 'all 0.2s ease'
                 }}
               >
-                Playeras Cuello R/V
+                Playeras
               </button>
               <button
                 onClick={() => setFilterCategory('polos')}
                 style={{
-                  padding: '8px 16px',
+                  padding: '8px 14px',
                   borderRadius: '8px',
                   border: 'none',
                   backgroundColor: filterCategory === 'polos' ? '#ffffff' : 'transparent',
@@ -96,7 +98,41 @@ export default function CatalogCarousel() {
                   transition: 'all 0.2s ease'
                 }}
               >
-                Polos Piqué
+                Polos
+              </button>
+              <button
+                onClick={() => setFilterCategory('calzado')}
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: filterCategory === 'calzado' ? 'var(--rey)' : 'transparent',
+                  color: filterCategory === 'calzado' ? '#ffffff' : 'var(--marino)',
+                  fontWeight: 800,
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  boxShadow: filterCategory === 'calzado' ? '0 2px 8px rgba(36,86,196,0.3)' : 'none',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                🥾 Calzado de Seguridad
+              </button>
+              <button
+                onClick={() => setFilterCategory('accesorios')}
+                style={{
+                  padding: '8px 14px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: filterCategory === 'accesorios' ? '#ffffff' : 'transparent',
+                  color: filterCategory === 'accesorios' ? 'var(--marino)' : 'var(--texto-2)',
+                  fontWeight: 700,
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  boxShadow: filterCategory === 'accesorios' ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                Accesorios
               </button>
             </div>
 

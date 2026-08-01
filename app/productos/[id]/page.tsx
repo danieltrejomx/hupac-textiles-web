@@ -200,8 +200,8 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                     </span>
                     <span style={{ 
                       fontSize: '0.75rem', 
-                      backgroundColor: quantity >= 504 ? '#cffafe' : (quantity >= 72 ? '#dcfce7' : '#fee2e2'), 
-                      color: quantity >= 504 ? '#083344' : (quantity >= 72 ? '#15803d' : '#991b1b'), 
+                      backgroundColor: product.precioDirecto ? '#dcfce7' : (quantity >= 504 ? '#cffafe' : (quantity >= 72 ? '#dcfce7' : '#fee2e2')), 
+                      color: product.precioDirecto ? '#15803d' : (quantity >= 504 ? '#083344' : (quantity >= 72 ? '#15803d' : '#991b1b')), 
                       fontWeight: 700, 
                       padding: '2px 8px', 
                       borderRadius: '10px', 
@@ -209,7 +209,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ id: st
                       display: 'inline-block',
                       marginTop: '4px'
                     }}>
-                      {quantity >= 504 ? 'Mayoreo +504 pzs' : (quantity >= 72 ? 'Mayoreo 72-503 pzs' : 'Mayoreo 12-71 pzs')}
+                      {product.precioDirecto ? 'Precio Directo de Lista' : (quantity >= 504 ? 'Mayoreo +504 pzs' : (quantity >= 72 ? 'Mayoreo 72-503 pzs' : 'Mayoreo 12-71 pzs'))}
                     </span>
                   </div>
 
