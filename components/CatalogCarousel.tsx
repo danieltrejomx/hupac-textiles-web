@@ -156,7 +156,14 @@ export default function CatalogCarousel() {
           }}>
             <div>
               <span className="eyebrow">Catálogo Confección Textil</span>
-              <h2 style={{ marginBottom: '6px', fontSize: '1.8rem' }}>Playeras y Polos de Línea</h2>
+              <h2 style={{ marginBottom: '6px', fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <Link href="/categoria/playeras" style={{ color: 'var(--marino)', textDecoration: 'none' }}>
+                  Playeras y Polos de Línea
+                </Link>
+                <Link href="/categoria/playeras" style={{ fontSize: '0.85rem', color: 'var(--rey)', fontWeight: 700, textDecoration: 'none' }}>
+                  Ver todo ({textilesProducts.length}) &rarr;
+                </Link>
+              </h2>
               <p style={{ color: 'var(--texto-2)', margin: 0, fontSize: '0.95rem' }}>
                 Modelos corporativos en peso completo, cuello redondo, cuello V y polos piqué.
               </p>
@@ -219,7 +226,14 @@ export default function CatalogCarousel() {
           }}>
             <div>
               <span className="eyebrow" style={{ color: '#0369a1' }}>Línea de Protección Industrial · Duty Gear</span>
-              <h2 style={{ marginBottom: '6px', fontSize: '1.8rem' }}>🥾 Calzado de Seguridad y Accesorios</h2>
+              <h2 style={{ marginBottom: '6px', fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <Link href="/categoria/calzado" style={{ color: 'var(--marino)', textDecoration: 'none' }}>
+                  🥾 Calzado de Seguridad y Accesorios
+                </Link>
+                <Link href="/categoria/calzado" style={{ fontSize: '0.85rem', color: 'var(--rey)', fontWeight: 700, textDecoration: 'none' }}>
+                  Ver todo ({footwearProducts.length}) &rarr;
+                </Link>
+              </h2>
               <p style={{ color: 'var(--texto-2)', margin: 0, fontSize: '0.95rem' }}>
                 Botas dieléctricas, tenis antiderrapantes, protección metatarsal y plantillas antifatiga.
               </p>
