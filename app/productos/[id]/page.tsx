@@ -19,7 +19,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
   const [selectedColor, setSelectedColor] = useState(product.colores[0]);
   const [selectedSize, setSelectedSize] = useState(product.tallas[0]);
-  const [quantity, setQuantity] = useState(12);
+  const [quantity, setQuantity] = useState(1);
 
   // Price calculation
   const unitPrice = getProductPrice(product, selectedColor.nombre, selectedSize, quantity);
@@ -200,8 +200,8 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                     </span>
                     <span style={{ 
                       fontSize: '0.75rem', 
-                      backgroundColor: product.precioDirecto ? '#dcfce7' : (quantity >= 504 ? '#cffafe' : (quantity >= 72 ? '#dcfce7' : '#fee2e2')), 
-                      color: product.precioDirecto ? '#15803d' : (quantity >= 504 ? '#083344' : (quantity >= 72 ? '#15803d' : '#991b1b')), 
+                      backgroundColor: product.precioDirecto ? '#dcfce7' : (quantity >= 504 ? '#cffafe' : (quantity >= 72 ? '#dcfce7' : '#e0e7ff')), 
+                      color: product.precioDirecto ? '#15803d' : (quantity >= 504 ? '#083344' : (quantity >= 72 ? '#15803d' : '#1e40af')), 
                       fontWeight: 700, 
                       padding: '2px 8px', 
                       borderRadius: '10px', 
@@ -209,7 +209,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       display: 'inline-block',
                       marginTop: '4px'
                     }}>
-                      {product.precioDirecto ? 'Precio Directo de Lista' : (quantity >= 504 ? 'Mayoreo +504 pzs' : (quantity >= 72 ? 'Mayoreo 72-503 pzs' : 'Mayoreo 12-71 pzs'))}
+                      {product.precioDirecto ? 'Precio Directo de Lista' : (quantity >= 504 ? 'Mayoreo +504 pzs' : (quantity >= 72 ? 'Mayoreo 72-503 pzs' : 'Escala 1 - 71 pzs'))}
                     </span>
                   </div>
 
@@ -326,27 +326,30 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                   </label>
                   <div style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid #cbd5e1', borderRadius: '10px', overflow: 'hidden', backgroundColor: '#ffffff' }}>
                     <button 
-                      onClick={() => setQuantity(Math.max(12, quantity - 1))}
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
                       style={{ width: '40px', height: '40px', border: 'none', backgroundColor: '#f1f5f9', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 700, color: 'var(--marino)' }}
+                      aria-label="Disminuir cantidad"
                     >
                       -
                     </button>
                     <input 
                       type="number" 
+                      min="1"
                       value={quantity} 
-                      onChange={(e) => setQuantity(Math.max(12, parseInt(e.target.value) || 12))}
+                      onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
                       style={{ width: '60px', height: '40px', border: 'none', textAlign: 'center', fontWeight: 700, fontSize: '1rem', color: 'var(--marino)', outline: 'none' }}
                     />
                     <button 
                       onClick={() => setQuantity(quantity + 1)}
                       style={{ width: '40px', height: '40px', border: 'none', backgroundColor: '#f1f5f9', cursor: 'pointer', fontSize: '1.2rem', fontWeight: 700, color: 'var(--marino)' }}
+                      aria-label="Aumentar cantidad"
                     >
                       +
                     </button>
                   </div>
                   <span style={{ marginLeft: '12px', fontSize: '0.85rem', color: 'var(--texto-2)' }}>piezas</span>
-                  <span style={{ display: 'block', fontSize: '0.75rem', color: '#991b1b', fontWeight: 600, marginTop: '8px' }}>
-                    * El mayoreo aplica a partir de 12 piezas por modelo.
+                  <span style={{ display: 'block', fontSize: '0.75rem', color: 'var(--texto-2)', fontWeight: 500, marginTop: '8px' }}>
+                    * Venta disponible desde 1 pieza. Descuento automático por volumen a partir de 72 y 504 piezas.
                   </span>
                 </div>
 

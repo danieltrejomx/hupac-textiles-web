@@ -84,7 +84,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
       color: color ? color.nombre : 'Único',
       colorHex: color ? color.hex : '#17222B',
       talla,
-      cantidad: prod.categoria === 'calzado' || prod.categoria === 'accesorios' ? 1 : 12,
+      cantidad: 1,
       precioUnitario: unitPrice,
       imagen: color?.imagen || prod.imagenPrincipal
     });
@@ -221,9 +221,9 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
                       </div>
                     ) : (
                       <div style={{ marginBottom: '14px' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>Precios de mayoreo (sin IVA):</span>
+                        <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>Precios por volumen (sin IVA):</span>
                         <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--rey)' }}>
-                          12 a 504+ pzs disponibles
+                          Desde 1 pza · Mayoreo 72+ y 504+
                         </span>
                       </div>
                     )}
