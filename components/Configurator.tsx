@@ -79,12 +79,12 @@ interface ColorOption {
 
 const COLORES: ColorOption[] = [
   { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
-  { c: '#AECDE8', n: 'Azul Cielo', rgb: [174, 205, 232], textColor: '#132A52' },
-  { c: '#2456C4', n: 'Azul Rey (HUPAC)', rgb: [36, 86, 196], textColor: '#FFFFFF' },
-  { c: '#132A52', n: 'Azul Marino Corporativo', rgb: [19, 42, 82], textColor: '#FFFFFF' },
-  { c: '#4A5568', n: 'Gris Oxford Industrial', rgb: [74, 85, 104], textColor: '#FFFFFF' },
-  { c: '#B22234', n: 'Rojo Empresarial', rgb: [178, 34, 52], textColor: '#FFFFFF' },
-  { c: '#1E293B', n: 'Negro Profundo', rgb: [30, 41, 59], textColor: '#FFFFFF' },
+  { c: '#7EA9CD', n: 'Azul Cielo', rgb: [126, 169, 205], textColor: '#132A52' },
+  { c: '#2254B8', n: 'Azul Rey (HUPAC)', rgb: [34, 84, 184], textColor: '#FFFFFF' },
+  { c: '#142236', n: 'Azul Marino Corporativo', rgb: [20, 34, 54], textColor: '#FFFFFF' },
+  { c: '#4E5664', n: 'Gris Oxford Industrial', rgb: [78, 86, 100], textColor: '#FFFFFF' },
+  { c: '#A31F2D', n: 'Rojo Empresarial', rgb: [163, 31, 45], textColor: '#FFFFFF' },
+  { c: '#22262E', n: 'Negro Profundo', rgb: [34, 38, 46], textColor: '#FFFFFF' },
 ];
 
 export default function Configurator() {
@@ -140,7 +140,7 @@ export default function Configurator() {
     reader.readAsDataURL(file);
   };
 
-  // Renderizado dinámico en Canvas para coloreado fotorrealista de tela
+  // Renderizado dinámico en Canvas para coloreado fotorrealista de tela parejo y no saturado
   useEffect(() => {
     const cvs = canvasRef.current;
     if (!cvs) return;
@@ -160,31 +160,83 @@ export default function Configurator() {
       // Dibujar imagen original base (blanca)
       ctx.drawImage(img, 0, 0);
 
-      // Si el color no es blanco, aplicar multiplicación fotorrealista sobre la prenda
+      // Si el color no es blanco, aplicar coloreado parejo y sin saturación excesiva
       if (colorOption.rgb) {
-        const imgData = ctx.getImageData(0, 0, cvs.width, cvs.height);
+        const w = cvs.width;
+        const h = cvs.height;
+        const imgData = ctx.getImageData(0, 0, w, h);
         const data = imgData.data;
         const [tr, tg, tb] = colorOption.rgb;
 
-        for (let i = 0; i < data.length; i += 4) {
-          const r = data[i];
-          const g = data[i + 1];
-          const b = data[i + 2];
-          const a = data[i + 3];
+        // 1. Detección precisa de fondo exterior mediante Flood Fill / BFS desde los bordes
+        const isBg = new Uint8Array(w * h);
+        const queue: number[] = [];
 
-          if (a === 0) continue;
+        const isWhiteBg = (idx: number) => {
+          const p = idx * 4;
+          return data[p] >= 243 && data[p + 1] >= 243 && data[p + 2] >= 243;
+        };
 
-          // Detectar píxeles de la prenda (fondo casi blanco puro > 250 se preserva limpio)
-          const brightness = (r * 0.299 + g * 0.587 + b * 0.114);
-          
-          if (brightness < 248) {
-            // Factor de multiplicación conservando sombras, textura del tejido y pliegues
-            const factor = brightness / 255;
-            data[i] = Math.min(255, Math.floor(tr * factor * 1.08));
-            data[i + 1] = Math.min(255, Math.floor(tg * factor * 1.08));
-            data[i + 2] = Math.min(255, Math.floor(tb * factor * 1.08));
+        // Encolar los bordes perimetrales de la imagen
+        for (let x = 0; x < w; x++) {
+          const topIdx = x;
+          const botIdx = (h - 1) * w + x;
+          if (isWhiteBg(topIdx) && !isBg[topIdx]) { isBg[topIdx] = 1; queue.push(topIdx); }
+          if (isWhiteBg(botIdx) && !isBg[botIdx]) { isBg[botIdx] = 1; queue.push(botIdx); }
+        }
+        for (let y = 0; y < h; y++) {
+          const leftIdx = y * w;
+          const rightIdx = y * w + (w - 1);
+          if (isWhiteBg(leftIdx) && !isBg[leftIdx]) { isBg[leftIdx] = 1; queue.push(leftIdx); }
+          if (isWhiteBg(rightIdx) && !isBg[rightIdx]) { isBg[rightIdx] = 1; queue.push(rightIdx); }
+        }
+
+        // BFS para expandir el fondo exterior
+        let head = 0;
+        while (head < queue.length) {
+          const curr = queue[head++];
+          const cx = curr % w;
+          const cy = Math.floor(curr / w);
+
+          if (cy > 0) {
+            const n = curr - w;
+            if (!isBg[n] && isWhiteBg(n)) { isBg[n] = 1; queue.push(n); }
+          }
+          if (cy < h - 1) {
+            const n = curr + w;
+            if (!isBg[n] && isWhiteBg(n)) { isBg[n] = 1; queue.push(n); }
+          }
+          if (cx > 0) {
+            const n = curr - 1;
+            if (!isBg[n] && isWhiteBg(n)) { isBg[n] = 1; queue.push(n); }
+          }
+          if (cx < w - 1) {
+            const n = curr + 1;
+            if (!isBg[n] && isWhiteBg(n)) { isBg[n] = 1; queue.push(n); }
           }
         }
+
+        // 2. Colorear uniformemente el 100% de la prenda (incluyendo cuello, botones y pliegues)
+        for (let idx = 0; idx < w * h; idx++) {
+          if (isBg[idx]) continue; // Conservar fondo exterior limpio
+
+          const p = idx * 4;
+          const r = data[p];
+          const g = data[p + 1];
+          const b = data[p + 2];
+
+          // Luminancia percibida de la tela original (sombras y textura del tejido)
+          const L = (0.299 * r + 0.587 * g + 0.114 * b) / 255.0;
+
+          // Curva suave de luz textil (preserva sombras profundas y textura uniforme sin quemar brillos)
+          const normL = Math.pow(L, 1.05);
+
+          // Mezcla suave, uniforme y sin sobresaturación
+          data[p]     = Math.min(255, Math.max(0, Math.round(tr * normL)));
+          data[p + 1] = Math.min(255, Math.max(0, Math.round(tg * normL)));
+          data[p + 2] = Math.min(255, Math.max(0, Math.round(tb * normL)));
+        }
+
         ctx.putImageData(imgData, 0, 0);
       }
 
