@@ -13,8 +13,10 @@ type Tecnica = 'Bordado' | 'Estampado';
 interface PrendaConfig {
   nombre: string;
   subtitulo: string;
-  frenteImg: string;
-  espaldaImg: string;
+  frenteImgWhite: string;
+  espaldaImgWhite: string;
+  frenteImgColor: string;
+  espaldaImgColor: string;
   posicionesFrente: { id: PosicionFrente; label: string; x: number; y: number; maxW: number }[];
   posicionesEspalda: { id: PosicionEspalda; label: string; x: number; y: number; maxW: number }[];
 }
@@ -23,8 +25,10 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
   polo: {
     nombre: 'POLO PIQUÉ EJECUTIVA',
     subtitulo: 'Tejido de punto 100% mexicano · Cuello y puños tejidos',
-    frenteImg: '/images/configurator/polo_front.jpg',
-    espaldaImg: '/images/configurator/polo_back.jpg',
+    frenteImgWhite: '/images/configurator/polo_front.jpg',
+    espaldaImgWhite: '/images/configurator/polo_back.jpg',
+    frenteImgColor: '/images/configurator/polo_front_color.png',
+    espaldaImgColor: '/images/configurator/polo_back_color.png',
     posicionesFrente: [
       { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 34, maxW: 90 },
       { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 44, maxW: 130 },
@@ -39,8 +43,10 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
   playera: {
     nombre: 'PLAYERA CUELLO REDONDO',
     subtitulo: 'Peso completo 100% algodón · Confort y alta durabilidad',
-    frenteImg: '/images/configurator/playera_front.jpg',
-    espaldaImg: '/images/configurator/playera_back.jpg',
+    frenteImgWhite: '/images/configurator/playera_front.jpg',
+    espaldaImgWhite: '/images/configurator/playera_back.jpg',
+    frenteImgColor: '/images/configurator/playera_front_color.png',
+    espaldaImgColor: '/images/configurator/playera_back_color.png',
     posicionesFrente: [
       { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 64, y: 32, maxW: 90 },
       { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 42, maxW: 150 },
@@ -55,8 +61,10 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
   camisa: {
     nombre: 'CAMISA DE VESTIR EJECUTIVA',
     subtitulo: 'Corte formal corporativo · Algodón premium y fácil planchado',
-    frenteImg: '/images/configurator/camisa_front.jpg',
-    espaldaImg: '/images/configurator/camisa_back.jpg',
+    frenteImgWhite: '/images/configurator/camisa_front.jpg',
+    espaldaImgWhite: '/images/configurator/camisa_back.jpg',
+    frenteImgColor: '/images/configurator/camisa_front_color.png',
+    espaldaImgColor: '/images/configurator/camisa_back_color.png',
     posicionesFrente: [
       { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 62, y: 34, maxW: 85 },
       { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 45, maxW: 120 },
@@ -140,7 +148,7 @@ export default function Configurator() {
     reader.readAsDataURL(file);
   };
 
-  // Renderizado dinámico en Canvas
+  // Renderizado dinámico en Canvas: foto original para blanco + coloreado 100% parejo y sin manchas
   useEffect(() => {
     const cvs = canvasRef.current;
     if (!cvs) return;
@@ -148,48 +156,50 @@ export default function Configurator() {
     if (!ctx) return;
 
     setIsProcessingCanvas(true);
+    const isWhite = !colorOption.rgb;
+
+    const imgSrc = isWhite
+      ? (vista === 'frente' ? prendaActual.frenteImgWhite : prendaActual.espaldaImgWhite)
+      : (vista === 'frente' ? prendaActual.frenteImgColor : prendaActual.espaldaImgColor);
+
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.src = vista === 'frente' ? prendaActual.frenteImg : prendaActual.espaldaImg;
+    img.src = imgSrc;
 
     img.onload = () => {
       cvs.width = img.naturalWidth;
       cvs.height = img.naturalHeight;
       ctx.clearRect(0, 0, cvs.width, cvs.height);
 
-      // Dibujar imagen fotográfica base
+      // Dibujar imagen
       ctx.drawImage(img, 0, 0);
 
-      // Si es blanco clásico, conservar 100% la foto original sin modificar
-      if (!colorOption.rgb) {
+      // Si es Blanco Clásico: mostrar directamente la foto auténtica de estudio
+      if (isWhite) {
         setIsProcessingCanvas(false);
         return;
       }
 
-      // Si es otro color, aplicar tinte suave respetando sombras y textura
+      // Si es Color: colorear el 100% de la prenda sin dejar puntos blancos
       const w = cvs.width;
       const h = cvs.height;
       const imgData = ctx.getImageData(0, 0, w, h);
       const data = imgData.data;
-      const [tr, tg, tb] = colorOption.rgb;
+      const [tr, tg, tb] = colorOption.rgb!;
 
       for (let i = 0; i < data.length; i += 4) {
+        const a = data[i + 3];
+        if (a === 0) continue; // Fondo transparente limpio
+
         const r = data[i];
         const g = data[i + 1];
         const b = data[i + 2];
-        const a = data[i + 3];
+        const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255.0;
 
-        if (a === 0) continue;
-
-        const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
-
-        // Solo colorear si no es fondo blanco exterior puro
-        if (brightness < 248) {
-          const factor = brightness / 255;
-          data[i] = Math.min(255, Math.round(tr * factor * 1.05));
-          data[i + 1] = Math.min(255, Math.round(tg * factor * 1.05));
-          data[i + 2] = Math.min(255, Math.round(tb * factor * 1.05));
-        }
+        // Coloreado completo y uniforme respetando la textura del tejido
+        data[i]     = Math.min(255, Math.round(tr * brightness));
+        data[i + 1] = Math.min(255, Math.round(tg * brightness));
+        data[i + 2] = Math.min(255, Math.round(tb * brightness));
       }
 
       ctx.putImageData(imgData, 0, 0);
