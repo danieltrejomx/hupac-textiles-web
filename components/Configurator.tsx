@@ -23,7 +23,7 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
   polo: {
     nombre: 'POLO PIQUÉ EJECUTIVA',
     subtitulo: 'Tejido de punto 100% mexicano · Cuello y puños tejidos',
-    frenteImg: '/images/configurator/polo_front.png',
+    frenteImg: '/images/configurator/polo_front.jpg',
     espaldaImg: '/images/configurator/polo_back.jpg',
     posicionesFrente: [
       { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 34, maxW: 90 },
