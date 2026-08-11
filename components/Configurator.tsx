@@ -23,7 +23,7 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
   polo: {
     nombre: 'POLO PIQUÉ EJECUTIVA',
     subtitulo: 'Tejido de punto 100% mexicano · Cuello y puños tejidos',
-    frenteImg: '/images/configurator/polo_front.jpg',
+    frenteImg: '/images/configurator/polo_front.png',
     espaldaImg: '/images/configurator/polo_back.jpg',
     posicionesFrente: [
       { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 34, maxW: 90 },
@@ -140,7 +140,7 @@ export default function Configurator() {
     reader.readAsDataURL(file);
   };
 
-  // Renderizado dinámico en Canvas para coloreado fotorrealista 100% parejo y sin manchas
+  // Renderizado dinámico en Canvas
   useEffect(() => {
     const cvs = canvasRef.current;
     if (!cvs) return;
@@ -157,53 +157,38 @@ export default function Configurator() {
       cvs.height = img.naturalHeight;
       ctx.clearRect(0, 0, cvs.width, cvs.height);
 
-      const w = cvs.width;
-      const h = cvs.height;
-
-      // Dibujar imagen original base
+      // Dibujar imagen fotográfica base
       ctx.drawImage(img, 0, 0);
 
+      // Si es blanco clásico, conservar 100% la foto original sin modificar
+      if (!colorOption.rgb) {
+        setIsProcessingCanvas(false);
+        return;
+      }
+
+      // Si es otro color, aplicar tinte suave respetando sombras y textura
+      const w = cvs.width;
+      const h = cvs.height;
       const imgData = ctx.getImageData(0, 0, w, h);
       const data = imgData.data;
-      const targetRGB = colorOption.rgb;
+      const [tr, tg, tb] = colorOption.rgb;
 
       for (let i = 0; i < data.length; i += 4) {
         const r = data[i];
         const g = data[i + 1];
         const b = data[i + 2];
+        const a = data[i + 3];
 
-        // Luminancia para separar fondo del cuerpo completo de la prenda
-        const L_raw = 0.299 * r + 0.587 * g + 0.114 * b;
+        if (a === 0) continue;
 
-        if (L_raw < 28) {
-          // Fondo 100% limpio y transparente
-          data[i + 3] = 0;
-        } else {
-          // Suavizado en bordes externos (antialiasing)
-          if (L_raw < 55) {
-            data[i + 3] = Math.round(((L_raw - 28) / 27) * 255);
-          } else {
-            data[i + 3] = 255;
-          }
+        const brightness = 0.299 * r + 0.587 * g + 0.114 * b;
 
-          // Luminancia normalizada del tejido textil (rescalado 28..255 a 0..1)
-          const normL = Math.max(0, Math.min(1, (L_raw - 28) / 227));
-
-          if (!targetRGB) {
-            // Blanco Clásico: textura blanca natural con sombras suaves y realistas
-            const whiteVal = Math.round(212 + 43 * normL);
-            data[i]     = whiteVal;
-            data[i + 1] = whiteVal;
-            data[i + 2] = whiteVal;
-          } else {
-            // Color corporativo: 100% parejo, sin manchas, sin sobre-saturación
-            const [tr, tg, tb] = targetRGB;
-            const tone = Math.pow(normL, 1.02);
-
-            data[i]     = Math.min(255, Math.max(0, Math.round(tr * tone)));
-            data[i + 1] = Math.min(255, Math.max(0, Math.round(tg * tone)));
-            data[i + 2] = Math.min(255, Math.max(0, Math.round(tb * tone)));
-          }
+        // Solo colorear si no es fondo blanco exterior puro
+        if (brightness < 248) {
+          const factor = brightness / 255;
+          data[i] = Math.min(255, Math.round(tr * factor * 1.05));
+          data[i + 1] = Math.min(255, Math.round(tg * factor * 1.05));
+          data[i + 2] = Math.min(255, Math.round(tb * factor * 1.05));
         }
       }
 
