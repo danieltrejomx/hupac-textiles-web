@@ -106,6 +106,12 @@ export default function Configurator() {
   const [logo, setLogo] = useState<string | null>(null);
   const [logoName, setLogoName] = useState<string>('');
   const [isProcessingCanvas, setIsProcessingCanvas] = useState(false);
+  const [showTicketModal, setShowTicketModal] = useState(false);
+  const folioRef = useRef<string>('');
+
+  if (!folioRef.current) {
+    folioRef.current = 'HUP-' + Math.floor(100000 + Math.random() * 900000);
+  }
 
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -115,7 +121,6 @@ export default function Configurator() {
   const currentPositions = vista === 'frente' ? prendaActual.posicionesFrente : prendaActual.posicionesEspalda;
   const activePositionObj = currentPositions.find(p => p.id === activePositionId) || currentPositions[0];
 
-  // Observador para animaciones al hacer scroll
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
@@ -134,7 +139,6 @@ export default function Configurator() {
     return () => observer.disconnect();
   }, []);
 
-  // Manejo de carga de archivo
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -148,7 +152,6 @@ export default function Configurator() {
     reader.readAsDataURL(file);
   };
 
-  // Renderizado dinámico en Canvas: foto original para blanco + coloreado 100% parejo y sin manchas
   useEffect(() => {
     const cvs = canvasRef.current;
     if (!cvs) return;
@@ -171,16 +174,13 @@ export default function Configurator() {
       cvs.height = img.naturalHeight;
       ctx.clearRect(0, 0, cvs.width, cvs.height);
 
-      // Dibujar imagen
       ctx.drawImage(img, 0, 0);
 
-      // Si es Blanco Clásico: mostrar directamente la foto auténtica de estudio
       if (isWhite) {
         setIsProcessingCanvas(false);
         return;
       }
 
-      // Si es Color: colorear el 100% de la prenda sin dejar puntos blancos
       const w = cvs.width;
       const h = cvs.height;
       const imgData = ctx.getImageData(0, 0, w, h);
@@ -189,14 +189,13 @@ export default function Configurator() {
 
       for (let i = 0; i < data.length; i += 4) {
         const a = data[i + 3];
-        if (a === 0) continue; // Fondo transparente limpio
+        if (a === 0) continue;
 
         const r = data[i];
         const g = data[i + 1];
         const b = data[i + 2];
         const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255.0;
 
-        // Coloreado completo y uniforme respetando la textura del tejido
         data[i]     = Math.min(255, Math.round(tr * brightness));
         data[i + 1] = Math.min(255, Math.round(tg * brightness));
         data[i + 2] = Math.min(255, Math.round(tb * brightness));
@@ -207,24 +206,20 @@ export default function Configurator() {
     };
   }, [prenda, vista, colorOption]);
 
-  // Función para descargar el diseño generado en alta resolución
   const handleDownloadMockup = () => {
     const cvs = canvasRef.current;
     if (!cvs) return;
 
-    // Crear canvas temporal de exportación que combina prenda + logo
     const exportCvs = document.createElement('canvas');
     exportCvs.width = cvs.width;
     exportCvs.height = cvs.height;
     const ctx = exportCvs.getContext('2d');
     if (!ctx) return;
 
-    // 1. Fondo blanco de estudio y dibujo de la prenda coloreada
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, exportCvs.width, exportCvs.height);
     ctx.drawImage(cvs, 0, 0);
 
-    // 2. Si hay logo, dibujarlo en la posición exacta
     if (logo) {
       const logoImg = new Image();
       logoImg.src = logo;
@@ -258,15 +253,34 @@ export default function Configurator() {
   };
 
   const activePositionName = activePositionObj.label;
-  const msg = encodeURIComponent(
-    `Hola HUPAC TEXTILES, quiero cotizar uniformes con la siguiente configuración:\n` +
-    `• Prenda: ${prendaActual.nombre}\n` +
-    `• Color: ${colorOption.n}\n` +
-    `• Vista: ${vista === 'frente' ? 'Frente' : 'Espalda'}\n` +
-    `• Posición de Logo: ${activePositionName}\n` +
-    `• Técnica: ${tec}\n` +
-    `• Logotipo: ${logo ? 'Cargado en mockup' : 'Pendiente de enviar'}`
-  );
+  const fechaActualStr = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+
+  const ticketFormattedText = 
+`📄 *TICKET DE COTIZACIÓN FORMAL*
+🏢 *HUPAC TEXTILES S.A. DE C.V.*
+────────────────────────────
+🆔 *Folio:* #${folioRef.current}
+📅 *Fecha:* ${fechaActualStr}
+────────────────────────────
+👔 *ESPECIFICACIONES DE PRENDA*
+• *Modelo:* ${prendaActual.nombre}
+• *Color Institucional:* ${colorOption.n}
+• *Descripción:* ${prendaActual.subtitulo}
+
+🪡 *PERSONALIZACIÓN Y BORDADO*
+• *Técnica:* ${tec}
+• *Vista de Prenda:* ${vista === 'frente' ? 'Frontal (Frente)' : 'Trasera (Espalda)'}
+• *Posición de Logo:* ${activePositionName}
+• *Tamaño de Logo:* ${size}% (Aprox. ${Math.round(size * 0.12)} cm)
+• *Logotipo:* ${logo ? `Cargado ✓ (${logoName || 'Imagen adjunta'})` : 'Pendiente de enviar por chat'}
+
+📦 *CONDICIONES Y CONFECCIÓN*
+• Confección 100% Nacional (México)
+• Garantía de Calidad Textil Empresarial HUPAC
+────────────────────────────
+💬 *Mensaje del Cliente:* Hola HUPAC TEXTILES, adjunto mi ticket de cotización para solicitar propuesta formal con escala de precios por volumen.`;
+
+  const msg = encodeURIComponent(ticketFormattedText);
 
   return (
     <div id="configurador" className="config-wrap" ref={containerRef}>
@@ -517,18 +531,73 @@ export default function Configurator() {
             </label>
           </div>
           
-          {/* Resumen de Configuración */}
-          <div className="resumen rv" style={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', boxShadow: '0 4px 14px rgba(0,0,0,0.03)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', borderBottom: '1px solid #f1f5f9', paddingBottom: '8px' }}>
-              <b style={{ color: 'var(--marino)', fontSize: '0.95rem' }}>Resumen de Personalización</b>
-              <span style={{ fontSize: '0.75rem', backgroundColor: '#e0e7ff', color: 'var(--rey)', padding: '2px 8px', borderRadius: '8px', fontWeight: 700 }}>
-                HUPAC TEXTILES
+          {/* Resumen de Configuración - Formato Ticket Digital */}
+          <div className="resumen rv" style={{ 
+            backgroundColor: '#ffffff', 
+            border: '2px dashed #cbd5e1', 
+            borderRadius: '16px',
+            padding: '18px',
+            boxShadow: '0 4px 18px rgba(0,0,0,0.03)',
+            position: 'relative'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '2px dashed #e2e8f0', paddingBottom: '10px' }}>
+              <div>
+                <span style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--rey)', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block' }}>
+                  HUPAC TEXTILES S.A. DE C.V.
+                </span>
+                <b style={{ color: 'var(--marino)', fontSize: '1rem', display: 'block' }}>
+                  📄 Ticket de Cotización Digital
+                </b>
+              </div>
+              <span style={{ 
+                fontSize: '0.8rem', 
+                backgroundColor: '#eff6ff', 
+                color: 'var(--rey)', 
+                padding: '4px 10px', 
+                borderRadius: '8px', 
+                fontWeight: 800,
+                border: '1px solid #bfdbfe'
+              }}>
+                #{folioRef.current}
               </span>
             </div>
-            Prenda: <b>{prendaActual.nombre}</b><br/>
-            Color: <b style={{ color: colorOption.c === '#FFFFFF' ? '#64748b' : colorOption.c }}>{colorOption.n}</b> · Técnica: <b>{tec}</b><br/>
-            Vista: <b>{vista === 'frente' ? 'Frontal (Frente)' : 'Trasera (Espalda)'}</b> · Posición: <b>{activePositionName}</b><br/>
-            Logotipo: <b>{logo ? `Cargado ✓ (${logoName})` : 'Pendiente de adjuntar'}</b>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 14px', fontSize: '0.86rem', color: '#334155', marginBottom: '14px' }}>
+              <div>Prenda: <b style={{ color: 'var(--marino)' }}>{prendaActual.nombre}</b></div>
+              <div>Color: <b style={{ color: colorOption.c === '#FFFFFF' ? '#475569' : colorOption.c }}>{colorOption.n}</b></div>
+              <div>Técnica: <b>{tec}</b></div>
+              <div>Vista: <b>{vista === 'frente' ? 'Frontal (Frente)' : 'Trasera (Espalda)'}</b></div>
+              <div>Posición Logo: <b>{activePositionName}</b></div>
+              <div>Tamaño Logo: <b>{size}%</b></div>
+              <div style={{ gridColumn: '1 / -1', borderTop: '1px solid #f1f5f9', paddingTop: '6px' }}>
+                Logotipo: <b style={{ color: logo ? '#16a34a' : '#ea580c' }}>{logo ? `Cargado ✓ (${logoName})` : 'Pendiente de adjuntar por chat'}</b>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => setShowTicketModal(true)}
+                style={{
+                  flex: 1,
+                  backgroundColor: '#f8fafc',
+                  color: 'var(--marino)',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '10px',
+                  padding: '10px 14px',
+                  fontSize: '0.86rem',
+                  fontWeight: 750,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                📄 Ver Ticket PDF / Formato
+              </button>
+            </div>
           </div>
           
           {/* Botón WhatsApp */}
@@ -538,6 +607,7 @@ export default function Configurator() {
               try {
                 await addDoc(collection(db, 'orders'), {
                   tipo: 'Cotización Personalizada',
+                  folio: folioRef.current,
                   prenda: prendaActual.nombre,
                   color: colorOption.n,
                   vista: vista === 'frente' ? 'Frente' : 'Espalda',
@@ -564,7 +634,7 @@ export default function Configurator() {
               gap: '10px'
             }}
           >
-            <span>💬</span> Enviar esta configuración por WhatsApp
+            <span>💬</span> Enviar Ticket por WhatsApp
           </button>
         </div>
 
@@ -827,6 +897,167 @@ export default function Configurator() {
           </div>
         </div>
 
+        {/* ================= MODAL FORMATO TICKET DE COTIZACIÓN ================= */}
+        {showTicketModal && (
+          <div style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(4px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}>
+            <div style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '20px',
+              maxWidth: '620px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              border: '1px solid #cbd5e1',
+              padding: '28px',
+              position: 'relative'
+            }}>
+              {/* Botón cerrar */}
+              <button
+                type="button"
+                onClick={() => setShowTicketModal(false)}
+                style={{
+                  position: 'absolute',
+                  top: '18px',
+                  right: '18px',
+                  backgroundColor: '#f1f5f9',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '36px',
+                  height: '36px',
+                  fontSize: '1.1rem',
+                  cursor: 'pointer',
+                  color: '#64748b',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                ✕
+              </button>
+
+              {/* Header del Ticket */}
+              <div style={{ borderBottom: '2px solid #2456C4', paddingBottom: '16px', marginBottom: '20px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <div>
+                    <h3 style={{ color: 'var(--marino)', margin: 0, fontSize: '1.3rem', fontWeight: 800 }}>
+                      HUPAC TEXTILES S.A. DE C.V.
+                    </h3>
+                    <p style={{ margin: '2px 0 0', fontSize: '0.82rem', color: '#64748b' }}>
+                      Confección & Personalización Textil Empresarial · México
+                    </p>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <span style={{ fontSize: '0.78rem', backgroundColor: '#2456C4', color: '#ffffff', padding: '4px 10px', borderRadius: '6px', fontWeight: 800 }}>
+                      TICKET OFICIAL
+                    </span>
+                    <p style={{ margin: '4px 0 0', fontSize: '0.85rem', fontWeight: 800, color: 'var(--marino)' }}>
+                      #{folioRef.current}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Datos Generales */}
+              <div style={{ backgroundColor: '#f8fafc', padding: '14px 18px', borderRadius: '12px', border: '1px solid #e2e8f0', marginBottom: '20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', fontSize: '0.88rem' }}>
+                <div><b>Fecha de Solicitud:</b> {fechaActualStr}</div>
+                <div><b>Estado:</b> <span style={{ color: '#16a34a', fontWeight: 700 }}>Válido para Cotización</span></div>
+                <div><b>Garantía:</b> 100% Hecho en México</div>
+                <div><b>Mínimo de Compra:</b> Desde 1 pieza</div>
+              </div>
+
+              {/* Detalles de Configuración */}
+              <h4 style={{ color: 'var(--marino)', fontSize: '1.05rem', margin: '0 0 12px', borderBottom: '1px solid #e2e8f0', paddingBottom: '6px' }}>
+                👔 Especificaciones del Pedido
+              </h4>
+
+              <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', marginBottom: '20px' }}>
+                <tbody>
+                  <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Modelo de Prenda</td>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800, color: 'var(--marino)' }}>{prendaActual.nombre}</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Color Institucional</td>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800 }}>{colorOption.n}</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Técnica de Personalización</td>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800 }}>{tec}</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Vista Configurada</td>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800 }}>{vista === 'frente' ? 'Frontal (Frente)' : 'Trasera (Espalda)'}</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Posición del Logo</td>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800 }}>{activePositionName}</td>
+                  </tr>
+                  <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
+                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Tamaño Escala Logo</td>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800 }}>{size}% (Aprox. {Math.round(size * 0.12)} cm)</td>
+                  </tr>
+                  <tr>
+                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Archivo de Logotipo</td>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800, color: logo ? '#16a34a' : '#ea580c' }}>
+                      {logo ? `Cargado ✓ (${logoName})` : 'Pendiente por WhatsApp'}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              {/* Botones de acción del Modal */}
+              <div style={{ display: 'flex', gap: '12px', marginTop: '24px' }}>
+                <button
+                  type="button"
+                  onClick={() => window.print()}
+                  style={{
+                    flex: 1,
+                    backgroundColor: '#ffffff',
+                    color: 'var(--marino)',
+                    border: '1px solid #cbd5e1',
+                    borderRadius: '12px',
+                    padding: '12px',
+                    fontWeight: 750,
+                    cursor: 'pointer',
+                    fontSize: '0.9rem'
+                  }}
+                >
+                  🖨️ Imprimir Ticket
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.open(`https://wa.me/525612870780?text=${msg}`, '_blank');
+                  }}
+                  style={{
+                    flex: 1.5,
+                    backgroundColor: '#2456C4',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '12px',
+                    padding: '12px',
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    fontSize: '0.95rem'
+                  }}
+                >
+                  💬 Enviar este Ticket a WhatsApp
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
