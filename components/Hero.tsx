@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 const HERO_SLIDES = [
   {
-    src: '/images/img_2.webp',
+    src: '/images/hero_camisa_model.jpg',
     alt: 'Camisa ejecutiva de vestir HUPAC TEXTILES',
     title: 'Distribución nacional e internacional',
     subtitle: 'Cadenas comerciales y clientes corporativos'
