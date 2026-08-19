@@ -223,6 +223,7 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .hero{padding-top:40px;padding-bottom:40px}
   .hero-foto img{height:360px}
   .hero-card{left:14px;bottom:20px}
+  .hero-dots{bottom:20px}
   .visor{position:static}
   .dist{padding:32px 24px}
   section{padding:64px 20px}

@@ -119,7 +119,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Cuello de punto reforzado', 'Doble costura en dobladillos', 'Tapa costura de hombro a hombro'],
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia', 'Bordado'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32603_playera_max_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -162,7 +162,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Silueta confort regular', 'Tejido pre-encogido', 'Tacto suave'],
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32702_playera_prime_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -205,7 +205,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Cuello V estructurado', 'Doble costura', 'Fácil de lavar'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/38387_playera_cuello_v_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -230,7 +230,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Sin mangas', 'Sisas ribeteadas', 'Tacto suave'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/37326_playera_tank_top_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -256,7 +256,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG', '3EG'],
     detalles: ['Grosor máximo y calidez', 'Corte amplio confortable', 'Cuello rib grueso'],
     tecnicas: ['Serigrafía', 'Bordado', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32603_playera_max_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -295,7 +295,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Silueta entallada femenina', 'Tacto suave peinado', 'Excelente caída'],
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32582_playera_prime_cuello_redondo_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -329,7 +329,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Escote en V fino', 'Corte para dama entallado', 'Fresco y ligero'],
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/31818_playera_prime_cuello_v_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -359,7 +359,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Corte olímpico espalda', 'Tejido jaspeado y liso', 'Ligereza excepcional'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32873_playera_tank_top_dama.jpg',
     colores: [
       { nombre: 'Fiusha Neón', hex: '#FF007F' },
       { nombre: 'Blanco', hex: '#FFFFFF' },
@@ -390,7 +390,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Silueta corta a la cintura', 'Corte amplio holgado', 'Fresco y juvenil'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/31818_playera_prime_cuello_v_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -417,7 +417,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Efecto jaspeado "Snow"', 'Escote en V estilizado', 'Tacto ultra suave'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/34990_playera_snow_cuello_v_dama.jpg',
     colores: [
       { nombre: 'Jaspe Negro', hex: '#2A2D34' },
       { nombre: 'Jaspe Acero', hex: '#707A8A' },
@@ -442,7 +442,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['ECH(04)', 'CH(06)', 'MD(08)', 'GD(10/12)', 'EG(14/16)'],
     detalles: ['Doble costura de refuerzo', 'Tintes suaves', 'Corte amplio escolar'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/39028_playera_cuello_redondo_nino.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -477,7 +477,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Algodón peinado premium', 'Tacto terso', 'Fit moderno'],
     tecnicas: ['Impresión Directa (DTG)', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/34401_playera_premium_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -505,7 +505,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['ECH(04)', 'CH(06)', 'MD(08)', 'GD(10/12)', 'EG(14/16)'],
     detalles: ['Silueta entallada juvenil', 'Cuello elástico fino', 'Tacto suave'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/39029_playera_asiluetada_nina.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -535,7 +535,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Tacto algodón', 'Sublimación perfecta', 'Fácil secado'],
     tecnicas: ['Sublimación total', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/34420_playera_subli_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' }
     ],
@@ -556,7 +556,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Mezcla suave y fuerte', 'Frescura diaria', 'Resistente a lavadas continuas'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/30039_playera_stampa_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Negro', hex: '#17222B' },
@@ -587,7 +587,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Cuello tejido clásico', 'Aletilla de 3 botones', 'Ideal para bordados corporativos'],
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32633_playera_polo_pique_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -627,7 +627,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Silueta femenina entallada', 'Aletilla de 4 botones finos', 'Cuello tejido rib'],
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32626_playera_polo_pique_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -667,7 +667,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Textura efecto nieve', 'Tela ultra fresca', 'Ideal para calor'],
     tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/34988_playera_snow_caballero.jpg',
     colores: [
       { nombre: 'Jaspe Negro', hex: '#2A2D34' },
       { nombre: 'Jaspe Acero', hex: '#707A8A' },
@@ -695,7 +695,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Manga larga formal', 'Puño tejido rib', 'Aletilla con 3 botones'],
     tecnicas: ['Bordado', 'Serigrafía'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/33981_polo_pique_manga_larga_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -721,7 +721,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG'],
     detalles: ['Textura jaspeada ultra suave', 'Costura lateral moderna', 'Cuello fino al tono'],
     tecnicas: ['Serigrafía', 'Termotransferencia', 'Sublimación (tonos claros)'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/34400_playera_london_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Rey Jaspe', hex: '#355FC4' },
@@ -756,7 +756,7 @@ export const PRODUCTS: Product[] = [
     },
     detalles: ['Cuello de alta calidad', 'Resistente a arrugas', ' Fit regular fit'],
     tecnicas: ['Bordado', 'Serigrafía'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/36980_playera_polo_supreme_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -779,7 +779,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Corte entallado dama', 'Aletilla fina', 'Secado rápido'],
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/36981_playera_polo_supreme_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -810,7 +810,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['ECH(04)', 'CH(06)', 'MD(08)'],
     detalles: ['Tejido transpirable de algodón', 'Puños ribeteados confortables', 'Costuras reforzadas para niños'],
     tecnicas: ['Bordado', 'Serigrafía'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32412_playera_polo_pique_infantil.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -840,7 +840,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['GD(10/12)', 'EG(14/16)'],
     detalles: ['Corte confortable regular juvenil', 'Resistente a deformación', 'Alta solidez al frote'],
     tecnicas: ['Bordado', 'Serigrafía'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32417_playera_polo_pique_juvenil.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },
@@ -870,7 +870,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Manga larga con puños acanalados', 'Tejido pesado abrigador', 'Costuras reforzadas en hombros'],
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/products/32692_playera_heavy_manga_larga_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
       { nombre: 'Heather', hex: '#c2c8d0' },

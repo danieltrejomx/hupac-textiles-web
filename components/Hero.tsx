@@ -5,22 +5,40 @@ import Link from 'next/link';
 
 const HERO_SLIDES = [
   {
-    src: '/images/hero_camisa_model.jpg',
-    alt: 'Camisa ejecutiva de vestir HUPAC TEXTILES',
-    title: 'Distribución nacional e internacional',
-    subtitle: 'Cadenas comerciales y clientes corporativos'
+    src: '/images/hero_slide_1.jpg',
+    alt: 'Camisa ejecutiva de vestir y línea corporativa HUPAC TEXTILES',
+    title: 'Línea Corporativa y Ejecutiva',
+    subtitle: 'Camisas de vestir para oficinas y clientes corporativos'
   },
   {
-    src: '/images/hero_industrial.jpg',
+    src: '/images/hero_slide_2.jpg',
     alt: 'Uniformes de seguridad e industriales HUPAC',
-    title: 'Línea Industrial y Alta Visibilidad',
+    title: 'Línea Industrial y Seguridad',
     subtitle: 'Confeccionados para trabajo pesado y uso rudo'
   },
   {
-    src: '/images/hero_polo.jpg',
-    alt: 'Playeras polo empresariales HUPAC',
-    title: 'Tejido de punto 100% mexicano',
-    subtitle: 'Bordado y serigrafía de alta precisión'
+    src: '/images/hero_slide_3.jpg',
+    alt: 'Prendas de alta visibilidad y logística HUPAC',
+    title: 'Línea Logística y Alta Visibilidad',
+    subtitle: 'Chalecos y prendas de alta visibilidad para supervisión'
+  },
+  {
+    src: '/images/hero_slide_4.jpg',
+    alt: 'Chalecos de trabajo y uniformes de almacén HUPAC',
+    title: 'Línea Operativa y Almacén',
+    subtitle: 'Chalecos multibolsillos y equipo para montacarguistas'
+  },
+  {
+    src: '/images/hero_slide_5.jpg',
+    alt: 'Batas y uniformes médicos y de salud HUPAC',
+    title: 'Línea Médica y Sanitaria',
+    subtitle: 'Batas, filipinas y uniformes para clínicas y hospitales'
+  },
+  {
+    src: '/images/hero_slide_6.jpg',
+    alt: 'Uniformes para estaciones de servicio y gasolineras HUPAC',
+    title: 'Línea de Servicio y Mantenimiento',
+    subtitle: 'Uniformes durables para estaciones de servicio y campo'
   }
 ];
 
