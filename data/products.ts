@@ -902,7 +902,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['23', '24', '25', '26', '27', '28', '29', '30'],
     detalles: ['Norma Tipo II+III', 'Suela Negra/Azul o Negra/Amarillo', 'Resistente al agua (Waterproof)'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_1427_dominion_waterproof.jpg',
     colores: [
       { nombre: 'Negro/Azul', hex: '#1e293b' },
       { nombre: 'Negro/Amarillo', hex: '#eab308' }
@@ -925,7 +925,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['23', '24', '25', '26', '27', '28', '29', '30'],
     detalles: ['Norma Tipo II+III', 'Suela TPU antiderrapante', 'Waterproof'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_1417_dominion_bullfight.jpg',
     colores: [
       { nombre: 'Bull Fight Café', hex: '#78350f' },
       { nombre: 'Bull Fight Negro', hex: '#17222B' }
@@ -948,7 +948,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['23', '24', '25', '26', '27', '28', '29', '30'],
     detalles: ['Norma Tipo II+III', 'Suela TPU Negro', 'Capellada transpirable'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_1437_dominion_cuna.jpg',
     colores: [
       { nombre: 'Micro Negro/Cuña Gris', hex: '#475569' },
       { nombre: 'Micro Negro/Cuña Negro-Azul', hex: '#1e3a8a' }
@@ -971,7 +971,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27'],
     detalles: ['Norma Tipo II+III para dama', 'Waterproof', 'Suela Rosa Bidensidad'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_2203_mark2_rosa_dama.jpg',
     colores: [
       { nombre: 'Micro Negro/Rosa', hex: '#f43f5e' }
     ],
@@ -993,7 +993,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Norma Tipo II+III', 'Waterproof', 'Excelente agarre'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_3638_mark2_negro.jpg',
     colores: [
       { nombre: 'Micro Negro', hex: '#17222B' }
     ],
@@ -1015,7 +1015,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Norma Tipo II+III', 'Waterproof', 'Piel Crazy resistente'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_3638_mark2_crazy_cafe.jpg',
     colores: [
       { nombre: 'Crazy Café', hex: '#92400e' }
     ],
@@ -1037,7 +1037,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Estilo Chelsea elástico', 'Fácil de calzar', 'Norma Tipo II+III'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_2236_mark2_chelsea_cafe.jpg',
     colores: [
       { nombre: 'Piel Grasso Café', hex: '#78350f' }
     ],
@@ -1059,7 +1059,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Norma Tipo II+III', 'Tacto suave napa', 'Alta tracción'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_3728_mark2_napa_cafe.jpg',
     colores: [
       { nombre: 'Napa Café', hex: '#854d0e' }
     ],
@@ -1081,7 +1081,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Norma Tipo II+III', 'Antiderrapante', 'Confort interior'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_3728_mark2_micro_negro.jpg',
     colores: [
       { nombre: 'Micro Negro', hex: '#17222B' }
     ],
@@ -1103,7 +1103,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['25', '26', '27', '28', '29', '30'],
     detalles: ['Norma Tipo II+III', 'Protección dieléctrica', 'Ergonómica'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_2211_mark2_negro_azul.jpg',
     colores: [
       { nombre: 'Negro/Azul', hex: '#1d4ed8' }
     ],
@@ -1125,7 +1125,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['25', '26', '27', '28', '29', '30'],
     detalles: ['Protector metatarsal para empeine', 'Norma Tipo II+III', 'Alta protección contra impactos'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_4031_mark2_metatarsal.jpg',
     colores: [
       { nombre: 'Piel Negro', hex: '#17222B' }
     ],
@@ -1147,7 +1147,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['25', '26', '27', '28', '29', '30'],
     detalles: ['Súper ligera', 'Norma Tipo II+III', 'Suela amortiguadora Phylon'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_8427_kenny_phylon.jpg',
     colores: [
       { nombre: 'Negro/Azul', hex: '#2563eb' },
       { nombre: 'Negro/Amarillo', hex: '#eab308' }
@@ -1170,7 +1170,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['23', '24', '25', '26', '27', '28', '29', '30'],
     detalles: ['Malla tejida ultra fresca', 'Estilo sneaker deportivo', 'Norma Tipo II'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_6427_shark_caballero.png',
     colores: [
       { nombre: 'Negro/Amarillo', hex: '#eab308' },
       { nombre: 'Negro/Azul', hex: '#2563eb' }
@@ -1193,7 +1193,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['23', '24', '25', '26', '27'],
     detalles: ['Horma femenina', 'Suela Phylon Fiusha', 'Norma Tipo II'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_6427_shark_fiusha_dama.jpg',
     colores: [
       { nombre: 'Negro/Fiusha', hex: '#ec4899' }
     ],
@@ -1215,7 +1215,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['25', '26', '27', '28', '29', '30'],
     detalles: ['Ajuste tipo calcetín slip-on', 'Protección anticlavo integrada', 'Norma Tipo II+III'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_800_ken_anticlavo.jpg',
     colores: [
       { nombre: 'Calcetín Negro', hex: '#17222B' }
     ],
@@ -1237,7 +1237,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Diseño antiderrapante Gripp', 'Norma Tipo II+III', 'Ligera e impermeable'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_8606_gripp_phylon.png',
     colores: [
       { nombre: 'Negro/Azul', hex: '#2563eb' },
       { nombre: 'Negro/Amarillo', hex: '#eab308' }
@@ -1260,7 +1260,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Resistente a hidrocarburos y aceites', 'Estilo petrolero de caña alta', 'Norma Tipo II+III'],
     tecnicas: ['Protección Industrial Especializada'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_6997_balboa_hule.jpg',
     colores: [
       { nombre: 'Piel Engrasada Café', hex: '#78350f' }
     ],
@@ -1282,7 +1282,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Waterproof a prueba de agua', 'Suela acrilo-nitrilo resistente', 'Norma Tipo II+III'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_1367_monster2_cafe.jpg',
     colores: [
       { nombre: 'Piel Grasso Café', hex: '#78350f' }
     ],
@@ -1304,7 +1304,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Waterproof', 'Alta durabilidad', 'Norma Tipo II+III'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_1367_monster2_negro.jpg',
     colores: [
       { nombre: 'Micro Negro', hex: '#17222B' }
     ],
@@ -1327,7 +1327,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['Unica'],
     detalles: ['Adaptable a cualquier bota', 'Resistente a fuertes impactos de objetos caídos', 'Fácil colocación'],
     tecnicas: ['Protección Industrial'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/accesorio_proteccion_metatarsal.jpg',
     colores: [
       { nombre: 'Negro Industrial', hex: '#17222B' }
     ],
@@ -1346,7 +1346,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22-24', '25-27', '28-30'],
     detalles: ['Soporte de arco anatómico', 'Absorción de impacto en talón', 'Mínimo de compra: 60 pares'],
     tecnicas: ['Confort Laboral'],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/accesorio_plantillas_pu.jpg',
     colores: [
       { nombre: 'Amarillo/Negro', hex: '#eab308' }
     ],
@@ -2107,7 +2107,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
     detalles: ['Piel ganado vacuno', 'Suela antiderrapante', 'Flexión hasta 200%', 'Múltiplo: 5 pares'],
     tecnicas: [],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_bota_industrial.jpg',
     colores: [{ nombre: 'Café', hex: '#92400e' }],
     precios: {},
     precioDirecto: 349.90,
@@ -2125,7 +2125,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['26', '27', '28', '29', '30'],
     detalles: ['Suela resistente', 'Impermeable', 'Repele líquidos y aceites', 'Múltiplo: 5 pares'],
     tecnicas: [],
-    imagenPrincipal: '/images/no-image.svg',
+    imagenPrincipal: '/images/calzado/calzado_bota_roper.jpg',
     colores: [{ nombre: 'Café', hex: '#92400e' }],
     precios: {},
     precioDirecto: 549.90,
