@@ -166,18 +166,19 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               >
                 <Link href={`/productos/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                   <div style={{
-                    backgroundColor: 'var(--nube)',
-                    height: '240px',
+                    backgroundColor: '#ffffff',
+                    height: '260px',
                     position: 'relative',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '20px'
+                    padding: '16px',
+                    borderBottom: '1px solid var(--linea)'
                   }}>
                     <img
                       src={prod.imagenPrincipal}
                       alt={prod.nombre}
-                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', mixBlendMode: 'multiply' }}
                     />
                     <span style={{
                       position: 'absolute',

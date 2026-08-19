@@ -86,7 +86,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 position: 'relative',
                 borderRadius: '16px',
                 overflow: 'hidden',
-                backgroundColor: '#f1f5f9',
+                backgroundColor: '#ffffff',
                 border: '1px solid #e2e8f0',
                 display: 'flex',
                 alignItems: 'center',
@@ -100,6 +100,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                     maxWidth: '100%',
                     maxHeight: '440px',
                     objectFit: 'contain',
+                    mixBlendMode: 'multiply',
                     transition: 'all 0.3s ease'
                   }}
                 />
