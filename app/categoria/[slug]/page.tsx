@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TypewriterTitle from '@/components/TypewriterTitle';
 import { PRODUCTS, Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 
@@ -293,7 +294,14 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
           }}>
             <div style={{ maxWidth: '720px' }}>
               <span className="eyebrow" style={{ marginBottom: '8px' }}>Catálogo Especializado · EPC & Uniformes</span>
-              <h1 style={{ fontSize: '2.2rem', color: 'var(--marino)', margin: '0 0 10px 0' }}>{meta.emoji} {meta.titulo}</h1>
+              <TypewriterTitle
+                text={`${meta.emoji} ${meta.titulo}`}
+                as="h1"
+                speed={32}
+                delay={100}
+                cursorColor="var(--rey)"
+                style={{ fontSize: '2.2rem', color: 'var(--marino)', margin: '0 0 10px 0', fontWeight: 800 }}
+              />
               <p style={{ color: 'var(--texto-2)', fontSize: '1.05rem', margin: 0, lineHeight: 1.5 }}>
                 {meta.descripcion}
               </p>

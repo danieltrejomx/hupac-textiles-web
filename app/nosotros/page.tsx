@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TypewriterTitle from '@/components/TypewriterTitle';
 
 export default function NosotrosPage() {
   return (
@@ -26,9 +27,14 @@ export default function NosotrosPage() {
             <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '6px 14px', borderRadius: '20px', display: 'inline-block', marginBottom: '16px' }}>
               Nuestra Historia & Compromiso
             </span>
-            <h1 style={{ fontSize: '2.6rem', fontWeight: 850, margin: '0 0 16px 0', lineHeight: 1.2, color: '#ffffff' }}>
-              Más de 21 años transformando fibras en identidad
-            </h1>
+            <TypewriterTitle
+              text="Más de 21 años transformando fibras en identidad"
+              as="h1"
+              speed={32}
+              delay={100}
+              cursorColor="#60a5fa"
+              style={{ fontSize: '2.6rem', fontWeight: 850, margin: '0 0 16px 0', lineHeight: 1.2, color: '#ffffff' }}
+            />
             <p style={{ fontSize: '1.15rem', color: '#cbd5e1', maxWidth: '760px', margin: '0 auto', lineHeight: 1.6 }}>
               Somos <strong>HUPAC TEXTILES</strong>, empresa 100% mexicana con inicio de operaciones en 2005. Confeccionamos uniformes empresariales e industriales de alto rendimiento.
             </p>

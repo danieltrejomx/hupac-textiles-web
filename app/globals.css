@@ -318,3 +318,21 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
 .tag-delay-3 { animation-delay: 0.4s; }
 .tag-delay-4 { animation-delay: 0.55s; }
 
+/* ---------- TYPEWRITER ANIMATION (Efecto Máquina de Escribir) ---------- */
+@keyframes typewriterBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 3.5px;
+  height: 0.85em;
+  background-color: var(--rey);
+  margin-left: 5px;
+  vertical-align: -0.05em;
+  animation: typewriterBlink 0.9s step-start infinite;
+  border-radius: 2px;
+}
+
+

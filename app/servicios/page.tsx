@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TypewriterTitle from '@/components/TypewriterTitle';
 
 export default function ServiciosPage() {
   const serviciosDetalle = [
@@ -98,9 +99,14 @@ export default function ServiciosPage() {
             <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '6px 14px', borderRadius: '20px', display: 'inline-block', marginBottom: '16px' }}>
               Taller de Decoración & Personalización
             </span>
-            <h1 style={{ fontSize: '2.6rem', fontWeight: 850, margin: '0 0 16px 0', lineHeight: 1.2, color: '#ffffff' }}>
-              Cinco técnicas de personalización. Un solo fabricante.
-            </h1>
+            <TypewriterTitle
+              text="Cinco técnicas de personalización. Un solo fabricante."
+              as="h1"
+              speed={30}
+              delay={100}
+              cursorColor="#60a5fa"
+              style={{ fontSize: '2.6rem', fontWeight: 850, margin: '0 0 16px 0', lineHeight: 1.2, color: '#ffffff' }}
+            />
             <p style={{ fontSize: '1.15rem', color: '#cbd5e1', maxWidth: '760px', margin: '0 auto', lineHeight: 1.6 }}>
               Personalizamos tus uniformes dentro de nuestras propias instalaciones, garantizando tiempos de entrega exactos, calibración de color precisa y el costo más bajo de fábrica.
             </p>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TypewriterTitle from '@/components/TypewriterTitle';
 
 export default function DistribuidoresPage() {
   const [nombre, setNombre] = useState('');
@@ -43,9 +44,14 @@ export default function DistribuidoresPage() {
             <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '6px 14px', borderRadius: '20px', display: 'inline-block', marginBottom: '16px' }}>
               Red Nacional de Distribuidores
             </span>
-            <h1 style={{ fontSize: '2.6rem', fontWeight: 850, margin: '0 0 16px 0', lineHeight: 1.2, color: '#ffffff' }}>
-              Tus márgenes de ganancia empiezan en la fábrica
-            </h1>
+            <TypewriterTitle
+              text="Tus márgenes de ganancia empiezan en la fábrica"
+              as="h1"
+              speed={30}
+              delay={100}
+              cursorColor="#60a5fa"
+              style={{ fontSize: '2.6rem', fontWeight: 850, margin: '0 0 16px 0', lineHeight: 1.2, color: '#ffffff' }}
+            />
             <p style={{ fontSize: '1.15rem', color: '#cbd5e1', maxWidth: '760px', margin: '0 auto', lineHeight: 1.6 }}>
               Únete a la red comercial de <strong>HUPAC TEXTILES</strong>. Compra directamente al fabricante con los mejores precios por volumen, inventario permanente y respaldo de entrega rápida.
             </p>

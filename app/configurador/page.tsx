@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Configurator from '@/components/Configurator';
+import TypewriterTitle from '@/components/TypewriterTitle';
 
 export default function ConfiguradorPage() {
   return (
@@ -26,9 +27,14 @@ export default function ConfiguradorPage() {
             <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '6px 14px', borderRadius: '20px', display: 'inline-block', marginBottom: '12px' }}>
               Herramienta Interactiva HUPAC
             </span>
-            <h1 style={{ fontSize: '2.4rem', fontWeight: 850, margin: '0 0 12px 0', lineHeight: 1.2, color: '#ffffff' }}>
-              Configurador Visual de Uniformes
-            </h1>
+            <TypewriterTitle
+              text="Configurador Visual de Uniformes"
+              as="h1"
+              speed={32}
+              delay={100}
+              cursorColor="#60a5fa"
+              style={{ fontSize: '2.4rem', fontWeight: 850, margin: '0 0 12px 0', lineHeight: 1.2, color: '#ffffff' }}
+            />
             <p style={{ fontSize: '1.05rem', color: '#cbd5e1', maxWidth: '720px', margin: '0 auto', lineHeight: 1.5 }}>
               Selecciona tu prenda, elige el color corporativo, sube tu logotipo, colócalo en la posición deseada y calcula tu cotización estimada al instante.
             </p>
