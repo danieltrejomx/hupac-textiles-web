@@ -13,7 +13,7 @@ export default function Footer() {
         </div>
         <div>
           <h5>Sitio</h5>
-          <Link href="/#catalogo">Catálogo</Link>
+          <Link href="/catalogo">Catálogo</Link>
           <Link href="/nosotros">Nosotros</Link>
           <Link href="/servicios">Servicios</Link>
           <Link href="/configurador">Configurador</Link>

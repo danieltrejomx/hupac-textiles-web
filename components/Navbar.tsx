@@ -34,7 +34,7 @@ export default function Navbar() {
 
   const NAV_LINKS = [
     { href: '/', label: 'Inicio', id: 'inicio', path: '/' },
-    { href: '/#catalogo', label: 'Catálogo', id: 'catalogo', path: '/#catalogo' },
+    { href: '/catalogo', label: 'Catálogo', id: 'catalogo', path: '/catalogo' },
     { href: '/nosotros', label: 'Nosotros', id: 'nosotros', path: '/nosotros' },
     { href: '/servicios', label: 'Servicios', id: 'servicios', path: '/servicios' },
     { href: '/configurador', label: 'Configurador', id: 'configurador', path: '/configurador' },
@@ -43,6 +43,7 @@ export default function Navbar() {
   ];
 
   const isLinkActive = (l: typeof NAV_LINKS[0]) => {
+    if (l.path === '/catalogo' && pathname === '/catalogo') return true;
     if (l.path === '/nosotros' && pathname === '/nosotros') return true;
     if (l.path === '/servicios' && pathname === '/servicios') return true;
     if (l.path === '/configurador' && pathname === '/configurador') return true;

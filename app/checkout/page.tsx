@@ -131,7 +131,7 @@ export default function CheckoutPage() {
             <div style={{ backgroundColor: '#ffffff', padding: '60px 20px', textAlign: 'center', borderRadius: '16px', border: '1px solid #e2e8f0' }}>
               <h2>Tu carrito está vacío</h2>
               <p style={{ color: 'var(--texto-2)', marginBottom: '20px' }}>Agrega productos al carrito antes de proceder al pago.</p>
-              <Link href="/#catalogo" className="btn" style={{ textDecoration: 'none' }}>Ver Productos</Link>
+              <Link href="/catalogo" className="btn" style={{ textDecoration: 'none' }}>Ver Productos</Link>
             </div>
           ) : (
             <form onSubmit={handlePay} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '32px' }}>

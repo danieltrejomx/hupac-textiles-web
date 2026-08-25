@@ -64,7 +64,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           <div style={{ marginBottom: '24px', fontSize: '0.9rem', color: 'var(--texto-2)', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Link href="/" style={{ color: 'var(--rey)', textDecoration: 'none', fontWeight: 500 }}>Inicio</Link>
             <span>/</span>
-            <Link href="/#catalogo" style={{ color: 'var(--rey)', textDecoration: 'none', fontWeight: 500 }}>Catálogo</Link>
+            <Link href="/catalogo" style={{ color: 'var(--rey)', textDecoration: 'none', fontWeight: 500 }}>Catálogo</Link>
             <span>/</span>
             <span style={{ color: 'var(--marino)', fontWeight: 600 }}>{product.nombre}</span>
           </div>

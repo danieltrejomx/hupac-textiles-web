@@ -214,7 +214,7 @@ export default function NosotrosPage() {
               </p>
             </div>
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <Link href="/#catalogo" className="btn" style={{ backgroundColor: '#ffffff', color: 'var(--marino)', fontWeight: 800 }}>
+              <Link href="/catalogo" className="btn" style={{ backgroundColor: '#ffffff', color: 'var(--marino)', fontWeight: 800 }}>
                 Ver Catálogo
               </Link>
               <Link href="/#cotizador" className="btn" style={{ backgroundColor: 'var(--rey)', color: '#ffffff', fontWeight: 800 }}>
