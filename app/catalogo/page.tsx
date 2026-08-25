@@ -268,8 +268,8 @@ export default function CatalogoPage() {
             <TypewriterTitle
               text="Confección Textil, Calzado y Seguridad Industrial"
               as="h1"
-              speed={30}
-              delay={100}
+              speed={85}
+              delay={250}
               cursorColor="#60a5fa"
               style={{ fontSize: '2.6rem', fontWeight: 850, margin: '0 0 16px 0', lineHeight: 1.2, color: '#ffffff' }}
             />

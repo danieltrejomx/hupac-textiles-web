@@ -13,8 +13,8 @@ interface TypewriterTitleProps {
 
 export default function TypewriterTitle({
   text,
-  speed = 35,
-  delay = 120,
+  speed = 85,
+  delay = 250,
   as = 'h1',
   className = '',
   style = {},

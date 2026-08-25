@@ -297,8 +297,8 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
               <TypewriterTitle
                 text={`${meta.emoji} ${meta.titulo}`}
                 as="h1"
-                speed={32}
-                delay={100}
+                speed={85}
+                delay={250}
                 cursorColor="var(--rey)"
                 style={{ fontSize: '2.2rem', color: 'var(--marino)', margin: '0 0 10px 0', fontWeight: 800 }}
               />

@@ -30,8 +30,8 @@ export default function ConfiguradorPage() {
             <TypewriterTitle
               text="Configurador Visual de Uniformes"
               as="h1"
-              speed={32}
-              delay={100}
+              speed={85}
+              delay={250}
               cursorColor="#60a5fa"
               style={{ fontSize: '2.4rem', fontWeight: 850, margin: '0 0 12px 0', lineHeight: 1.2, color: '#ffffff' }}
             />
