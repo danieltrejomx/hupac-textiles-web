@@ -31,8 +31,8 @@ export default function Navbar() {
 
   const NAV_LINKS = [
     { href: '/#inicio', label: 'Inicio', id: 'inicio' },
-    { href: '/#nosotros', label: 'Nosotros', id: 'nosotros' },
     { href: '/#catalogo', label: 'Catálogo', id: 'catalogo' },
+    { href: '/#nosotros', label: 'Nosotros', id: 'nosotros' },
     { href: '/#servicios', label: 'Servicios', id: 'servicios' },
     { href: '/#configurador', label: 'Configurador', id: 'configurador' },
     { href: '/#industrias', label: 'Industrias', id: 'industrias' },
