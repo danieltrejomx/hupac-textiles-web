@@ -58,6 +58,180 @@ const CATEGORIES_META: Record<string, { titulo: string; descripcion: string; emo
   }
 };
 
+function CategoryProductCard({ prod, handleQuickAdd }: { prod: Product; handleQuickAdd: (e: React.MouseEvent, p: Product) => void }) {
+  const [selectedColor, setSelectedColor] = useState(prod.colores?.[0]);
+  const activeImg = selectedColor?.imagen || prod.imagenPrincipal;
+
+  return (
+    <article
+      style={{
+        backgroundColor: '#ffffff',
+        border: '1px solid var(--linea)',
+        borderRadius: '18px',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        transition: 'transform 0.2s ease, box-shadow 0.2s ease'
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-4px)';
+        e.currentTarget.style.boxShadow = '0 12px 30px rgba(19, 42, 82, 0.1)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = 'none';
+      }}
+    >
+      <Link href={`/productos/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+        <div style={{
+          backgroundColor: '#ffffff',
+          height: '260px',
+          position: 'relative',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px',
+          borderBottom: '1px solid var(--linea)'
+        }}>
+          <img
+            src={activeImg}
+            alt={`${prod.nombre} - ${selectedColor?.nombre || ''}`}
+            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', mixBlendMode: 'multiply', transition: 'all 0.2s ease' }}
+          />
+          <span style={{
+            position: 'absolute',
+            top: '14px',
+            left: '14px',
+            fontFamily: 'var(--mono)',
+            fontSize: '11px',
+            fontWeight: 700,
+            backgroundColor: 'rgba(255,255,255,0.94)',
+            backdropFilter: 'blur(4px)',
+            border: '1px solid var(--linea)',
+            color: 'var(--marino)',
+            borderRadius: '6px',
+            padding: '4px 10px'
+          }}>
+            ESTILO {prod.sku}
+          </span>
+        </div>
+      </Link>
+
+      <div style={{ padding: '22px', display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
+        <div>
+          <Link href={`/productos/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+            <h3 style={{ fontSize: '1.15rem', fontWeight: 750, color: 'var(--marino)', margin: '0 0 6px 0', lineHeight: 1.3 }}>
+              {prod.nombre}
+            </h3>
+            <span style={{ fontSize: '0.82rem', color: 'var(--texto-2)', fontFamily: 'var(--mono)', display: 'block', marginBottom: '10px' }}>
+              {prod.composicion} · {prod.gramaje}
+            </span>
+          </Link>
+
+          {/* Color swatches */}
+          {prod.colores && prod.colores.length > 0 && (
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center', marginBottom: '14px' }}>
+              {prod.colores.slice(0, 8).map((c, i) => {
+                const isSelected = selectedColor?.nombre === c.nombre;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSelectedColor(c);
+                    }}
+                    onMouseEnter={() => {
+                      if (c.imagen) setSelectedColor(c);
+                    }}
+                    style={{
+                      width: isSelected ? '18px' : '14px',
+                      height: isSelected ? '18px' : '14px',
+                      borderRadius: '50%',
+                      backgroundColor: c.hex,
+                      border: isSelected ? '2px solid var(--rey)' : (c.hex === '#FFFFFF' ? '1px solid #cbd5e1' : '1px solid rgba(0,0,0,0.12)'),
+                      boxShadow: isSelected ? '0 0 0 2px rgba(36,86,196,0.25)' : 'none',
+                      cursor: 'pointer',
+                      padding: 0,
+                      transition: 'all 0.15s ease',
+                      outline: 'none'
+                    }}
+                    title={c.nombre}
+                    aria-label={`Seleccionar color ${c.nombre}`}
+                  />
+                );
+              })}
+              {prod.colores.length > 8 && (
+                <span style={{ fontSize: '0.72rem', color: 'var(--texto-2)', fontWeight: 600 }}>
+                  +{prod.colores.length - 8}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+
+        <div>
+          {/* Precio si es directo */}
+          {prod.precioDirecto ? (
+            <div style={{ marginBottom: '14px' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>Precio unitario (sin IVA):</span>
+              <span style={{ fontSize: '1.35rem', fontWeight: 850, color: 'var(--marino)' }}>
+                ${prod.precioDirecto.toFixed(2)} <span style={{ fontSize: '0.85rem', color: 'var(--texto-2)', fontWeight: 600 }}>MXN</span>
+              </span>
+            </div>
+          ) : (
+            <div style={{ marginBottom: '14px' }}>
+              <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>Precios por volumen (sin IVA):</span>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--rey)' }}>
+                Desde 1 pza · Mayoreo 72+ y 504+
+              </span>
+            </div>
+          )}
+
+          {/* Botones de acción */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '8px' }}>
+            <Link
+              href={`/productos/${prod.id}`}
+              style={{
+                textDecoration: 'none',
+                padding: '10px 12px',
+                borderRadius: '10px',
+                border: '1px solid var(--linea)',
+                backgroundColor: '#ffffff',
+                color: 'var(--marino)',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                textAlign: 'center',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              Ver Ficha
+            </Link>
+
+            <button
+              onClick={(e) => handleQuickAdd(e, prod)}
+              style={{
+                padding: '10px 12px',
+                borderRadius: '10px',
+                border: 'none',
+                backgroundColor: 'var(--rey)',
+                color: '#ffffff',
+                fontSize: '0.85rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                boxShadow: '0 4px 10px rgba(36,86,196,0.2)',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              + Carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default function CategoryPage({ params }: { params: { slug: string } }) {
   const slug = params?.slug;
   const meta = CATEGORIES_META[slug];
@@ -144,132 +318,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
             gap: '24px'
           }}>
             {products.map((prod) => (
-              <article
-                key={prod.id}
-                style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid var(--linea)',
-                  borderRadius: '18px',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 12px 30px rgba(19, 42, 82, 0.1)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
-                }}
-              >
-                <Link href={`/productos/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                  <div style={{
-                    backgroundColor: '#ffffff',
-                    height: '260px',
-                    position: 'relative',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '16px',
-                    borderBottom: '1px solid var(--linea)'
-                  }}>
-                    <img
-                      src={prod.imagenPrincipal}
-                      alt={prod.nombre}
-                      style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', mixBlendMode: 'multiply' }}
-                    />
-                    <span style={{
-                      position: 'absolute',
-                      top: '14px',
-                      left: '14px',
-                      fontFamily: 'var(--mono)',
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      backgroundColor: 'rgba(255,255,255,0.94)',
-                      backdropFilter: 'blur(4px)',
-                      border: '1px solid var(--linea)',
-                      color: 'var(--marino)',
-                      borderRadius: '6px',
-                      padding: '4px 10px'
-                    }}>
-                      ESTILO {prod.sku}
-                    </span>
-                  </div>
-                </Link>
-
-                <div style={{ padding: '22px', display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
-                  <Link href={`/productos/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <div>
-                      <h3 style={{ fontSize: '1.15rem', fontWeight: 750, color: 'var(--marino)', margin: '0 0 6px 0', lineHeight: 1.3 }}>
-                        {prod.nombre}
-                      </h3>
-                      <span style={{ fontSize: '0.82rem', color: 'var(--texto-2)', fontFamily: 'var(--mono)', display: 'block', marginBottom: '12px' }}>
-                        {prod.composicion} · {prod.gramaje}
-                      </span>
-                    </div>
-                  </Link>
-
-                  <div>
-                    {/* Precio si es directo */}
-                    {prod.precioDirecto ? (
-                      <div style={{ marginBottom: '14px' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>Precio unitario (sin IVA):</span>
-                        <span style={{ fontSize: '1.35rem', fontWeight: 850, color: 'var(--marino)' }}>
-                          ${prod.precioDirecto.toFixed(2)} <span style={{ fontSize: '0.85rem', color: 'var(--texto-2)', fontWeight: 600 }}>MXN</span>
-                        </span>
-                      </div>
-                    ) : (
-                      <div style={{ marginBottom: '14px' }}>
-                        <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block', fontWeight: 600 }}>Precios por volumen (sin IVA):</span>
-                        <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--rey)' }}>
-                          Desde 1 pza · Mayoreo 72+ y 504+
-                        </span>
-                      </div>
-                    )}
-
-                    {/* Botones de acción */}
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', marginTop: '8px' }}>
-                      <Link
-                        href={`/productos/${prod.id}`}
-                        style={{
-                          textDecoration: 'none',
-                          padding: '10px 12px',
-                          borderRadius: '10px',
-                          border: '1px solid var(--linea)',
-                          backgroundColor: '#ffffff',
-                          color: 'var(--marino)',
-                          fontSize: '0.85rem',
-                          fontWeight: 700,
-                          textAlign: 'center',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        Ver Ficha
-                      </Link>
-
-                      <button
-                        onClick={(e) => handleQuickAdd(e, prod)}
-                        style={{
-                          padding: '10px 12px',
-                          borderRadius: '10px',
-                          border: 'none',
-                          backgroundColor: 'var(--rey)',
-                          color: '#ffffff',
-                          fontSize: '0.85rem',
-                          fontWeight: 700,
-                          cursor: 'pointer',
-                          boxShadow: '0 4px 10px rgba(36,86,196,0.2)',
-                          transition: 'all 0.15s ease'
-                        }}
-                      >
-                        + Carrito
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </article>
+              <CategoryProductCard key={prod.id} prod={prod} handleQuickAdd={handleQuickAdd} />
             ))}
           </div>
 

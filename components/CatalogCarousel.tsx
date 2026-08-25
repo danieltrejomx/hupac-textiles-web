@@ -1,28 +1,14 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import { PRODUCTS, Product } from '@/data/products';
 
-export default function CatalogCarousel() {
-  const textilesScrollRef = useRef<HTMLDivElement>(null);
-  const footwearScrollRef = useRef<HTMLDivElement>(null);
+function CarouselProductCard({ prod }: { prod: Product }) {
+  const [selectedColor, setSelectedColor] = useState(prod.colores?.[0]);
+  const activeImg = selectedColor?.imagen || prod.imagenPrincipal;
 
-  const textilesProducts = PRODUCTS.filter((p) => !p.categoria || p.categoria === 'textiles');
-  const footwearProducts = PRODUCTS.filter((p) => p.categoria === 'calzado' || p.categoria === 'accesorios');
-
-  const scroll = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
-    if (ref.current) {
-      const scrollAmount = 320 * 2;
-      ref.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  const renderProductCard = (prod: Product) => (
+  return (
     <div
-      key={prod.id}
       style={{
         flex: '0 0 300px',
         scrollSnapAlign: 'start',
@@ -30,29 +16,29 @@ export default function CatalogCarousel() {
         minWidth: '300px'
       }}
     >
-      <Link
-        href={`/productos/${prod.id}`}
-        style={{ textDecoration: 'none', color: 'inherit', display: 'block', height: '100%' }}
+      <article
+        style={{
+          backgroundColor: '#ffffff',
+          border: '1px solid var(--linea)',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-4px)';
+          e.currentTarget.style.boxShadow = '0 12px 28px rgba(19, 42, 82, 0.08)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = 'none';
+        }}
       >
-        <article
-          style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid var(--linea)',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-4px)';
-            e.currentTarget.style.boxShadow = '0 12px 28px rgba(19, 42, 82, 0.08)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = 'none';
-          }}
+        <Link
+          href={`/productos/${prod.id}`}
+          style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
         >
           <div style={{
             backgroundColor: '#ffffff',
@@ -65,9 +51,9 @@ export default function CatalogCarousel() {
             borderBottom: '1px solid var(--linea)'
           }}>
             <img
-              src={prod.imagenPrincipal}
-              alt={prod.nombre}
-              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', mixBlendMode: 'multiply' }}
+              src={activeImg}
+              alt={`${prod.nombre} - ${selectedColor?.nombre || ''}`}
+              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', mixBlendMode: 'multiply', transition: 'all 0.2s ease' }}
             />
             <span style={{
               position: 'absolute',
@@ -86,8 +72,13 @@ export default function CatalogCarousel() {
               ESTILO {prod.sku}
             </span>
           </div>
+        </Link>
 
-          <div style={{ padding: '18px', display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
+        <div style={{ padding: '18px', display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
+          <Link
+            href={`/productos/${prod.id}`}
+            style={{ textDecoration: 'none', color: 'inherit', display: 'block' }}
+          >
             <div>
               <h3 style={{ fontSize: '1.05rem', fontWeight: 750, color: 'var(--marino)', margin: '0 0 4px 0', lineHeight: 1.25 }}>
                 {prod.nombre}
@@ -96,50 +87,87 @@ export default function CatalogCarousel() {
                 {prod.composicion} · {prod.gramaje}
               </span>
             </div>
+          </Link>
 
-            <div>
-              {prod.precioDirecto ? (
-                <div style={{ marginBottom: '8px' }}>
-                  <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block' }}>Desde (sin IVA):</span>
-                  <span style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--marino)' }}>
-                    ${prod.precioDirecto.toFixed(2)} <span style={{ fontSize: '0.8rem', color: 'var(--texto-2)' }}>MXN</span>
-                  </span>
-                </div>
-              ) : null}
+          <div>
+            {prod.precioDirecto ? (
+              <div style={{ marginBottom: '8px' }}>
+                <span style={{ fontSize: '0.75rem', color: 'var(--texto-2)', display: 'block' }}>Desde (sin IVA):</span>
+                <span style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--marino)' }}>
+                  ${prod.precioDirecto.toFixed(2)} <span style={{ fontSize: '0.8rem', color: 'var(--texto-2)' }}>MXN</span>
+                </span>
+              </div>
+            ) : null}
 
-              <span style={{ fontSize: '0.8rem', color: 'var(--rey)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px', marginBottom: '10px' }}>
-                Ver detalles &rarr;
-              </span>
+            <Link
+              href={`/productos/${prod.id}`}
+              style={{ textDecoration: 'none', fontSize: '0.8rem', color: 'var(--rey)', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '4px', marginBottom: '10px' }}
+            >
+              Ver detalles &rarr;
+            </Link>
 
-              {prod.colores && prod.colores.length > 0 && (
-                <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap' }}>
-                  {prod.colores.slice(0, 7).map((c, i) => (
-                    <span
+            {prod.colores && prod.colores.length > 0 && (
+              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
+                {prod.colores.slice(0, 7).map((c, i) => {
+                  const isSelected = selectedColor?.nombre === c.nombre;
+                  return (
+                    <button
                       key={i}
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedColor(c);
+                      }}
+                      onMouseEnter={() => {
+                        if (c.imagen) setSelectedColor(c);
+                      }}
                       style={{
-                        width: '13px',
-                        height: '13px',
+                        width: isSelected ? '17px' : '13px',
+                        height: isSelected ? '17px' : '13px',
                         borderRadius: '50%',
                         backgroundColor: c.hex,
-                        border: c.hex === '#FFFFFF' ? '1px solid #cbd5e1' : 'none',
-                        display: 'inline-block'
+                        border: isSelected ? '2px solid var(--rey)' : (c.hex === '#FFFFFF' ? '1px solid #cbd5e1' : '1px solid rgba(0,0,0,0.12)'),
+                        boxShadow: isSelected ? '0 0 0 2px rgba(36,86,196,0.25)' : 'none',
+                        cursor: 'pointer',
+                        padding: 0,
+                        transition: 'all 0.15s ease',
+                        outline: 'none'
                       }}
                       title={c.nombre}
+                      aria-label={`Seleccionar color ${c.nombre}`}
                     />
-                  ))}
-                  {prod.colores.length > 7 && (
-                    <span style={{ fontSize: '0.7rem', color: 'var(--texto-2)', fontWeight: 600, alignSelf: 'center' }}>
-                      +{prod.colores.length - 7}
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
+                  );
+                })}
+                {prod.colores.length > 7 && (
+                  <span style={{ fontSize: '0.7rem', color: 'var(--texto-2)', fontWeight: 600, alignSelf: 'center' }}>
+                    +{prod.colores.length - 7}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
-        </article>
-      </Link>
+        </div>
+      </article>
     </div>
   );
+}
+
+export default function CatalogCarousel() {
+  const textilesScrollRef = useRef<HTMLDivElement>(null);
+  const footwearScrollRef = useRef<HTMLDivElement>(null);
+
+  const textilesProducts = PRODUCTS.filter((p) => !p.categoria || p.categoria === 'textiles');
+  const footwearProducts = PRODUCTS.filter((p) => p.categoria === 'calzado' || p.categoria === 'accesorios');
+
+  const scroll = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
+    if (ref.current) {
+      const scrollAmount = 320 * 2;
+      ref.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth',
+      });
+    }
+  };
 
   return (
     <section id="catalogo" style={{ backgroundColor: '#ffffff', borderTop: '1px solid var(--linea)', borderBottom: '1px solid var(--linea)', padding: '64px 0' }}>
@@ -210,7 +238,9 @@ export default function CatalogCarousel() {
               scrollBehavior: 'smooth'
             }}
           >
-            {textilesProducts.map(renderProductCard)}
+            {textilesProducts.map((p) => (
+              <CarouselProductCard key={p.id} prod={p} />
+            ))}
           </div>
         </div>
 
@@ -280,7 +310,9 @@ export default function CatalogCarousel() {
               scrollBehavior: 'smooth'
             }}
           >
-            {footwearProducts.map(renderProductCard)}
+            {footwearProducts.map((p) => (
+              <CarouselProductCard key={p.id} prod={p} />
+            ))}
           </div>
         </div>
 

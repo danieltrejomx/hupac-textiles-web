@@ -904,8 +904,8 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_1427_dominion_waterproof.jpg',
     colores: [
-      { nombre: 'Negro/Azul', hex: '#1e293b' },
-      { nombre: 'Negro/Amarillo', hex: '#eab308' }
+      { nombre: 'Negro/Azul', hex: '#1e293b', imagen: '/images/calzado/calzado_1427_dominion_negro_azul.jpg' },
+      { nombre: 'Negro/Amarillo', hex: '#eab308', imagen: '/images/calzado/calzado_1427_dominion_waterproof.jpg' }
     ],
     precios: {},
     precioDirecto: 613.00,
@@ -927,8 +927,8 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_1417_dominion_bullfight.jpg',
     colores: [
-      { nombre: 'Bull Fight Café', hex: '#78350f' },
-      { nombre: 'Bull Fight Negro', hex: '#17222B' }
+      { nombre: 'Bull Fight Café', hex: '#78350f', imagen: '/images/calzado/calzado_1417_dominion_bullfight.jpg' },
+      { nombre: 'Bull Fight Negro', hex: '#17222B', imagen: '/images/calzado/calzado_1417_dominion_bullfight_negro.jpg' }
     ],
     precios: {},
     precioDirecto: 628.00,
@@ -950,8 +950,8 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_1437_dominion_cuna.jpg',
     colores: [
-      { nombre: 'Micro Negro/Cuña Gris', hex: '#475569' },
-      { nombre: 'Micro Negro/Cuña Negro-Azul', hex: '#1e3a8a' }
+      { nombre: 'Micro Negro/Cuña Gris', hex: '#475569', imagen: '/images/calzado/calzado_1437_dominion_cuna.jpg' },
+      { nombre: 'Micro Negro/Cuña Negro-Azul', hex: '#1e3a8a', imagen: '/images/calzado/calzado_1437_dominion_cuna_azul.jpg' }
     ],
     precios: {},
     precioDirecto: 628.00,
@@ -973,7 +973,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_2203_mark2_rosa_dama.jpg',
     colores: [
-      { nombre: 'Micro Negro/Rosa', hex: '#f43f5e' }
+      { nombre: 'Micro Negro/Rosa', hex: '#f43f5e', imagen: '/images/calzado/calzado_2203_mark2_rosa_dama.jpg' }
     ],
     precios: {},
     precioDirecto: 541.00,
@@ -995,7 +995,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_3638_mark2_negro.jpg',
     colores: [
-      { nombre: 'Micro Negro', hex: '#17222B' }
+      { nombre: 'Micro Negro', hex: '#17222B', imagen: '/images/calzado/calzado_3638_mark2_negro.jpg' }
     ],
     precios: {},
     precioDirecto: 570.00,
@@ -1017,7 +1017,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_3638_mark2_crazy_cafe.jpg',
     colores: [
-      { nombre: 'Crazy Café', hex: '#92400e' }
+      { nombre: 'Crazy Café', hex: '#92400e', imagen: '/images/calzado/calzado_3638_mark2_crazy_cafe.jpg' }
     ],
     precios: {},
     precioDirecto: 617.00,
@@ -1039,7 +1039,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_2236_mark2_chelsea_cafe.jpg',
     colores: [
-      { nombre: 'Piel Grasso Café', hex: '#78350f' }
+      { nombre: 'Piel Grasso Café', hex: '#78350f', imagen: '/images/calzado/calzado_2236_mark2_chelsea_cafe.jpg' }
     ],
     precios: {},
     precioDirecto: 582.00,
@@ -1061,7 +1061,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_3728_mark2_napa_cafe.jpg',
     colores: [
-      { nombre: 'Napa Café', hex: '#854d0e' }
+      { nombre: 'Napa Café', hex: '#854d0e', imagen: '/images/calzado/calzado_3728_mark2_napa_cafe.jpg' }
     ],
     precios: {},
     precioDirecto: 572.00,
@@ -1083,7 +1083,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_3728_mark2_micro_negro.jpg',
     colores: [
-      { nombre: 'Micro Negro', hex: '#17222B' }
+      { nombre: 'Micro Negro', hex: '#17222B', imagen: '/images/calzado/calzado_3728_mark2_micro_negro.jpg' }
     ],
     precios: {},
     precioDirecto: 559.00,
@@ -1105,7 +1105,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_2211_mark2_negro_azul.jpg',
     colores: [
-      { nombre: 'Negro/Azul', hex: '#1d4ed8' }
+      { nombre: 'Negro/Azul', hex: '#1d4ed8', imagen: '/images/calzado/calzado_2211_mark2_negro_azul.jpg' }
     ],
     precios: {},
     precioDirecto: 628.00,
@@ -1127,7 +1127,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_4031_mark2_metatarsal.jpg',
     colores: [
-      { nombre: 'Piel Negro', hex: '#17222B' }
+      { nombre: 'Piel Negro', hex: '#17222B', imagen: '/images/calzado/calzado_4031_mark2_metatarsal.jpg' }
     ],
     precios: {},
     precioDirecto: 639.00,
@@ -1149,8 +1149,8 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_8427_kenny_phylon.jpg',
     colores: [
-      { nombre: 'Negro/Azul', hex: '#2563eb' },
-      { nombre: 'Negro/Amarillo', hex: '#eab308' }
+      { nombre: 'Negro/Azul', hex: '#2563eb', imagen: '/images/calzado/calzado_8427_kenny_phylon.jpg' },
+      { nombre: 'Negro/Amarillo', hex: '#eab308', imagen: '/images/calzado/calzado_8427_kenny_amarillo.jpg' }
     ],
     precios: {},
     precioDirecto: 537.00,
@@ -1172,8 +1172,8 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_6427_shark_caballero.png',
     colores: [
-      { nombre: 'Negro/Amarillo', hex: '#eab308' },
-      { nombre: 'Negro/Azul', hex: '#2563eb' }
+      { nombre: 'Negro/Amarillo', hex: '#eab308', imagen: '/images/calzado/calzado_6427_shark_caballero.png' },
+      { nombre: 'Negro/Azul', hex: '#2563eb', imagen: '/images/calzado/calzado_6427_shark_azul.png' }
     ],
     precios: {},
     precioDirecto: 510.00,
@@ -1195,7 +1195,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_6427_shark_fiusha_dama.jpg',
     colores: [
-      { nombre: 'Negro/Fiusha', hex: '#ec4899' }
+      { nombre: 'Negro/Fiusha', hex: '#ec4899', imagen: '/images/calzado/calzado_6427_shark_fiusha_dama.jpg' }
     ],
     precios: {},
     precioDirecto: 510.00,
@@ -1217,7 +1217,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_800_ken_anticlavo.jpg',
     colores: [
-      { nombre: 'Calcetín Negro', hex: '#17222B' }
+      { nombre: 'Calcetín Negro', hex: '#17222B', imagen: '/images/calzado/calzado_800_ken_anticlavo.jpg' }
     ],
     precios: {},
     precioDirecto: 479.00,
@@ -1239,8 +1239,8 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_8606_gripp_phylon.png',
     colores: [
-      { nombre: 'Negro/Azul', hex: '#2563eb' },
-      { nombre: 'Negro/Amarillo', hex: '#eab308' }
+      { nombre: 'Negro/Azul', hex: '#2563eb', imagen: '/images/calzado/calzado_8606_gripp_phylon.png' },
+      { nombre: 'Negro/Amarillo', hex: '#eab308', imagen: '/images/calzado/calzado_8606_gripp_amarillo.png' }
     ],
     precios: {},
     precioDirecto: 608.00,
@@ -1262,7 +1262,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial Especializada'],
     imagenPrincipal: '/images/calzado/calzado_6997_balboa_hule.jpg',
     colores: [
-      { nombre: 'Piel Engrasada Café', hex: '#78350f' }
+      { nombre: 'Piel Engrasada Café', hex: '#78350f', imagen: '/images/calzado/calzado_6997_balboa_hule.jpg' }
     ],
     precios: {},
     precioDirecto: 672.00,
@@ -1284,7 +1284,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_1367_monster2_cafe.jpg',
     colores: [
-      { nombre: 'Piel Grasso Café', hex: '#78350f' }
+      { nombre: 'Piel Grasso Café', hex: '#78350f', imagen: '/images/calzado/calzado_1367_monster2_cafe.jpg' }
     ],
     precios: {},
     precioDirecto: 675.00,
@@ -1306,7 +1306,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/calzado_1367_monster2_negro.jpg',
     colores: [
-      { nombre: 'Micro Negro', hex: '#17222B' }
+      { nombre: 'Micro Negro', hex: '#17222B', imagen: '/images/calzado/calzado_1367_monster2_negro.jpg' }
     ],
     precios: {},
     precioDirecto: 664.00,
@@ -1329,7 +1329,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Protección Industrial'],
     imagenPrincipal: '/images/calzado/accesorio_proteccion_metatarsal.jpg',
     colores: [
-      { nombre: 'Negro Industrial', hex: '#17222B' }
+      { nombre: 'Negro Industrial', hex: '#17222B', imagen: '/images/calzado/accesorio_proteccion_metatarsal.jpg' }
     ],
     precios: {},
     precioDirecto: 60.00
@@ -1348,7 +1348,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Confort Laboral'],
     imagenPrincipal: '/images/calzado/accesorio_plantillas_pu.jpg',
     colores: [
-      { nombre: 'Amarillo/Negro', hex: '#eab308' }
+      { nombre: 'Amarillo / Negro', hex: '#eab308', imagen: '/images/calzado/accesorio_plantillas_pu.jpg' }
     ],
     precios: {},
     precioDirecto: 48.90
