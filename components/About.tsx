@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 export default function About() {
   const ref = useRef<HTMLDivElement>(null);
@@ -31,6 +32,11 @@ export default function About() {
           <p>Somos <strong>HUPAC TEXTILES</strong>, una empresa 100% mexicana con inicio de operaciones en 2005, especializada en la confección de uniformes empresariales que destacan por su calidad, estilo y funcionalidad. Transformamos fibras de algodón y sintéticas para brindar a nuestros distribuidores y sus clientes prendas funcionales, cómodas y durables.</p>
           <p>Fabricamos hilados, tejidos, acabados y prendas de vestir para toda la familia — nuestra fortaleza es el <strong>tejido de punto</strong>. Hemos confeccionado más de <strong>7 millones de prendas</strong> para más de <strong>43 mil clientes</strong>, con distribución en cadenas comerciales nacionales y clientes internacionales.</p>
           <p className="frase">Diseñamos identidad,<br/>confeccionamos confianza.</p>
+          <div style={{ marginTop: '24px' }}>
+            <Link href="/nosotros" className="btn" style={{ display: 'inline-flex', padding: '12px 24px', fontSize: '0.95rem' }}>
+              Conoce más sobre nuestra historia y valores &rarr;
+            </Link>
+          </div>
         </div>
         <div className="valores rv">
           <div className="valor"><b>Calidad sin compromiso</b><span>La excelencia es nuestra base, desde la prenda hasta la atención.</span></div>

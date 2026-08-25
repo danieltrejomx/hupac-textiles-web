@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 export default function Industries() {
   const ref = useRef<HTMLElement>(null);
@@ -75,6 +76,11 @@ export default function Industries() {
           <b>Centros logísticos</b>
           <span>Camisola, pantalón, chaleco, casco, guantes y lentes.</span>
         </div>
+      </div>
+      <div style={{ textAlign: 'center', marginTop: '36px' }}>
+        <Link href="/industrias" className="btn" style={{ padding: '12px 28px', fontSize: '0.95rem' }}>
+          Conocer soluciones para todos los sectores industriales &rarr;
+        </Link>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import Link from 'next/link';
 
 export default function Services() {
   const ref = useRef<HTMLElement>(null);
@@ -75,6 +76,11 @@ export default function Services() {
           <b>Termotransferencia</b>
           <span>Calor y presión para impresiones nítidas, legibles y de larga vida.</span>
         </div>
+      </div>
+      <div style={{ textAlign: 'center', marginTop: '36px' }}>
+        <Link href="/servicios" className="btn" style={{ padding: '12px 28px', fontSize: '0.95rem' }}>
+          Ver especificaciones completas de personalización &rarr;
+        </Link>
       </div>
     </section>
   );

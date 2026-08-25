@@ -30,7 +30,9 @@ export default function Distributors() {
           <span className="eyebrow" style={{ color: '#8FC1EA' }}>Red de distribuidores</span>
           <h2>Beneficios de comprar con nosotros.</h2>
           <p>Somos fabricantes: tus márgenes empiezan en la fábrica. Únete a la red de distribuidores HUPAC y crece con producción nacional y reposición rápida.</p>
-          <Link href="#cotizador" className="btn" style={{ background: '#fff', color: 'var(--marino)' }}>Quiero ser distribuidor</Link>
+          <Link href="/distribuidores" className="btn" style={{ background: '#fff', color: 'var(--marino)', fontWeight: 800 }}>
+            Quiero ser distribuidor &rarr;
+          </Link>
         </div>
         <div className="dist-ben">
           <div className="dben">

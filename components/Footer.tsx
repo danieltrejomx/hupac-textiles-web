@@ -13,17 +13,20 @@ export default function Footer() {
         </div>
         <div>
           <h5>Sitio</h5>
-          <Link href="/#nosotros">Nosotros</Link>
           <Link href="/#catalogo">Catálogo</Link>
-          <Link href="/#configurador">Configurador</Link>
-          <Link href="/#distribuidores">Distribuidores</Link>
+          <Link href="/nosotros">Nosotros</Link>
+          <Link href="/servicios">Servicios</Link>
+          <Link href="/configurador">Configurador</Link>
+          <Link href="/industrias">Industrias</Link>
+          <Link href="/distribuidores">Distribuidores</Link>
         </div>
         <div>
           <h5>Personalización</h5>
-          <Link href="/#servicios">Bordado industrial</Link>
-          <Link href="/#servicios">Serigrafía</Link>
-          <Link href="/#servicios">Sublimación</Link>
-          <Link href="/#servicios">Impresión directa</Link>
+          <Link href="/servicios">Bordado industrial</Link>
+          <Link href="/servicios">Serigrafía</Link>
+          <Link href="/servicios">Sublimación</Link>
+          <Link href="/servicios">Impresión directa (DTG)</Link>
+          <Link href="/servicios">Termotransferencia (DTF)</Link>
         </div>
         <div>
           <h5>Contacto</h5>
