@@ -36,34 +36,46 @@ export default function NosotrosPage() {
         </section>
 
         <div style={{ maxWidth: '1200px', margin: '-36px auto 0 auto', padding: '0 24px' }}>
-          {/* Tarjetas de Estadísticas Clave */}
+          {/* Tarjetas de Estadísticas Clave Animadas como Etiquetas */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-            gap: '20px',
+            gap: '24px',
             marginBottom: '48px'
           }}>
             {[
-              { num: '2005', label: 'Año de fundación', desc: 'Más de dos décadas de experiencia textil' },
-              { num: '+7M', label: 'Prendas confeccionadas', desc: 'Calidad probada en millones de usuarios' },
-              { num: '+43K', label: 'Clientes atendidos', desc: 'Empresas, distribuidores y gobierno' },
-              { num: '100%', label: 'Hecho en México', desc: 'Planta matriz en Cuautitlán Izcalli, Edo. Méx.' }
+              { num: '2005', label: 'Año de fundación', desc: 'Más de dos décadas de experiencia textil', tag: 'TRAYECTORIA' },
+              { num: '+7M', label: 'Prendas confeccionadas', desc: 'Calidad probada en millones de usuarios', tag: 'PRODUCCIÓN' },
+              { num: '+43K', label: 'Clientes atendidos', desc: 'Empresas, distribuidores y gobierno', tag: 'CONFIANZA' },
+              { num: '100%', label: 'Hecho en México', desc: 'Planta matriz en Cuautitlán Izcalli, Edo. Méx.', tag: 'CALIDAD' }
             ].map((stat, i) => (
-              <div key={i} style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--linea)',
-                borderRadius: '16px',
-                padding: '28px 24px',
-                boxShadow: '0 8px 24px rgba(19, 42, 82, 0.06)',
-                textAlign: 'center'
-              }}>
-                <div style={{ fontSize: '2.4rem', fontWeight: 900, color: 'var(--rey)', marginBottom: '4px', fontFamily: 'var(--mono)' }}>
+              <div
+                key={i}
+                className={`textile-tag-card tag-delay-${i + 1}`}
+              >
+                <span style={{
+                  display: 'inline-block',
+                  fontFamily: 'var(--mono)',
+                  fontSize: '9.5px',
+                  fontWeight: 700,
+                  letterSpacing: '1px',
+                  color: 'var(--rey)',
+                  backgroundColor: 'var(--cielo)',
+                  border: '1px solid var(--cielo-2)',
+                  padding: '3px 9px',
+                  borderRadius: '6px',
+                  marginBottom: '10px',
+                  textTransform: 'uppercase'
+                }}>
+                  🏷️ {stat.tag}
+                </span>
+                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--rey)', marginBottom: '4px', fontFamily: 'var(--mono)' }}>
                   {stat.num}
                 </div>
                 <div style={{ fontWeight: 750, color: 'var(--marino)', fontSize: '1.05rem', marginBottom: '6px' }}>
                   {stat.label}
                 </div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--texto-2)' }}>
+                <div style={{ fontSize: '0.85rem', color: 'var(--texto-2)', lineHeight: 1.4 }}>
                   {stat.desc}
                 </div>
               </div>
