@@ -170,9 +170,74 @@ export default function CatalogCarousel() {
   };
 
   return (
-    <section id="catalogo" style={{ backgroundColor: '#ffffff', borderTop: '1px solid var(--linea)', borderBottom: '1px solid var(--linea)', padding: '64px 0' }}>
+    <section id="catalogo" style={{ backgroundColor: '#ffffff', borderTop: '1px solid var(--linea)', borderBottom: '1px solid var(--linea)', padding: '56px 0' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 28px' }}>
         
+        {/* ================= BOTONES RÁPIDOS DE CATEGORÍAS EPC & LÍNEAS ================= */}
+        <div style={{ marginBottom: '32px', paddingBottom: '24px', borderBottom: '1px solid var(--linea)' }}>
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            flexWrap: 'wrap'
+          }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--marino)', textTransform: 'uppercase', letterSpacing: '0.5px', marginRight: '4px', fontFamily: 'var(--mono)' }}>
+              Categorías:
+            </span>
+            {[
+              { slug: 'playeras', emoji: '👕', label: 'Playeras y Polos', count: textilesProducts.length, bg: '#f8fafc', border: '#cbd5e1', color: 'var(--marino)' },
+              { slug: 'calzado', emoji: '🥾', label: 'Calzado Duty Gear', count: footwearProducts.length, bg: '#f8fafc', border: '#cbd5e1', color: 'var(--marino)' },
+              { slug: 'cabeza', emoji: '⛑️', label: 'Protección Cabeza', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length, bg: '#fef3c7', border: '#fde68a', color: '#92400e' },
+              { slug: 'visual', emoji: '🥽', label: 'Protección Visual', count: PRODUCTS.filter(p => p.categoria === 'visual').length, bg: '#e0f2fe', border: '#bae6fd', color: '#0369a1' },
+              { slug: 'manos', emoji: '🧤', label: 'Protección Manos', count: PRODUCTS.filter(p => p.categoria === 'manos').length, bg: '#fce7f3', border: '#fbcfe8', color: '#9d174d' },
+              { slug: 'ropa-trabajo', emoji: '🦺', label: 'Ropa de Trabajo', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length, bg: '#dcfce7', border: '#bbf7d0', color: '#166534' },
+              { slug: 'alturas', emoji: '🔗', label: 'Protección Alturas', count: PRODUCTS.filter(p => p.categoria === 'alturas').length, bg: '#ede9fe', border: '#ddd6fe', color: '#5b21b6' },
+              { slug: 'vial', emoji: '🚧', label: 'Limitación Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length, bg: '#fee2e2', border: '#fecaca', color: '#991b1b' },
+            ].map(btn => (
+              <Link
+                key={btn.slug}
+                href={`/categoria/${btn.slug}`}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '7px',
+                  backgroundColor: btn.bg,
+                  border: `1.5px solid ${btn.border}`,
+                  color: btn.color,
+                  textDecoration: 'none',
+                  fontSize: '0.84rem',
+                  fontWeight: 700,
+                  padding: '7px 14px',
+                  borderRadius: '999px',
+                  transition: 'all 0.15s ease',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                  whiteSpace: 'nowrap'
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.03)';
+                }}
+              >
+                <span style={{ fontSize: '1.05rem' }}>{btn.emoji}</span>
+                <span>{btn.label}</span>
+                <span style={{
+                  fontSize: '0.72rem',
+                  backgroundColor: 'rgba(0,0,0,0.07)',
+                  padding: '2px 7px',
+                  borderRadius: '12px',
+                  fontWeight: 800
+                }}>
+                  {btn.count}
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* ================= CARRUSEL 1: PLAYERAS Y TEXTILES ================= */}
         <div style={{ marginBottom: '64px' }}>
           <div style={{ 
