@@ -94,19 +94,6 @@ export default function Hero() {
             </div>
           ))}
 
-          {/* Card con info dinámica del slide activo */}
-          <div className="hero-card">
-            <div className="dot">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-            </div>
-            <div>
-              <b>{HERO_SLIDES[currentSlide].title}</b>
-              <span>{HERO_SLIDES[currentSlide].subtitle}</span>
-            </div>
-          </div>
-
           {/* Flechas de navegación */}
           <button 
             type="button"
@@ -136,6 +123,19 @@ export default function Hero() {
                 aria-label={`Ver imagen ${idx + 1}`}
               />
             ))}
+          </div>
+        </div>
+
+        {/* Tarjeta informativa ubicada por DEBAJO del recuadro de la foto */}
+        <div className="hero-caption">
+          <div className="dot">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M20 6 9 17l-5-5"/>
+            </svg>
+          </div>
+          <div>
+            <b>{HERO_SLIDES[currentSlide].title}</b>
+            <span>{HERO_SLIDES[currentSlide].subtitle}</span>
           </div>
         </div>
       </div>
