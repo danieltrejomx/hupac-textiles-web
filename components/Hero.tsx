@@ -90,8 +90,7 @@ export default function Hero() {
               key={slide.src}
               className={`hero-slide ${idx === currentSlide ? 'active' : ''}`}
             >
-              <img className="hero-slide-bg" src={slide.src} alt="" aria-hidden="true" />
-              <img className="hero-slide-fg" src={slide.src} alt={slide.alt} />
+              <img src={slide.src} alt={slide.alt} />
             </div>
           ))}
 
