@@ -155,9 +155,23 @@ function CarouselProductCard({ prod }: { prod: Product }) {
 export default function CatalogCarousel() {
   const textilesScrollRef = useRef<HTMLDivElement>(null);
   const footwearScrollRef = useRef<HTMLDivElement>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const textilesProducts = PRODUCTS.filter((p) => !p.categoria || p.categoria === 'textiles');
   const footwearProducts = PRODUCTS.filter((p) => p.categoria === 'calzado' || p.categoria === 'accesorios');
+
+  const searchResults = searchQuery.trim()
+    ? PRODUCTS.filter((p) => {
+        const q = searchQuery.toLowerCase().trim();
+        return (
+          p.nombre.toLowerCase().includes(q) ||
+          p.sku.toLowerCase().includes(q) ||
+          p.composicion?.toLowerCase().includes(q) ||
+          p.gramaje?.toLowerCase().includes(q) ||
+          p.categoria?.toLowerCase().includes(q)
+        );
+      })
+    : [];
 
   const scroll = (ref: React.RefObject<HTMLDivElement>, direction: 'left' | 'right') => {
     if (ref.current) {
@@ -173,8 +187,73 @@ export default function CatalogCarousel() {
     <section id="catalogo" style={{ backgroundColor: '#ffffff', borderTop: '1px solid var(--linea)', borderBottom: '1px solid var(--linea)', padding: '56px 0' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 28px' }}>
         
-        {/* ================= BOTONES RÁPIDOS DE CATEGORÍAS EPC & LÍNEAS ================= */}
-        <div style={{ marginBottom: '32px', paddingBottom: '24px', borderBottom: '1px solid var(--linea)' }}>
+        {/* ================= BUSCADOR CON LUPA & BOTONES RÁPIDOS DE CATEGORÍAS ================= */}
+        <div style={{ marginBottom: '36px', paddingBottom: '24px', borderBottom: '1px solid var(--linea)' }}>
+          
+          {/* Campo de Búsqueda con Lupa */}
+          <div style={{ position: 'relative', maxWidth: '560px', marginBottom: '20px' }}>
+            <div style={{
+              position: 'absolute',
+              left: '16px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              fontSize: '1.1rem',
+              pointerEvents: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              userSelect: 'none'
+            }}>
+              🔍
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Buscar productos por nombre, código SKU o tipo..."
+              style={{
+                width: '100%',
+                padding: '12px 42px 12px 46px',
+                borderRadius: '12px',
+                border: searchQuery ? '2px solid var(--rey)' : '1px solid #cbd5e1',
+                fontSize: '0.95rem',
+                outline: 'none',
+                backgroundColor: '#ffffff',
+                boxShadow: searchQuery ? '0 0 0 4px rgba(36,86,196,0.12)' : '0 2px 8px rgba(0,0,0,0.03)',
+                transition: 'all 0.2s ease',
+                color: 'var(--marino)',
+                fontWeight: 600
+              }}
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                style={{
+                  position: 'absolute',
+                  right: '12px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: '#e2e8f0',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '24px',
+                  height: '24px',
+                  cursor: 'pointer',
+                  fontSize: '0.8rem',
+                  color: '#475569',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: 800
+                }}
+                title="Limpiar búsqueda"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
+          {/* Categorías Tabs */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -222,13 +301,13 @@ export default function CatalogCarousel() {
                   e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.03)';
                 }}
               >
-                <span style={{ fontSize: '1.05rem' }}>{btn.emoji}</span>
+                <span>{btn.emoji}</span>
                 <span>{btn.label}</span>
                 <span style={{
                   fontSize: '0.72rem',
-                  backgroundColor: 'rgba(0,0,0,0.07)',
+                  backgroundColor: 'rgba(0,0,0,0.06)',
                   padding: '2px 7px',
-                  borderRadius: '12px',
+                  borderRadius: '10px',
                   fontWeight: 800
                 }}>
                   {btn.count}
@@ -237,6 +316,127 @@ export default function CatalogCarousel() {
             ))}
           </div>
         </div>
+
+        {/* ================= RESULTADOS DE BÚSQUEDA EN TIEMPO REAL ================= */}
+        {searchQuery.trim() ? (
+          <div style={{ marginBottom: '48px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+              <div>
+                <h3 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--marino)', margin: 0 }}>
+                  🔍 Resultados de Búsqueda ({searchResults.length})
+                </h3>
+                <p style={{ margin: '4px 0 0', fontSize: '0.9rem', color: '#64748b' }}>
+                  Mostrando productos coincidentes con &quot;<b style={{ color: 'var(--rey)' }}>{searchQuery}</b>&quot;
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                style={{
+                  backgroundColor: '#f1f5f9',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '10px',
+                  padding: '8px 16px',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  color: 'var(--marino)',
+                  cursor: 'pointer'
+                }}
+              >
+                ✕ Limpiar Búsqueda
+              </button>
+            </div>
+
+            {searchResults.length > 0 ? (
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+                gap: '24px'
+              }}>
+                {searchResults.map((prod) => (
+                  <article
+                    key={prod.id}
+                    style={{
+                      backgroundColor: '#ffffff',
+                      border: '1px solid var(--linea)',
+                      borderRadius: '16px',
+                      overflow: 'hidden',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      boxShadow: '0 4px 14px rgba(0,0,0,0.04)'
+                    }}
+                  >
+                    <Link href={`/productos/${prod.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <div style={{
+                        backgroundColor: '#ffffff',
+                        height: '220px',
+                        position: 'relative',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        padding: '12px',
+                        borderBottom: '1px solid var(--linea)'
+                      }}>
+                        <img
+                          src={prod.imagenPrincipal}
+                          alt={prod.nombre}
+                          style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', mixBlendMode: 'multiply' }}
+                        />
+                        <span style={{
+                          position: 'absolute',
+                          top: '12px',
+                          left: '12px',
+                          fontFamily: 'var(--mono)',
+                          fontSize: '10px',
+                          fontWeight: 700,
+                          backgroundColor: 'rgba(255,255,255,0.94)',
+                          border: '1px solid var(--linea)',
+                          color: 'var(--marino)',
+                          borderRadius: '6px',
+                          padding: '3px 8px'
+                        }}>
+                          ESTILO {prod.sku}
+                        </span>
+                      </div>
+                    </Link>
+                    <div style={{ padding: '16px', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <div>
+                        <h4 style={{ fontSize: '1rem', fontWeight: 750, color: 'var(--marino)', margin: '0 0 4px 0' }}>
+                          {prod.nombre}
+                        </h4>
+                        <span style={{ fontSize: '0.78rem', color: 'var(--texto-2)', fontFamily: 'var(--mono)', display: 'block', marginBottom: '8px' }}>
+                          {prod.composicion} · {prod.gramaje}
+                        </span>
+                      </div>
+                      <Link
+                        href={`/productos/${prod.id}`}
+                        style={{ textDecoration: 'none', fontSize: '0.85rem', color: 'var(--rey)', fontWeight: 700 }}
+                      >
+                        Ver detalles &rarr;
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div style={{
+                textAlign: 'center',
+                padding: '48px 20px',
+                backgroundColor: '#f8fafc',
+                borderRadius: '16px',
+                border: '1px dashed #cbd5e1'
+              }}>
+                <span style={{ fontSize: '2.5rem', display: 'block', marginBottom: '12px' }}>🔍</span>
+                <h4 style={{ color: 'var(--marino)', fontSize: '1.2rem', margin: '0 0 8px' }}>
+                  No encontramos productos con &quot;{searchQuery}&quot;
+                </h4>
+                <p style={{ color: '#64748b', fontSize: '0.9rem', margin: 0 }}>
+                  Intenta buscar por palabras clave como &quot;polo&quot;, &quot;bota&quot;, &quot;casco&quot;, &quot;chaleco&quot; o explora por categoría arriba.
+                </p>
+              </div>
+            )}
+          </div>
+        ) : null}
 
         {/* ================= CARRUSEL 1: PLAYERAS Y TEXTILES ================= */}
         <div style={{ marginBottom: '64px' }}>
