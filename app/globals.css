@@ -81,7 +81,7 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease-in-out;pointer-events:none}
 .hero-slide.active{opacity:1;pointer-events:auto}
 .hero-slide img{width:100%;height:100%;object-fit:cover;object-position:top}
-.hero-card{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,0.60);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid rgba(255,255,255,0.80);border-radius:999px;padding:9px 18px;box-shadow:0 8px 30px rgba(0,0,0,0.08);display:flex;align-items:center;gap:12px;z-index:5;max-width:calc(100% - 140px);transition:all .3s ease}
+.hero-card{position:absolute;left:14px;top:14px;background:rgba(255,255,255,0.60);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%);border:1px solid rgba(255,255,255,0.80);border-radius:999px;padding:9px 18px;box-shadow:0 8px 30px rgba(0,0,0,0.08);display:flex;align-items:center;gap:12px;z-index:5;max-width:calc(100% - 28px);transition:all .3s ease}
 .hero-card:hover{background:rgba(255,255,255,0.85);box-shadow:0 10px 36px rgba(0,0,0,0.12)}
 .hero-card .dot{width:28px;height:28px;border-radius:50%;background:var(--rey);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 6px rgba(36,86,196,0.3)}
 .hero-card b{display:block;font-size:13.5px;font-weight:700;color:var(--marino);line-height:1.25}
@@ -223,7 +223,7 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .hero,.nos-grid,.config,.dist{grid-template-columns:1fr;gap:32px}
   .hero{padding-top:40px;padding-bottom:40px}
   .hero-foto img{height:360px}
-  .hero-card{left:14px;bottom:20px}
+  .hero-card{left:12px;top:12px}
   .hero-dots{bottom:20px}
   .visor{position:static}
   .dist{padding:32px 24px}
