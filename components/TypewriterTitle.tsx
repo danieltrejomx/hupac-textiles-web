@@ -13,7 +13,7 @@ interface TypewriterTitleProps {
 
 export default function TypewriterTitle({
   text,
-  delay = 80,
+  delay = 50,
   as = 'h1',
   className = '',
   style = {}
@@ -28,34 +28,21 @@ export default function TypewriterTitle({
   }, [delay]);
 
   const Tag = as;
-  const words = text.split(' ');
 
   return (
     <Tag
       className={className}
       style={{
-        ...style,
-        display: 'inline-flex',
-        flexWrap: 'wrap',
-        gap: '0.28em',
-        alignItems: 'baseline'
+        width: '100%',
+        textAlign: 'center',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? 'translateY(0)' : 'translateY(8px)',
+        transition: 'opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)',
+        willChange: 'opacity, transform',
+        ...style
       }}
     >
-      {words.map((word, idx) => (
-        <span
-          key={idx}
-          style={{
-            display: 'inline-block',
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(14px) scale(0.96)',
-            filter: isVisible ? 'blur(0px)' : 'blur(6px)',
-            transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.07}s`,
-            willChange: 'transform, opacity, filter'
-          }}
-        >
-          {word}
-        </span>
-      ))}
+      {text}
     </Tag>
   );
 }
