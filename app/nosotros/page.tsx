@@ -11,7 +11,7 @@ export default function NosotrosPage() {
       <main style={{ backgroundColor: '#f8fafc', minHeight: '85vh', paddingBottom: '80px' }}>
         {/* Hero Header */}
         <section style={{
-          background: 'linear-gradient(135deg, var(--marino) 0%, #1a365d 100%)',
+          background: 'var(--marino)',
           color: '#ffffff',
           padding: '64px 28px 72px 28px',
           textAlign: 'center',

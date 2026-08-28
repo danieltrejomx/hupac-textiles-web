@@ -12,7 +12,7 @@ export default function ConfiguradorPage() {
       <main style={{ backgroundColor: '#f8fafc', minHeight: '85vh', paddingBottom: '80px' }}>
         {/* Header */}
         <section style={{
-          background: 'linear-gradient(135deg, var(--marino) 0%, #1e293b 100%)',
+          background: 'var(--marino)',
           color: '#ffffff',
           padding: '48px 28px 48px 28px',
           textAlign: 'center'
