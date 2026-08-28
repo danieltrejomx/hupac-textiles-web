@@ -2244,7 +2244,7 @@ export const PRODUCTS: Product[] = [
     colores: [
       { nombre: 'Verde Neón', hex: '#22c55e' },
       { nombre: 'Naranja Neón', hex: '#ea580c' },
-      { nombre: 'Azul Rey', hex: '#2563eb' }
+      { nombre: 'Azul Turquesa', hex: '#7EA9CD' }
     ],
     precios: {},
     precioDirecto: 44.90,
@@ -2391,7 +2391,7 @@ export const PRODUCTS: Product[] = [
     tecnicas: [],
     imagenPrincipal: '/images/epc/chaleco_brigadista_premium.jpg',
     colores: [
-      { nombre: 'Azul Rey', hex: '#2563eb' },
+      { nombre: 'Azul Marino', hex: '#142236' },
       { nombre: 'Rojo', hex: '#dc2626' },
       { nombre: 'Naranja', hex: '#ea580c' },
       { nombre: 'Verde', hex: '#16a34a' },
@@ -2417,7 +2417,7 @@ export const PRODUCTS: Product[] = [
     imagenPrincipal: '/images/epc/chaleco_brigadista_std.jpg',
     colores: [
       { nombre: 'Naranja', hex: '#ea580c' },
-      { nombre: 'Azul Rey', hex: '#2563eb' },
+      { nombre: 'Azul Marino', hex: '#142236' },
       { nombre: 'Rojo', hex: '#dc2626' },
       { nombre: 'Verde', hex: '#16a34a' }
     ],

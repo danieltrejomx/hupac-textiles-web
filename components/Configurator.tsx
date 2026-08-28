@@ -87,7 +87,7 @@ interface ColorOption {
 
 const COLORES: ColorOption[] = [
   { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
-  { c: '#7EA9CD', n: 'Azul Cielo', rgb: [126, 169, 205], textColor: '#132A52' },
+  { c: '#7EA9CD', n: 'Azul Turquesa', rgb: [126, 169, 205], textColor: '#132A52' },
   { c: '#142236', n: 'Azul Marino Corporativo', rgb: [20, 34, 54], textColor: '#FFFFFF' },
   { c: '#4E5664', n: 'Gris Oxford Industrial', rgb: [78, 86, 100], textColor: '#FFFFFF' },
   { c: '#A31F2D', n: 'Rojo Empresarial', rgb: [163, 31, 45], textColor: '#FFFFFF' },
@@ -327,7 +327,7 @@ export default function Configurator() {
           <div className="grupo rv">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
               <label className="tit" style={{ margin: 0 }}>2 · Color de Línea HUPAC</label>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--rey)' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--marino)' }}>
                 {colorOption.n}
               </span>
             </div>
