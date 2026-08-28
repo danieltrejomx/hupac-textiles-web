@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 
 interface TypewriterTitleProps {
   text: string;
-  speed?: number; // ms per character
-  delay?: number; // ms delay before typing
+  speed?: number;
+  delay?: number;
   as?: 'h1' | 'h2' | 'h3' | 'span' | 'p';
   className?: string;
   style?: React.CSSProperties;
@@ -13,50 +13,49 @@ interface TypewriterTitleProps {
 
 export default function TypewriterTitle({
   text,
-  speed = 85,
-  delay = 250,
+  delay = 80,
   as = 'h1',
   className = '',
-  style = {},
-  cursorColor = 'var(--rey)'
+  style = {}
 }: TypewriterTitleProps) {
-  const [displayedText, setDisplayedText] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    let index = 0;
-    setDisplayedText('');
-    setIsTyping(true);
-
     const timer = setTimeout(() => {
-      const interval = setInterval(() => {
-        if (index < text.length) {
-          setDisplayedText(text.slice(0, index + 1));
-          index++;
-        } else {
-          clearInterval(interval);
-          setIsTyping(false);
-        }
-      }, speed);
-
-      return () => clearInterval(interval);
+      setIsVisible(true);
     }, delay);
-
     return () => clearTimeout(timer);
-  }, [text, speed, delay]);
+  }, [delay]);
 
   const Tag = as;
+  const words = text.split(' ');
 
   return (
-    <Tag className={className} style={{ ...style, position: 'relative' }}>
-      {displayedText}
-      <span
-        className="typewriter-cursor"
-        style={{
-          backgroundColor: cursorColor,
-          opacity: isTyping ? 1 : undefined
-        }}
-      />
+    <Tag
+      className={className}
+      style={{
+        ...style,
+        display: 'inline-flex',
+        flexWrap: 'wrap',
+        gap: '0.28em',
+        alignItems: 'baseline'
+      }}
+    >
+      {words.map((word, idx) => (
+        <span
+          key={idx}
+          style={{
+            display: 'inline-block',
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(14px) scale(0.96)',
+            filter: isVisible ? 'blur(0px)' : 'blur(6px)',
+            transition: `all 0.5s cubic-bezier(0.16, 1, 0.3, 1) ${idx * 0.07}s`,
+            willChange: 'transform, opacity, filter'
+          }}
+        >
+          {word}
+        </span>
+      ))}
     </Tag>
   );
 }
