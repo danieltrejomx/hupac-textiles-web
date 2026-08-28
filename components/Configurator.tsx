@@ -88,7 +88,6 @@ interface ColorOption {
 const COLORES: ColorOption[] = [
   { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
   { c: '#7EA9CD', n: 'Azul Cielo', rgb: [126, 169, 205], textColor: '#132A52' },
-  { c: '#2254B8', n: 'Azul Rey (HUPAC)', rgb: [34, 84, 184], textColor: '#FFFFFF' },
   { c: '#142236', n: 'Azul Marino Corporativo', rgb: [20, 34, 54], textColor: '#FFFFFF' },
   { c: '#4E5664', n: 'Gris Oxford Industrial', rgb: [78, 86, 100], textColor: '#FFFFFF' },
   { c: '#A31F2D', n: 'Rojo Empresarial', rgb: [163, 31, 45], textColor: '#FFFFFF' },
