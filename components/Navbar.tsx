@@ -45,9 +45,9 @@ export default function Navbar() {
   const NAV_LINKS = [
     { href: '/', label: 'Inicio', id: 'inicio', path: '/' },
     { href: '/catalogo', label: 'Catálogo', id: 'catalogo', path: '/catalogo' },
+    { href: '/configurador', label: 'Configurador', id: 'configurador', path: '/configurador' },
     { href: '/nosotros', label: 'Nosotros', id: 'nosotros', path: '/nosotros' },
     { href: '/servicios', label: 'Servicios', id: 'servicios', path: '/servicios' },
-    { href: '/configurador', label: 'Configurador', id: 'configurador', path: '/configurador' },
     { href: '/industrias', label: 'Industrias', id: 'industrias', path: '/industrias' },
     { href: '/distribuidores', label: 'Distribuidores', id: 'distribuidores', path: '/distribuidores' },
   ];
