@@ -218,6 +218,44 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .tecnicas{grid-template-columns:repeat(3,1fr)}
   .grid-ind{grid-template-columns:repeat(3,1fr)}
 }
+/* ---------- LAPTOP ADAPTACIÓN RESPONSIVA ---------- */
+@media (max-width: 1440px) and (min-width: 961px) {
+  .hero { padding-top: 36px; padding-bottom: 36px; gap: 32px; }
+  .hero-foto { height: 480px; }
+  .hero p.lead { font-size: 16.5px; margin: 16px 0 24px; }
+  .hero-ctas { margin-bottom: 32px; }
+}
+
+@media (max-height: 900px) and (min-width: 961px) {
+  .hero { padding-top: 24px; padding-bottom: 24px; gap: 28px; }
+  .badge-mx { margin-bottom: 12px; padding: 5px 12px; font-size: 11.5px; }
+  h1 { font-size: clamp(30px, 3.2vw, 46px); line-height: 1.08; }
+  .hero p.lead { font-size: 15.5px; margin: 12px 0 20px; max-width: 48ch; }
+  .hero-ctas { margin-bottom: 24px; gap: 10px; }
+  .stats { max-width: 520px; }
+  .stats div { padding: 12px 14px; }
+  .stats b { font-size: 18px; }
+  .stats span { font-size: 11px; }
+  .hero-foto { height: min(440px, 50vh); }
+  .hero-caption { margin-top: 10px; padding: 8px 14px; }
+  .hero-caption b { font-size: 13px; }
+  .hero-caption span { font-size: 11px; }
+  .cifras-in { padding: 24px 28px; }
+  .cifra b { font-size: clamp(20px, 2vw, 26px); }
+  .cifra > span { font-size: 11.5px; }
+}
+
+@media (max-height: 780px) and (min-width: 961px) {
+  .hero { padding-top: 16px; padding-bottom: 16px; gap: 20px; }
+  .badge-mx { margin-bottom: 8px; }
+  h1 { font-size: clamp(26px, 2.8vw, 38px); }
+  .hero p.lead { font-size: 14.5px; margin: 8px 0 14px; }
+  .hero-ctas { margin-bottom: 16px; }
+  .stats div { padding: 9px 12px; }
+  .hero-foto { height: min(370px, 44vh); }
+  .cifras-in { padding: 18px 24px; }
+}
+
 @media(max-width:960px){
   .hero,.nos-grid,.config,.dist{grid-template-columns:1fr;gap:32px}
   .hero{padding-top:40px;padding-bottom:40px}
