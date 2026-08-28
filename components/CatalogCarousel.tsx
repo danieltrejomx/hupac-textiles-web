@@ -187,73 +187,8 @@ export default function CatalogCarousel() {
     <section id="catalogo" style={{ backgroundColor: '#ffffff', borderTop: '1px solid var(--linea)', borderBottom: '1px solid var(--linea)', padding: '56px 0' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 28px' }}>
         
-        {/* ================= BUSCADOR CON LUPA & BOTONES RÁPIDOS DE CATEGORÍAS ================= */}
-        <div style={{ marginBottom: '36px', paddingBottom: '24px', borderBottom: '1px solid var(--linea)' }}>
-          
-          {/* Campo de Búsqueda con Lupa */}
-          <div style={{ position: 'relative', maxWidth: '560px', marginBottom: '20px' }}>
-            <div style={{
-              position: 'absolute',
-              left: '16px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              fontSize: '1.1rem',
-              pointerEvents: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              userSelect: 'none'
-            }}>
-              🔍
-            </div>
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Buscar productos por nombre, código SKU o tipo..."
-              style={{
-                width: '100%',
-                padding: '12px 42px 12px 46px',
-                borderRadius: '12px',
-                border: searchQuery ? '2px solid var(--rey)' : '1px solid #cbd5e1',
-                fontSize: '0.95rem',
-                outline: 'none',
-                backgroundColor: '#ffffff',
-                boxShadow: searchQuery ? '0 0 0 4px rgba(36,86,196,0.12)' : '0 2px 8px rgba(0,0,0,0.03)',
-                transition: 'all 0.2s ease',
-                color: 'var(--marino)',
-                fontWeight: 600
-              }}
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery('')}
-                style={{
-                  position: 'absolute',
-                  right: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  background: '#e2e8f0',
-                  border: 'none',
-                  borderRadius: '50%',
-                  width: '24px',
-                  height: '24px',
-                  cursor: 'pointer',
-                  fontSize: '0.8rem',
-                  color: '#475569',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontWeight: 800
-                }}
-                title="Limpiar búsqueda"
-              >
-                ✕
-              </button>
-            )}
-          </div>
-
-          {/* Categorías Tabs */}
+        {/* ================= BOTONES RÁPIDOS DE CATEGORÍAS & LUPA ================= */}
+        <div style={{ marginBottom: '32px', paddingBottom: '24px', borderBottom: '1px solid var(--linea)' }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
@@ -314,6 +249,68 @@ export default function CatalogCarousel() {
                 </span>
               </Link>
             ))}
+
+            {/* Lupa de Búsqueda a lado de Limitación Vial */}
+            <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Buscar producto..."
+                style={{
+                  backgroundColor: searchQuery ? '#eff6ff' : '#ffffff',
+                  border: searchQuery ? '2px solid var(--rey)' : '1.5px solid #cbd5e1',
+                  color: 'var(--marino)',
+                  fontSize: '0.84rem',
+                  fontWeight: 700,
+                  padding: '7px 14px 7px 34px',
+                  borderRadius: '999px',
+                  outline: 'none',
+                  width: searchQuery ? '230px' : '150px',
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)'
+                }}
+                onFocus={(e) => {
+                  if (!searchQuery) e.target.style.width = '200px';
+                }}
+                onBlur={(e) => {
+                  if (!searchQuery) e.target.style.width = '150px';
+                }}
+              />
+              <span style={{
+                position: 'absolute',
+                left: '12px',
+                pointerEvents: 'none',
+                fontSize: '0.85rem'
+              }}>
+                🔍
+              </span>
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    background: '#e2e8f0',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '18px',
+                    height: '18px',
+                    cursor: 'pointer',
+                    fontSize: '0.7rem',
+                    color: '#475569',
+                    fontWeight: 800,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                  title="Limpiar búsqueda"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
           </div>
         </div>
 
