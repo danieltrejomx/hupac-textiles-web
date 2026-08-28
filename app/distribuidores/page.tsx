@@ -31,29 +31,26 @@ export default function DistribuidoresPage() {
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
-          padding: '64px 28px 72px 28px',
+          padding: '52px 28px',
           textAlign: 'center'
         }}>
           <div style={{ maxWidth: '960px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '16px', fontSize: '0.9rem', color: '#93c5fd', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+            <div style={{ marginBottom: '14px', fontSize: '0.88rem', color: '#93c5fd', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
               <Link href="/" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 600 }}>Inicio</Link>
               <span>/</span>
               <span style={{ color: '#ffffff', fontWeight: 700 }}>Distribuidores</span>
             </div>
 
-            <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '6px 14px', borderRadius: '20px', display: 'inline-block', marginBottom: '16px' }}>
+            <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '6px 14px', borderRadius: '20px', display: 'inline-block', marginBottom: '14px' }}>
               Red Nacional de Distribuidores
             </span>
             <TypewriterTitle
               text="Tus márgenes de ganancia empiezan en la fábrica"
               as="h1"
-              speed={85}
-              delay={250}
-              cursorColor="#60a5fa"
-              style={{ fontSize: '2.6rem', fontWeight: 850, margin: '0 0 16px 0', lineHeight: 1.2, color: '#ffffff' }}
+              style={{ fontSize: '2.3rem', fontWeight: 850, margin: '0 0 14px 0', lineHeight: 1.2, color: '#ffffff' }}
             />
-            <p style={{ fontSize: '1.15rem', color: '#cbd5e1', maxWidth: '760px', margin: '0 auto', lineHeight: 1.6 }}>
-              Únete a la red comercial de <strong>HUPAC TEXTILES</strong>. Compra directamente al fabricante con los mejores precios por volumen, inventario permanente y respaldo de entrega rápida.
+            <p style={{ fontSize: '1.05rem', color: '#cbd5e1', maxWidth: '740px', margin: '0 auto', lineHeight: 1.55 }}>
+              Suministramos a comercializadoras, distribuidores e intermediarios con volumen directo de planta, tiempos de entrega garantizados y muestras para licitaciones.
             </p>
           </div>
         </section>
