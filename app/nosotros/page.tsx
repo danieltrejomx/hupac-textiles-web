@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TypewriterTitle from '@/components/TypewriterTitle';
+import { IconAward, IconTrending, IconShield, IconTag } from '@/components/Icons';
 
 export default function NosotrosPage() {
   return (
@@ -47,42 +48,47 @@ export default function NosotrosPage() {
             marginBottom: '48px'
           }}>
             {[
-              { num: '2005', label: 'Año de fundación', desc: 'Más de dos décadas de experiencia textil', tag: 'TRAYECTORIA' },
-              { num: '+7M', label: 'Prendas confeccionadas', desc: 'Calidad probada en millones de usuarios', tag: 'PRODUCCIÓN' },
-              { num: '+43K', label: 'Clientes atendidos', desc: 'Empresas, distribuidores y gobierno', tag: 'CONFIANZA' },
-              { num: '100%', label: 'Hecho en México', desc: 'Planta matriz en Cuautitlán Izcalli, Edo. Méx.', tag: 'CALIDAD' }
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className={`textile-tag-card tag-delay-${i + 1}`}
-              >
-                <span style={{
-                  display: 'inline-block',
-                  fontFamily: 'var(--mono)',
-                  fontSize: '9.5px',
-                  fontWeight: 700,
-                  letterSpacing: '1px',
-                  color: 'var(--rey)',
-                  backgroundColor: 'var(--cielo)',
-                  border: '1px solid var(--cielo-2)',
-                  padding: '3px 9px',
-                  borderRadius: '6px',
-                  marginBottom: '10px',
-                  textTransform: 'uppercase'
-                }}>
-                  🏷️ {stat.tag}
-                </span>
-                <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--rey)', marginBottom: '4px', fontFamily: 'var(--mono)' }}>
-                  {stat.num}
+              { num: '2005', label: 'Año de fundación', desc: 'Más de dos décadas de experiencia textil', tag: 'TRAYECTORIA', icon: IconAward },
+              { num: '+7M', label: 'Prendas confeccionadas', desc: 'Calidad probada en millones de usuarios', tag: 'PRODUCCIÓN', icon: IconTrending },
+              { num: '+43K', label: 'Clientes atendidos', desc: 'Empresas, distribuidores y gobierno', tag: 'CONFIANZA', icon: IconShield },
+              { num: '100%', label: 'Hecho en México', desc: 'Planta matriz en Cuautitlán Izcalli, Edo. Méx.', tag: 'CALIDAD', icon: IconTag }
+            ].map((stat, i) => {
+              const IconComp = stat.icon;
+              return (
+                <div
+                  key={i}
+                  className={`textile-tag-card tag-delay-${i + 1}`}
+                >
+                  <span style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '5px',
+                    fontFamily: 'var(--mono)',
+                    fontSize: '9.5px',
+                    fontWeight: 700,
+                    letterSpacing: '1px',
+                    color: 'var(--rey)',
+                    backgroundColor: 'var(--cielo)',
+                    border: '1px solid var(--cielo-2)',
+                    padding: '3px 9px',
+                    borderRadius: '6px',
+                    marginBottom: '10px',
+                    textTransform: 'uppercase'
+                  }}>
+                    <IconComp size={11} color="var(--rey)" /> {stat.tag}
+                  </span>
+                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--rey)', marginBottom: '4px', fontFamily: 'var(--mono)' }}>
+                    {stat.num}
+                  </div>
+                  <div style={{ fontWeight: 750, color: 'var(--marino)', fontSize: '1.05rem', marginBottom: '6px' }}>
+                    {stat.label}
+                  </div>
+                  <div style={{ fontSize: '0.85rem', color: 'var(--texto-2)', lineHeight: 1.4 }}>
+                    {stat.desc}
+                  </div>
                 </div>
-                <div style={{ fontWeight: 750, color: 'var(--marino)', fontSize: '1.05rem', marginBottom: '6px' }}>
-                  {stat.label}
-                </div>
-                <div style={{ fontSize: '0.85rem', color: 'var(--texto-2)', lineHeight: 1.4 }}>
-                  {stat.desc}
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Grid Principal de Historia y Capacidades */}

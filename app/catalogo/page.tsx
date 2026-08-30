@@ -6,17 +6,29 @@ import Footer from '@/components/Footer';
 import TypewriterTitle from '@/components/TypewriterTitle';
 import { PRODUCTS, Product } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import {
+  IconTodos,
+  IconPlayeras,
+  IconCalzado,
+  IconCabeza,
+  IconVisual,
+  IconManos,
+  IconRopaTrabajo,
+  IconAlturas,
+  IconVial,
+  IconSearch
+} from '@/components/Icons';
 
 const CATEGORIAS_FILTRO = [
-  { id: 'todos', label: 'Todos los productos', emoji: '✨' },
-  { id: 'textiles', label: 'Playeras y Polos', emoji: '👕' },
-  { id: 'calzado', label: 'Calzado y Accesorios', emoji: '🥾' },
-  { id: 'cabeza', label: 'Protección Cabeza', emoji: '⛑️' },
-  { id: 'visual', label: 'Protección Visual', emoji: '🥽' },
-  { id: 'manos', label: 'Protección Manos', emoji: '🧤' },
-  { id: 'ropa-trabajo', label: 'Ropa de Trabajo', emoji: '🦺' },
-  { id: 'alturas', label: 'Alturas', emoji: '🔗' },
-  { id: 'vial', label: 'Limitación Vial', emoji: '🚧' },
+  { id: 'todos', label: 'Todos los productos', icon: IconTodos },
+  { id: 'textiles', label: 'Playeras y Polos', icon: IconPlayeras },
+  { id: 'calzado', label: 'Calzado y Accesorios', icon: IconCalzado },
+  { id: 'cabeza', label: 'Protección Cabeza', icon: IconCabeza },
+  { id: 'visual', label: 'Protección Visual', icon: IconVisual },
+  { id: 'manos', label: 'Protección Manos', icon: IconManos },
+  { id: 'ropa-trabajo', label: 'Ropa de Trabajo', icon: IconRopaTrabajo },
+  { id: 'alturas', label: 'Alturas', icon: IconAlturas },
+  { id: 'vial', label: 'Limitación Vial', icon: IconVial },
 ];
 
 function ProductCatalogCard({ prod, handleQuickAdd }: { prod: Product; handleQuickAdd: (e: React.MouseEvent, p: Product) => void }) {
@@ -351,6 +363,7 @@ export default function CatalogoPage() {
             }}>
               {CATEGORIAS_FILTRO.map((cat) => {
                 const isActive = categoriaActiva === cat.id;
+                const IconComp = cat.icon;
                 return (
                   <button
                     key={cat.id}
@@ -369,14 +382,13 @@ export default function CatalogoPage() {
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
                       transition: 'all 0.15s ease'
-                    }}
-                  >
-                    <span>{cat.emoji}</span>
-                    <span>{cat.label}</span>
-                  </button>
-                );
-              })}
-            </div>
+                    }}>
+                      <IconComp size={16} color={isActive ? '#ffffff' : 'var(--rey)'} />
+                      <span>{cat.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
           </div>
 
           {/* Grid de Productos */}
