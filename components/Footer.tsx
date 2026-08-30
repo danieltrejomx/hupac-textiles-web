@@ -37,7 +37,7 @@ export default function Footer() {
           </a>
           <a href="https://wa.me/525516257933" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <IconWhatsApp size={14} color="#22c55e" />
-            WhatsApp 55 1625 7933
+            55 1625 7933
           </a>
           <a href="mailto:diviciontextiles@grupohupac.com" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <IconMail size={14} color="#94a3b8" />
