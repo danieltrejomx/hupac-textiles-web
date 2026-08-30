@@ -31,7 +31,7 @@ export default function Footer() {
         <div>
           <h5>Contacto</h5>
           <a href="tel:+525516257933">55 1625 7933</a>
-          <a href="https://wa.me/525612870780" target="_blank" rel="noopener noreferrer">WhatsApp 56 1287 0780</a>
+          <a href="https://wa.me/525516257933" target="_blank" rel="noopener noreferrer">WhatsApp 55 1625 7933</a>
           <a href="mailto:diviciontextiles@grupohupac.com">diviciontextiles@grupohupac.com</a>
           <a href="https://www.hupactextiles.mx" target="_blank" rel="noopener noreferrer">www.hupactextiles.mx</a>
         </div>

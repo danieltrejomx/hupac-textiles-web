@@ -19,7 +19,7 @@ export default function DistribuidoresPage() {
     const mensaje = encodeURIComponent(
       `Hola, me interesa ser Distribuidor HUPAC.\n\n*Nombre:* ${nombre}\n*Empresa:* ${empresa}\n*Teléfono:* ${telefono}\n*Correo:* ${correo}\n*Estado:* ${estado}\n*Línea de Interés:* ${interes}`
     );
-    window.open(`https://wa.me/525612870780?text=${mensaje}`, '_blank');
+    window.open(`https://wa.me/525516257933?text=${mensaje}`, '_blank');
     setEnviado(true);
   };
 
@@ -137,7 +137,7 @@ export default function DistribuidoresPage() {
 
               <div style={{ fontSize: '0.9rem', color: 'var(--texto-2)' }}>
                 📍 <strong>Matriz y Bodega Central:</strong> Av. Laguna Luna 30, Col. Cumbria, Cuautitlán Izcalli, Estado de México, C.P. 54740.<br/>
-                📞 <strong>Atención Mayorista:</strong> 55 1625 7933 · WhatsApp 56 1287 0780
+                📞 <strong>Atención Mayorista:</strong> Tel. y WhatsApp 55 1625 7933
               </div>
             </div>
 

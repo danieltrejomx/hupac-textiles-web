@@ -619,7 +619,7 @@ export default function Configurator() {
               } catch (e) {
                 console.error("Error guardando el pedido: ", e);
               }
-              window.open(`https://wa.me/525612870780?text=${msg}`, '_blank');
+              window.open(`https://wa.me/525516257933?text=${msg}`, '_blank');
             }}
             style={{ 
               alignSelf: 'flex-start', 
@@ -1037,7 +1037,7 @@ export default function Configurator() {
                 <button
                   type="button"
                   onClick={() => {
-                    window.open(`https://wa.me/525612870780?text=${msg}`, '_blank');
+                    window.open(`https://wa.me/525516257933?text=${msg}`, '_blank');
                   }}
                   style={{
                     flex: 1.5,
