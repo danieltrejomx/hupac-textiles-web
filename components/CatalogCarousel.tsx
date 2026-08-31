@@ -64,7 +64,7 @@ function CarouselProductCard({ prod }: { prod: Product }) {
             <img
               src={activeImg}
               alt={`${prod.nombre} - ${selectedColor?.nombre || ''}`}
-              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', mixBlendMode: 'multiply', transition: 'all 0.2s ease' }}
+              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', transition: 'all 0.2s ease' }}
             />
             <span style={{
               position: 'absolute',
