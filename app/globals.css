@@ -80,7 +80,7 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .hero-foto{position:relative;border-radius:16px;overflow:hidden;background:var(--nube);box-shadow:var(--sombra);height:560px}
 .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity .6s ease-in-out;pointer-events:none}
 .hero-slide.active{opacity:1;pointer-events:auto}
-.hero-slide img{width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-slide img{width:100%;height:100%;object-fit:cover;object-position:top center}
 .hero-caption{margin-top:14px;background:#ffffff;border:1px solid var(--linea);border-radius:14px;padding:12px 18px;box-shadow:0 4px 16px rgba(0,0,0,0.04);display:flex;align-items:center;gap:12px;transition:all .3s ease}
 .hero-caption .dot{width:28px;height:28px;border-radius:50%;background:var(--rey);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 6px rgba(36,86,196,0.25)}
 .hero-caption b{display:block;font-size:14px;font-weight:750;color:var(--marino);line-height:1.25}
@@ -220,39 +220,41 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
 }
 /* ---------- LAPTOP ADAPTACIÓN RESPONSIVA ---------- */
 @media (max-width: 1440px) and (min-width: 961px) {
-  .hero { padding-top: 28px; padding-bottom: 28px; gap: 32px; }
-  .hero-foto { height: 500px; }
+  .hero { padding-top: 24px; padding-bottom: 24px; gap: 32px; }
+  .hero-foto { height: 520px; }
   .hero p.lead { font-size: 16.5px; margin: 16px 0 24px; }
   .hero-ctas { margin-bottom: 32px; }
 }
 
 @media (max-height: 900px) and (min-width: 961px) {
-  .hero { padding-top: 18px; padding-bottom: 18px; gap: 24px; }
+  .hero { padding-top: 14px; padding-bottom: 14px; gap: 24px; }
   .badge-mx { margin-bottom: 10px; padding: 5px 12px; font-size: 11.5px; }
-  h1 { font-size: clamp(28px, 3vw, 44px); line-height: 1.08; }
-  .hero p.lead { font-size: 15px; margin: 10px 0 18px; max-width: 48ch; }
-  .hero-ctas { margin-bottom: 20px; gap: 10px; }
+  h1 { font-size: clamp(28px, 3vw, 42px); line-height: 1.08; }
+  .hero p.lead { font-size: 14.5px; margin: 10px 0 16px; max-width: 48ch; }
+  .hero-ctas { margin-bottom: 18px; gap: 10px; }
   .stats { max-width: 520px; }
   .stats div { padding: 10px 12px; }
   .stats b { font-size: 18px; }
   .stats span { font-size: 11px; }
-  .hero-foto { height: min(460px, 48vh); }
+  .hero-foto { height: 490px; }
+  .hero-slide img { object-fit: cover; object-position: top center; }
   .hero-caption { margin-top: 8px; padding: 8px 14px; }
   .hero-caption b { font-size: 13px; }
   .hero-caption span { font-size: 11px; }
-  .cifras-in { padding: 22px 28px; }
+  .cifras-in { padding: 20px 28px; }
   .cifra b { font-size: clamp(20px, 2vw, 26px); }
   .cifra > span { font-size: 11.5px; }
 }
 
 @media (max-height: 780px) and (min-width: 961px) {
-  .hero { padding-top: 12px; padding-bottom: 12px; gap: 16px; }
+  .hero { padding-top: 8px; padding-bottom: 8px; gap: 16px; }
   .badge-mx { margin-bottom: 6px; }
-  h1 { font-size: clamp(24px, 2.5vw, 36px); }
-  .hero p.lead { font-size: 13.5px; margin: 6px 0 12px; }
-  .hero-ctas { margin-bottom: 14px; }
+  h1 { font-size: clamp(24px, 2.5vw, 34px); }
+  .hero p.lead { font-size: 13.5px; margin: 6px 0 10px; }
+  .hero-ctas { margin-bottom: 12px; }
   .stats div { padding: 8px 10px; }
-  .hero-foto { height: min(400px, 44vh); }
+  .hero-foto { height: 440px; }
+  .hero-slide img { object-fit: cover; object-position: top center; }
   .cifras-in { padding: 14px 20px; }
 }
 
