@@ -169,6 +169,32 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
   gap: clamp(10px, 1.5vw, 22px);
 }
 
+/* Ajuste específico para Monitores Grandes: al presionar Inicio se ve exactamente hasta la barra azul sin mostrar contenido inferior */
+@media (min-width: 1024px) {
+  .hero-first-screen {
+    height: calc(100vh - 64px);
+    max-height: calc(100vh - 64px);
+    justify-content: space-between;
+    overflow: hidden;
+  }
+  .hero-first-screen .hero {
+    flex: 1;
+    padding-top: clamp(8px, 1.5vh, 20px);
+    padding-bottom: clamp(8px, 1.5vh, 20px);
+  }
+  .hero-first-screen .hero-foto {
+    height: clamp(300px, 48vh, 500px);
+  }
+  .hero-first-screen .hero-caption {
+    width: clamp(300px, 48vh, 500px);
+    margin-top: 8px;
+    padding: 8px 14px;
+  }
+  .hero-first-screen .cifras-in {
+    padding: clamp(16px, 2.2vh, 26px) 28px;
+  }
+}
+
 /* ---------- HERO ---------- */
 .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-top:72px;padding-bottom:72px}
 .hero p.lead{font-size:18.5px;color:var(--texto-2);max-width:52ch;margin:22px 0 34px}
