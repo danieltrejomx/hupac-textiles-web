@@ -67,6 +67,56 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .sec-head{max-width:740px;margin-bottom:52px;width:100%;box-sizing:border-box}
 .sec-head p{color:var(--texto-2);font-size:17px}
 
+/* ---------- HERO 100VH FIRST SCREEN ---------- */
+.hero-first-screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.hero-first-screen .hero {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: clamp(20px, 3vw, 40px);
+  align-items: center;
+  padding-top: clamp(10px, 2vh, 32px);
+  padding-bottom: clamp(10px, 2vh, 32px);
+}
+
+.hero-first-screen .hero-foto {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--nube);
+  box-shadow: var(--sombra);
+  height: clamp(340px, 46vh, 540px);
+}
+
+.hero-first-screen .hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.hero-first-screen .cifras {
+  background: var(--marino);
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.hero-first-screen .cifras-in {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: clamp(16px, 2.4vh, 36px) 28px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(12px, 1.8vw, 24px);
+}
+
 /* ---------- HERO ---------- */
 .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding-top:72px;padding-bottom:72px}
 .hero p.lead{font-size:18.5px;color:var(--texto-2);max-width:52ch;margin:22px 0 34px}
