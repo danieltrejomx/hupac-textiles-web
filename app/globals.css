@@ -90,16 +90,17 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
   position: relative;
   border-radius: 16px;
   overflow: hidden;
-  background: var(--nube);
-  box-shadow: var(--sombra);
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(19, 42, 82, 0.08);
+  border: 1px solid var(--linea);
   height: clamp(340px, 46vh, 540px);
 }
 
 .hero-first-screen .hero-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  object-fit: contain;
+  object-position: center;
 }
 
 .hero-first-screen .cifras {
