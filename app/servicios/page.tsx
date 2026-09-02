@@ -114,7 +114,7 @@ export default function ServiciosPage() {
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
-          padding: '14px 24px 44px 24px',
+          padding: '16px 24px 32px 24px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           textAlign: 'center'
         }}>
@@ -152,8 +152,8 @@ export default function ServiciosPage() {
           </div>
         </section>
 
-        {/* GRID DE LAS 5 TÉCNICAS EN TARJETAS COLORIDAS (EN UNA SOLA LÍNEA) */}
-        <div style={{ maxWidth: '1280px', margin: '-32px auto 0 auto', padding: '0 24px' }}>
+        {/* GRID DE LAS 5 TÉCNICAS (EN UNA SOLA LÍNEA) */}
+        <div style={{ maxWidth: '1280px', margin: '-18px auto 0 auto', padding: '0 24px' }}>
           
           <div style={{
             display: 'grid',

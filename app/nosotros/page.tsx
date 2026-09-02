@@ -14,7 +14,7 @@ export default function NosotrosPage() {
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
-          padding: '14px 24px 44px 24px',
+          padding: '16px 24px 32px 24px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           textAlign: 'center'
         }}>
@@ -52,7 +52,7 @@ export default function NosotrosPage() {
           </div>
         </section>
 
-        <div style={{ maxWidth: '1200px', margin: '-32px auto 0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1200px', margin: '-18px auto 0 auto', padding: '0 24px' }}>
           {/* Tarjetas Principales: Misión, Visión, Valores */}
           <div style={{
             display: 'grid',
