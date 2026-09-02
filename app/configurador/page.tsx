@@ -39,7 +39,7 @@ export default function ConfiguradorPage() {
         </section>
 
         {/* Componente del Configurador */}
-        <div style={{ maxWidth: '1320px', margin: '0 auto', padding: '16px 16px 0 16px' }}>
+        <div style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 16px' }}>
           <Configurator />
         </div>
       </main>

@@ -241,7 +241,7 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 
 /* ---------- CONFIGURADOR ---------- */
 .config-wrap{background:#FFFFFF}
-.config{max-width:1280px;margin:0 auto;padding:96px 28px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.config{max-width:1320px;margin:0 auto;padding:clamp(12px, 2vh, 24px) 24px clamp(32px, 4vh, 64px) 24px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
 .visor{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:30px;box-shadow:var(--sombra);position:sticky;top:100px}
 .visor-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;color:var(--texto-2);border-bottom:1px solid var(--linea);padding-bottom:14px;margin-bottom:10px}
 .visor-head b{color:var(--rey);font-weight:600}
