@@ -166,8 +166,8 @@ export default function ServiciosPage() {
                 key={srv.id}
                 onClick={() => setModalServicio(srv)}
                 style={{
-                  backgroundColor: srv.bg,
-                  border: `1.5px solid ${srv.border}`,
+                  backgroundColor: '#ffffff',
+                  border: '1px solid var(--linea)',
                   borderRadius: '20px',
                   padding: '22px 20px',
                   cursor: 'pointer',
@@ -175,16 +175,18 @@ export default function ServiciosPage() {
                   flexDirection: 'column',
                   justifyContent: 'space-between',
                   gap: '16px',
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                  boxShadow: '0 4px 14px rgba(0,0,0,0.03)'
+                  transition: 'all 0.2s ease',
+                  boxShadow: '0 4px 14px rgba(19, 42, 82, 0.04)'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 10px 24px rgba(0,0,0,0.08)';
+                  e.currentTarget.style.borderColor = 'var(--rey)';
+                  e.currentTarget.style.boxShadow = '0 12px 28px rgba(36, 86, 196, 0.12)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(0,0,0,0.03)';
+                  e.currentTarget.style.borderColor = 'var(--linea)';
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(19, 42, 82, 0.04)';
                 }}
               >
                 <div>
@@ -192,11 +194,11 @@ export default function ServiciosPage() {
                     {srv.icono}
                   </span>
                   
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 850, color: srv.color, margin: '0 0 8px 0', lineHeight: 1.25 }}>
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 850, color: 'var(--marino)', margin: '0 0 8px 0', lineHeight: 1.25 }}>
                     {srv.titulo}
                   </h3>
 
-                  <p style={{ fontSize: '0.82rem', color: '#475569', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
+                  <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
                     {srv.resumen}
                   </p>
                 </div>
@@ -204,7 +206,7 @@ export default function ServiciosPage() {
                 <div style={{
                   fontSize: '0.84rem',
                   fontWeight: 800,
-                  color: srv.link,
+                  color: 'var(--rey)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '4px'
@@ -269,7 +271,7 @@ export default function ServiciosPage() {
               maxHeight: '90vh',
               overflowY: 'auto',
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-              border: `2px solid ${modalServicio.border}`,
+              border: '2px solid var(--cielo-2)',
               padding: '32px',
               position: 'relative'
             }}
@@ -306,9 +308,9 @@ export default function ServiciosPage() {
               <div>
                 <span style={{
                   fontSize: '0.78rem',
-                  backgroundColor: modalServicio.bg,
-                  color: modalServicio.color,
-                  border: `1px solid ${modalServicio.border}`,
+                  backgroundColor: 'var(--cielo)',
+                  color: 'var(--rey)',
+                  border: '1px solid var(--cielo-2)',
                   padding: '3px 10px',
                   borderRadius: '12px',
                   fontWeight: 800,
