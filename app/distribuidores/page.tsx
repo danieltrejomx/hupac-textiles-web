@@ -31,7 +31,7 @@ export default function DistribuidoresPage() {
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
-          padding: '16px 24px 32px 24px',
+          padding: '12px 24px 20px 24px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           textAlign: 'center'
         }}>
@@ -69,17 +69,17 @@ export default function DistribuidoresPage() {
           </div>
         </section>
 
-        <div style={{ maxWidth: '1200px', margin: '-18px auto 0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1200px', margin: '-10px auto 0 auto', padding: '0 24px' }}>
           {/* Formulario y Requisitos */}
           <div style={{
             backgroundColor: '#ffffff',
             border: '1px solid var(--linea)',
             borderRadius: '24px',
-            padding: '48px',
+            padding: '24px 32px 32px 32px',
             boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '48px',
+            gap: '32px',
             marginBottom: '36px'
           }}>
             <div>
