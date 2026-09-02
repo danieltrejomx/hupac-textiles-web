@@ -474,4 +474,21 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   border-radius: 2px;
 }
 
+/* ---------- CUSTOM HORIZONTAL SCROLLBAR BAR ---------- */
+.custom-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+.custom-scroll-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 999px;
+}
+.custom-scroll-container::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 999px;
+}
+.custom-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: var(--rey);
+}
+
+
 

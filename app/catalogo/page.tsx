@@ -395,13 +395,16 @@ export default function CatalogoPage() {
             </div>
 
             {/* Categorías Tabs */}
-            <div style={{
-              display: 'flex',
-              gap: '8px',
-              overflowX: 'auto',
-              paddingBottom: '6px',
-              scrollbarWidth: 'thin'
-            }}>
+            <div
+              className="custom-scroll-container"
+              style={{
+                display: 'flex',
+                gap: '8px',
+                overflowX: 'auto',
+                paddingBottom: '8px',
+                scrollBehavior: 'smooth'
+              }}
+            >
               {CATEGORIAS_FILTRO.map((cat) => {
                 const isActive = categoriaActiva === cat.id;
                 const IconComp = cat.icon;

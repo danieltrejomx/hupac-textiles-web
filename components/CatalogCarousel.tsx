@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { PRODUCTS, Product } from '@/data/products';
 import { 
@@ -13,6 +13,158 @@ import {
   IconVial, 
   IconSearch 
 } from '@/components/Icons';
+
+function CarouselScrollBar({ containerRef, stepAmount = 320 }: { containerRef: React.RefObject<HTMLDivElement>; stepAmount?: number }) {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [thumbWidth, setThumbWidth] = useState(25);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const handleScroll = () => {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll > 0) {
+        const ratio = el.clientWidth / el.scrollWidth;
+        setThumbWidth(Math.max(15, Math.min(60, ratio * 100)));
+        setScrollProgress((el.scrollLeft / maxScroll) * 100);
+      } else {
+        setScrollProgress(0);
+      }
+    };
+
+    el.addEventListener('scroll', handleScroll);
+    handleScroll();
+    return () => el.removeEventListener('scroll', handleScroll);
+  }, [containerRef]);
+
+  const scrollStep = (direction: 'left' | 'right') => {
+    if (containerRef.current) {
+      containerRef.current.scrollBy({
+        left: direction === 'left' ? -stepAmount : stepAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const handleTrackClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const percentage = clickX / rect.width;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    el.scrollTo({
+      left: percentage * maxScroll,
+      behavior: 'smooth'
+    });
+  };
+
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: '8px',
+      marginTop: '12px',
+      width: '100%',
+      padding: '0 2px'
+    }}>
+      <button
+        type="button"
+        onClick={() => scrollStep('left')}
+        style={{
+          background: '#f1f5f9',
+          border: '1px solid #cbd5e1',
+          borderRadius: '6px',
+          cursor: 'pointer',
+          color: 'var(--marino)',
+          fontSize: '0.7rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '24px',
+          height: '24px',
+          padding: 0,
+          fontWeight: 800,
+          transition: 'all 0.15s ease',
+          flexShrink: 0
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.backgroundColor = 'var(--rey)';
+          e.currentTarget.style.color = '#ffffff';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.backgroundColor = '#f1f5f9';
+          e.currentTarget.style.color = 'var(--marino)';
+        }}
+        title="Deslizar producto anterior"
+        aria-label="Deslizar producto anterior"
+      >
+        ◀
+      </button>
+
+      <div
+        onClick={handleTrackClick}
+        style={{
+          flex: 1,
+          height: '7px',
+          backgroundColor: '#e2e8f0',
+          borderRadius: '999px',
+          position: 'relative',
+          cursor: 'pointer',
+          overflow: 'hidden'
+        }}
+      >
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            width: `${thumbWidth}%`,
+            left: `${scrollProgress * (100 - thumbWidth) / 100}%`,
+            backgroundColor: 'var(--marino)',
+            borderRadius: '999px',
+            transition: 'left 0.1s ease-out'
+          }}
+        />
+      </div>
+
+      <button
+        type="button"
+        onClick={() => scrollStep('right')}
+        style={{
+          background: '#f1f5f9',
+          border: '1px solid #cbd5e1',
+          borderRadius: '6px',
+          cursor: 'pointer',
+          color: 'var(--marino)',
+          fontSize: '0.7rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '24px',
+          height: '24px',
+          padding: 0,
+          fontWeight: 800,
+          transition: 'all 0.15s ease',
+          flexShrink: 0
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.backgroundColor = 'var(--rey)';
+          e.currentTarget.style.color = '#ffffff';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.backgroundColor = '#f1f5f9';
+          e.currentTarget.style.color = 'var(--marino)';
+        }}
+        title="Deslizar siguiente producto"
+        aria-label="Deslizar siguiente producto"
+      >
+        ▶
+      </button>
+    </div>
+  );
+}
 
 function CarouselProductCard({ prod }: { prod: Product }) {
   const [selectedColor, setSelectedColor] = useState(prod.colores?.[0]);
@@ -164,6 +316,7 @@ function CarouselProductCard({ prod }: { prod: Product }) {
 }
 
 export default function CatalogCarousel() {
+  const categoriesScrollRef = useRef<HTMLDivElement>(null);
   const textilesScrollRef = useRef<HTMLDivElement>(null);
   const footwearScrollRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -199,76 +352,93 @@ export default function CatalogCarousel() {
       <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 28px' }}>
         
         {/* ================= BOTONES RÁPIDOS DE CATEGORÍAS & LUPA ================= */}
-        <div style={{ marginBottom: '32px', paddingBottom: '24px', borderBottom: '1px solid var(--linea)' }}>
+        <div style={{ marginBottom: '32px', paddingBottom: '16px', borderBottom: '1px solid var(--linea)' }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
-            gap: '10px',
-            flexWrap: 'wrap'
+            gap: '12px',
+            marginBottom: '10px'
           }}>
-            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--marino)', textTransform: 'uppercase', letterSpacing: '0.5px', marginRight: '4px', fontFamily: 'var(--mono)' }}>
+            <span style={{ fontSize: '0.8rem', fontWeight: 800, color: 'var(--marino)', textTransform: 'uppercase', letterSpacing: '0.5px', marginRight: '4px', fontFamily: 'var(--mono)', flexShrink: 0 }}>
               Categorías:
             </span>
-            {[
-              { slug: 'playeras', icon: IconPlayeras, label: 'Playeras y Polos', count: textilesProducts.length },
-              { slug: 'calzado', icon: IconCalzado, label: 'Calzado Duty Gear', count: footwearProducts.length },
-              { slug: 'cabeza', icon: IconCabeza, label: 'Protección Cabeza', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
-              { slug: 'visual', icon: IconVisual, label: 'Protección Visual', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
-              { slug: 'manos', icon: IconManos, label: 'Protección Manos', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
-              { slug: 'ropa-trabajo', icon: IconRopaTrabajo, label: 'Ropa de Trabajo', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
-              { slug: 'alturas', icon: IconAlturas, label: 'Protección Alturas', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
-              { slug: 'vial', icon: IconVial, label: 'Limitación Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length },
-            ].map(btn => {
-              const IconComp = btn.icon;
-              return (
-                <Link
-                  key={btn.slug}
-                  href={`/categoria/${btn.slug}`}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '7px',
-                    backgroundColor: '#ffffff',
-                    border: '1.5px solid #cbd5e1',
-                    color: 'var(--marino)',
-                    textDecoration: 'none',
-                    fontSize: '0.84rem',
-                    fontWeight: 700,
-                    padding: '7px 14px',
-                    borderRadius: '999px',
-                    transition: 'all 0.15s ease',
-                    boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
-                    whiteSpace: 'nowrap'
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.borderColor = 'var(--rey)';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(36,86,196,0.12)';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.borderColor = '#cbd5e1';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.03)';
-                  }}
-                >
-                  <IconComp size={16} color="var(--marino)" />
-                  <span>{btn.label}</span>
-                  <span style={{
-                    fontSize: '0.72rem',
-                    backgroundColor: '#f1f5f9',
-                    color: 'var(--marino)',
-                    padding: '2px 7px',
-                    borderRadius: '10px',
-                    fontWeight: 800
-                  }}>
-                    {btn.count}
-                  </span>
-                </Link>
-              );
-            })}
+
+            {/* Contenedor Deslizable de Botones de Categorías */}
+            <div
+              ref={categoriesScrollRef}
+              className="custom-scroll-container"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                overflowX: 'auto',
+                paddingBottom: '6px',
+                flex: 1,
+                scrollBehavior: 'smooth'
+              }}
+            >
+              {[
+                { slug: 'playeras', icon: IconPlayeras, label: 'Playeras y Polos', count: textilesProducts.length },
+                { slug: 'calzado', icon: IconCalzado, label: 'Calzado Duty Gear', count: footwearProducts.length },
+                { slug: 'cabeza', icon: IconCabeza, label: 'Protección Cabeza', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
+                { slug: 'visual', icon: IconVisual, label: 'Protección Visual', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
+                { slug: 'manos', icon: IconManos, label: 'Protección Manos', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
+                { slug: 'ropa-trabajo', icon: IconRopaTrabajo, label: 'Ropa de Trabajo', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
+                { slug: 'alturas', icon: IconAlturas, label: 'Protección Alturas', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
+                { slug: 'vial', icon: IconVial, label: 'Limitación Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length },
+              ].map(btn => {
+                const IconComp = btn.icon;
+                return (
+                  <Link
+                    key={btn.slug}
+                    href={`/categoria/${btn.slug}`}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '7px',
+                      backgroundColor: '#ffffff',
+                      border: '1.5px solid #cbd5e1',
+                      color: 'var(--marino)',
+                      textDecoration: 'none',
+                      fontSize: '0.84rem',
+                      fontWeight: 700,
+                      padding: '7px 14px',
+                      borderRadius: '999px',
+                      transition: 'all 0.15s ease',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                      whiteSpace: 'nowrap',
+                      flexShrink: 0
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = 'var(--rey)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(36,86,196,0.12)';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = '#cbd5e1';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.03)';
+                    }}
+                  >
+                    <IconComp size={16} color="var(--marino)" />
+                    <span>{btn.label}</span>
+                    <span style={{
+                      fontSize: '0.72rem',
+                      backgroundColor: '#f1f5f9',
+                      color: 'var(--marino)',
+                      padding: '2px 7px',
+                      borderRadius: '10px',
+                      fontWeight: 800
+                    }}>
+                      {btn.count}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
 
             {/* Lupa de Búsqueda a lado de Limitación Vial */}
-            <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
+            <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', flexShrink: 0 }}>
               <input
                 type="text"
                 value={searchQuery}
@@ -331,6 +501,9 @@ export default function CatalogCarousel() {
               )}
             </div>
           </div>
+
+          {/* Barrita Deslizable para Categorías */}
+          <CarouselScrollBar containerRef={categoriesScrollRef} stepAmount={200} />
         </div>
 
         {/* ================= RESULTADOS DE BÚSQUEDA EN TIEMPO REAL ================= */}
@@ -509,13 +682,13 @@ export default function CatalogCarousel() {
 
           <div
             ref={textilesScrollRef}
+            className="custom-scroll-container"
             style={{
               display: 'flex',
               gap: '20px',
               overflowX: 'auto',
               scrollSnapType: 'x mandatory',
               paddingBottom: '16px',
-              scrollbarWidth: 'thin',
               scrollBehavior: 'smooth'
             }}
           >
@@ -523,6 +696,7 @@ export default function CatalogCarousel() {
               <CarouselProductCard key={p.id} prod={p} />
             ))}
           </div>
+          <CarouselScrollBar containerRef={textilesScrollRef} stepAmount={320} />
         </div>
 
 
@@ -581,13 +755,13 @@ export default function CatalogCarousel() {
 
           <div
             ref={footwearScrollRef}
+            className="custom-scroll-container"
             style={{
               display: 'flex',
               gap: '20px',
               overflowX: 'auto',
               scrollSnapType: 'x mandatory',
               paddingBottom: '16px',
-              scrollbarWidth: 'thin',
               scrollBehavior: 'smooth'
             }}
           >
@@ -595,6 +769,7 @@ export default function CatalogCarousel() {
               <CarouselProductCard key={p.id} prod={p} />
             ))}
           </div>
+          <CarouselScrollBar containerRef={footwearScrollRef} stepAmount={320} />
         </div>
 
         {/* ================= SECCIÓN EPC: GRID DE CATEGORÍAS ================= */}
