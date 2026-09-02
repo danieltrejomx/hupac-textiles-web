@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TypewriterTitle from '@/components/TypewriterTitle';
-import { IconBordado, IconSerigrafia, IconDTG, IconSublimacion, IconTransfer } from '@/components/Icons';
+import { IconBordado, IconSerigrafia, IconDTG, IconSublimacion, IconTransfer, IconWhatsApp, IconConfigurator } from '@/components/Icons';
 
 export default function ServiciosPage() {
   const [modalServicio, setModalServicio] = useState<any | null>(null);
@@ -258,16 +258,16 @@ export default function ServiciosPage() {
                 href="https://wa.me/525516257933?text=Hola,%20quisiera%20asesoria%20sobre%20las%20tecnicas%20de%20personalizacion"
                 target="_blank"
                 className="btn-primary"
-                style={{ backgroundColor: '#22c55e', color: '#ffffff', padding: '12px 22px', fontSize: '0.9rem', borderRadius: '12px', fontWeight: 700 }}
+                style={{ backgroundColor: '#22c55e', color: '#ffffff', padding: '12px 22px', fontSize: '0.9rem', borderRadius: '12px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               >
-                💬 Asesoría por WhatsApp
+                <IconWhatsApp size={18} color="#ffffff" /> Asesoría por WhatsApp
               </Link>
               <Link
                 href="/configurador"
                 className="btn-outline"
-                style={{ borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff', padding: '12px 22px', fontSize: '0.9rem', borderRadius: '12px', fontWeight: 700 }}
+                style={{ borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff', padding: '12px 22px', fontSize: '0.9rem', borderRadius: '12px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px' }}
               >
-                ⚙️ Probar Configurador 3D
+                <IconConfigurator size={18} color="#ffffff" /> Probar Configurador 3D
               </Link>
             </div>
           </div>

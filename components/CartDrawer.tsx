@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import { IconCart } from '@/components/Icons';
 
 export default function CartDrawer() {
   const { cart, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, subtotal, totalItems } = useCart();
@@ -81,7 +82,9 @@ export default function CartDrawer() {
         <div style={{ flex: 1, overflowY: 'auto', padding: '20px 24px' }}>
           {cart.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '60px 20px', color: 'var(--texto-2)' }}>
-              <div style={{ fontSize: '3rem', marginBottom: '16px' }}>🛒</div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                <IconCart size={48} color="var(--marino)" />
+              </div>
               <h3 style={{ fontSize: '1.1rem', color: 'var(--marino)', marginBottom: '8px' }}>Tu carrito está vacío</h3>
               <p style={{ fontSize: '0.9rem', marginBottom: '24px' }}>Explora nuestro catálogo y agrega tus prendas.</p>
               <button

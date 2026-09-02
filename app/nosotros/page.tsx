@@ -133,7 +133,7 @@ export default function NosotrosPage() {
                       alignItems: 'center',
                       gap: '6px'
                     }}>
-                      <span>⏳</span> {pillar.desc}
+                      <span>•</span> {pillar.desc}
                     </div>
                   </div>
                 </div>
@@ -168,7 +168,7 @@ export default function NosotrosPage() {
                 alignItems: 'center',
                 gap: '10px'
               }}>
-                <span style={{ fontSize: '1.2rem' }}>⏳</span>
+                <span style={{ fontSize: '1rem', fontWeight: 800 }}>•</span>
                 <div>
                   Información pendiente por actualizar
                 </div>

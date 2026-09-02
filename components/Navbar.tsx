@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState, useRef } from 'react';
 import { useCart } from '@/context/CartContext';
 import { PRODUCTS } from '@/data/products';
+import { IconSearch, IconCart } from '@/components/Icons';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -122,7 +123,7 @@ export default function Navbar() {
               aria-label="Buscar productos"
               title="Buscar productos"
             >
-              <span>🔍</span>
+              <IconSearch size={16} color="var(--marino)" />
               <span style={{ fontSize: '13px', color: '#475569' }}>Buscar</span>
             </button>
 
@@ -137,7 +138,7 @@ export default function Navbar() {
               }}
               aria-label="Abrir carrito de compras"
             >
-              🛒
+              <IconCart size={18} color="var(--marino)" />
               {totalItems > 0 && (
                 <span style={{
                   position: 'absolute', top: '-6px', right: '-6px',
@@ -200,7 +201,7 @@ export default function Navbar() {
             {/* Header del Modal con Campo de Búsqueda */}
             <div style={{ padding: '20px 24px', borderBottom: '1px solid #e2e8f0', backgroundColor: '#f8fafc', position: 'relative' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '1.4rem' }}>🔍</span>
+                <IconSearch size={20} color="var(--marino)" />
                 <input
                   ref={searchInputRef}
                   type="text"
@@ -308,7 +309,9 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div style={{ textAlign: 'center', padding: '36px 12px' }}>
-                    <span style={{ fontSize: '2.2rem', display: 'block', marginBottom: '8px' }}>🔍</span>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
+                      <IconSearch size={32} color="var(--marino)" />
+                    </div>
                     <b style={{ color: 'var(--marino)', display: 'block', fontSize: '1.05rem', marginBottom: '4px' }}>
                       No se encontraron resultados para &quot;{navQuery}&quot;
                     </b>
@@ -336,10 +339,13 @@ export default function Navbar() {
                           fontSize: '0.82rem',
                           fontWeight: 700,
                           color: 'var(--marino)',
-                          cursor: 'pointer'
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
                         }}
                       >
-                        🔍 {term}
+                        <IconSearch size={13} color="var(--rey)" /> {term}
                       </button>
                     ))}
                   </div>

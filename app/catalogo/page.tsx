@@ -16,7 +16,8 @@ import {
   IconRopaTrabajo,
   IconAlturas,
   IconVial,
-  IconSearch
+  IconSearch,
+  IconCatalog
 } from '@/components/Icons';
 
 const CATEGORIAS_FILTRO = [
@@ -376,7 +377,7 @@ export default function CatalogoPage() {
                 }}
                 title="Descargar Catálogo Completo HUPAC en formato PDF"
               >
-                <span>📄</span> Catálogo PDF
+                <IconCatalog size={18} color="var(--rey)" /> Catálogo PDF
               </a>
 
               <div style={{

@@ -980,7 +980,7 @@ export default function Configurator() {
 
               {/* Detalles de Configuración */}
               <h4 style={{ color: 'var(--marino)', fontSize: '1.05rem', margin: '0 0 12px', borderBottom: '1px solid #e2e8f0', paddingBottom: '6px' }}>
-                👔 Especificaciones del Pedido
+                Especificaciones del Pedido
               </h4>
 
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.9rem', marginBottom: '20px' }}>
@@ -1035,7 +1035,7 @@ export default function Configurator() {
                     fontSize: '0.9rem'
                   }}
                 >
-                  🖨️ Imprimir Ticket
+                  Imprimir Ticket
                 </button>
                 <button
                   type="button"
@@ -1054,7 +1054,7 @@ export default function Configurator() {
                     fontSize: '0.95rem'
                   }}
                 >
-                  💬 Enviar este Ticket a WhatsApp
+                  Enviar este Ticket a WhatsApp
                 </button>
               </div>
             </div>
