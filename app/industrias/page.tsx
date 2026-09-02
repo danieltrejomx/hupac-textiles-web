@@ -251,7 +251,7 @@ export default function IndustriasPage() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: '#f8fafc', minHeight: '85vh', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', paddingBottom: '80px' }}>
         {/* Header Compacto Centrado */}
         <section style={{
           background: 'var(--marino)',
