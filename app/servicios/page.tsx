@@ -173,16 +173,35 @@ export default function ServiciosPage() {
                   }}
                 >
                   <div>
+                    {/* Badge TÉCNICA Centrado Arriba */}
+                    <div style={{ textAlign: 'center', marginBottom: '14px' }}>
+                      <span style={{
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--mono)',
+                        fontWeight: 800,
+                        color: 'var(--rey)',
+                        backgroundColor: 'var(--cielo)',
+                        padding: '4px 12px',
+                        borderRadius: '8px',
+                        display: 'inline-block'
+                      }}>
+                        TÉCNICA 0{idx + 1}
+                      </span>
+                    </div>
+
+                    {/* Nombre a la izquierda, Ícono a la derecha */}
                     <h3 style={{ 
-                      fontSize: '1.05rem', 
+                      fontSize: '1.02rem', 
                       fontWeight: 850, 
                       color: 'var(--marino)', 
                       margin: '0 0 10px 0', 
                       lineHeight: 1.3,
                       display: 'flex',
                       alignItems: 'center',
+                      justifyContent: 'space-between',
                       gap: '10px'
                     }}>
+                      <span>{srv.titulo}</span>
                       <div style={{
                         width: '36px',
                         height: '36px',
@@ -197,7 +216,6 @@ export default function ServiciosPage() {
                       }}>
                         <IconComponent size={20} color="var(--rey)" />
                       </div>
-                      <span>{srv.titulo}</span>
                     </h3>
 
                     <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
