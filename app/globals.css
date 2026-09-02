@@ -79,11 +79,33 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .hero-first-screen .hero {
   flex: 1;
   display: grid;
-  grid-template-columns: 1.05fr .95fr;
-  gap: clamp(20px, 3vw, 40px);
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: clamp(16px, 2.5vw, 36px);
   align-items: center;
-  padding-top: clamp(10px, 2vh, 32px);
-  padding-bottom: clamp(10px, 2vh, 32px);
+  padding-top: clamp(6px, 1.5vh, 24px);
+  padding-bottom: clamp(6px, 1.5vh, 24px);
+}
+
+.hero-first-screen .badge-mx {
+  margin-bottom: 12px;
+  padding: 5px 13px;
+  font-size: 11.5px;
+}
+
+.hero-first-screen h1 {
+  font-size: clamp(26px, 2.7vw, 40px);
+  line-height: 1.1;
+}
+
+.hero-first-screen .hero p.lead {
+  font-size: 15.5px;
+  margin: 12px 0 22px;
+  max-width: 44ch;
+}
+
+.hero-first-screen .hero-ctas {
+  gap: 12px;
+  margin-bottom: 0;
 }
 
 .hero-first-screen .hero-foto {
@@ -92,15 +114,17 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
   overflow: hidden;
   background: var(--nube);
   box-shadow: var(--sombra);
-  width: 100%;
-  height: clamp(380px, 54vh, 600px);
+  aspect-ratio: 1 / 1;
+  height: clamp(360px, 56vh, 580px);
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .hero-first-screen .hero-slide img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
+  object-position: center;
 }
 
 .hero-first-screen .cifras {
@@ -112,10 +136,10 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .hero-first-screen .cifras-in {
   max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(16px, 2.4vh, 36px) 28px;
+  padding: clamp(14px, 2vh, 30px) 28px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: clamp(12px, 1.8vw, 24px);
+  gap: clamp(10px, 1.5vw, 22px);
 }
 
 /* ---------- HERO ---------- */
