@@ -18,13 +18,13 @@
   --sombra:0 10px 30px rgba(19,42,82,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:96px;overflow-x:clip}
-body{background:var(--fondo);color:var(--texto);font-family:var(--sans);font-weight:360;line-height:1.6;-webkit-font-smoothing:antialiased;width:100%}
+html{scroll-behavior:smooth;scroll-padding-top:80px;overflow-x:clip}
+body{background:var(--fondo);color:var(--texto);font-family:var(--sans);font-weight:360;line-height:1.6;-webkit-font-smoothing:antialiased;width:100%;padding-top:64px}
 img{max-width:100%;display:block}
 a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--rey);outline-offset:3px;border-radius:4px}
 
 /* ---------- NAV ---------- */
-nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--linea);width:100%}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--linea);width:100%;box-shadow:0 4px 20px rgba(19,42,82,.06)}
 .nav-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px 20px;width:100%;box-sizing:border-box}
 .logo{font-weight:850;font-stretch:115%;font-size:18px;letter-spacing:.05em;color:var(--marino);text-decoration:none;display:flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0}
 .logo svg{width:28px;height:28px;flex-shrink:0}

@@ -82,7 +82,17 @@ export default function Navbar() {
       <nav>
         <div className="nav-in">
           {/* Logo */}
-          <Link href="/" className="logo" onClick={() => setMenuOpen(false)}>
+          <Link
+            href="/"
+            className="logo"
+            onClick={(e) => {
+              setMenuOpen(false);
+              if (pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+          >
             <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 0C8.954 0 0 8.954 0 20s8.954 20 20 20 20-8.954 20-20S31.046 0 20 0zm0 36c-8.837 0-16-7.163-16-16S11.163 4 20 4s16 7.163 16 16-7.163 16-16 16z" fill="#132A52"/>
               <path d="M12 12h4v6h8v-6h4v16h-4v-6h-8v6h-4V12z" fill="#2456C4"/>
@@ -93,7 +103,17 @@ export default function Navbar() {
           {/* Desktop nav links */}
           <div className="nav-links">
             {NAV_LINKS.map(l => (
-              <Link key={l.id} href={l.href} className={`nav-btn ${isLinkActive(l) ? 'act' : ''}`}>
+              <Link
+                key={l.id}
+                href={l.href}
+                className={`nav-btn ${isLinkActive(l) ? 'act' : ''}`}
+                onClick={(e) => {
+                  if (l.id === 'inicio' && pathname === '/') {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }
+                }}
+              >
                 {l.label}
               </Link>
             ))}
