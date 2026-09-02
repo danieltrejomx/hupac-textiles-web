@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { getProductById, getProductPrice } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import { IconCart } from '@/components/Icons';
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const id = params?.id;
@@ -386,7 +387,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                     transition: 'transform 0.15s ease'
                   }}
                 >
-                  ⚡ Comprar Ahora (${totalPrice.toLocaleString('es-MX')} MXN)
+                  Comprar Ahora (${totalPrice.toLocaleString('es-MX')} MXN)
                 </button>
 
                 <button
@@ -407,7 +408,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                     transition: 'background-color 0.15s ease'
                   }}
                 >
-                  🛒 Agregar al Carrito
+                  <IconCart size={18} color="#ffffff" /> Agregar al Carrito
                 </button>
               </div>
 

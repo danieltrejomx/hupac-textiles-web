@@ -295,7 +295,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
             <div style={{ maxWidth: '720px' }}>
               <span className="eyebrow" style={{ marginBottom: '8px' }}>Catálogo Especializado · EPC & Uniformes</span>
               <TypewriterTitle
-                text={`${meta.emoji} ${meta.titulo}`}
+                text={meta.titulo}
                 as="h1"
                 speed={85}
                 delay={250}
