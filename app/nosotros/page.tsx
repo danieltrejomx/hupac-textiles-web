@@ -9,43 +9,43 @@ export default function NosotrosPage() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: '#f8fafc', minHeight: '85vh', paddingBottom: '80px' }}>
+      <main style={{ backgroundColor: '#f8fafc', minHeight: '85vh', paddingBottom: '40px' }}>
         {/* Hero Header */}
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
-          padding: '52px 28px',
+          padding: 'clamp(28px, 3.5vh, 48px) 28px clamp(44px, 5vh, 60px) 28px',
           textAlign: 'center',
           position: 'relative'
         }}>
           <div style={{ maxWidth: '960px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '14px', fontSize: '0.88rem', color: '#93c5fd', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+            <div style={{ marginBottom: '10px', fontSize: '0.85rem', color: '#93c5fd', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
               <Link href="/" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 600 }}>Inicio</Link>
               <span>/</span>
               <span style={{ color: '#ffffff', fontWeight: 700 }}>Nosotros</span>
             </div>
 
-            <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '6px 14px', borderRadius: '20px', display: 'inline-block', marginBottom: '14px' }}>
+            <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '4px 12px', borderRadius: '20px', display: 'inline-block', marginBottom: '10px', fontSize: '0.8rem' }}>
               Nuestra Historia & Compromiso
             </span>
             <TypewriterTitle
               text="Más de 21 años transformando fibras en identidad"
               as="h1"
-              style={{ fontSize: '2.3rem', fontWeight: 850, margin: '0 0 14px 0', lineHeight: 1.2, color: '#ffffff' }}
+              style={{ fontSize: 'clamp(1.7rem, 2.2vw, 2.3rem)', fontWeight: 850, margin: '0 0 10px 0', lineHeight: 1.2, color: '#ffffff' }}
             />
-            <p style={{ fontSize: '1.05rem', color: '#cbd5e1', maxWidth: '740px', margin: '0 auto', lineHeight: 1.55 }}>
+            <p style={{ fontSize: '0.98rem', color: '#cbd5e1', maxWidth: '740px', margin: '0 auto', lineHeight: 1.45 }}>
               Somos <strong>HUPAC TEXTILES</strong>, empresa 100% mexicana con inicio de operaciones en 2005. Confeccionamos uniformes empresariales e industriales de alto rendimiento.
             </p>
           </div>
         </section>
 
-        <div style={{ maxWidth: '1200px', margin: '-36px auto 0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1200px', margin: '-32px auto 0 auto', padding: '0 24px' }}>
           {/* Tarjetas Principales: Misión, Visión, Valores */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '24px',
-            marginBottom: '48px'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '20px',
+            marginBottom: '32px'
           }}>
             {[
               { 
@@ -78,9 +78,9 @@ export default function NosotrosPage() {
                   style={{
                     backgroundColor: '#ffffff',
                     border: '1px solid var(--linea)',
-                    borderRadius: '20px',
-                    padding: '32px',
-                    boxShadow: '0 10px 30px rgba(19, 42, 82, 0.06)',
+                    borderRadius: '18px',
+                    padding: '24px 26px',
+                    boxShadow: '0 8px 24px rgba(19, 42, 82, 0.05)',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between'
@@ -92,23 +92,23 @@ export default function NosotrosPage() {
                       alignItems: 'center',
                       gap: '6px',
                       fontFamily: 'var(--mono)',
-                      fontSize: '10px',
+                      fontSize: '9.5px',
                       fontWeight: 750,
-                      letterSpacing: '1.2px',
+                      letterSpacing: '1px',
                       color: pillar.color,
                       backgroundColor: 'rgba(36,86,196,0.06)',
                       border: `1px solid ${pillar.color}33`,
-                      padding: '4px 12px',
-                      borderRadius: '8px',
-                      marginBottom: '16px',
+                      padding: '3px 10px',
+                      borderRadius: '6px',
+                      marginBottom: '12px',
                       textTransform: 'uppercase'
                     }}>
-                      <IconComp size={13} color={pillar.color} /> {pillar.tag}
+                      <IconComp size={12} color={pillar.color} /> {pillar.tag}
                     </span>
-                    <h2 style={{ fontSize: '1.75rem', fontWeight: 850, color: 'var(--marino)', marginBottom: '12px' }}>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 850, color: 'var(--marino)', marginBottom: '8px' }}>
                       {pillar.titulo}
                     </h2>
-                    <p style={{ fontSize: '0.96rem', color: 'var(--texto-2)', lineHeight: 1.6, margin: 0 }}>
+                    <p style={{ fontSize: '0.9rem', color: 'var(--texto-2)', lineHeight: 1.5, margin: 0 }}>
                       {pillar.desc}
                     </p>
                   </div>
@@ -121,10 +121,10 @@ export default function NosotrosPage() {
           <div style={{
             backgroundColor: '#ffffff',
             border: '1px solid var(--linea)',
-            borderRadius: '24px',
-            padding: '48px',
+            borderRadius: '20px',
+            padding: '36px 40px',
             boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
-            marginBottom: '48px'
+            marginBottom: '36px'
           }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'center' }}>
               <div>
