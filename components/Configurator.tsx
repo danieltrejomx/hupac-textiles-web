@@ -443,12 +443,266 @@ export default function Configurator() {
               </button>
             </div>
           </div>
+        </div>
+
+        {/* ================= PANEL DERECHO: VISOR FOTORREALISTA Y ACCIONES DE PERSONALIZACIÓN ================= */}
+        <div className="visor rv" aria-label="Vista previa fotorrealista de la prenda configurada" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
-          {/* 6. Subir Logotipo */}
-          <div className="grupo rv">
+          {/* TARJETA DEL VISOR MOCKUP FOTORREALISTA */}
+          <div style={{ backgroundColor: '#ffffff', border: '1px solid var(--linea)', borderRadius: '20px', padding: '20px', boxShadow: 'var(--sombra)' }}>
+            {/* Barra superior del visor */}
+            <div className="visor-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--marino)', fontWeight: 800 }}>
+                  {prendaActual.nombre}
+                </span>
+                <span style={{
+                  fontSize: '0.75rem',
+                  backgroundColor: 'var(--cielo)',
+                  color: 'var(--marino)',
+                  padding: '2px 8px',
+                  borderRadius: '10px',
+                  fontWeight: 600
+                }}>
+                  {vista === 'frente' ? 'Frente' : 'Espalda'}
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{
+                  width: '12px',
+                  height: '12px',
+                  borderRadius: '50%',
+                  backgroundColor: colorOption.c,
+                  border: colorOption.c === '#FFFFFF' ? '1px solid #cbd5e1' : 'none',
+                  display: 'inline-block'
+                }} />
+                <span style={{ fontWeight: 700, color: 'var(--marino)', fontSize: '0.85rem' }}>
+                  {colorOption.n}
+                </span>
+              </div>
+            </div>
+
+            {/* Selector Rápido de Frente / Espalda dentro del Visor */}
+            <div style={{
+              display: 'flex',
+              backgroundColor: '#f1f5f9',
+              padding: '4px',
+              borderRadius: '12px',
+              marginBottom: '16px',
+              gap: '4px'
+            }}>
+              <button
+                type="button"
+                onClick={() => setVista('frente')}
+                style={{
+                  flex: 1,
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: vista === 'frente' ? '#ffffff' : 'transparent',
+                  color: vista === 'frente' ? 'var(--rey)' : 'var(--texto-2)',
+                  fontWeight: 700,
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  boxShadow: vista === 'frente' ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                👕 Vista Frente
+              </button>
+              <button
+                type="button"
+                onClick={() => setVista('espalda')}
+                style={{
+                  flex: 1,
+                  padding: '8px 12px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  backgroundColor: vista === 'espalda' ? '#ffffff' : 'transparent',
+                  color: vista === 'espalda' ? 'var(--rey)' : 'var(--texto-2)',
+                  fontWeight: 700,
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  boxShadow: vista === 'espalda' ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                🔄 Vista Espalda
+              </button>
+            </div>
+
+            {/* Contenedor del Mockup Fotorrealista */}
+            <div style={{
+              position: 'relative',
+              width: '100%',
+              aspectRatio: '1/1',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: 'inset 0 2px 6px rgba(0,0,0,0.02)'
+            }}>
+              
+              {/* Canvas con la prenda coloreada con pliegues fotorrealistas */}
+              <canvas 
+                ref={canvasRef} 
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block'
+                }}
+              />
+
+              {/* Capa Interactiva del Logotipo / Placeholder */}
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                pointerEvents: 'none',
+              }}>
+                <div 
+                  style={{
+                    position: 'absolute',
+                    left: `${activePositionObj.x}%`,
+                    top: `${activePositionObj.y}%`,
+                    transform: 'translate(-50%, -50%)',
+                    width: `${(size / 100) * activePositionObj.maxW}px`,
+                    maxWidth: '85%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    transition: 'all 0.15s ease-out',
+                    zIndex: 20
+                  }}
+                >
+                  {!logo ? (
+                    /* Placeholder visual cuando aún no hay logo subido */
+                    <div style={{
+                      border: '2px dashed var(--rey)',
+                      backgroundColor: 'rgba(255, 255, 255, 0.85)',
+                      backdropFilter: 'blur(2px)',
+                      padding: '8px 12px',
+                      borderRadius: '8px',
+                      textAlign: 'center',
+                      boxShadow: '0 4px 12px rgba(36, 86, 196, 0.15)',
+                      pointerEvents: 'auto',
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => document.getElementById('fileLogo')?.click()}
+                    >
+                      <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--marino)', display: 'block', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                        TU LOGO AQUÍ
+                      </span>
+                      <span style={{ fontSize: '0.62rem', color: 'var(--texto-2)', display: 'block', whiteSpace: 'nowrap' }}>
+                        {activePositionName}
+                      </span>
+                    </div>
+                  ) : (
+                    /* Logotipo aplicado con textura de Bordado o Estampado */
+                    <img
+                      src={logo}
+                      alt="Logotipo del cliente en uniforme"
+                      style={{
+                        maxWidth: '100%',
+                        maxHeight: '140px',
+                        objectFit: 'contain',
+                        filter: tec === 'Bordado'
+                          ? 'drop-shadow(0 2px 2px rgba(0,0,0,0.4)) drop-shadow(0 -0.5px 0.5px rgba(255,255,255,0.5)) contrast(1.1)'
+                          : 'drop-shadow(0 1px 1px rgba(0,0,0,0.2))',
+                        transition: 'all 0.2s ease'
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+
+              {/* Badge de Técnica y Acabado */}
+              <div style={{
+                position: 'absolute',
+                bottom: '12px',
+                left: '12px',
+                backgroundColor: 'rgba(255,255,255,0.92)',
+                backdropFilter: 'blur(6px)',
+                padding: '4px 10px',
+                borderRadius: '8px',
+                border: '1px solid #cbd5e1',
+                fontSize: '0.75rem',
+                fontWeight: 700,
+                color: 'var(--marino)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}>
+                <span>{tec === 'Bordado' ? '🧵' : '🎨'}</span>
+                <span>Acabado: {tec}</span>
+              </div>
+
+              {/* Botón flotante para voltear vista rápido */}
+              <button
+                type="button"
+                onClick={() => setVista(vista === 'frente' ? 'espalda' : 'frente')}
+                style={{
+                  position: 'absolute',
+                  top: '12px',
+                  right: '12px',
+                  backgroundColor: 'rgba(255,255,255,0.95)',
+                  backdropFilter: 'blur(6px)',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '20px',
+                  padding: '6px 12px',
+                  fontSize: '0.78rem',
+                  fontWeight: 700,
+                  color: 'var(--rey)',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}
+                title="Voltear prenda"
+              >
+                🔄 Ver {vista === 'frente' ? 'Espalda' : 'Frente'}
+              </button>
+            </div>
+
+            {/* Acciones del visor: Descargar diseño */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px' }}>
+              <p className="nota" style={{ margin: 0, fontSize: '0.78rem' }}>
+                * Vista fotográfica con proporciones para confección y bordado.
+              </p>
+              <button
+                type="button"
+                onClick={handleDownloadMockup}
+                style={{
+                  backgroundColor: '#ffffff',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '8px',
+                  padding: '6px 12px',
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  color: 'var(--marino)',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  transition: 'all 0.15s ease'
+                }}
+                title="Descargar imagen del diseño"
+              >
+                <span>📥</span> Descargar Vista
+              </button>
+            </div>
+          </div>
+
+          {/* ================= 6. CARGA DE LOGOTIPO (ADAPTADO ABAJO DEL VISOR) ================= */}
+          <div className="grupo" style={{ margin: 0 }}>
             <label className="tit">6 · Logotipo del Cliente</label>
             <label 
-              className="upload-dropzone" 
               htmlFor="fileLogo"
               style={{
                 display: 'flex',
@@ -456,7 +710,7 @@ export default function Configurator() {
                 alignItems: 'center',
                 justifyContent: 'center',
                 padding: '24px 20px',
-                backgroundColor: logo ? '#f0fdf4' : '#f8fafc',
+                backgroundColor: logo ? 'rgba(34, 197, 94, 0.05)' : '#eff6ff',
                 border: logo ? '2px solid #22c55e' : '2px dashed #93c5fd',
                 borderRadius: '16px',
                 cursor: 'pointer',
@@ -487,7 +741,7 @@ export default function Configurator() {
 
               <span style={{ fontSize: '0.82rem', color: 'var(--texto-2)', display: 'block', maxWidth: '360px', lineHeight: 1.4 }}>
                 {logo 
-                  ? 'El logo se muestra en la prenda. Puedes cambiar de posición o tamaño arriba.' 
+                  ? 'El logo se muestra en la prenda. Puedes cambiar de posición o tamaño a la izquierda.' 
                   : 'Recomendado archivo PNG con fondo transparente, SVG o JPG.'
                 }
               </span>
@@ -534,8 +788,8 @@ export default function Configurator() {
             </label>
           </div>
           
-          {/* Resumen de Configuración - Formato Ticket Digital */}
-          <div className="resumen rv" style={{ 
+          {/* ================= TICKET DE COTIZACIÓN DIGITAL (ABAJO DEL VISOR) ================= */}
+          <div className="resumen" style={{ 
             backgroundColor: '#ffffff', 
             border: '2px dashed #cbd5e1', 
             borderRadius: '16px',
@@ -603,9 +857,9 @@ export default function Configurator() {
             </div>
           </div>
           
-          {/* Botón WhatsApp */}
+          {/* ================= BOTÓN ENVIAR TICKET POR WHATSAPP ================= */}
           <button 
-            className="btn rv" 
+            className="btn" 
             onClick={async () => {
               try {
                 await addDoc(collection(db, 'orders'), {
@@ -626,278 +880,23 @@ export default function Configurator() {
               window.open(`https://wa.me/525516257933?text=${msg}`, '_blank');
             }}
             style={{ 
-              alignSelf: 'flex-start', 
+              width: '100%',
               border: 'none', 
               cursor: 'pointer', 
               fontFamily: 'var(--fuente-cuerpo)',
               padding: '16px 28px',
               fontSize: '1rem',
+              fontWeight: 800,
               display: 'flex',
               alignItems: 'center',
-              gap: '10px'
+              justifyContent: 'center',
+              gap: '10px',
+              borderRadius: '14px',
+              boxShadow: '0 8px 20px rgba(36, 86, 196, 0.25)'
             }}
           >
             <span>💬</span> Enviar Ticket por WhatsApp
           </button>
-        </div>
-
-        {/* ================= PANEL DERECHO: VISOR FOTORREALISTA ================= */}
-        <div className="visor rv" aria-label="Vista previa fotorrealista de la prenda configurada" style={{ padding: '24px', position: 'sticky', top: '80px', alignSelf: 'flex-start' }}>
-          
-          {/* Barra superior del visor */}
-          <div className="visor-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '0.85rem', color: 'var(--marino)', fontWeight: 800 }}>
-                {prendaActual.nombre}
-              </span>
-              <span style={{
-                fontSize: '0.75rem',
-                backgroundColor: 'var(--cielo)',
-                color: 'var(--marino)',
-                padding: '2px 8px',
-                borderRadius: '10px',
-                fontWeight: 600
-              }}>
-                {vista === 'frente' ? 'Frente' : 'Espalda'}
-              </span>
-            </div>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                backgroundColor: colorOption.c,
-                border: colorOption.c === '#FFFFFF' ? '1px solid #cbd5e1' : 'none',
-                display: 'inline-block'
-              }} />
-              <span style={{ fontWeight: 700, color: 'var(--marino)', fontSize: '0.85rem' }}>
-                {colorOption.n}
-              </span>
-            </div>
-          </div>
-
-          {/* Selector Rápido de Frente / Espalda dentro del Visor */}
-          <div style={{
-            display: 'flex',
-            backgroundColor: '#f1f5f9',
-            padding: '4px',
-            borderRadius: '12px',
-            marginBottom: '16px',
-            gap: '4px'
-          }}>
-            <button
-              type="button"
-              onClick={() => setVista('frente')}
-              style={{
-                flex: 1,
-                padding: '8px 12px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: vista === 'frente' ? '#ffffff' : 'transparent',
-                color: vista === 'frente' ? 'var(--rey)' : 'var(--texto-2)',
-                fontWeight: 700,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                boxShadow: vista === 'frente' ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
-                transition: 'all 0.15s ease'
-              }}
-            >
-              👕 Vista Frente
-            </button>
-            <button
-              type="button"
-              onClick={() => setVista('espalda')}
-              style={{
-                flex: 1,
-                padding: '8px 12px',
-                borderRadius: '8px',
-                border: 'none',
-                backgroundColor: vista === 'espalda' ? '#ffffff' : 'transparent',
-                color: vista === 'espalda' ? 'var(--rey)' : 'var(--texto-2)',
-                fontWeight: 700,
-                fontSize: '0.85rem',
-                cursor: 'pointer',
-                boxShadow: vista === 'espalda' ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
-                transition: 'all 0.15s ease'
-              }}
-            >
-              🔄 Vista Espalda
-            </button>
-          </div>
-
-          {/* Contenedor del Mockup Fotorrealista */}
-          <div style={{
-            position: 'relative',
-            width: '100%',
-            aspectRatio: '1/1',
-            borderRadius: '16px',
-            overflow: 'hidden',
-            backgroundColor: '#f8fafc',
-            border: '1px solid #e2e8f0',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: 'inset 0 2px 6px rgba(0,0,0,0.02)'
-          }}>
-            
-            {/* Canvas con la prenda coloreada con pliegues fotorrealistas */}
-            <canvas 
-              ref={canvasRef} 
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                display: 'block'
-              }}
-            />
-
-            {/* Capa Interactiva del Logotipo / Placeholder */}
-            <div style={{
-              position: 'absolute',
-              inset: 0,
-              pointerEvents: 'none',
-            }}>
-              <div 
-                style={{
-                  position: 'absolute',
-                  left: `${activePositionObj.x}%`,
-                  top: `${activePositionObj.y}%`,
-                  transform: 'translate(-50%, -50%)',
-                  width: `${(size / 100) * activePositionObj.maxW}px`,
-                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                {!logo ? (
-                  /* Placeholder cuando no hay logo */
-                  <div style={{
-                    width: '100%',
-                    padding: '10px 8px',
-                    borderRadius: '8px',
-                    border: colorOption.c === '#FFFFFF' ? '2px dashed var(--rey)' : '2px dashed #ffffff',
-                    backgroundColor: colorOption.c === '#FFFFFF' ? 'rgba(36,86,196,0.08)' : 'rgba(255,255,255,0.2)',
-                    backdropFilter: 'blur(2px)',
-                    textAlign: 'center',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-                  }}>
-                    <span style={{
-                      display: 'block',
-                      fontFamily: 'var(--fuente-mono)',
-                      fontSize: '10px',
-                      fontWeight: 800,
-                      color: colorOption.c === '#FFFFFF' ? 'var(--rey)' : '#ffffff',
-                      letterSpacing: '0.5px'
-                    }}>
-                      TU LOGO AQUÍ
-                    </span>
-                    <span style={{
-                      display: 'block',
-                      fontSize: '8.5px',
-                      color: colorOption.c === '#FFFFFF' ? 'var(--marino)' : '#f8fafc',
-                      fontWeight: 600,
-                      marginTop: '2px'
-                    }}>
-                      {activePositionObj.label}
-                    </span>
-                  </div>
-                ) : (
-                  /* Logotipo aplicado con textura de Bordado o Estampado */
-                  <img
-                    src={logo}
-                    alt="Logotipo del cliente en uniforme"
-                    style={{
-                      maxWidth: '100%',
-                      maxHeight: '140px',
-                      objectFit: 'contain',
-                      filter: tec === 'Bordado'
-                        ? 'drop-shadow(0 2px 2px rgba(0,0,0,0.4)) drop-shadow(0 -0.5px 0.5px rgba(255,255,255,0.5)) contrast(1.1)'
-                        : 'drop-shadow(0 1px 1px rgba(0,0,0,0.2))',
-                      transition: 'all 0.2s ease'
-                    }}
-                  />
-                )}
-              </div>
-            </div>
-
-            {/* Badge de Técnica y Acabado */}
-            <div style={{
-              position: 'absolute',
-              bottom: '12px',
-              left: '12px',
-              backgroundColor: 'rgba(255,255,255,0.92)',
-              backdropFilter: 'blur(6px)',
-              padding: '4px 10px',
-              borderRadius: '8px',
-              border: '1px solid #cbd5e1',
-              fontSize: '0.75rem',
-              fontWeight: 700,
-              color: 'var(--marino)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}>
-              <span>{tec === 'Bordado' ? '🧵' : '🎨'}</span>
-              <span>Acabado: {tec}</span>
-            </div>
-
-            {/* Botón flotante para voltear vista rápido */}
-            <button
-              type="button"
-              onClick={() => setVista(vista === 'frente' ? 'espalda' : 'frente')}
-              style={{
-                position: 'absolute',
-                top: '12px',
-                right: '12px',
-                backgroundColor: 'rgba(255,255,255,0.95)',
-                backdropFilter: 'blur(6px)',
-                border: '1px solid #cbd5e1',
-                borderRadius: '20px',
-                padding: '6px 12px',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                color: 'var(--rey)',
-                cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-              title="Voltear prenda"
-            >
-              🔄 Ver {vista === 'frente' ? 'Espalda' : 'Frente'}
-            </button>
-          </div>
-
-          {/* Acciones del visor: Descargar diseño */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px' }}>
-            <p className="nota" style={{ margin: 0, fontSize: '0.78rem' }}>
-              * Vista fotográfica con proporciones para confección y bordado.
-            </p>
-            <button
-              type="button"
-              onClick={handleDownloadMockup}
-              style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid #cbd5e1',
-                borderRadius: '8px',
-                padding: '6px 12px',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                color: 'var(--marino)',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                transition: 'all 0.15s ease'
-              }}
-              title="Descargar imagen del diseño"
-            >
-              <span>📥</span> Descargar Vista
-            </button>
-          </div>
         </div>
 
         {/* ================= MODAL FORMATO TICKET DE COTIZACIÓN ================= */}
