@@ -287,11 +287,15 @@ export default function Configurator() {
         
         {/* ================= PANEL IZQUIERDO: CONTROLES ================= */}
         <div className="panel">
-          <div className="rv">
-            <span className="eyebrow">Configurador de Uniformes HUPAC</span>
-            <h2>Visualiza tu logotipo sobre prendas reales en alta definición.</h2>
-            <p style={{ color: 'var(--texto-2)', fontSize: '1.02rem', lineHeight: 1.6 }}>
-              Selecciona el modelo, el color institucional y la vista (Frente o Espalda). Sube tu logotipo para ver cómo lucirá con técnica de bordado en relieve o estampado textil.
+          <div className="rv" style={{ marginBottom: '16px' }}>
+            <span className="eyebrow" style={{ color: 'var(--rey)', display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: 'rgba(36,86,196,0.06)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 800 }}>
+              🎨 Personaliza tu Uniforme con tu Logo
+            </span>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 850, color: 'var(--marino)', margin: '8px 0 6px 0', lineHeight: 1.25 }}>
+              Prueba cómo luce tu logotipo sobre prendas reales en alta definición.
+            </h2>
+            <p style={{ color: 'var(--texto-2)', fontSize: '0.92rem', lineHeight: 1.45, margin: 0 }}>
+              Elige el modelo, color institucional y sube tu logotipo para generar tu cotización y mockup digital.
             </p>
           </div>
           
@@ -638,7 +642,7 @@ export default function Configurator() {
         </div>
 
         {/* ================= PANEL DERECHO: VISOR FOTORREALISTA ================= */}
-        <div className="visor rv" aria-label="Vista previa fotorrealista de la prenda configurada" style={{ padding: '24px' }}>
+        <div className="visor rv" aria-label="Vista previa fotorrealista de la prenda configurada" style={{ padding: '24px', position: 'sticky', top: '80px', alignSelf: 'flex-start' }}>
           
           {/* Barra superior del visor */}
           <div className="visor-head" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
