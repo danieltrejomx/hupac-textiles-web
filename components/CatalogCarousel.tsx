@@ -11,7 +11,9 @@ import {
   IconRopaTrabajo, 
   IconAlturas, 
   IconVial, 
-  IconSearch 
+  IconSearch,
+  IconShield,
+  IconCatalog
 } from '@/components/Icons';
 
 function CarouselScrollBar({ containerRef, stepAmount = 320 }: { containerRef: React.RefObject<HTMLDivElement>; stepAmount?: number }) {
@@ -838,84 +840,166 @@ export default function CatalogCarousel() {
           <CarouselScrollBar containerRef={footwearScrollRef} stepAmount={320} />
         </div>
 
-        {/* ================= SECCIÓN EPC: GRID DE CATEGORÍAS ================= */}
-        <div style={{ marginTop: '72px' }}>
-          <div style={{ marginBottom: '28px' }}>
-            <span className="eyebrow" style={{ color: '#b45309' }}>Equipo de Protección y Trabajo</span>
-            <h2 style={{ marginBottom: '6px', fontSize: '1.8rem' }}>🛡️ Catálogo EPC Completo</h2>
-            <p style={{ color: 'var(--texto-2)', margin: 0, fontSize: '0.95rem' }}>
-              Equipo de protección colectiva e individual certificado: cascos, lentes, guantes, ropa industrial, arneses y señalización vial.
-            </p>
-          </div>
-
+        {/* ================= SECCIÓN EPC: TARJETA INSTITUCIONAL (Estilo Refacciones/EPC) ================= */}
+        <div style={{ marginTop: '64px' }}>
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
-            gap: '16px'
+            backgroundColor: 'var(--marino)',
+            borderRadius: '24px',
+            padding: '48px 36px',
+            border: '1px solid rgba(255, 255, 255, 0.12)',
+            boxShadow: '0 20px 50px rgba(19, 42, 82, 0.25)',
+            textAlign: 'center',
+            color: '#ffffff'
           }}>
-            {[
-              { slug: 'cabeza', icon: IconCabeza, titulo: 'Protección para la Cabeza', desc: 'Cascos, protectores faciales, orejeras, tapones, cofias', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
-              { slug: 'visual', icon: IconVisual, titulo: 'Protección Visual', desc: 'Lentes de seguridad, goggles, sobre lentes', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
-              { slug: 'manos', icon: IconManos, titulo: 'Protección para Manos', desc: 'Guantes nitrilo, carnaza, anticorte, soldador', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
-              { slug: 'ropa-trabajo', icon: IconRopaTrabajo, titulo: 'Ropa de Trabajo', desc: 'Chalecos, overoles, mezclilla, mandiles, impermeables', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
-              { slug: 'alturas', icon: IconAlturas, titulo: 'Protección a las Alturas', desc: 'Arneses, líneas de vida, puntos de anclaje', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
-              { slug: 'vial', icon: IconVial, titulo: 'Limitación Vial', desc: 'Conos, trafitambos, mallas, cintas, postes', count: PRODUCTS.filter(p => p.categoria === 'vial').length }
-            ].map(cat => {
-              const IconComp = cat.icon;
-              return (
-                <Link
-                  key={cat.slug}
-                  href={`/categoria/${cat.slug}`}
-                  style={{ textDecoration: 'none', color: 'inherit' }}
-                >
-                  <div
+            {/* Ícono Superior Centrado */}
+            <div style={{
+              width: '64px',
+              height: '64px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(36, 86, 196, 0.25)',
+              border: '1.5px solid var(--rey)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 20px auto',
+              boxShadow: '0 0 20px rgba(36, 86, 196, 0.3)'
+            }}>
+              <IconShield size={30} color="#38bdf8" />
+            </div>
+
+            {/* Título y Descripción Centrados */}
+            <h2 style={{
+              color: '#ffffff',
+              fontSize: '1.8rem',
+              fontWeight: 850,
+              letterSpacing: '0.5px',
+              margin: '0 0 12px 0',
+              textTransform: 'uppercase'
+            }}>
+              Catálogo EPC y Equipo de Protección
+            </h2>
+            <p style={{
+              color: '#cbd5e1',
+              fontSize: '0.96rem',
+              maxWidth: '720px',
+              margin: '0 auto 36px auto',
+              lineHeight: 1.6
+            }}>
+              Contamos con disponibilidad permanente y certificación en nuestro almacén de equipo de protección personal (EPP), cascos, lentes, guantes, uniformes industriales, arneses y señalización vial.
+            </p>
+
+            {/* Grid de 6 Categorías EPC en Pills Elegantes */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '14px',
+              maxWidth: '960px',
+              margin: '0 auto 36px auto'
+            }}>
+              {[
+                { slug: 'cabeza', icon: IconCabeza, titulo: 'Protección para la Cabeza', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
+                { slug: 'visual', icon: IconVisual, titulo: 'Protección Visual', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
+                { slug: 'manos', icon: IconManos, titulo: 'Protección para Manos', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
+                { slug: 'ropa-trabajo', icon: IconRopaTrabajo, titulo: 'Ropa de Trabajo', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
+                { slug: 'alturas', icon: IconAlturas, titulo: 'Protección a las Alturas', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
+                { slug: 'vial', icon: IconVial, titulo: 'Limitación Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length }
+              ].map(cat => {
+                const IconComp = cat.icon;
+                return (
+                  <button
+                    key={cat.slug}
+                    type="button"
+                    onClick={() => {
+                      setSelectedCategory(cat.slug);
+                      window.scrollTo({ top: 350, behavior: 'smooth' });
+                    }}
                     style={{
-                      backgroundColor: '#ffffff',
-                      border: '1px solid var(--linea)',
-                      borderRadius: '16px',
-                      padding: '22px',
+                      backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                      border: '1px solid rgba(255, 255, 255, 0.14)',
+                      borderRadius: '12px',
+                      padding: '14px 18px',
                       display: 'flex',
-                      flexDirection: 'column',
+                      alignItems: 'center',
                       gap: '12px',
-                      transition: 'transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease',
                       cursor: 'pointer',
-                      boxShadow: '0 4px 14px rgba(19, 42, 82, 0.04)'
+                      transition: 'all 0.2s ease',
+                      textAlign: 'left',
+                      color: '#ffffff'
                     }}
                     onMouseEnter={e => {
-                      (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-3px)';
-                      (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--rey)';
-                      (e.currentTarget as HTMLDivElement).style.boxShadow = '0 12px 28px rgba(36, 86, 196, 0.12)';
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)';
+                      e.currentTarget.style.borderColor = '#38bdf8';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
                     }}
                     onMouseLeave={e => {
-                      (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
-                      (e.currentTarget as HTMLDivElement).style.borderColor = 'var(--linea)';
-                      (e.currentTarget as HTMLDivElement).style.boxShadow = '0 4px 14px rgba(19, 42, 82, 0.04)';
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.06)';
+                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.14)';
+                      e.currentTarget.style.transform = 'translateY(0)';
                     }}
                   >
                     <div style={{
-                      width: '40px',
-                      height: '40px',
-                      borderRadius: '10px',
-                      backgroundColor: 'var(--cielo)',
-                      border: '1px solid var(--cielo-2)',
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      backgroundColor: 'rgba(56, 189, 248, 0.15)',
+                      border: '1px solid rgba(56, 189, 248, 0.3)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      color: 'var(--rey)'
+                      flexShrink: 0
                     }}>
-                      <IconComp size={22} color="var(--rey)" />
+                      <IconComp size={16} color="#38bdf8" />
                     </div>
-                    <div>
-                      <div style={{ fontWeight: 800, fontSize: '1rem', color: 'var(--marino)', marginBottom: '4px' }}>{cat.titulo}</div>
-                      <div style={{ fontSize: '0.82rem', color: 'var(--texto-2)', lineHeight: 1.4 }}>{cat.desc}</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: '0.9rem', fontWeight: 750, color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {cat.titulo}
+                      </div>
+                      <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 600 }}>
+                        {cat.count} productos disponibles
+                      </div>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
-                      <span style={{ fontSize: '0.78rem', fontWeight: 800, color: 'var(--rey)' }}>Ver {cat.count} productos →</span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Botón Principal Inferior estilo PDF/Catálogo */}
+            <div>
+              <a
+                href="/catalogo-hupac.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Catalogo_HUPAC_Textiles.pdf"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  backgroundColor: '#2456C4',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '999px',
+                  padding: '16px 36px',
+                  fontSize: '0.98rem',
+                  fontWeight: 850,
+                  letterSpacing: '0.5px',
+                  textDecoration: 'none',
+                  boxShadow: '0 8px 24px rgba(36, 86, 196, 0.4)',
+                  transition: 'all 0.2s ease',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = '#1d4ed8';
+                  e.currentTarget.style.transform = 'scale(1.02)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = '#2456C4';
+                  e.currentTarget.style.transform = 'scale(1)';
+                }}
+              >
+                <IconCatalog size={20} color="#ffffff" />
+                DESCARGAR CATÁLOGO EN PDF
+              </a>
+            </div>
           </div>
         </div>
         </>
