@@ -8,7 +8,6 @@ import { IconSearch, IconCart } from '@/components/Icons';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const [activeSection, setActiveSection] = useState<string>('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [navQuery, setNavQuery] = useState('');
@@ -20,18 +19,6 @@ export default function Navbar() {
       setTimeout(() => searchInputRef.current?.focus(), 100);
     }
   }, [isSearchOpen]);
-
-  useEffect(() => {
-    if (pathname !== '/') return;
-    const secciones = document.querySelectorAll('section[id],div[id].nosotros,div[id].config-wrap');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) setActiveSection(e.target.id);
-      });
-    }, { rootMargin: '-40% 0px -55% 0px' });
-    secciones.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, [pathname]);
 
   // Close menu on route change / scroll
   useEffect(() => {
@@ -54,14 +41,8 @@ export default function Navbar() {
   ];
 
   const isLinkActive = (l: typeof NAV_LINKS[0]) => {
-    if (l.path === '/catalogo' && pathname === '/catalogo') return true;
-    if (l.path === '/nosotros' && pathname === '/nosotros') return true;
-    if (l.path === '/servicios' && pathname === '/servicios') return true;
-    if (l.path === '/configurador' && pathname === '/configurador') return true;
-    if (l.path === '/industrias' && pathname === '/industrias') return true;
-    if (l.path === '/distribuidores' && pathname === '/distribuidores') return true;
-    if (pathname === '/' && activeSection === l.id) return true;
-    if (pathname === '/' && !activeSection && l.id === 'inicio') return true;
+    if (l.path === '/' && pathname === '/') return true;
+    if (l.path !== '/' && pathname === l.path) return true;
     return false;
   };
 
