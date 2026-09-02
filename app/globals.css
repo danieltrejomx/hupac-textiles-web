@@ -163,7 +163,7 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .hero-first-screen .cifras-in {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 14px 28px;
+  padding: 26px 28px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: clamp(10px, 1.5vw, 22px);
