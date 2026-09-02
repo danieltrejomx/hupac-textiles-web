@@ -8,12 +8,13 @@ export default function ConfiguradorPage() {
     <>
       <Navbar />
       <main style={{ backgroundColor: '#f8fafc', minHeight: '85vh', paddingBottom: '40px' }}>
-        {/* Header Compacto Estilizado */}
+        {/* Header Compacto Centrado */}
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
           padding: '12px 24px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)'
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          textAlign: 'center'
         }}>
           <div style={{ 
             maxWidth: '1320px', 
@@ -21,27 +22,10 @@ export default function ConfiguradorPage() {
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
-            gap: '12px 20px', 
+            gap: '10px 18px', 
             flexWrap: 'wrap',
             textAlign: 'center'
           }}>
-            <span style={{ 
-              color: '#60a5fa', 
-              backgroundColor: 'rgba(96, 165, 250, 0.12)', 
-              border: '1px solid rgba(96, 165, 250, 0.25)',
-              padding: '4px 14px', 
-              borderRadius: '20px', 
-              fontSize: '0.75rem', 
-              fontWeight: 800,
-              letterSpacing: '0.5px',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)'
-            }}>
-              🎨 PERSONALIZADOR EN TIEMPO REAL
-            </span>
-
             <h1 style={{ 
               fontSize: '1.25rem', 
               fontWeight: 850, 
