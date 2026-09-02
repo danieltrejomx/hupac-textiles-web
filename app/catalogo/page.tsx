@@ -20,7 +20,6 @@ import {
 } from '@/components/Icons';
 
 const CATEGORIAS_FILTRO = [
-  { id: 'todos', label: 'Todos los productos', icon: IconTodos },
   { id: 'textiles', label: 'Playeras y Polos', icon: IconPlayeras },
   { id: 'calzado', label: 'Calzado y Accesorios', icon: IconCalzado },
   { id: 'cabeza', label: 'Protección Cabeza', icon: IconCabeza },
@@ -381,7 +380,7 @@ export default function CatalogoPage() {
                 return (
                   <button
                     key={cat.id}
-                    onClick={() => setCategoriaActiva(cat.id)}
+                    onClick={() => setCategoriaActiva(isActive ? 'todos' : cat.id)}
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
