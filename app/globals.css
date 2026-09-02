@@ -220,42 +220,39 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
 }
 /* ---------- LAPTOP ADAPTACIÓN RESPONSIVA ---------- */
 @media (max-width: 1440px) and (min-width: 961px) {
-  .hero { padding-top: 24px; padding-bottom: 24px; gap: 32px; }
-  .hero-foto { height: 520px; background: #ffffff; }
-  .hero p.lead { font-size: 16.5px; margin: 16px 0 24px; }
-  .hero-ctas { margin-bottom: 32px; }
+  .hero { padding-top: 20px; padding-bottom: 20px; gap: 32px; }
+  .hero-foto { height: 480px; background: #ffffff; }
+  .hero p.lead { font-size: 16.5px; margin: 14px 0 22px; }
+  .hero-ctas { margin-bottom: 0; }
 }
 
 @media (max-height: 900px) and (min-width: 961px) {
-  .hero { padding-top: 14px; padding-bottom: 14px; gap: 24px; }
-  .badge-mx { margin-bottom: 10px; padding: 5px 12px; font-size: 11.5px; }
-  h1 { font-size: clamp(28px, 3vw, 42px); line-height: 1.08; }
-  .hero p.lead { font-size: 14.5px; margin: 10px 0 16px; max-width: 48ch; }
-  .hero-ctas { margin-bottom: 18px; gap: 10px; }
-  .stats { max-width: 520px; }
-  .stats div { padding: 10px 12px; }
-  .stats b { font-size: 18px; }
-  .stats span { font-size: 11px; }
-  .hero-foto { height: 490px; background: #ffffff; }
+  .hero { padding-top: 8px; padding-bottom: 8px; gap: 20px; }
+  .badge-mx { margin-bottom: 8px; padding: 4px 10px; font-size: 11px; }
+  h1 { font-size: clamp(26px, 2.8vw, 38px); line-height: 1.08; }
+  .hero p.lead { font-size: 14px; margin: 8px 0 14px; max-width: 48ch; }
+  .hero-ctas { margin-bottom: 0; gap: 10px; }
+  .hero-foto { height: clamp(340px, 42vh, 420px); background: #ffffff; }
   .hero-slide img { object-fit: contain; object-position: center; }
-  .hero-caption { margin-top: 8px; padding: 8px 14px; }
-  .hero-caption b { font-size: 13px; }
-  .hero-caption span { font-size: 11px; }
-  .cifras-in { padding: 20px 28px; }
-  .cifra b { font-size: clamp(20px, 2vw, 26px); }
-  .cifra > span { font-size: 11.5px; }
+  .hero-caption { margin-top: 6px; padding: 6px 12px; }
+  .hero-caption b { font-size: 12.5px; }
+  .hero-caption span { font-size: 10.5px; }
+  .cifras-in { padding: 14px 20px 16px 20px; }
+  .cifra b { font-size: clamp(18px, 1.8vw, 24px); }
+  .cifra > span { font-size: 11px; margin-top: 2px; }
 }
 
 @media (max-height: 780px) and (min-width: 961px) {
-  .hero { padding-top: 8px; padding-bottom: 8px; gap: 16px; }
-  .badge-mx { margin-bottom: 6px; }
-  h1 { font-size: clamp(24px, 2.5vw, 34px); }
-  .hero p.lead { font-size: 13.5px; margin: 6px 0 10px; }
-  .hero-ctas { margin-bottom: 12px; }
-  .stats div { padding: 8px 10px; }
-  .hero-foto { height: 440px; background: #ffffff; }
+  .hero { padding-top: 4px; padding-bottom: 4px; gap: 14px; }
+  .badge-mx { margin-bottom: 4px; }
+  h1 { font-size: clamp(22px, 2.4vw, 32px); }
+  .hero p.lead { font-size: 13px; margin: 4px 0 8px; }
+  .hero-ctas { margin-bottom: 0; }
+  .hero-foto { height: clamp(280px, 38vh, 360px); background: #ffffff; }
   .hero-slide img { object-fit: contain; object-position: center; }
-  .cifras-in { padding: 14px 20px; }
+  .cifras-in { padding: 10px 16px 12px 16px; }
+  .cifra b { font-size: 18px; }
+  .cifra > span { font-size: 10px; margin-top: 1px; }
 }
 
 @media(max-width:960px){
