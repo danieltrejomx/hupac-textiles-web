@@ -40,58 +40,84 @@ export default function NosotrosPage() {
         </section>
 
         <div style={{ maxWidth: '1200px', margin: '-36px auto 0 auto', padding: '0 24px' }}>
-          {/* Tarjetas de Estadísticas Clave Animadas como Etiquetas */}
+          {/* Tarjetas Principales: Misión, Visión, Valores */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '24px',
             marginBottom: '48px'
           }}>
             {[
-              { num: '2005', label: 'Año de fundación', desc: 'Más de dos décadas de experiencia textil', tag: 'TRAYECTORIA', icon: IconAward },
-              { num: '+7M', label: 'Prendas confeccionadas', desc: 'Calidad probada en millones de usuarios', tag: 'PRODUCCIÓN', icon: IconTrending },
-              { num: '+43K', label: 'Clientes atendidos', desc: 'Empresas, distribuidores y gobierno', tag: 'CONFIANZA', icon: IconShield },
-              { num: '100%', label: 'Hecho en México', desc: 'Planta matriz en Cuautitlán Izcalli, Edo. Méx.', tag: 'CALIDAD', icon: IconTag }
-            ].map((stat, i) => {
-              const IconComp = stat.icon;
+              { 
+                tag: 'MISIÓN', 
+                titulo: 'Misión', 
+                desc: 'Confeccionar e innovar en uniformes empresariales e industriales de alto rendimiento, brindando a nuestros clientes prendas funcionales, duraderas y de máxima calidad textil que reflejen la identidad y solidez de su empresa.', 
+                icon: IconAward,
+                color: 'var(--rey)'
+              },
+              { 
+                tag: 'VISIÓN', 
+                titulo: 'Visión', 
+                desc: 'Consolidarnos como el fabricante y proveedor textil líder en México y América Latina, destacando por nuestra integración vertical, innovación tecnológica constante, sustentabilidad y excelencia en el servicio.', 
+                icon: IconTrending,
+                color: '#0284c7'
+              },
+              { 
+                tag: 'VALORES', 
+                titulo: 'Valores', 
+                desc: 'Calidad sin compromiso, integridad, innovación constante, puntualidad en entregas y trabajo en equipo para construir alianzas sólidas y duraderas con nuestros clientes y distribuidores.', 
+                icon: IconShield,
+                color: '#059669'
+              }
+            ].map((pillar, i) => {
+              const IconComp = pillar.icon;
               return (
                 <div
                   key={i}
                   className={`textile-tag-card tag-delay-${i + 1}`}
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '1px solid var(--linea)',
+                    borderRadius: '20px',
+                    padding: '32px',
+                    boxShadow: '0 10px 30px rgba(19, 42, 82, 0.06)',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}
                 >
-                  <span style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '5px',
-                    fontFamily: 'var(--mono)',
-                    fontSize: '9.5px',
-                    fontWeight: 700,
-                    letterSpacing: '1px',
-                    color: 'var(--rey)',
-                    backgroundColor: 'var(--cielo)',
-                    border: '1px solid var(--cielo-2)',
-                    padding: '3px 9px',
-                    borderRadius: '6px',
-                    marginBottom: '10px',
-                    textTransform: 'uppercase'
-                  }}>
-                    <IconComp size={11} color="var(--rey)" /> {stat.tag}
-                  </span>
-                  <div style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--rey)', marginBottom: '4px', fontFamily: 'var(--mono)' }}>
-                    {stat.num}
-                  </div>
-                  <div style={{ fontWeight: 750, color: 'var(--marino)', fontSize: '1.05rem', marginBottom: '6px' }}>
-                    {stat.label}
-                  </div>
-                  <div style={{ fontSize: '0.85rem', color: 'var(--texto-2)', lineHeight: 1.4 }}>
-                    {stat.desc}
+                  <div>
+                    <span style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontFamily: 'var(--mono)',
+                      fontSize: '10px',
+                      fontWeight: 750,
+                      letterSpacing: '1.2px',
+                      color: pillar.color,
+                      backgroundColor: 'rgba(36,86,196,0.06)',
+                      border: `1px solid ${pillar.color}33`,
+                      padding: '4px 12px',
+                      borderRadius: '8px',
+                      marginBottom: '16px',
+                      textTransform: 'uppercase'
+                    }}>
+                      <IconComp size={13} color={pillar.color} /> {pillar.tag}
+                    </span>
+                    <h2 style={{ fontSize: '1.75rem', fontWeight: 850, color: 'var(--marino)', marginBottom: '12px' }}>
+                      {pillar.titulo}
+                    </h2>
+                    <p style={{ fontSize: '0.96rem', color: 'var(--texto-2)', lineHeight: 1.6, margin: 0 }}>
+                      {pillar.desc}
+                    </p>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Grid Principal de Historia y Capacidades */}
+          {/* Sección Destacada: Política de Calidad */}
           <div style={{
             backgroundColor: '#ffffff',
             border: '1px solid var(--linea)',
@@ -102,15 +128,15 @@ export default function NosotrosPage() {
           }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'center' }}>
               <div>
-                <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>¿Quiénes somos?</span>
-                <h2 style={{ fontSize: '2rem', color: 'var(--marino)', margin: '0 0 20px 0', lineHeight: 1.3 }}>
-                  Diseñamos identidad, confeccionamos confianza
+                <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>Compromiso Institucional</span>
+                <h2 style={{ fontSize: '2.1rem', color: 'var(--marino)', margin: '0 0 16px 0', lineHeight: 1.25, fontWeight: 850 }}>
+                  Política de Calidad
                 </h2>
-                <p style={{ fontSize: '1.02rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '16px' }}>
-                  En <strong>HUPAC TEXTILES</strong> transformamos fibras de algodón y mezclas sintéticas de alta resistencia para brindar a nuestros distribuidores y sus clientes prendas funcionales, cómodas y de máxima durabilidad.
+                <p style={{ fontSize: '1.05rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '20px' }}>
+                  En <strong>HUPAC TEXTILES</strong> estamos comprometidos a satisfacer y superar los requerimientos de nuestros clientes mediante la fabricación de uniformes y equipo de protección con los más altos estándares de calidad textil y normativas oficiales.
                 </p>
                 <p style={{ fontSize: '1.02rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '24px' }}>
-                  Fabricamos hilados, tejidos, acabados y prendas completas. Nuestra mayor fortaleza es el <strong>tejido de punto</strong>, satisfaciendo la demanda de cadenas comerciales nacionales y proyectos de exportación.
+                  Impulsamos la <strong>mejora continua</strong> en cada etapa productiva: desde el diseño, selección del hilo, tejido, confección, bordado y estampado, hasta la entrega puntual sin intermediarios.
                 </p>
                 <div style={{
                   padding: '20px 24px',
@@ -122,7 +148,7 @@ export default function NosotrosPage() {
                   fontWeight: 600,
                   fontSize: '1.05rem'
                 }}>
-                  &ldquo;Nuestro negocio es tu imagen corporativa: cada puntada refleja la solidez y profesionalismo de tu equipo.&rdquo;
+                  &ldquo;La excelencia textil no es una coincidencia, es nuestro estándar diario en cada puntada e hilo.&rdquo;
                 </div>
               </div>
 
@@ -137,7 +163,7 @@ export default function NosotrosPage() {
                     🏭 Integración Vertical de Fábrica
                   </h3>
                   <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
-                    Controlamos el ciclo completo desde la selección del hilo hasta el empaque individual, garantizando precios directos y abastecimiento continuo sin intermediarios.
+                    Controlamos el ciclo completo desde la selección del hilo hasta el empaque individual, garantizando precios directos y abastecimiento continuo.
                   </p>
                 </div>
 
