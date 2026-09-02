@@ -69,7 +69,8 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 
 /* ---------- HERO 100VH FIRST SCREEN ---------- */
 .hero-first-screen {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
+  height: calc(100vh - 64px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -82,8 +83,8 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
   grid-template-columns: 0.9fr 1.1fr;
   gap: clamp(16px, 2.5vw, 36px);
   align-items: center;
-  padding-top: clamp(6px, 1.5vh, 24px);
-  padding-bottom: clamp(6px, 1.5vh, 24px);
+  padding-top: clamp(4px, 1vh, 16px);
+  padding-bottom: clamp(4px, 1vh, 16px);
 }
 
 .hero-first-screen .hero-text {
@@ -126,7 +127,7 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
   background: var(--nube);
   box-shadow: var(--sombra);
   aspect-ratio: 1 / 1;
-  height: clamp(360px, 56vh, 580px);
+  height: clamp(260px, 40vh, 450px);
   max-width: 100%;
   margin: 0 auto;
 }
@@ -139,17 +140,17 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 }
 
 .hero-first-screen .hero-caption {
-  margin-top: 12px;
+  margin-top: 8px;
   background: #ffffff;
   border: 1px solid var(--linea);
-  border-radius: 14px;
-  padding: 10px 16px;
+  border-radius: 12px;
+  padding: 8px 14px;
   box-shadow: 0 4px 16px rgba(0,0,0,0.04);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   transition: all .3s ease;
-  width: clamp(360px, 56vh, 580px);
+  width: clamp(260px, 40vh, 450px);
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -163,7 +164,7 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .hero-first-screen .cifras-in {
   max-width: 1280px;
   margin: 0 auto;
-  padding: clamp(14px, 2vh, 30px) 28px;
+  padding: clamp(10px, 1.2vh, 18px) 28px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: clamp(10px, 1.5vw, 22px);
