@@ -610,49 +610,65 @@ export default function CatalogCarousel() {
             gap: '16px'
           }}>
             {[
-              { slug: 'cabeza', titulo: 'Protección para la Cabeza', desc: 'Cascos, protectores faciales, orejeras, tapones, cofias', color: '#fef3c7', accent: '#d97706', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
-              { slug: 'visual', titulo: 'Protección Visual', desc: 'Lentes de seguridad, goggles, sobre lentes', color: '#e0f2fe', accent: '#0284c7', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
-              { slug: 'manos', titulo: 'Protección para Manos', desc: 'Guantes nitrilo, carnaza, anticorte, soldador', color: '#fce7f3', accent: '#db2777', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
-              { slug: 'ropa-trabajo', titulo: 'Ropa de Trabajo', desc: 'Chalecos, overoles, mezclilla, mandiles, impermeables', color: '#dcfce7', accent: '#16a34a', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
-              { slug: 'alturas', titulo: 'Protección a las Alturas', desc: 'Arneses, líneas de vida, puntos de anclaje', color: '#ede9fe', accent: '#7c3aed', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
-              { slug: 'vial', titulo: 'Limitación Vial', desc: 'Conos, trafitambos, mallas, cintas, postes', color: '#fee2e2', accent: '#dc2626', count: PRODUCTS.filter(p => p.categoria === 'vial').length }
-            ].map(cat => (
-              <Link
-                key={cat.slug}
-                href={`/categoria/${cat.slug}`}
-                style={{ textDecoration: 'none', color: 'inherit' }}
-              >
-                <div
-                  style={{
-                    backgroundColor: cat.color,
-                    border: `1.5px solid ${cat.accent}22`,
-                    borderRadius: '16px',
-                    padding: '22px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '10px',
-                    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                    cursor: 'pointer'
-                  }}
-                  onMouseEnter={e => {
-                    (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-3px)';
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 20px ${cat.accent}22`;
-                  }}
-                  onMouseLeave={e => {
-                    (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
-                    (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
-                  }}
+              { slug: 'cabeza', icon: IconCabeza, titulo: 'Protección para la Cabeza', desc: 'Cascos, protectores faciales, orejeras, tapones, cofias', color: '#fef3c7', accent: '#d97706', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
+              { slug: 'visual', icon: IconVisual, titulo: 'Protección Visual', desc: 'Lentes de seguridad, goggles, sobre lentes', color: '#e0f2fe', accent: '#0284c7', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
+              { slug: 'manos', icon: IconManos, titulo: 'Protección para Manos', desc: 'Guantes nitrilo, carnaza, anticorte, soldador', color: '#fce7f3', accent: '#db2777', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
+              { slug: 'ropa-trabajo', icon: IconRopaTrabajo, titulo: 'Ropa de Trabajo', desc: 'Chalecos, overoles, mezclilla, mandiles, impermeables', color: '#dcfce7', accent: '#16a34a', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
+              { slug: 'alturas', icon: IconAlturas, titulo: 'Protección a las Alturas', desc: 'Arneses, líneas de vida, puntos de anclaje', color: '#ede9fe', accent: '#7c3aed', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
+              { slug: 'vial', icon: IconVial, titulo: 'Limitación Vial', desc: 'Conos, trafitambos, mallas, cintas, postes', color: '#fee2e2', accent: '#dc2626', count: PRODUCTS.filter(p => p.categoria === 'vial').length }
+            ].map(cat => {
+              const IconComp = cat.icon;
+              return (
+                <Link
+                  key={cat.slug}
+                  href={`/categoria/${cat.slug}`}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
                 >
-                  <div>
-                    <div style={{ fontWeight: 800, fontSize: '1rem', color: '#0f172a', marginBottom: '4px' }}>{cat.titulo}</div>
-                    <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: 1.4 }}>{cat.desc}</div>
+                  <div
+                    style={{
+                      backgroundColor: cat.color,
+                      border: `1.5px solid ${cat.accent}22`,
+                      borderRadius: '16px',
+                      padding: '22px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '12px',
+                      transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                      cursor: 'pointer'
+                    }}
+                    onMouseEnter={e => {
+                      (e.currentTarget as HTMLDivElement).style.transform = 'translateY(-3px)';
+                      (e.currentTarget as HTMLDivElement).style.boxShadow = `0 8px 20px ${cat.accent}22`;
+                    }}
+                    onMouseLeave={e => {
+                      (e.currentTarget as HTMLDivElement).style.transform = 'translateY(0)';
+                      (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
+                    }}
+                  >
+                    <div style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '10px',
+                      backgroundColor: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: cat.accent,
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.06)'
+                    }}>
+                      <IconComp size={22} color={cat.accent} />
+                    </div>
+                    <div>
+                      <div style={{ fontWeight: 800, fontSize: '1rem', color: '#0f172a', marginBottom: '4px' }}>{cat.titulo}</div>
+                      <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: 1.4 }}>{cat.desc}</div>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
+                      <span style={{ fontSize: '0.78rem', fontWeight: 700, color: cat.accent }}>Ver {cat.count} productos →</span>
+                    </div>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '4px' }}>
-                    <span style={{ fontSize: '0.78rem', fontWeight: 700, color: cat.accent }}>Ver {cat.count} productos →</span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );
+            })}
           </div>
         </div>
 

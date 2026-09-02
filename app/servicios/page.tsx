@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TypewriterTitle from '@/components/TypewriterTitle';
+import { IconBordado, IconSerigrafia, IconDTG, IconSublimacion, IconTransfer } from '@/components/Icons';
 
 export default function ServiciosPage() {
   const [modalServicio, setModalServicio] = useState<any | null>(null);
@@ -12,7 +13,7 @@ export default function ServiciosPage() {
     {
       id: 'bordado',
       titulo: 'Bordado Industrial Computarizado',
-      icono: '🪡',
+      iconComp: IconBordado,
       resumen: 'Hilos de alta resistencia, acabados premium y relieve 3D de máxima durabilidad.',
       destacado: 'Más de 2 millones de piezas bordadas',
       desc: 'Acabado premium de máxima resistencia y relieve tridimensional utilizando hilos de alta tenacidad que resisten lavados industriales continuos sin decolorar.',
@@ -22,16 +23,12 @@ export default function ServiciosPage() {
         'Maquinaria multicabezal automatizada de alta precisión y velocidad.',
         'Digitalización (ponchado) profesional para reproducir logotipos con nitidez milimétrica.'
       ],
-      telas: '100% Algodón, Piqué, Mezclilla, Gabardina, Micropolar',
-      bg: '#fef9c3',
-      border: '#fef08a',
-      color: '#854d0e',
-      link: '#ca8a04'
+      telas: '100% Algodón, Piqué, Mezclilla, Gabardina, Micropolar'
     },
     {
       id: 'serigrafia',
       titulo: 'Serigrafía Textil de Alto Rendimiento',
-      icono: '🎨',
+      iconComp: IconSerigrafia,
       resumen: 'Tintas plastisol y ahuladas ideales para medianos y grandes volúmenes.',
       destacado: 'La técnica más eficiente para medianos y grandes volúmenes',
       desc: 'Impresión con tintas plastisol, ahuladas y base agua que ofrecen colores intensos, gran durabilidad y excelente relación costo-beneficio para eventos masivos o dotaciones de personal.',
@@ -41,16 +38,12 @@ export default function ServiciosPage() {
         'Efectos especiales: tacto cero (discharge), inflables (puff) y reflejantes.',
         'Curado térmico controlado que garantiza fijación permanente al tejido.'
       ],
-      telas: '100% Algodón, Algodón/Poliéster, Jersey',
-      bg: '#e0f2fe',
-      border: '#bae6fd',
-      color: '#0369a1',
-      link: '#0284c7'
+      telas: '100% Algodón, Algodón/Poliéster, Jersey'
     },
     {
       id: 'dtg',
       titulo: 'Impresión Directa a Prenda (DTG)',
-      icono: '🖨️',
+      iconComp: IconDTG,
       resumen: 'Resolución fotográfica sin límite de colores y tacto suave e impalpable.',
       destacado: 'Resolución fotográfica sin límite de colores',
       desc: 'Tecnología digital de inyección de tinta textil que penetra la fibra sin dejar plastas gruesas, permitiendo degradados finos, sombras complejas e ilustraciones hiperrealistas.',
@@ -60,16 +53,12 @@ export default function ServiciosPage() {
         'Sin costos de revelado de marcos ni matrices.',
         'Tinta pigmentada con base agua de secado reactivo.'
       ],
-      telas: '100% Algodón Peinado y Tejidos Lisos',
-      bg: '#fce7f3',
-      border: '#fbcfe8',
-      color: '#be185d',
-      link: '#db2777'
+      telas: '100% Algodón Peinado y Tejidos Lisos'
     },
     {
       id: 'sublimacion',
       titulo: 'Sublimación Textil HD',
-      icono: '🌈',
+      iconComp: IconSublimacion,
       resumen: 'Impresión molecular 100% transpirable que nunca se despinta ni cuartea.',
       destacado: 'Impresión molecular 100% transpirable',
       desc: 'El calor y la presión transforman la tinta en gas penetrando la molécula de poliéster, logrando estampados continuos (full print) que nunca se cuartean ni pierden intensidad.',
@@ -79,16 +68,12 @@ export default function ServiciosPage() {
         'Colores vivos y brillantes que duran toda la vida útil de la prenda.',
         'Excelente para uniformes deportivos, playeras técnicas y cordones.'
       ],
-      telas: '100% Poliéster, Dry-Fit, Microfibra, Lycra',
-      bg: '#dcfce7',
-      border: '#bbf7d0',
-      color: '#15803d',
-      link: '#16a34a'
+      telas: '100% Poliéster, Dry-Fit, Microfibra, Lycra'
     },
     {
       id: 'transfer',
       titulo: 'Termotransferencia y Vinil Textil',
-      icono: '✨',
+      iconComp: IconTransfer,
       resumen: 'Precisión nítida para folios, nombres y logotipos reflectivos de seguridad.',
       destacado: 'Precisión nítida para números, nombres y logotipos reflectivos',
       desc: 'Aplicación térmica de películas de poliuretano y tecnología DTF de alta fidelidad, ideal para numeraciones deportivas, personalización individual y detalles de alta reflectividad de seguridad.',
@@ -98,11 +83,7 @@ export default function ServiciosPage() {
         'Excelente definición en líneas finas y textos pequeños.',
         'Ideal para personalización individual con nombres de empleados.'
       ],
-      telas: 'Algodón, Poliéster, Nylon, Mezclas y Ropa de Trabajo',
-      bg: '#f3e8ff',
-      border: '#e9d5ff',
-      color: '#6b21a8',
-      link: '#9333ea'
+      telas: 'Algodón, Poliéster, Nylon, Mezclas y Ropa de Trabajo'
     }
   ];
 
@@ -161,70 +142,87 @@ export default function ServiciosPage() {
             gap: '16px',
             marginBottom: '36px'
           }}>
-            {serviciosDetalle.map((srv, idx) => (
-              <div
-                key={srv.id}
-                onClick={() => setModalServicio(srv)}
-                style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid var(--linea)',
-                  borderRadius: '20px',
-                  padding: '22px 20px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  gap: '16px',
-                  transition: 'all 0.2s ease',
-                  boxShadow: '0 4px 14px rgba(19, 42, 82, 0.04)'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.borderColor = 'var(--rey)';
-                  e.currentTarget.style.boxShadow = '0 12px 28px rgba(36, 86, 196, 0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.borderColor = 'var(--linea)';
-                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(19, 42, 82, 0.04)';
-                }}
-              >
-                <div>
-                  <span style={{
-                    fontSize: '0.8rem',
-                    fontFamily: 'var(--mono)',
-                    fontWeight: 800,
+            {serviciosDetalle.map((srv, idx) => {
+              const IconComponent = srv.iconComp;
+              return (
+                <div
+                  key={srv.id}
+                  onClick={() => setModalServicio(srv)}
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '1px solid var(--linea)',
+                    borderRadius: '20px',
+                    padding: '22px 20px',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: '16px',
+                    transition: 'all 0.2s ease',
+                    boxShadow: '0 4px 14px rgba(19, 42, 82, 0.04)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                    e.currentTarget.style.borderColor = 'var(--rey)';
+                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(36, 86, 196, 0.12)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.borderColor = 'var(--linea)';
+                    e.currentTarget.style.boxShadow = '0 4px 14px rgba(19, 42, 82, 0.04)';
+                  }}
+                >
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                      <div style={{
+                        width: '42px',
+                        height: '42px',
+                        borderRadius: '12px',
+                        backgroundColor: 'var(--cielo)',
+                        border: '1px solid var(--cielo-2)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--rey)'
+                      }}>
+                        <IconComponent size={22} color="var(--rey)" />
+                      </div>
+
+                      <span style={{
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--mono)',
+                        fontWeight: 800,
+                        color: 'var(--rey)',
+                        backgroundColor: 'var(--cielo)',
+                        padding: '3px 10px',
+                        borderRadius: '8px'
+                      }}>
+                        TÉCNICA 0{idx + 1}
+                      </span>
+                    </div>
+                    
+                    <h3 style={{ fontSize: '1.05rem', fontWeight: 850, color: 'var(--marino)', margin: '0 0 8px 0', lineHeight: 1.25 }}>
+                      {srv.titulo}
+                    </h3>
+
+                    <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
+                      {srv.resumen}
+                    </p>
+                  </div>
+
+                  <div style={{
+                    fontSize: '0.84rem',
+                    fontWeight: 850,
                     color: 'var(--rey)',
-                    backgroundColor: 'var(--cielo)',
-                    padding: '3px 10px',
-                    borderRadius: '8px',
-                    display: 'inline-block',
-                    marginBottom: '12px'
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px'
                   }}>
-                    TÉCNICA 0{idx + 1}
-                  </span>
-                  
-                  <h3 style={{ fontSize: '1.05rem', fontWeight: 850, color: 'var(--marino)', margin: '0 0 8px 0', lineHeight: 1.25 }}>
-                    {srv.titulo}
-                  </h3>
-
-                  <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
-                    {srv.resumen}
-                  </p>
+                    <span>Ver especificaciones</span> &rarr;
+                  </div>
                 </div>
-
-                <div style={{
-                  fontSize: '0.84rem',
-                  fontWeight: 800,
-                  color: 'var(--rey)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '4px'
-                }}>
-                  <span>Ver especificaciones</span> &rarr;
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Banner de Asesoría */}

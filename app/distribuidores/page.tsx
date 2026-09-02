@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TypewriterTitle from '@/components/TypewriterTitle';
+import { IconPriceTag, IconBox, IconSparkles, IconTruck } from '@/components/Icons';
 
 export default function DistribuidoresPage() {
   const [nombre, setNombre] = useState('');
@@ -250,53 +251,75 @@ export default function DistribuidoresPage() {
             {[
               {
                 num: '01',
+                icon: IconPriceTag,
                 titulo: 'Precios de Fábrica',
                 desc: 'Escalas de precios por volumen (mayoreo 72+ y 504+ pzas) para maximizar tu rentabilidad comercial.'
               },
               {
                 num: '02',
+                icon: IconBox,
                 titulo: 'Inventario Permanente',
                 desc: 'Stock garantizado de playeras peso completo, polos piqué y calzado Duty Gear para reposición inmediata.'
               },
               {
                 num: '03',
+                icon: IconSparkles,
                 titulo: 'Personalización Integral',
                 desc: 'Servicio interno de bordado computarizado, serigrafía y transfer: entrega prendas listas para tu cliente.'
               },
               {
                 num: '04',
+                icon: IconTruck,
                 titulo: 'Envíos a Todo México',
                 desc: 'Alianzas logísticas con transportistas consolidados para entregas seguras y económicas en cualquier estado.'
               }
-            ].map((ben, i) => (
-              <div key={i} style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--linea)',
-                borderRadius: '18px',
-                padding: '28px',
-                boxShadow: '0 4px 16px rgba(19, 42, 82, 0.04)'
-              }}>
-                <span style={{
-                  fontSize: '0.8rem',
-                  fontFamily: 'var(--mono)',
-                  fontWeight: 800,
-                  color: 'var(--rey)',
-                  backgroundColor: 'var(--cielo)',
-                  padding: '3px 10px',
-                  borderRadius: '8px',
-                  display: 'inline-block',
-                  marginBottom: '12px'
+            ].map((ben, i) => {
+              const IconComp = ben.icon;
+              return (
+                <div key={i} style={{
+                  backgroundColor: '#ffffff',
+                  border: '1px solid var(--linea)',
+                  borderRadius: '18px',
+                  padding: '28px',
+                  boxShadow: '0 4px 16px rgba(19, 42, 82, 0.04)'
                 }}>
-                  {ben.num}
-                </span>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--marino)', margin: '0 0 8px 0' }}>
-                  {ben.titulo}
-                </h3>
-                <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
-                  {ben.desc}
-                </p>
-              </div>
-            ))}
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                    <div style={{
+                      width: '42px',
+                      height: '42px',
+                      borderRadius: '12px',
+                      backgroundColor: 'var(--cielo)',
+                      border: '1px solid var(--cielo-2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      color: 'var(--rey)'
+                    }}>
+                      <IconComp size={22} color="var(--rey)" />
+                    </div>
+
+                    <span style={{
+                      fontSize: '0.78rem',
+                      fontFamily: 'var(--mono)',
+                      fontWeight: 800,
+                      color: 'var(--rey)',
+                      backgroundColor: 'var(--cielo)',
+                      padding: '3px 10px',
+                      borderRadius: '8px'
+                    }}>
+                      {ben.num}
+                    </span>
+                  </div>
+
+                  <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--marino)', margin: '0 0 8px 0' }}>
+                    {ben.titulo}
+                  </h3>
+                  <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
+                    {ben.desc}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </main>
