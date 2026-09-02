@@ -172,53 +172,41 @@ export default function ServiciosPage() {
                     e.currentTarget.style.boxShadow = '0 4px 14px rgba(19, 42, 82, 0.04)';
                   }}
                 >
-                  <div>
-                    {/* Badge TÉCNICA Centrado Arriba */}
-                    <div style={{ textAlign: 'center', marginBottom: '14px' }}>
+                  <div style={{ textAlign: 'center' }}>
+                    {/* Badge Centrado con Ícono + Técnica 1..5 */}
+                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '14px' }}>
                       <span style={{
-                        fontSize: '0.75rem',
+                        fontSize: '0.78rem',
                         fontFamily: 'var(--mono)',
                         fontWeight: 800,
                         color: 'var(--rey)',
                         backgroundColor: 'var(--cielo)',
-                        padding: '4px 12px',
-                        borderRadius: '8px',
-                        display: 'inline-block'
+                        border: '1px solid var(--cielo-2)',
+                        padding: '5px 14px',
+                        borderRadius: '20px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px'
                       }}>
-                        TÉCNICA 0{idx + 1}
+                        <IconComponent size={18} color="var(--rey)" />
+                        <span>Técnica {idx + 1}</span>
                       </span>
                     </div>
 
-                    {/* Nombre a la izquierda, Ícono a la derecha */}
+                    {/* Título de la Técnica Centrado */}
                     <h3 style={{ 
-                      fontSize: '1.02rem', 
+                      fontSize: '1.05rem', 
                       fontWeight: 850, 
                       color: 'var(--marino)', 
-                      margin: '0 0 10px 0', 
-                      lineHeight: 1.3,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      gap: '10px'
+                      margin: '0 0 8px 0', 
+                      lineHeight: 1.25,
+                      textAlign: 'center'
                     }}>
-                      <span>{srv.titulo}</span>
-                      <div style={{
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: '10px',
-                        backgroundColor: 'var(--cielo)',
-                        border: '1px solid var(--cielo-2)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--rey)',
-                        flexShrink: 0
-                      }}>
-                        <IconComponent size={20} color="var(--rey)" />
-                      </div>
+                      {srv.titulo}
                     </h3>
 
-                    <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
+                    {/* Resumen Centrado */}
+                    <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.45, fontWeight: 500, textAlign: 'center' }}>
                       {srv.resumen}
                     </p>
                   </div>
@@ -229,7 +217,9 @@ export default function ServiciosPage() {
                     color: 'var(--rey)',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '4px'
+                    justifyContent: 'center',
+                    gap: '4px',
+                    marginTop: '12px'
                   }}>
                     <span>Ver especificaciones</span> &rarr;
                   </div>
