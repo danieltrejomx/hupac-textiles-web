@@ -72,12 +72,6 @@ export default function Hero() {
           <Link href="#catalogo" className="btn">Ver catálogo de línea</Link>
           <Link href="#cotizador" className="btn sec">Cotizar para mi equipo</Link>
         </div>
-        <div className="stats">
-          <div><b>21</b><span>Años de<br/>experiencia</span></div>
-          <div><b>7 M</b><span>Prendas<br/>entregadas</span></div>
-          <div><b>43 k</b><span>Clientes<br/>satisfechos</span></div>
-          <div><b>100%</b><span>Producción<br/>nacional</span></div>
-        </div>
       </div>
       <div className="hero-visual">
         <div 

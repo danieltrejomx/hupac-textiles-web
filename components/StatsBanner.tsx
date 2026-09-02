@@ -50,6 +50,7 @@ export default function StatsBanner() {
   return (
     <div className="cifras" aria-label="Cifras de HUPAC TEXTILES" ref={statsRef}>
       <div className="cifras-in">
+        <div className="cifra"><b><span className="cnt" data-v="21" data-suf="" data-div="1">0</span></b><span>años de experiencia</span></div>
         <div className="cifra"><b><span className="cnt" data-v="43000" data-suf=" mil" data-div="1000">0</span>+</b><span>clientes atendidos</span></div>
         <div className="cifra"><b><span className="cnt" data-v="7000000" data-suf=" M" data-div="1000000">0</span>+</b><span>prendas confeccionadas</span></div>
         <div className="cifra"><b><span className="cnt" data-v="2000000" data-suf=" M" data-div="1000000">0</span>+</b><span>bordados realizados</span></div>
