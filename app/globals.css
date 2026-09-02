@@ -345,7 +345,7 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .cifra > span { font-size: 10px; margin-top: 1px; }
 }
 
-/* ================= MOBILE DESIGN JUST FOR PHONES (Hasta 900px) ================= */
+/* ================= MOBILE DESIGN EXCLUSIVO PARA TELÉFONOS (Hasta 900px) ================= */
 @media (max-width: 900px) {
   body {
     padding-top: 60px;
@@ -385,7 +385,7 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
     display: none !important;
   }
 
-  /* 1. Hero layout: Single clean vertical column on mobile */
+  /* 1. Hero layout: Columna única vertical centrada en móviles */
   .hero-first-screen {
     min-height: auto !important;
     height: auto !important;
@@ -396,8 +396,8 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .hero-first-screen .hero {
     display: flex !important;
     flex-direction: column !important;
-    gap: 24px !important;
-    padding: 12px 16px 24px 16px !important;
+    gap: 20px !important;
+    padding: 12px 16px 20px 16px !important;
     align-items: center !important;
     text-align: center !important;
   }
@@ -411,14 +411,14 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   }
 
   .hero-first-screen h1 {
-    font-size: clamp(24px, 7vw, 32px) !important;
+    font-size: clamp(24px, 6.8vw, 30px) !important;
     line-height: 1.15 !important;
     text-align: center;
   }
 
   .hero-first-screen .hero p.lead {
     font-size: 14.5px !important;
-    margin: 10px 0 18px !important;
+    margin: 10px 0 16px !important;
     text-align: center;
     max-width: 100% !important;
   }
@@ -440,23 +440,24 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
 
   .hero-first-screen .hero-visual {
     width: 100% !important;
-    max-width: 380px !important;
+    max-width: 350px !important;
   }
 
   .hero-first-screen .hero-foto {
     width: 100% !important;
     height: auto !important;
     aspect-ratio: 1 / 1 !important;
-    max-width: 360px !important;
+    max-width: 340px !important;
+    margin: 0 auto !important;
   }
 
   .hero-first-screen .hero-caption {
     width: 100% !important;
-    max-width: 360px !important;
+    max-width: 340px !important;
     margin-top: 10px !important;
   }
 
-  /* 2. Cifras banner: 2 columns grid on mobile */
+  /* 2. Cifras banner: Cuadrícula limpia de 2 columnas en móviles */
   .hero-first-screen .cifras {
     margin-top: 0 !important;
   }
@@ -464,7 +465,7 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .hero-first-screen .cifras-in {
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 16px 12px !important;
-    padding: 20px 16px !important;
+    padding: 22px 16px !important;
   }
 
   .cifra {
@@ -472,20 +473,20 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   }
 
   .cifra b {
-    font-size: 20px !important;
+    font-size: 19px !important;
+    line-height: 1.2 !important;
   }
 
   .cifra > span {
     font-size: 11px !important;
+    line-height: 1.3 !important;
+    display: block !important;
+    margin-top: 2px !important;
   }
 
-  /* 3. General mobile layouts */
-  .grid-prod { grid-template-columns: 1fr; }
-  .tecnicas { grid-template-columns: 1fr 1fr; }
-  .grid-ind { grid-template-columns: 1fr 1fr; }
-  .stats { grid-template-columns: 1fr 1fr; }
-  .foot-in { grid-template-columns: 1fr; padding: 40px 20px 24px; }
-  section { padding: 44px 16px; }
+  /* 3. Ajustes de secciones en móviles */
+  section { padding: 40px 16px !important; }
+  .foot-in { grid-template-columns: 1fr; padding: 40px 16px 24px; text-align: center; }
 }
 
 /* ---------- TEXTILE TAG ANIMATIONS (Etiquetas Textiles) ---------- */
