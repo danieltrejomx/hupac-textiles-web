@@ -249,22 +249,22 @@ export default function DistribuidoresPage() {
           }}>
             {[
               {
-                icono: '💰',
+                num: '01',
                 titulo: 'Precios de Fábrica',
                 desc: 'Escalas de precios por volumen (mayoreo 72+ y 504+ pzas) para maximizar tu rentabilidad comercial.'
               },
               {
-                icono: '📦',
+                num: '02',
                 titulo: 'Inventario Permanente',
                 desc: 'Stock garantizado de playeras peso completo, polos piqué y calzado Duty Gear para reposición inmediata.'
               },
               {
-                icono: '🎨',
+                num: '03',
                 titulo: 'Personalización Integral',
                 desc: 'Servicio interno de bordado computarizado, serigrafía y transfer: entrega prendas listas para tu cliente.'
               },
               {
-                icono: '🚚',
+                num: '04',
                 titulo: 'Envíos a Todo México',
                 desc: 'Alianzas logísticas con transportistas consolidados para entregas seguras y económicas en cualquier estado.'
               }
@@ -276,7 +276,19 @@ export default function DistribuidoresPage() {
                 padding: '28px',
                 boxShadow: '0 4px 16px rgba(19, 42, 82, 0.04)'
               }}>
-                <div style={{ fontSize: '2.2rem', marginBottom: '12px' }}>{ben.icono}</div>
+                <span style={{
+                  fontSize: '0.8rem',
+                  fontFamily: 'var(--mono)',
+                  fontWeight: 800,
+                  color: 'var(--rey)',
+                  backgroundColor: 'var(--cielo)',
+                  padding: '3px 10px',
+                  borderRadius: '8px',
+                  display: 'inline-block',
+                  marginBottom: '12px'
+                }}>
+                  {ben.num}
+                </span>
                 <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--marino)', margin: '0 0 8px 0' }}>
                   {ben.titulo}
                 </h3>

@@ -325,8 +325,7 @@ export default function IndustriasPage() {
                   }}
                 >
                   {/* Badge de Selección Activa */}
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                    <span style={{ fontSize: '2.4rem' }}>{sec.icono}</span>
+                  <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '12px' }}>
                     <span style={{
                       fontSize: '0.75rem',
                       fontFamily: 'var(--mono)',
@@ -501,8 +500,8 @@ export default function IndustriasPage() {
                 }}>
                   SECTOR SELECCIONADO — {sectorActivo.tag}
                 </span>
-                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--marino)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  <span>{sectorActivo.icono}</span> {sectorActivo.titulo}
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--marino)', margin: '0 0 8px 0' }}>
+                  {sectorActivo.titulo}
                 </h2>
                 <p style={{ fontSize: '0.94rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
                   {sectorActivo.descripcion}
@@ -527,7 +526,6 @@ export default function IndustriasPage() {
                     justifyContent: 'space-between'
                   }}>
                     <div>
-                      <div style={{ fontSize: '2rem', marginBottom: '8px' }}>{prod.imagen}</div>
                       <h4 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--marino)', margin: '0 0 4px 0' }}>
                         {prod.nombre}
                       </h4>

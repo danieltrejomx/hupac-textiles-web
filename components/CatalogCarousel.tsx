@@ -610,12 +610,12 @@ export default function CatalogCarousel() {
             gap: '16px'
           }}>
             {[
-              { slug: 'cabeza', emoji: '⛑️', titulo: 'Protección para la Cabeza', desc: 'Cascos, protectores faciales, orejeras, tapones, cofias', color: '#fef3c7', accent: '#d97706', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
-              { slug: 'visual', emoji: '🥽', titulo: 'Protección Visual', desc: 'Lentes de seguridad, goggles, sobre lentes', color: '#e0f2fe', accent: '#0284c7', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
-              { slug: 'manos', emoji: '🧤', titulo: 'Protección para Manos', desc: 'Guantes nitrilo, carnaza, anticorte, soldador', color: '#fce7f3', accent: '#db2777', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
-              { slug: 'ropa-trabajo', emoji: '🦺', titulo: 'Ropa de Trabajo', desc: 'Chalecos, overoles, mezclilla, mandiles, impermeables', color: '#dcfce7', accent: '#16a34a', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
-              { slug: 'alturas', emoji: '🔗', titulo: 'Protección a las Alturas', desc: 'Arneses, líneas de vida, puntos de anclaje', color: '#ede9fe', accent: '#7c3aed', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
-              { slug: 'vial', emoji: '🚧', titulo: 'Limitación Vial', desc: 'Conos, trafitambos, mallas, cintas, postes', color: '#fee2e2', accent: '#dc2626', count: PRODUCTS.filter(p => p.categoria === 'vial').length }
+              { slug: 'cabeza', titulo: 'Protección para la Cabeza', desc: 'Cascos, protectores faciales, orejeras, tapones, cofias', color: '#fef3c7', accent: '#d97706', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
+              { slug: 'visual', titulo: 'Protección Visual', desc: 'Lentes de seguridad, goggles, sobre lentes', color: '#e0f2fe', accent: '#0284c7', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
+              { slug: 'manos', titulo: 'Protección para Manos', desc: 'Guantes nitrilo, carnaza, anticorte, soldador', color: '#fce7f3', accent: '#db2777', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
+              { slug: 'ropa-trabajo', titulo: 'Ropa de Trabajo', desc: 'Chalecos, overoles, mezclilla, mandiles, impermeables', color: '#dcfce7', accent: '#16a34a', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
+              { slug: 'alturas', titulo: 'Protección a las Alturas', desc: 'Arneses, líneas de vida, puntos de anclaje', color: '#ede9fe', accent: '#7c3aed', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
+              { slug: 'vial', titulo: 'Limitación Vial', desc: 'Conos, trafitambos, mallas, cintas, postes', color: '#fee2e2', accent: '#dc2626', count: PRODUCTS.filter(p => p.categoria === 'vial').length }
             ].map(cat => (
               <Link
                 key={cat.slug}
@@ -643,7 +643,6 @@ export default function CatalogCarousel() {
                     (e.currentTarget as HTMLDivElement).style.boxShadow = 'none';
                   }}
                 >
-                  <div style={{ fontSize: '2rem' }}>{cat.emoji}</div>
                   <div>
                     <div style={{ fontWeight: 800, fontSize: '1rem', color: '#0f172a', marginBottom: '4px' }}>{cat.titulo}</div>
                     <div style={{ fontSize: '0.82rem', color: '#475569', lineHeight: 1.4 }}>{cat.desc}</div>

@@ -190,8 +190,18 @@ export default function ServiciosPage() {
                 }}
               >
                 <div>
-                  <span style={{ fontSize: '2.2rem', display: 'block', marginBottom: '12px' }}>
-                    {srv.icono}
+                  <span style={{
+                    fontSize: '0.8rem',
+                    fontFamily: 'var(--mono)',
+                    fontWeight: 800,
+                    color: 'var(--rey)',
+                    backgroundColor: 'var(--cielo)',
+                    padding: '3px 10px',
+                    borderRadius: '8px',
+                    display: 'inline-block',
+                    marginBottom: '12px'
+                  }}>
+                    TÉCNICA 0{idx + 1}
                   </span>
                   
                   <h3 style={{ fontSize: '1.05rem', fontWeight: 850, color: 'var(--marino)', margin: '0 0 8px 0', lineHeight: 1.25 }}>
@@ -303,8 +313,7 @@ export default function ServiciosPage() {
             </button>
 
             {/* Header del Modal */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-              <span style={{ fontSize: '3rem' }}>{modalServicio.icono}</span>
+            <div style={{ marginBottom: '16px' }}>
               <div>
                 <span style={{
                   fontSize: '0.78rem',
