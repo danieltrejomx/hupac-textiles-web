@@ -173,36 +173,31 @@ export default function ServiciosPage() {
                   }}
                 >
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                    <h3 style={{ 
+                      fontSize: '1.05rem', 
+                      fontWeight: 850, 
+                      color: 'var(--marino)', 
+                      margin: '0 0 10px 0', 
+                      lineHeight: 1.3,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px'
+                    }}>
                       <div style={{
-                        width: '42px',
-                        height: '42px',
-                        borderRadius: '12px',
+                        width: '36px',
+                        height: '36px',
+                        borderRadius: '10px',
                         backgroundColor: 'var(--cielo)',
                         border: '1px solid var(--cielo-2)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: 'var(--rey)'
-                      }}>
-                        <IconComponent size={22} color="var(--rey)" />
-                      </div>
-
-                      <span style={{
-                        fontSize: '0.75rem',
-                        fontFamily: 'var(--mono)',
-                        fontWeight: 800,
                         color: 'var(--rey)',
-                        backgroundColor: 'var(--cielo)',
-                        padding: '3px 10px',
-                        borderRadius: '8px'
+                        flexShrink: 0
                       }}>
-                        TÉCNICA 0{idx + 1}
-                      </span>
-                    </div>
-                    
-                    <h3 style={{ fontSize: '1.05rem', fontWeight: 850, color: 'var(--marino)', margin: '0 0 8px 0', lineHeight: 1.25 }}>
-                      {srv.titulo}
+                        <IconComponent size={20} color="var(--rey)" />
+                      </div>
+                      <span>{srv.titulo}</span>
                     </h3>
 
                     <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
@@ -229,26 +224,44 @@ export default function ServiciosPage() {
           <div style={{
             marginTop: '44px',
             backgroundColor: 'var(--marino)',
-            borderRadius: '24px',
-            padding: '36px 40px',
             color: '#ffffff',
+            borderRadius: '24px',
+            padding: '36px 32px',
             display: 'flex',
-            justifyContent: 'space-between',
             alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: '24px',
             flexWrap: 'wrap',
-            gap: '24px'
+            boxShadow: '0 12px 36px rgba(19, 42, 82, 0.12)'
           }}>
-            <div style={{ maxWidth: '680px' }}>
-              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0 0 8px 0', color: '#ffffff' }}>
-                ¿No estás seguro de qué técnica es la más adecuada para tu proyecto?
-              </h3>
-              <p style={{ color: '#cbd5e1', fontSize: '0.92rem', margin: 0, lineHeight: 1.5 }}>
-                Envíanos tu logotipo y un asesor técnico evaluará la tela, los colores y las proporciones para recomendarte la técnica más duradera y económica.
+            <div>
+              <span style={{ fontSize: '0.8rem', color: '#cbd5e1', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px' }}>
+                ¿Tienes dudas sobre qué técnica elegir?
+              </span>
+              <h2 style={{ fontSize: '1.45rem', fontWeight: 850, margin: '0 0 6px 0', color: '#ffffff' }}>
+                Te asesoramos sin costo en la técnica ideal para tus uniformes
+              </h2>
+              <p style={{ fontSize: '0.92rem', color: '#cbd5e1', margin: 0, maxWidth: '640px' }}>
+                Evaluamos el tipo de tela, la complejidad de tu logotipo y tu presupuesto para garantizar la mejor durabilidad y acabado visual.
               </p>
             </div>
-            <Link href="/#cotizador" className="btn" style={{ backgroundColor: '#ffffff', color: 'var(--marino)', fontWeight: 800, padding: '14px 26px', fontSize: '0.95rem' }}>
-              Solicitar Asesoría de Personalización
-            </Link>
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <Link
+                href="https://wa.me/525516257933?text=Hola,%20quisiera%20asesoria%20sobre%20las%20tecnicas%20de%20personalizacion"
+                target="_blank"
+                className="btn-primary"
+                style={{ backgroundColor: '#22c55e', color: '#ffffff', padding: '12px 22px', fontSize: '0.9rem', borderRadius: '12px', fontWeight: 700 }}
+              >
+                💬 Asesoría por WhatsApp
+              </Link>
+              <Link
+                href="/configurador"
+                className="btn-outline"
+                style={{ borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff', padding: '12px 22px', fontSize: '0.9rem', borderRadius: '12px', fontWeight: 700 }}
+              >
+                ⚙️ Probar Configurador 3D
+              </Link>
+            </div>
           </div>
         </div>
       </main>
@@ -260,8 +273,8 @@ export default function ServiciosPage() {
           style={{
             position: 'fixed',
             inset: 0,
-            backgroundColor: 'rgba(15, 23, 42, 0.75)',
-            backdropFilter: 'blur(4px)',
+            backgroundColor: 'rgba(15, 23, 42, 0.65)',
+            backdropFilter: 'blur(6px)',
             zIndex: 9999,
             display: 'flex',
             alignItems: 'center',
@@ -279,8 +292,8 @@ export default function ServiciosPage() {
               maxHeight: '90vh',
               overflowY: 'auto',
               boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-              border: '2px solid var(--cielo-2)',
-              padding: '32px',
+              border: '1px solid var(--linea)',
+              padding: '36px',
               position: 'relative'
             }}
           >
@@ -322,12 +335,13 @@ export default function ServiciosPage() {
                   borderRadius: '12px',
                   fontWeight: 800,
                   display: 'inline-block',
-                  marginBottom: '4px'
+                  marginBottom: '8px'
                 }}>
                   ✓ {modalServicio.destacado}
                 </span>
-                <h2 style={{ fontSize: '1.6rem', color: 'var(--marino)', margin: 0, fontWeight: 850, lineHeight: 1.25 }}>
-                  {modalServicio.titulo}
+                <h2 style={{ fontSize: '1.6rem', color: 'var(--marino)', margin: 0, fontWeight: 850, lineHeight: 1.25, display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  {modalServicio.iconComp && <modalServicio.iconComp size={24} color="var(--rey)" />}
+                  <span>{modalServicio.titulo}</span>
                 </h2>
               </div>
             </div>
