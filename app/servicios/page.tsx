@@ -6,13 +6,14 @@ import Footer from '@/components/Footer';
 import TypewriterTitle from '@/components/TypewriterTitle';
 
 export default function ServiciosPage() {
-  const [selectedTecId, setSelectedTecId] = useState<string>('bordado');
+  const [modalServicio, setModalServicio] = useState<any | null>(null);
 
   const serviciosDetalle = [
     {
       id: 'bordado',
       titulo: 'Bordado Industrial Computarizado',
       icono: '🪡',
+      resumen: 'Hilos de alta resistencia, acabados premium y relieve 3D de máxima durabilidad.',
       destacado: 'Más de 2 millones de piezas bordadas',
       desc: 'Acabado premium de máxima resistencia y relieve tridimensional utilizando hilos de alta tenacidad que resisten lavados industriales continuos sin decolorar.',
       caracteristicas: [
@@ -21,12 +22,17 @@ export default function ServiciosPage() {
         'Maquinaria multicabezal automatizada de alta precisión y velocidad.',
         'Digitalización (ponchado) profesional para reproducir logotipos con nitidez milimétrica.'
       ],
-      telas: '100% Algodón, Piqué, Mezclilla, Gabardina, Micropolar'
+      telas: '100% Algodón, Piqué, Mezclilla, Gabardina, Micropolar',
+      bg: '#fef9c3',
+      border: '#fef08a',
+      color: '#854d0e',
+      link: '#ca8a04'
     },
     {
       id: 'serigrafia',
       titulo: 'Serigrafía Textil de Alto Rendimiento',
       icono: '🎨',
+      resumen: 'Tintas plastisol y ahuladas ideales para medianos y grandes volúmenes.',
       destacado: 'La técnica más eficiente para medianos y grandes volúmenes',
       desc: 'Impresión con tintas plastisol, ahuladas y base agua que ofrecen colores intensos, gran durabilidad y excelente relación costo-beneficio para eventos masivos o dotaciones de personal.',
       caracteristicas: [
@@ -35,12 +41,17 @@ export default function ServiciosPage() {
         'Efectos especiales: tacto cero (discharge), inflables (puff) y reflejantes.',
         'Curado térmico controlado que garantiza fijación permanente al tejido.'
       ],
-      telas: '100% Algodón, Algodón/Poliéster, Jersey'
+      telas: '100% Algodón, Algodón/Poliéster, Jersey',
+      bg: '#e0f2fe',
+      border: '#bae6fd',
+      color: '#0369a1',
+      link: '#0284c7'
     },
     {
       id: 'dtg',
       titulo: 'Impresión Directa a Prenda (DTG)',
       icono: '🖨️',
+      resumen: 'Resolución fotográfica sin límite de colores y tacto suave e impalpable.',
       destacado: 'Resolución fotográfica sin límite de colores',
       desc: 'Tecnología digital de inyección de tinta textil que penetra la fibra sin dejar plastas gruesas, permitiendo degradados finos, sombras complejas e ilustraciones hiperrealistas.',
       caracteristicas: [
@@ -49,12 +60,17 @@ export default function ServiciosPage() {
         'Sin costos de revelado de marcos ni matrices.',
         'Tinta pigmentada con base agua de secado reactivo.'
       ],
-      telas: '100% Algodón Peinado y Tejidos Lisos'
+      telas: '100% Algodón Peinado y Tejidos Lisos',
+      bg: '#fce7f3',
+      border: '#fbcfe8',
+      color: '#be185d',
+      link: '#db2777'
     },
     {
       id: 'sublimacion',
       titulo: 'Sublimación Textil HD',
       icono: '🌈',
+      resumen: 'Impresión molecular 100% transpirable que nunca se despinta ni cuartea.',
       destacado: 'Impresión molecular 100% transpirable',
       desc: 'El calor y la presión transforman la tinta en gas penetrando la molécula de poliéster, logrando estampados continuos (full print) que nunca se cuartean ni pierden intensidad.',
       caracteristicas: [
@@ -63,12 +79,17 @@ export default function ServiciosPage() {
         'Colores vivos y brillantes que duran toda la vida útil de la prenda.',
         'Excelente para uniformes deportivos, playeras técnicas y cordones.'
       ],
-      telas: '100% Poliéster, Dry-Fit, Microfibra, Lycra'
+      telas: '100% Poliéster, Dry-Fit, Microfibra, Lycra',
+      bg: '#dcfce7',
+      border: '#bbf7d0',
+      color: '#15803d',
+      link: '#16a34a'
     },
     {
       id: 'transfer',
-      titulo: 'Termotransferencia y Vinil Textil (DTF)',
+      titulo: 'Termotransferencia y Vinil Textil',
       icono: '✨',
+      resumen: 'Precisión nítida para folios, nombres y logotipos reflectivos de seguridad.',
       destacado: 'Precisión nítida para números, nombres y logotipos reflectivos',
       desc: 'Aplicación térmica de películas de poliuretano y tecnología DTF de alta fidelidad, ideal para numeraciones deportivas, personalización individual y detalles de alta reflectividad de seguridad.',
       caracteristicas: [
@@ -77,12 +98,13 @@ export default function ServiciosPage() {
         'Excelente definición en líneas finas y textos pequeños.',
         'Ideal para personalización individual con nombres de empleados.'
       ],
-      telas: 'Algodón, Poliéster, Nylon, Mezclas y Ropa de Trabajo'
+      telas: 'Algodón, Poliéster, Nylon, Mezclas y Ropa de Trabajo',
+      bg: '#f3e8ff',
+      border: '#e9d5ff',
+      color: '#6b21a8',
+      link: '#9333ea'
     }
   ];
-
-  const srvActivo = serviciosDetalle.find(s => s.id === selectedTecId) || serviciosDetalle[0];
-  const idxActivo = serviciosDetalle.findIndex(s => s.id === srvActivo.id);
 
   return (
     <>
@@ -125,148 +147,80 @@ export default function ServiciosPage() {
               alignItems: 'center',
               gap: '6px'
             }}>
-              <span style={{ opacity: 0.5, fontSize: '0.9rem' }}>•</span> Bordado, serigrafía, DTG, sublimación y vinil textil directo de fábrica.
+              <span style={{ opacity: 0.5, fontSize: '0.9rem' }}>•</span> Haz clic en cualquiera de las 5 técnicas para ver sus especificaciones completas.
             </span>
           </div>
         </section>
 
-        {/* Lista Detallada de Servicios en Una Sola Línea de Pestañas */}
-        <div style={{ maxWidth: '1200px', margin: '-32px auto 0 auto', padding: '0 24px' }}>
+        {/* GRID DE LAS 5 TÉCNICAS EN TARJETAS COLORIDAS (EN UNA SOLA LÍNEA) */}
+        <div style={{ maxWidth: '1280px', margin: '-32px auto 0 auto', padding: '0 24px' }}>
           
-          {/* BARRA DE LAS 5 TÉCNICAS EN UNA SOLA LÍNEA */}
           <div style={{
-            backgroundColor: '#ffffff',
-            borderRadius: '20px',
-            padding: '8px',
-            boxShadow: '0 4px 20px rgba(19, 42, 82, 0.06)',
-            border: '1px solid var(--linea)',
-            marginBottom: '28px',
-            display: 'flex',
-            gap: '6px',
-            overflowX: 'auto'
-          }}>
-            {serviciosDetalle.map((srv, idx) => {
-              const isActive = selectedTecId === srv.id;
-              return (
-                <button
-                  key={srv.id}
-                  type="button"
-                  onClick={() => setSelectedTecId(srv.id)}
-                  style={{
-                    flex: 1,
-                    minWidth: '170px',
-                    padding: '12px 14px',
-                    borderRadius: '14px',
-                    border: 'none',
-                    backgroundColor: isActive ? 'var(--marino)' : 'transparent',
-                    color: isActive ? '#ffffff' : 'var(--marino)',
-                    fontWeight: 750,
-                    fontSize: '0.88rem',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '8px',
-                    transition: 'all 0.15s ease',
-                    boxShadow: isActive ? '0 4px 12px rgba(19, 42, 82, 0.2)' : 'none'
-                  }}
-                >
-                  <span style={{ fontSize: '1.2rem' }}>{srv.icono}</span>
-                  <span style={{ whiteSpace: 'nowrap' }}>0{idx + 1}. {srv.titulo.split(' ')[0]}</span>
-                </button>
-              );
-            })}
-          </div>
-
-          {/* TARJETA DETALLADA DE LA TÉCNICA SELECCIONADA */}
-          <div style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid var(--linea)',
-            borderRadius: '24px',
-            padding: '40px',
-            boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '36px',
-            alignItems: 'center'
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '16px',
+            marginBottom: '36px'
           }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
-                <span style={{ fontSize: '2.4rem' }}>{srvActivo.icono}</span>
+            {serviciosDetalle.map((srv, idx) => (
+              <div
+                key={srv.id}
+                onClick={() => setModalServicio(srv)}
+                style={{
+                  backgroundColor: srv.bg,
+                  border: `1.5px solid ${srv.border}`,
+                  borderRadius: '20px',
+                  padding: '22px 20px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  gap: '16px',
+                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+                  boxShadow: '0 4px 14px rgba(0,0,0,0.03)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.boxShadow = '0 10px 24px rgba(0,0,0,0.08)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = '0 4px 14px rgba(0,0,0,0.03)';
+                }}
+              >
                 <div>
-                  <span style={{ fontSize: '0.8rem', fontFamily: 'var(--mono)', color: 'var(--rey)', fontWeight: 700, textTransform: 'uppercase' }}>
-                    Técnica 0{idxActivo + 1}
+                  <span style={{ fontSize: '2.2rem', display: 'block', marginBottom: '12px' }}>
+                    {srv.icono}
                   </span>
-                  <h2 style={{ fontSize: '1.6rem', color: 'var(--marino)', margin: 0, fontWeight: 800 }}>
-                    {srvActivo.titulo}
-                  </h2>
+                  
+                  <h3 style={{ fontSize: '1.05rem', fontWeight: 850, color: srv.color, margin: '0 0 8px 0', lineHeight: 1.25 }}>
+                    {srv.titulo}
+                  </h3>
+
+                  <p style={{ fontSize: '0.82rem', color: '#475569', margin: 0, lineHeight: 1.45, fontWeight: 500 }}>
+                    {srv.resumen}
+                  </p>
+                </div>
+
+                <div style={{
+                  fontSize: '0.84rem',
+                  fontWeight: 800,
+                  color: srv.link,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px'
+                }}>
+                  <span>Ver especificaciones</span> &rarr;
                 </div>
               </div>
-
-              <div style={{
-                display: 'inline-block',
-                backgroundColor: 'var(--cielo)',
-                color: 'var(--rey)',
-                fontWeight: 700,
-                fontSize: '0.88rem',
-                padding: '6px 14px',
-                borderRadius: '8px',
-                marginBottom: '16px'
-              }}>
-                ✓ {srvActivo.destacado}
-              </div>
-
-              <p style={{ fontSize: '1rem', color: 'var(--texto-2)', lineHeight: 1.6, margin: '0 0 20px 0' }}>
-                {srvActivo.desc}
-              </p>
-
-              <div style={{
-                padding: '12px 16px',
-                backgroundColor: '#f8fafc',
-                borderRadius: '12px',
-                border: '1px solid var(--linea)',
-                fontSize: '0.88rem',
-                color: 'var(--marino)'
-              }}>
-                <strong>Telas recomendadas:</strong> {srvActivo.telas}
-              </div>
-            </div>
-
-            <div style={{
-              backgroundColor: '#f8fafc',
-              border: '1px solid var(--linea)',
-              borderRadius: '18px',
-              padding: '28px'
-            }}>
-              <h3 style={{ fontSize: '1.05rem', color: 'var(--marino)', margin: '0 0 16px 0', fontWeight: 800 }}>
-                Ventajas y Especificaciones Técnicas:
-              </h3>
-              <ul style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {srvActivo.caracteristicas.map((c, i) => (
-                  <li key={i} style={{ fontSize: '0.92rem', color: 'var(--texto-2)', lineHeight: 1.45 }}>
-                    {c}
-                  </li>
-                ))}
-              </ul>
-
-              <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
-                <Link
-                  href="/configurador"
-                  className="btn"
-                  style={{ fontSize: '0.85rem', padding: '9px 16px', backgroundColor: 'var(--rey)', color: '#ffffff' }}
-                >
-                  Probar en Configurador 3D &rarr;
-                </Link>
-              </div>
-            </div>
+            ))}
           </div>
 
           {/* Banner de Asesoría */}
           <div style={{
-            marginTop: '48px',
+            marginTop: '44px',
             backgroundColor: 'var(--marino)',
             borderRadius: '24px',
-            padding: '44px',
+            padding: '36px 40px',
             color: '#ffffff',
             display: 'flex',
             justifyContent: 'space-between',
@@ -275,19 +229,176 @@ export default function ServiciosPage() {
             gap: '24px'
           }}>
             <div style={{ maxWidth: '680px' }}>
-              <h3 style={{ fontSize: '1.7rem', fontWeight: 800, margin: '0 0 8px 0', color: '#ffffff' }}>
+              <h3 style={{ fontSize: '1.5rem', fontWeight: 800, margin: '0 0 8px 0', color: '#ffffff' }}>
                 ¿No estás seguro de qué técnica es la más adecuada para tu proyecto?
               </h3>
-              <p style={{ color: '#cbd5e1', fontSize: '0.98rem', margin: 0, lineHeight: 1.5 }}>
+              <p style={{ color: '#cbd5e1', fontSize: '0.92rem', margin: 0, lineHeight: 1.5 }}>
                 Envíanos tu logotipo y un asesor técnico evaluará la tela, los colores y las proporciones para recomendarte la técnica más duradera y económica.
               </p>
             </div>
-            <Link href="/#cotizador" className="btn" style={{ backgroundColor: '#ffffff', color: 'var(--marino)', fontWeight: 800, padding: '14px 28px', fontSize: '1rem' }}>
+            <Link href="/#cotizador" className="btn" style={{ backgroundColor: '#ffffff', color: 'var(--marino)', fontWeight: 800, padding: '14px 26px', fontSize: '0.95rem' }}>
               Solicitar Asesoría de Personalización
             </Link>
           </div>
         </div>
       </main>
+
+      {/* ================= MODAL PANTALLA EMERGENTE DE TÉCNICA ================= */}
+      {modalServicio && (
+        <div 
+          onClick={() => setModalServicio(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            backgroundColor: 'rgba(15, 23, 42, 0.75)',
+            backdropFilter: 'blur(4px)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '20px'
+          }}
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              backgroundColor: '#ffffff',
+              borderRadius: '24px',
+              maxWidth: '680px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+              border: `2px solid ${modalServicio.border}`,
+              padding: '32px',
+              position: 'relative'
+            }}
+          >
+            {/* Botón Cerrar */}
+            <button
+              type="button"
+              onClick={() => setModalServicio(null)}
+              style={{
+                position: 'absolute',
+                top: '20px',
+                right: '20px',
+                background: '#f1f5f9',
+                border: 'none',
+                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                fontSize: '1.2rem',
+                fontWeight: 700,
+                color: 'var(--marino)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.15s ease'
+              }}
+            >
+              ✕
+            </button>
+
+            {/* Header del Modal */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+              <span style={{ fontSize: '3rem' }}>{modalServicio.icono}</span>
+              <div>
+                <span style={{
+                  fontSize: '0.78rem',
+                  backgroundColor: modalServicio.bg,
+                  color: modalServicio.color,
+                  border: `1px solid ${modalServicio.border}`,
+                  padding: '3px 10px',
+                  borderRadius: '12px',
+                  fontWeight: 800,
+                  display: 'inline-block',
+                  marginBottom: '4px'
+                }}>
+                  ✓ {modalServicio.destacado}
+                </span>
+                <h2 style={{ fontSize: '1.6rem', color: 'var(--marino)', margin: 0, fontWeight: 850, lineHeight: 1.25 }}>
+                  {modalServicio.titulo}
+                </h2>
+              </div>
+            </div>
+
+            <p style={{ fontSize: '0.98rem', color: 'var(--texto-2)', lineHeight: 1.6, marginBottom: '20px' }}>
+              {modalServicio.desc}
+            </p>
+
+            <div style={{
+              padding: '12px 16px',
+              backgroundColor: '#f8fafc',
+              borderRadius: '14px',
+              border: '1px solid var(--linea)',
+              fontSize: '0.88rem',
+              color: 'var(--marino)',
+              marginBottom: '24px'
+            }}>
+              <strong>Telas recomendadas:</strong> {modalServicio.telas}
+            </div>
+
+            {/* Ventajas y Especificaciones */}
+            <div style={{
+              backgroundColor: '#f8fafc',
+              border: '1px solid var(--linea)',
+              borderRadius: '18px',
+              padding: '24px',
+              marginBottom: '24px'
+            }}>
+              <h3 style={{ fontSize: '1.05rem', color: 'var(--marino)', margin: '0 0 14px 0', fontWeight: 800 }}>
+                Ventajas y Especificaciones Técnicas:
+              </h3>
+              <ul style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {modalServicio.caracteristicas.map((c: string, i: number) => (
+                  <li key={i} style={{ fontSize: '0.92rem', color: 'var(--texto-2)', lineHeight: 1.45 }}>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Acciones */}
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'flex-end', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => setModalServicio(null)}
+                style={{
+                  backgroundColor: '#f1f5f9',
+                  color: 'var(--marino)',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '12px',
+                  padding: '12px 20px',
+                  fontSize: '0.9rem',
+                  fontWeight: 750,
+                  cursor: 'pointer'
+                }}
+              >
+                Cerrar
+              </button>
+              <Link
+                href="/configurador"
+                className="btn"
+                style={{
+                  backgroundColor: 'var(--rey)',
+                  color: '#ffffff',
+                  fontWeight: 800,
+                  padding: '12px 24px',
+                  borderRadius: '12px',
+                  fontSize: '0.92rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                Probar en Configurador 3D &rarr;
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </>
   );
