@@ -126,74 +126,74 @@ export default function NosotrosPage() {
             boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
             marginBottom: '36px'
           }}>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '48px', alignItems: 'center' }}>
-              <div>
-                <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>Compromiso Institucional</span>
-                <h2 style={{ fontSize: '2.1rem', color: 'var(--marino)', margin: '0 0 16px 0', lineHeight: 1.25, fontWeight: 850 }}>
-                  Política de Calidad
-                </h2>
-                <p style={{ fontSize: '1.05rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '20px' }}>
-                  En <strong>HUPAC TEXTILES</strong> estamos comprometidos a satisfacer y superar los requerimientos de nuestros clientes mediante la fabricación de uniformes y equipo de protección con los más altos estándares de calidad textil y normativas oficiales.
+            {/* Texto de Política de Calidad Arriba */}
+            <div style={{ maxWidth: '880px', marginBottom: '32px' }}>
+              <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>Compromiso Institucional</span>
+              <h2 style={{ fontSize: '2.1rem', color: 'var(--marino)', margin: '0 0 16px 0', lineHeight: 1.25, fontWeight: 850 }}>
+                Política de Calidad
+              </h2>
+              <p style={{ fontSize: '1.05rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '16px' }}>
+                En <strong>HUPAC TEXTILES</strong> estamos comprometidos a satisfacer y superar los requerimientos de nuestros clientes mediante la fabricación de uniformes y equipo de protección con los más altos estándares de calidad textil y normativas oficiales.
+              </p>
+              <p style={{ fontSize: '1.02rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '20px' }}>
+                Impulsamos la <strong>mejora continua</strong> en cada etapa productiva: desde el diseño, selección del hilo, tejido, confección, bordado y estampado, hasta la entrega puntual sin intermediarios.
+              </p>
+              <div style={{
+                padding: '16px 20px',
+                backgroundColor: 'var(--cielo)',
+                borderLeft: '4px solid var(--rey)',
+                borderRadius: '0 12px 12px 0',
+                fontStyle: 'italic',
+                color: 'var(--marino)',
+                fontWeight: 600,
+                fontSize: '1rem'
+              }}>
+                &ldquo;La excelencia textil no es una coincidencia, es nuestro estándar diario en cada puntada e hilo.&rdquo;
+              </div>
+            </div>
+
+            {/* Las 3 Tarjetas Abajo */}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+              <div style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid var(--linea)',
+                borderRadius: '16px',
+                padding: '24px'
+              }}>
+                <h3 style={{ fontSize: '1.15rem', color: 'var(--marino)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800 }}>
+                  🏭 Integración Vertical de Fábrica
+                </h3>
+                <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
+                  Controlamos el ciclo completo desde la selección del hilo hasta el empaque individual, garantizando precios directos y abastecimiento continuo.
                 </p>
-                <p style={{ fontSize: '1.02rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '24px' }}>
-                  Impulsamos la <strong>mejora continua</strong> en cada etapa productiva: desde el diseño, selección del hilo, tejido, confección, bordado y estampado, hasta la entrega puntual sin intermediarios.
-                </p>
-                <div style={{
-                  padding: '20px 24px',
-                  backgroundColor: 'var(--cielo)',
-                  borderLeft: '4px solid var(--rey)',
-                  borderRadius: '0 12px 12px 0',
-                  fontStyle: 'italic',
-                  color: 'var(--marino)',
-                  fontWeight: 600,
-                  fontSize: '1.05rem'
-                }}>
-                  &ldquo;La excelencia textil no es una coincidencia, es nuestro estándar diario en cada puntada e hilo.&rdquo;
-                </div>
               </div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid var(--linea)',
-                  borderRadius: '16px',
-                  padding: '24px'
-                }}>
-                  <h3 style={{ fontSize: '1.2rem', color: 'var(--marino)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    🏭 Integración Vertical de Fábrica
-                  </h3>
-                  <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
-                    Controlamos el ciclo completo desde la selección del hilo hasta el empaque individual, garantizando precios directos y abastecimiento continuo.
-                  </p>
-                </div>
+              <div style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid var(--linea)',
+                borderRadius: '16px',
+                padding: '24px'
+              }}>
+                <h3 style={{ fontSize: '1.15rem', color: 'var(--marino)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800 }}>
+                  🛡️ Línea EPC y Calzado Industrial
+                </h3>
+                <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
+                  Complementamos la vestimenta corporativa con Equipo de Protección Colectiva y Personal certificado: botas de seguridad Duty Gear, cascos, lentes, guantes y señalización.
+                </p>
+              </div>
 
-                <div style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid var(--linea)',
-                  borderRadius: '16px',
-                  padding: '24px'
-                }}>
-                  <h3 style={{ fontSize: '1.2rem', color: 'var(--marino)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    🛡️ Línea EPC y Calzado Industrial
-                  </h3>
-                  <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
-                    Complementamos la vestimenta corporativa con Equipo de Protección Colectiva y Personal certificado: botas de seguridad Duty Gear, cascos, lentes, guantes y señalización.
-                  </p>
-                </div>
-
-                <div style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid var(--linea)',
-                  borderRadius: '16px',
-                  padding: '24px'
-                }}>
-                  <h3 style={{ fontSize: '1.2rem', color: 'var(--marino)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    🎨 Taller de Personalización Interno
-                  </h3>
-                  <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
-                    Más de 2 millones de bordados computarizados, serigrafía industrial, DTG y sublimación realizados en planta con tecnología japonesa y alemana.
-                  </p>
-                </div>
+              <div style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid var(--linea)',
+                borderRadius: '16px',
+                padding: '24px'
+              }}>
+                <h3 style={{ fontSize: '1.15rem', color: 'var(--marino)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: 800 }}>
+                  🎨 Taller de Personalización Interno
+                </h3>
+                <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
+                  Más de 2 millones de bordados computarizados, serigrafía industrial, DTG y sublimación realizados en planta con tecnología japonesa y alemana.
+                </p>
               </div>
             </div>
           </div>
