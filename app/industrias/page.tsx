@@ -252,31 +252,45 @@ export default function IndustriasPage() {
     <>
       <Navbar />
       <main style={{ backgroundColor: '#f8fafc', minHeight: '85vh', paddingBottom: '80px' }}>
-        {/* Hero Header */}
+        {/* Header Compacto Centrado */}
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
-          padding: 'clamp(28px, 3.5vh, 48px) 28px clamp(44px, 5vh, 60px) 28px',
+          padding: '14px 24px 44px 24px',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           textAlign: 'center'
         }}>
-          <div style={{ maxWidth: '960px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '10px', fontSize: '0.85rem', color: '#93c5fd', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
-              <Link href="/" style={{ color: '#93c5fd', textDecoration: 'none', fontWeight: 600 }}>Inicio</Link>
-              <span>/</span>
-              <span style={{ color: '#ffffff', fontWeight: 700 }}>Industrias</span>
-            </div>
+          <div style={{ 
+            maxWidth: '1320px', 
+            margin: '0 auto', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            gap: '10px 18px', 
+            flexWrap: 'wrap',
+            textAlign: 'center'
+          }}>
+            <h1 style={{ 
+              fontSize: '1.25rem', 
+              fontWeight: 850, 
+              margin: 0, 
+              color: '#ffffff',
+              display: 'inline-flex',
+              alignItems: 'center'
+            }}>
+              Un uniforme específico para cada operación
+            </h1>
 
-            <span className="eyebrow" style={{ color: '#60a5fa', background: 'rgba(255,255,255,0.08)', padding: '4px 12px', borderRadius: '20px', display: 'inline-block', marginBottom: '10px', fontSize: '0.8rem' }}>
-              Soluciones Especializadas por Sector
+            <span style={{ 
+              fontSize: '0.86rem', 
+              color: '#cbd5e1',
+              fontWeight: 500,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              <span style={{ opacity: 0.5, fontSize: '0.9rem' }}>•</span> Haz clic en cualquiera de las 6 industrias para desplegar sus productos y dotaciones recomendadas.
             </span>
-            <TypewriterTitle
-              text="Un uniforme específico para cada operación"
-              as="h1"
-              style={{ fontSize: 'clamp(1.7rem, 2.2vw, 2.3rem)', fontWeight: 850, margin: '0 0 10px 0', lineHeight: 1.2, color: '#ffffff' }}
-            />
-            <p style={{ fontSize: '0.98rem', color: '#cbd5e1', maxWidth: '740px', margin: '0 auto', lineHeight: 1.45 }}>
-              Haz clic en cualquiera de las <strong>6 industrias</strong> para desplegar sus productos y dotaciones recomendadas.
-            </p>
           </div>
         </section>
 
