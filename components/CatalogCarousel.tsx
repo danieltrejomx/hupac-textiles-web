@@ -319,10 +319,20 @@ export default function CatalogCarousel() {
   const categoriesScrollRef = useRef<HTMLDivElement>(null);
   const textilesScrollRef = useRef<HTMLDivElement>(null);
   const footwearScrollRef = useRef<HTMLDivElement>(null);
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('todos');
 
   const textilesProducts = PRODUCTS.filter((p) => !p.categoria || p.categoria === 'textiles');
   const footwearProducts = PRODUCTS.filter((p) => p.categoria === 'calzado' || p.categoria === 'accesorios');
+
+  const filteredCategoryProducts = selectedCategory !== 'todos'
+    ? PRODUCTS.filter((p) => {
+        if (selectedCategory === 'playeras') return !p.categoria || p.categoria === 'textiles';
+        if (selectedCategory === 'calzado') return p.categoria === 'calzado' || p.categoria === 'accesorios';
+        return p.categoria === selectedCategory;
+      })
+    : [];
 
   const searchResults = searchQuery.trim()
     ? PRODUCTS.filter((p) => {
@@ -388,51 +398,46 @@ export default function CatalogCarousel() {
                 { slug: 'vial', icon: IconVial, label: 'Limitación Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length },
               ].map(btn => {
                 const IconComp = btn.icon;
+                const isSelected = selectedCategory === btn.slug;
                 return (
-                  <Link
+                  <button
                     key={btn.slug}
-                    href={`/categoria/${btn.slug}`}
+                    type="button"
+                    onClick={() => {
+                      setSearchQuery('');
+                      setSelectedCategory(isSelected ? 'todos' : btn.slug);
+                    }}
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '7px',
-                      backgroundColor: '#ffffff',
-                      border: '1.5px solid #cbd5e1',
-                      color: 'var(--marino)',
-                      textDecoration: 'none',
+                      backgroundColor: isSelected ? 'var(--marino)' : '#ffffff',
+                      border: isSelected ? '1.5px solid var(--rey)' : '1.5px solid #cbd5e1',
+                      color: isSelected ? '#ffffff' : 'var(--marino)',
                       fontSize: '0.84rem',
-                      fontWeight: 700,
+                      fontWeight: isSelected ? 800 : 700,
                       padding: '7px 14px',
                       borderRadius: '999px',
+                      cursor: 'pointer',
                       transition: 'all 0.15s ease',
-                      boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                      boxShadow: isSelected ? '0 4px 12px rgba(19, 42, 82, 0.2)' : '0 1px 3px rgba(0,0,0,0.03)',
                       whiteSpace: 'nowrap',
                       flexShrink: 0
                     }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.borderColor = 'var(--rey)';
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(36,86,196,0.12)';
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.borderColor = '#cbd5e1';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.03)';
-                    }}
                   >
-                    <IconComp size={16} color="var(--marino)" />
+                    <IconComp size={16} color={isSelected ? '#ffffff' : 'var(--marino)'} />
                     <span>{btn.label}</span>
                     <span style={{
                       fontSize: '0.72rem',
-                      backgroundColor: '#f1f5f9',
-                      color: 'var(--marino)',
+                      backgroundColor: isSelected ? 'rgba(255,255,255,0.2)' : '#f1f5f9',
+                      color: isSelected ? '#ffffff' : 'var(--marino)',
                       padding: '2px 7px',
                       borderRadius: '10px',
                       fontWeight: 800
                     }}>
                       {btn.count}
                     </span>
-                  </Link>
+                  </button>
                 );
               })}
             </div>
@@ -627,8 +632,69 @@ export default function CatalogCarousel() {
           </div>
         ) : null}
 
-        {/* ================= CARRUSEL 1: PLAYERAS Y TEXTILES ================= */}
-        <div style={{ marginBottom: '64px' }}>
+        {/* ================= VISTA FILTRADA POR CATEGORÍA EN TIEMPO REAL ================= */}
+        {selectedCategory !== 'todos' && !searchQuery.trim() ? (
+          <div style={{ marginBottom: '64px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
+              <div>
+                <span className="eyebrow" style={{ color: 'var(--rey)' }}>Catálogo en Vivo</span>
+                <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--marino)', margin: '0 0 4px 0' }}>
+                  {selectedCategory === 'playeras' ? 'Playeras y Polos de Línea' :
+                   selectedCategory === 'calzado' ? 'Calzado Duty Gear y Accesorios' :
+                   selectedCategory === 'cabeza' ? 'Protección para la Cabeza' :
+                   selectedCategory === 'visual' ? 'Protección Visual' :
+                   selectedCategory === 'manos' ? 'Protección para Manos' :
+                   selectedCategory === 'ropa-trabajo' ? 'Ropa de Trabajo y Uniformes' :
+                   selectedCategory === 'alturas' ? 'Protección a las Alturas' :
+                   selectedCategory === 'vial' ? 'Limitación Vial' : selectedCategory} ({filteredCategoryProducts.length})
+                </h3>
+                <p style={{ margin: 0, fontSize: '0.92rem', color: '#64748b' }}>
+                  Desliza o navega producto por producto de esta categoría.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSelectedCategory('todos')}
+                style={{
+                  backgroundColor: '#f1f5f9',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '10px',
+                  padding: '8px 16px',
+                  fontSize: '0.85rem',
+                  fontWeight: 700,
+                  color: 'var(--marino)',
+                  cursor: 'pointer'
+                }}
+              >
+                ✕ Ver Todas las Categorías
+              </button>
+            </div>
+
+            <div
+              ref={categoryScrollRef}
+              className="custom-scroll-container"
+              style={{
+                display: 'flex',
+                gap: '20px',
+                overflowX: 'auto',
+                scrollSnapType: 'x mandatory',
+                paddingBottom: '16px',
+                scrollBehavior: 'smooth'
+              }}
+            >
+              {filteredCategoryProducts.map((p) => (
+                <CarouselProductCard key={p.id} prod={p} />
+              ))}
+            </div>
+            <CarouselScrollBar containerRef={categoryScrollRef} stepAmount={320} />
+          </div>
+        ) : null}
+
+        {/* ================= CARRUSELES Estándar (Solo cuando no hay filtro o búsqueda activos) ================= */}
+        {selectedCategory === 'todos' && !searchQuery.trim() ? (
+          <>
+            {/* ================= CARRUSEL 1: PLAYERAS Y TEXTILES ================= */}
+            <div style={{ marginBottom: '64px' }}>
           <div style={{ 
             display: 'flex', 
             justifyContent: 'space-between', 
@@ -852,6 +918,8 @@ export default function CatalogCarousel() {
             })}
           </div>
         </div>
+        </>
+        ) : null}
 
       </div>
     </section>
