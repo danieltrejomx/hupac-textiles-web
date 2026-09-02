@@ -302,53 +302,49 @@ export default function IndustriasPage() {
             gap: '20px',
             marginBottom: '36px'
           }}>
-            {sectores.map((sec) => {
+            {sectores.map((sec, idx) => {
               const isSelected = sec.id === selectedSectorId;
               return (
                 <div
                   key={sec.id}
+                  className="interactive-card-box"
                   onClick={() => {
                     setSelectedSectorId(sec.id);
                     setIsModalOpen(true);
                   }}
                   style={{
-                    backgroundColor: '#ffffff',
-                    border: isSelected ? `2.5px solid var(--rey)` : '1px solid var(--linea)',
-                    borderRadius: '20px',
-                    padding: '24px',
-                    boxShadow: isSelected ? '0 12px 30px rgba(36, 86, 196, 0.15)' : '0 4px 14px rgba(19, 42, 82, 0.04)',
-                    cursor: 'pointer',
-                    transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    transform: isSelected ? 'translateY(-2px)' : 'none'
+                    animationDelay: `${idx * 0.08}s`,
+                    borderColor: isSelected ? 'var(--rey)' : undefined,
+                    boxShadow: isSelected ? '0 12px 30px rgba(36, 86, 196, 0.15)' : undefined,
                   }}
                 >
-                  {/* Badge de Selección Activa */}
-                  <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '12px' }}>
-                    <span style={{
-                      fontSize: '0.75rem',
-                      fontFamily: 'var(--mono)',
-                      fontWeight: 800,
-                      color: isSelected ? '#ffffff' : 'var(--rey)',
-                      backgroundColor: isSelected ? 'var(--rey)' : 'rgba(36, 86, 196, 0.08)',
-                      padding: '4px 10px',
-                      borderRadius: '8px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.5px'
-                    }}>
-                      {sec.tag}
-                    </span>
+                  <div>
+                    {/* Badge de Selección Activa */}
+                    <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', marginBottom: '12px' }}>
+                      <span className="card-icon-badge" style={{
+                        fontSize: '0.75rem',
+                        fontFamily: 'var(--mono)',
+                        fontWeight: 800,
+                        color: isSelected ? '#ffffff' : 'var(--rey)',
+                        backgroundColor: isSelected ? 'var(--rey)' : 'rgba(36, 86, 196, 0.08)',
+                        padding: '4px 10px',
+                        borderRadius: '8px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.5px'
+                      }}>
+                        {sec.tag}
+                      </span>
+                    </div>
+
+                    <h2 style={{ fontSize: '1.25rem', fontWeight: 850, color: 'var(--marino)', margin: '0 0 6px 0' }}>
+                      {sec.titulo}
+                    </h2>
+                    <p style={{ fontSize: '0.86rem', color: 'var(--texto-2)', margin: '0 0 16px 0', lineHeight: 1.45 }}>
+                      {sec.subtitulo}
+                    </p>
                   </div>
 
-                  <h2 style={{ fontSize: '1.25rem', fontWeight: 850, color: 'var(--marino)', margin: '0 0 6px 0' }}>
-                    {sec.titulo}
-                  </h2>
-                  <p style={{ fontSize: '0.86rem', color: 'var(--texto-2)', margin: '0 0 16px 0', lineHeight: 1.45 }}>
-                    {sec.subtitulo}
-                  </p>
-
-                  <div style={{
+                  <div className="card-action-link" style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
@@ -359,7 +355,7 @@ export default function IndustriasPage() {
                     color: 'var(--rey)'
                   }}>
                     <span>Abrir catálogo de esta industria 🔍</span>
-                    <span style={{ fontSize: '1.1rem' }}>↗</span>
+                    <span className="card-arrow-icon" style={{ fontSize: '1.1rem' }}>↗</span>
                   </div>
                 </div>
               );

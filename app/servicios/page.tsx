@@ -147,35 +147,14 @@ export default function ServiciosPage() {
               return (
                 <div
                   key={srv.id}
+                  className="interactive-card-box"
                   onClick={() => setModalServicio(srv)}
-                  style={{
-                    backgroundColor: '#ffffff',
-                    border: '1px solid var(--linea)',
-                    borderRadius: '20px',
-                    padding: '22px 20px',
-                    cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                    gap: '16px',
-                    transition: 'all 0.2s ease',
-                    boxShadow: '0 4px 14px rgba(19, 42, 82, 0.04)'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-4px)';
-                    e.currentTarget.style.borderColor = 'var(--rey)';
-                    e.currentTarget.style.boxShadow = '0 12px 28px rgba(36, 86, 196, 0.12)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.borderColor = 'var(--linea)';
-                    e.currentTarget.style.boxShadow = '0 4px 14px rgba(19, 42, 82, 0.04)';
-                  }}
+                  style={{ animationDelay: `${idx * 0.08}s` }}
                 >
                   <div style={{ textAlign: 'center' }}>
                     {/* Badge Centrado con Ícono + Técnica 1..5 */}
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '14px' }}>
-                      <span style={{
+                      <span className="card-icon-badge" style={{
                         fontSize: '0.78rem',
                         fontFamily: 'var(--mono)',
                         fontWeight: 800,
@@ -188,7 +167,7 @@ export default function ServiciosPage() {
                         alignItems: 'center',
                         gap: '8px'
                       }}>
-                        <IconComponent size={18} color="var(--rey)" />
+                        <IconComponent size={18} color="currentColor" />
                         <span>Técnica {idx + 1}</span>
                       </span>
                     </div>
@@ -211,7 +190,7 @@ export default function ServiciosPage() {
                     </p>
                   </div>
 
-                  <div style={{
+                  <div className="card-action-link" style={{
                     fontSize: '0.84rem',
                     fontWeight: 850,
                     color: 'var(--rey)',
@@ -219,9 +198,11 @@ export default function ServiciosPage() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '4px',
+                    textAlign: 'center',
                     marginTop: '12px'
                   }}>
-                    <span>Ver especificaciones</span> &rarr;
+                    <span>Ver especificaciones</span>
+                    <span className="card-arrow-icon">→</span>
                   </div>
                 </div>
               );
