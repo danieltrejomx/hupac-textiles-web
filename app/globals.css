@@ -67,6 +67,20 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 .sec-head{max-width:740px;margin-bottom:52px;width:100%;box-sizing:border-box}
 .sec-head p{color:var(--texto-2);font-size:17px}
 
+/* ---------- HERO FIRST SCREEN ---------- */
+.hero-first-screen {
+  position: relative;
+  background: 
+    radial-gradient(circle at 12% 20%, rgba(36, 86, 196, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 88% 75%, rgba(19, 42, 82, 0.08) 0%, transparent 50%),
+    radial-gradient(rgba(36, 86, 196, 0.11) 1.2px, transparent 1.2px),
+    linear-gradient(135deg, #f8fafc 0%, #edf3fc 50%, #e2ecf9 100%);
+  background-size: 100% 100%, 100% 100%, 28px 28px, 100% 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
 /* ---------- HERO FIRST SCREEN (DESKTOP & MONITORES >= 901px) ---------- */
 @media (min-width: 901px) {
   .hero-first-screen {
