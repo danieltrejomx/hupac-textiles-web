@@ -70,53 +70,6 @@ export default function DistribuidoresPage() {
         </section>
 
         <div style={{ maxWidth: '1200px', margin: '-32px auto 0 auto', padding: '0 24px' }}>
-          {/* Grid de Beneficios de Distribuidor */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-            gap: '20px',
-            marginBottom: '48px'
-          }}>
-            {[
-              {
-                icono: '💰',
-                titulo: 'Precios de Fábrica',
-                desc: 'Escalas de precios por volumen (mayoreo 72+ y 504+ pzas) para maximizar tu rentabilidad comercial.'
-              },
-              {
-                icono: '📦',
-                titulo: 'Inventario Permanente',
-                desc: 'Stock garantizado de playeras peso completo, polos piqué y calzado Duty Gear para reposición inmediata.'
-              },
-              {
-                icono: '🎨',
-                titulo: 'Personalización Integral',
-                desc: 'Servicio interno de bordado computarizado, serigrafía y transfer: entrega prendas listas para tu cliente.'
-              },
-              {
-                icono: '🚚',
-                titulo: 'Envíos a Todo México',
-                desc: 'Alianzas logísticas con transportistas consolidados para entregas seguras y económicas en cualquier estado.'
-              }
-            ].map((ben, i) => (
-              <div key={i} style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--linea)',
-                borderRadius: '18px',
-                padding: '28px',
-                boxShadow: '0 4px 16px rgba(19, 42, 82, 0.04)'
-              }}>
-                <div style={{ fontSize: '2.2rem', marginBottom: '12px' }}>{ben.icono}</div>
-                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--marino)', margin: '0 0 8px 0' }}>
-                  {ben.titulo}
-                </h3>
-                <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
-                  {ben.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-
           {/* Formulario y Requisitos */}
           <div style={{
             backgroundColor: '#ffffff',
@@ -126,7 +79,8 @@ export default function DistribuidoresPage() {
             boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '48px'
+            gap: '48px',
+            marginBottom: '36px'
           }}>
             <div>
               <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>Inicia hoy</span>
@@ -285,6 +239,52 @@ export default function DistribuidoresPage() {
                 </form>
               )}
             </div>
+          </div>
+
+          {/* Grid de Beneficios de Distribuidor (Ubicado por DEBAJO de la tarjeta de datos) */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '20px'
+          }}>
+            {[
+              {
+                icono: '💰',
+                titulo: 'Precios de Fábrica',
+                desc: 'Escalas de precios por volumen (mayoreo 72+ y 504+ pzas) para maximizar tu rentabilidad comercial.'
+              },
+              {
+                icono: '📦',
+                titulo: 'Inventario Permanente',
+                desc: 'Stock garantizado de playeras peso completo, polos piqué y calzado Duty Gear para reposición inmediata.'
+              },
+              {
+                icono: '🎨',
+                titulo: 'Personalización Integral',
+                desc: 'Servicio interno de bordado computarizado, serigrafía y transfer: entrega prendas listas para tu cliente.'
+              },
+              {
+                icono: '🚚',
+                titulo: 'Envíos a Todo México',
+                desc: 'Alianzas logísticas con transportistas consolidados para entregas seguras y económicas en cualquier estado.'
+              }
+            ].map((ben, i) => (
+              <div key={i} style={{
+                backgroundColor: '#ffffff',
+                border: '1px solid var(--linea)',
+                borderRadius: '18px',
+                padding: '28px',
+                boxShadow: '0 4px 16px rgba(19, 42, 82, 0.04)'
+              }}>
+                <div style={{ fontSize: '2.2rem', marginBottom: '12px' }}>{ben.icono}</div>
+                <h3 style={{ fontSize: '1.15rem', fontWeight: 800, color: 'var(--marino)', margin: '0 0 8px 0' }}>
+                  {ben.titulo}
+                </h3>
+                <p style={{ fontSize: '0.92rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
+                  {ben.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </main>
