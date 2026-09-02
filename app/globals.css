@@ -108,6 +108,13 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
   margin-bottom: 0;
 }
 
+.hero-first-screen .hero-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .hero-first-screen .hero-foto {
   position: relative;
   border-radius: 16px;
@@ -125,6 +132,22 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+
+.hero-first-screen .hero-caption {
+  margin-top: 12px;
+  background: #ffffff;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  padding: 10px 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all .3s ease;
+  width: clamp(360px, 56vh, 580px);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .hero-first-screen .cifras {
