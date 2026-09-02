@@ -7,6 +7,7 @@ import TypewriterTitle from '@/components/TypewriterTitle';
 
 export default function IndustriasPage() {
   const [selectedSectorId, setSelectedSectorId] = useState<string>('corporativo');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const sectores = [
     {
@@ -292,7 +293,10 @@ export default function IndustriasPage() {
               return (
                 <div
                   key={sec.id}
-                  onClick={() => setSelectedSectorId(sec.id)}
+                  onClick={() => {
+                    setSelectedSectorId(sec.id);
+                    setIsModalOpen(true);
+                  }}
                   style={{
                     backgroundColor: '#ffffff',
                     border: isSelected ? `2.5px solid var(--rey)` : '1px solid var(--linea)',
@@ -320,7 +324,7 @@ export default function IndustriasPage() {
                       textTransform: 'uppercase',
                       letterSpacing: '0.5px'
                     }}>
-                      {isSelected ? '✓ SELECCIONADO' : sec.tag}
+                      {sec.tag}
                     </span>
                   </div>
 
@@ -339,10 +343,10 @@ export default function IndustriasPage() {
                     borderTop: '1px solid var(--linea)',
                     fontSize: '0.85rem',
                     fontWeight: 750,
-                    color: isSelected ? 'var(--rey)' : 'var(--texto-2)'
+                    color: 'var(--rey)'
                   }}>
-                    <span>{isSelected ? 'Desplegando productos abajo 👇' : 'Ver productos de esta industria →'}</span>
-                    <span style={{ fontSize: '1.1rem' }}>{isSelected ? '▼' : '▶'}</span>
+                    <span>Abrir catálogo de esta industria 🔍</span>
+                    <span style={{ fontSize: '1.1rem' }}>↗</span>
                   </div>
                 </div>
               );
@@ -516,6 +520,225 @@ export default function IndustriasPage() {
             </Link>
           </div>
         </div>
+
+        {/* MODAL EMERGENTE DE CATÁLOGO POR INDUSTRIA (SIN SCROLLING) */}
+        {isModalOpen && (
+          <div
+            style={{
+              position: 'fixed',
+              inset: 0,
+              backgroundColor: 'rgba(19, 42, 82, 0.7)',
+              backdropFilter: 'blur(8px)',
+              WebkitBackdropFilter: 'blur(8px)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 1000,
+              padding: '20px'
+            }}
+            onClick={() => setIsModalOpen(false)}
+          >
+            <div
+              style={{
+                backgroundColor: '#ffffff',
+                borderRadius: '24px',
+                padding: 'clamp(24px, 3vw, 36px)',
+                maxWidth: '920px',
+                width: '100%',
+                maxHeight: '90vh',
+                overflowY: 'auto',
+                boxShadow: '0 25px 60px rgba(0,0,0,0.3)',
+                border: '1px solid var(--linea)',
+                position: 'relative'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Botón de Cerrar Modal */}
+              <button
+                onClick={() => setIsModalOpen(false)}
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '50%',
+                  backgroundColor: '#f1f5f9',
+                  border: 'none',
+                  color: 'var(--marino)',
+                  fontWeight: 800,
+                  fontSize: '1.2rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  zIndex: 10
+                }}
+              >
+                ✕
+              </button>
+
+              {/* Selector Rápido de Industrias arriba del Modal */}
+              <div style={{
+                display: 'flex',
+                gap: '8px',
+                overflowX: 'auto',
+                paddingBottom: '12px',
+                marginBottom: '20px',
+                borderBottom: '1px solid var(--linea)',
+                paddingRight: '40px'
+              }}>
+                {sectores.map((s) => (
+                  <button
+                    key={s.id}
+                    onClick={() => setSelectedSectorId(s.id)}
+                    style={{
+                      padding: '6px 14px',
+                      borderRadius: '20px',
+                      fontSize: '0.8rem',
+                      fontFamily: 'var(--mono)',
+                      fontWeight: 750,
+                      border: s.id === selectedSectorId ? '2px solid var(--rey)' : '1px solid var(--linea)',
+                      backgroundColor: s.id === selectedSectorId ? 'var(--rey)' : '#f8fafc',
+                      color: s.id === selectedSectorId ? '#ffffff' : 'var(--marino)',
+                      cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}
+                  >
+                    <span>{s.icono}</span> {s.titulo}
+                  </button>
+                ))}
+              </div>
+
+              {/* Header del Sector Activo en Modal */}
+              <div style={{ marginBottom: '24px' }}>
+                <span style={{
+                  fontSize: '0.78rem',
+                  fontFamily: 'var(--mono)',
+                  fontWeight: 800,
+                  color: 'var(--rey)',
+                  letterSpacing: '1px',
+                  backgroundColor: 'rgba(36, 86, 196, 0.08)',
+                  padding: '4px 10px',
+                  borderRadius: '6px',
+                  display: 'inline-block',
+                  marginBottom: '8px'
+                }}>
+                  SECTOR SELECCIONADO — {sectorActivo.tag}
+                </span>
+                <h2 style={{ fontSize: '1.8rem', fontWeight: 900, color: 'var(--marino)', margin: '0 0 8px 0', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <span>{sectorActivo.icono}</span> {sectorActivo.titulo}
+                </h2>
+                <p style={{ fontSize: '0.94rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.5 }}>
+                  {sectorActivo.descripcion}
+                </p>
+              </div>
+
+              {/* Grid de Productos en Modal */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))',
+                gap: '16px',
+                marginBottom: '24px'
+              }}>
+                {sectorActivo.productos.map((prod, idx) => (
+                  <div key={idx} style={{
+                    backgroundColor: '#f8fafc',
+                    border: '1px solid var(--linea)',
+                    borderRadius: '16px',
+                    padding: '18px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between'
+                  }}>
+                    <div>
+                      <div style={{ fontSize: '2rem', marginBottom: '8px' }}>{prod.imagen}</div>
+                      <h4 style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--marino)', margin: '0 0 4px 0' }}>
+                        {prod.nombre}
+                      </h4>
+                      <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: '0 0 12px 0', lineHeight: 1.4 }}>
+                        {prod.desc}
+                      </p>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px', marginBottom: '14px' }}>
+                        {prod.specs.map((spec, sIdx) => (
+                          <span key={sIdx} style={{
+                            fontSize: '0.72rem',
+                            backgroundColor: '#ffffff',
+                            border: '1px solid var(--linea)',
+                            color: 'var(--marino)',
+                            padding: '2px 6px',
+                            borderRadius: '4px',
+                            fontWeight: 600
+                          }}>
+                            ✓ {spec}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '10px', borderTop: '1px solid var(--linea)' }}>
+                      <Link
+                        href={prod.link}
+                        onClick={() => setIsModalOpen(false)}
+                        style={{ fontSize: '0.82rem', color: 'var(--rey)', fontWeight: 750, textDecoration: 'none' }}
+                      >
+                        Ver en Catálogo →
+                      </Link>
+                      <Link
+                        href="/#cotizador"
+                        onClick={() => setIsModalOpen(false)}
+                        style={{
+                          fontSize: '0.75rem',
+                          padding: '5px 10px',
+                          backgroundColor: 'var(--cielo)',
+                          color: 'var(--rey)',
+                          border: '1px solid var(--cielo-2)',
+                          borderRadius: '6px',
+                          fontWeight: 750,
+                          textDecoration: 'none'
+                        }}
+                      >
+                        Cotizar
+                      </Link>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Action Bar en Footer del Modal */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '12px',
+                paddingTop: '16px',
+                borderTop: '1px solid var(--linea)'
+              }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--texto-2)', fontWeight: 600 }}>
+                  ¿Necesitas asesoría personalizada para tu sector?
+                </span>
+                <Link
+                  href="/#cotizador"
+                  onClick={() => setIsModalOpen(false)}
+                  className="btn"
+                  style={{
+                    backgroundColor: 'var(--marino)',
+                    color: '#ffffff',
+                    fontWeight: 800,
+                    fontSize: '0.88rem',
+                    padding: '10px 20px'
+                  }}
+                >
+                  Cotizar Dotación Completa
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
       <Footer />
     </>
