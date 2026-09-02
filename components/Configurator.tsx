@@ -444,118 +444,97 @@ export default function Configurator() {
             </div>
           </div>
 
-          {/* ================= TICKET DE COTIZACIÓN DIGITAL (LADO IZQUIERDO) ================= */}
-          <div className="resumen rv" style={{ 
-            backgroundColor: '#ffffff', 
-            border: '2px dashed #cbd5e1', 
-            borderRadius: '16px',
-            padding: '18px',
-            boxShadow: '0 4px 18px rgba(0,0,0,0.03)',
-            position: 'relative'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '2px dashed #e2e8f0', paddingBottom: '10px' }}>
-              <div>
-                <span style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--rey)', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block' }}>
-                  HUPAC TEXTILES S.A. DE C.V.
-                </span>
-                <b style={{ color: 'var(--marino)', fontSize: '1rem', display: 'block' }}>
-                  📄 Ticket de Cotización Digital
-                </b>
-              </div>
-              <span style={{ 
-                fontSize: '0.8rem', 
-                backgroundColor: '#eff6ff', 
-                color: 'var(--rey)', 
-                padding: '4px 10px', 
-                borderRadius: '8px', 
-                fontWeight: 800,
-                border: '1px solid #bfdbfe'
+          {/* 6. Logotipo del Cliente (LADO IZQUIERDO) */}
+          <div className="grupo rv">
+            <label className="tit">6 · Logotipo del Cliente</label>
+            <label 
+              htmlFor="fileLogo"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '24px 20px',
+                backgroundColor: logo ? 'rgba(34, 197, 94, 0.05)' : '#eff6ff',
+                border: logo ? '2px solid #22c55e' : '2px dashed #93c5fd',
+                borderRadius: '16px',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+                textAlign: 'center',
+                position: 'relative'
+              }}
+            >
+              <div style={{
+                width: '48px',
+                height: '48px',
+                borderRadius: '12px',
+                backgroundColor: logo ? '#dcfce7' : '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '10px',
+                boxShadow: '0 4px 10px rgba(36, 86, 196, 0.08)',
+                color: logo ? '#16a34a' : 'var(--rey)',
+                fontSize: '1.4rem'
               }}>
-                #{folioRef.current}
-              </span>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 14px', fontSize: '0.86rem', color: '#334155', marginBottom: '14px' }}>
-              <div>Prenda: <b style={{ color: 'var(--marino)' }}>{prendaActual.nombre}</b></div>
-              <div>Color: <b style={{ color: colorOption.c === '#FFFFFF' ? '#475569' : colorOption.c }}>{colorOption.n}</b></div>
-              <div>Técnica: <b>{tec}</b></div>
-              <div>Vista: <b>{vista === 'frente' ? 'Frontal (Frente)' : 'Trasera (Espalda)'}</b></div>
-              <div>Posición Logo: <b>{activePositionName}</b></div>
-              <div>Tamaño Logo: <b>{size}%</b></div>
-              <div style={{ gridColumn: '1 / -1', borderTop: '1px solid #f1f5f9', paddingTop: '6px' }}>
-                Logotipo: <b style={{ color: logo ? '#16a34a' : '#ea580c' }}>{logo ? `Cargado ✓ (${logoName})` : 'Pendiente de adjuntar por chat'}</b>
+                {logo ? '✓' : '☁️'}
               </div>
-            </div>
 
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-              <button
-                type="button"
-                onClick={() => setShowTicketModal(true)}
-                style={{
-                  flex: 1,
-                  backgroundColor: '#f8fafc',
-                  color: 'var(--marino)',
-                  border: '1px solid #cbd5e1',
-                  borderRadius: '10px',
-                  padding: '10px 14px',
-                  fontSize: '0.86rem',
-                  fontWeight: 750,
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px',
-                  transition: 'all 0.15s ease'
-                }}
-              >
-                📄 Ver Ticket PDF / Formato
-              </button>
-            </div>
+              <span style={{ fontSize: '0.98rem', fontWeight: 750, color: 'var(--marino)', display: 'block', marginBottom: '4px' }}>
+                {logo ? `¡Logotipo cargado! (${logoName})` : 'Carga tu archivo de logotipo'}
+              </span>
+
+              <span style={{ fontSize: '0.82rem', color: 'var(--texto-2)', display: 'block', maxWidth: '360px', lineHeight: 1.4 }}>
+                {logo 
+                  ? 'El logo se muestra en la prenda a la derecha.' 
+                  : 'Recomendado archivo PNG con fondo transparente, SVG o JPG.'
+                }
+              </span>
+
+              <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
+                <span style={{
+                  fontSize: '0.78rem',
+                  backgroundColor: logo ? '#15803d' : 'var(--rey)',
+                  color: '#ffffff',
+                  fontWeight: 700,
+                  padding: '6px 16px',
+                  borderRadius: '20px',
+                  display: 'inline-block'
+                }}>
+                  {logo ? 'Cambiar imagen' : 'Explorar archivos'}
+                </span>
+
+                {logo && (
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setLogo(null);
+                      setLogoName('');
+                    }}
+                    style={{
+                      fontSize: '0.78rem',
+                      backgroundColor: '#ef4444',
+                      color: '#ffffff',
+                      border: 'none',
+                      fontWeight: 700,
+                      padding: '6px 14px',
+                      borderRadius: '20px',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Quitar logo
+                  </button>
+                )}
+              </div>
+
+              <input type="file" id="fileLogo" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
+            </label>
           </div>
-          
-          {/* ================= BOTÓN ENVIAR TICKET POR WHATSAPP (LADO IZQUIERDO) ================= */}
-          <button 
-            className="btn rv" 
-            onClick={async () => {
-              try {
-                await addDoc(collection(db, 'orders'), {
-                  tipo: 'Cotización Personalizada',
-                  folio: folioRef.current,
-                  prenda: prendaActual.nombre,
-                  color: colorOption.n,
-                  vista: vista === 'frente' ? 'Frente' : 'Espalda',
-                  tecnica: tec,
-                  posicion: activePositionName,
-                  tamaño: size,
-                  logoIncluido: !!logo,
-                  fecha: serverTimestamp(),
-                });
-              } catch (e) {
-                console.error("Error guardando el pedido: ", e);
-              }
-              window.open(`https://wa.me/525516257933?text=${msg}`, '_blank');
-            }}
-            style={{ 
-              width: '100%',
-              border: 'none', 
-              cursor: 'pointer', 
-              fontFamily: 'var(--fuente-cuerpo)',
-              padding: '16px 28px',
-              fontSize: '1rem',
-              fontWeight: 800,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '10px',
-              borderRadius: '14px',
-              boxShadow: '0 8px 20px rgba(36, 86, 196, 0.25)'
-            }}
-          >
-            <span>💬</span> Enviar Ticket por WhatsApp
-          </button>
         </div>
 
-        {/* ================= PANEL DERECHO: VISOR FOTORREALISTA Y LOGO DEL CLIENTE ================= */}
+        {/* ================= PANEL DERECHO: VISOR FOTORREALISTA, TICKET Y WHATSAPP ================= */}
         <div className="visor rv" aria-label="Vista previa fotorrealista de la prenda configurada" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px', position: 'sticky', top: '80px', alignSelf: 'flex-start' }}>
           
           {/* TARJETA DEL VISOR MOCKUP FOTORREALISTA */}
@@ -809,94 +788,115 @@ export default function Configurator() {
             </div>
           </div>
 
-          {/* ================= 6. CARGA DE LOGOTIPO (DEBAJO DEL MOCKUP DE PRENDA) ================= */}
-          <div className="grupo" style={{ margin: 0 }}>
-            <label className="tit">6 · Logotipo del Cliente</label>
-            <label 
-              htmlFor="fileLogo"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '24px 20px',
-                backgroundColor: logo ? 'rgba(34, 197, 94, 0.05)' : '#eff6ff',
-                border: logo ? '2px solid #22c55e' : '2px dashed #93c5fd',
-                borderRadius: '16px',
-                cursor: 'pointer',
-                transition: 'all 0.2s ease',
-                textAlign: 'center',
-                position: 'relative'
-              }}
-            >
-              <div style={{
-                width: '48px',
-                height: '48px',
-                borderRadius: '12px',
-                backgroundColor: logo ? '#dcfce7' : '#ffffff',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: '10px',
-                boxShadow: '0 4px 10px rgba(36, 86, 196, 0.08)',
-                color: logo ? '#16a34a' : 'var(--rey)',
-                fontSize: '1.4rem'
-              }}>
-                {logo ? '✓' : '☁️'}
-              </div>
-
-              <span style={{ fontSize: '0.98rem', fontWeight: 750, color: 'var(--marino)', display: 'block', marginBottom: '4px' }}>
-                {logo ? `¡Logotipo cargado! (${logoName})` : 'Carga tu archivo de logotipo'}
-              </span>
-
-              <span style={{ fontSize: '0.82rem', color: 'var(--texto-2)', display: 'block', maxWidth: '360px', lineHeight: 1.4 }}>
-                {logo 
-                  ? 'El logo se muestra en la prenda. Puedes cambiar de posición o tamaño a la izquierda.' 
-                  : 'Recomendado archivo PNG con fondo transparente, SVG o JPG.'
-                }
-              </span>
-
-              <div style={{ display: 'flex', gap: '10px', marginTop: '12px' }}>
-                <span style={{
-                  fontSize: '0.78rem',
-                  backgroundColor: logo ? '#15803d' : 'var(--rey)',
-                  color: '#ffffff',
-                  fontWeight: 700,
-                  padding: '6px 16px',
-                  borderRadius: '20px',
-                  display: 'inline-block'
-                }}>
-                  {logo ? 'Cambiar imagen' : 'Explorar archivos'}
+          {/* ================= TICKET DE COTIZACIÓN DIGITAL (LADO DERECHO) ================= */}
+          <div className="resumen" style={{ 
+            backgroundColor: '#ffffff', 
+            border: '2px dashed #cbd5e1', 
+            borderRadius: '16px',
+            padding: '18px',
+            boxShadow: '0 4px 18px rgba(0,0,0,0.03)',
+            position: 'relative'
+          }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '2px dashed #e2e8f0', paddingBottom: '10px' }}>
+              <div>
+                <span style={{ fontSize: '0.72rem', fontWeight: 800, color: 'var(--rey)', textTransform: 'uppercase', letterSpacing: '0.5px', display: 'block' }}>
+                  HUPAC TEXTILES S.A. DE C.V.
                 </span>
-
-                {logo && (
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setLogo(null);
-                      setLogoName('');
-                    }}
-                    style={{
-                      fontSize: '0.78rem',
-                      backgroundColor: '#ef4444',
-                      color: '#ffffff',
-                      border: 'none',
-                      fontWeight: 700,
-                      padding: '6px 14px',
-                      borderRadius: '20px',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    Quitar logo
-                  </button>
-                )}
+                <b style={{ color: 'var(--marino)', fontSize: '1rem', display: 'block' }}>
+                  📄 Ticket de Cotización Digital
+                </b>
               </div>
+              <span style={{ 
+                fontSize: '0.8rem', 
+                backgroundColor: '#eff6ff', 
+                color: 'var(--rey)', 
+                padding: '4px 10px', 
+                borderRadius: '8px', 
+                fontWeight: 800,
+                border: '1px solid #bfdbfe'
+              }}>
+                #{folioRef.current}
+              </span>
+            </div>
 
-              <input type="file" id="fileLogo" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
-            </label>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 14px', fontSize: '0.86rem', color: '#334155', marginBottom: '14px' }}>
+              <div>Prenda: <b style={{ color: 'var(--marino)' }}>{prendaActual.nombre}</b></div>
+              <div>Color: <b style={{ color: colorOption.c === '#FFFFFF' ? '#475569' : colorOption.c }}>{colorOption.n}</b></div>
+              <div>Técnica: <b>{tec}</b></div>
+              <div>Vista: <b>{vista === 'frente' ? 'Frontal (Frente)' : 'Trasera (Espalda)'}</b></div>
+              <div>Posición Logo: <b>{activePositionName}</b></div>
+              <div>Tamaño Logo: <b>{size}%</b></div>
+              <div style={{ gridColumn: '1 / -1', borderTop: '1px solid #f1f5f9', paddingTop: '6px' }}>
+                Logotipo: <b style={{ color: logo ? '#16a34a' : '#ea580c' }}>{logo ? `Cargado ✓ (${logoName})` : 'Pendiente de adjuntar por chat'}</b>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => setShowTicketModal(true)}
+                style={{
+                  flex: 1,
+                  backgroundColor: '#f8fafc',
+                  color: 'var(--marino)',
+                  border: '1px solid #cbd5e1',
+                  borderRadius: '10px',
+                  padding: '10px 14px',
+                  fontSize: '0.86rem',
+                  fontWeight: 750,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                📄 Ver Ticket PDF / Formato
+              </button>
+            </div>
           </div>
+          
+          {/* ================= BOTÓN ENVIAR TICKET POR WHATSAPP (LADO DERECHO) ================= */}
+          <button 
+            className="btn" 
+            onClick={async () => {
+              try {
+                await addDoc(collection(db, 'orders'), {
+                  tipo: 'Cotización Personalizada',
+                  folio: folioRef.current,
+                  prenda: prendaActual.nombre,
+                  color: colorOption.n,
+                  vista: vista === 'frente' ? 'Frente' : 'Espalda',
+                  tecnica: tec,
+                  posicion: activePositionName,
+                  tamaño: size,
+                  logoIncluido: !!logo,
+                  fecha: serverTimestamp(),
+                });
+              } catch (e) {
+                console.error("Error guardando el pedido: ", e);
+              }
+              window.open(`https://wa.me/525516257933?text=${msg}`, '_blank');
+            }}
+            style={{ 
+              width: '100%',
+              border: 'none', 
+              cursor: 'pointer', 
+              fontFamily: 'var(--fuente-cuerpo)',
+              padding: '16px 28px',
+              fontSize: '1rem',
+              fontWeight: 800,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              borderRadius: '14px',
+              boxShadow: '0 8px 20px rgba(36, 86, 196, 0.25)'
+            }}
+          >
+            <span>💬</span> Enviar Ticket por WhatsApp
+          </button>
         </div>
 
         {/* ================= MODAL FORMATO TICKET DE COTIZACIÓN ================= */}
