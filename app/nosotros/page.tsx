@@ -51,21 +51,21 @@ export default function NosotrosPage() {
               { 
                 tag: 'MISIÓN', 
                 titulo: 'Misión', 
-                desc: 'Confeccionar e innovar en uniformes empresariales e industriales de alto rendimiento, brindando a nuestros clientes prendas funcionales, duraderas y de máxima calidad textil que reflejen la identidad y solidez de su empresa.', 
+                desc: 'Información pendiente por actualizar', 
                 icon: IconAward,
                 color: 'var(--rey)'
               },
               { 
                 tag: 'VISIÓN', 
                 titulo: 'Visión', 
-                desc: 'Consolidarnos como el fabricante y proveedor textil líder en México y América Latina, destacando por nuestra integración vertical, innovación tecnológica constante, sustentabilidad y excelencia en el servicio.', 
+                desc: 'Información pendiente por actualizar', 
                 icon: IconTrending,
                 color: '#0284c7'
               },
               { 
                 tag: 'VALORES', 
                 titulo: 'Valores', 
-                desc: 'Calidad sin compromiso, integridad, innovación constante, puntualidad en entregas y trabajo en equipo para construir alianzas sólidas y duraderas con nuestros clientes y distribuidores.', 
+                desc: 'Información pendiente por actualizar', 
                 icon: IconShield,
                 color: '#059669'
               }
@@ -105,12 +105,23 @@ export default function NosotrosPage() {
                     }}>
                       <IconComp size={12} color={pillar.color} /> {pillar.tag}
                     </span>
-                    <h2 style={{ fontSize: '1.5rem', fontWeight: 850, color: 'var(--marino)', marginBottom: '8px' }}>
+                    <h2 style={{ fontSize: '1.5rem', fontWeight: 850, color: 'var(--marino)', marginBottom: '12px' }}>
                       {pillar.titulo}
                     </h2>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--texto-2)', lineHeight: 1.5, margin: 0 }}>
-                      {pillar.desc}
-                    </p>
+                    <div style={{
+                      backgroundColor: '#fef3c7',
+                      border: '1px dashed #d97706',
+                      borderRadius: '10px',
+                      padding: '10px 14px',
+                      color: '#b45309',
+                      fontSize: '0.85rem',
+                      fontWeight: 700,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '6px'
+                    }}>
+                      <span>⏳</span> {pillar.desc}
+                    </div>
                   </div>
                 </div>
               );
@@ -132,23 +143,22 @@ export default function NosotrosPage() {
               <h2 style={{ fontSize: '2.1rem', color: 'var(--marino)', margin: '0 0 16px 0', lineHeight: 1.25, fontWeight: 850 }}>
                 Política de Calidad
               </h2>
-              <p style={{ fontSize: '1.05rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '16px' }}>
-                En <strong>HUPAC TEXTILES</strong> estamos comprometidos a satisfacer y superar los requerimientos de nuestros clientes mediante la fabricación de uniformes y equipo de protección con los más altos estándares de calidad textil y normativas oficiales.
-              </p>
-              <p style={{ fontSize: '1.02rem', color: 'var(--texto-2)', lineHeight: 1.7, marginBottom: '20px' }}>
-                Impulsamos la <strong>mejora continua</strong> en cada etapa productiva: desde el diseño, selección del hilo, tejido, confección, bordado y estampado, hasta la entrega puntual sin intermediarios.
-              </p>
               <div style={{
+                backgroundColor: '#fef3c7',
+                border: '1px dashed #d97706',
+                borderRadius: '12px',
                 padding: '16px 20px',
-                backgroundColor: 'var(--cielo)',
-                borderLeft: '4px solid var(--rey)',
-                borderRadius: '0 12px 12px 0',
-                fontStyle: 'italic',
-                color: 'var(--marino)',
-                fontWeight: 600,
-                fontSize: '1rem'
+                color: '#b45309',
+                fontSize: '0.94rem',
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px'
               }}>
-                &ldquo;La excelencia textil no es una coincidencia, es nuestro estándar diario en cada puntada e hilo.&rdquo;
+                <span style={{ fontSize: '1.2rem' }}>⏳</span>
+                <div>
+                  Información pendiente por actualizar
+                </div>
               </div>
             </div>
 
