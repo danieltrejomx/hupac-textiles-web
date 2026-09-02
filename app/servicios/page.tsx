@@ -1,10 +1,13 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import TypewriterTitle from '@/components/TypewriterTitle';
 
 export default function ServiciosPage() {
+  const [selectedTecId, setSelectedTecId] = useState<string>('bordado');
+
   const serviciosDetalle = [
     {
       id: 'bordado',
@@ -78,6 +81,9 @@ export default function ServiciosPage() {
     }
   ];
 
+  const srvActivo = serviciosDetalle.find(s => s.id === selectedTecId) || serviciosDetalle[0];
+  const idxActivo = serviciosDetalle.findIndex(s => s.id === srvActivo.id);
+
   return (
     <>
       <Navbar />
@@ -124,92 +130,135 @@ export default function ServiciosPage() {
           </div>
         </section>
 
-        {/* Lista Detallada de Servicios */}
+        {/* Lista Detallada de Servicios en Una Sola Línea de Pestañas */}
         <div style={{ maxWidth: '1200px', margin: '-32px auto 0 auto', padding: '0 24px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-            {serviciosDetalle.map((srv, idx) => (
-              <div key={srv.id} style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--linea)',
-                borderRadius: '24px',
-                padding: '40px',
-                boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-                gap: '36px',
-                alignItems: 'center'
-              }}>
+          
+          {/* BARRA DE LAS 5 TÉCNICAS EN UNA SOLA LÍNEA */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            borderRadius: '20px',
+            padding: '8px',
+            boxShadow: '0 4px 20px rgba(19, 42, 82, 0.06)',
+            border: '1px solid var(--linea)',
+            marginBottom: '28px',
+            display: 'flex',
+            gap: '6px',
+            overflowX: 'auto'
+          }}>
+            {serviciosDetalle.map((srv, idx) => {
+              const isActive = selectedTecId === srv.id;
+              return (
+                <button
+                  key={srv.id}
+                  type="button"
+                  onClick={() => setSelectedTecId(srv.id)}
+                  style={{
+                    flex: 1,
+                    minWidth: '170px',
+                    padding: '12px 14px',
+                    borderRadius: '14px',
+                    border: 'none',
+                    backgroundColor: isActive ? 'var(--marino)' : 'transparent',
+                    color: isActive ? '#ffffff' : 'var(--marino)',
+                    fontWeight: 750,
+                    fontSize: '0.88rem',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    transition: 'all 0.15s ease',
+                    boxShadow: isActive ? '0 4px 12px rgba(19, 42, 82, 0.2)' : 'none'
+                  }}
+                >
+                  <span style={{ fontSize: '1.2rem' }}>{srv.icono}</span>
+                  <span style={{ whiteSpace: 'nowrap' }}>0{idx + 1}. {srv.titulo.split(' ')[0]}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* TARJETA DETALLADA DE LA TÉCNICA SELECCIONADA */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            border: '1px solid var(--linea)',
+            borderRadius: '24px',
+            padding: '40px',
+            boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gap: '36px',
+            alignItems: 'center'
+          }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
+                <span style={{ fontSize: '2.4rem' }}>{srvActivo.icono}</span>
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '12px' }}>
-                    <span style={{ fontSize: '2.4rem' }}>{srv.icono}</span>
-                    <div>
-                      <span style={{ fontSize: '0.8rem', fontFamily: 'var(--mono)', color: 'var(--rey)', fontWeight: 700, textTransform: 'uppercase' }}>
-                        Técnica 0{idx + 1}
-                      </span>
-                      <h2 style={{ fontSize: '1.6rem', color: 'var(--marino)', margin: 0, fontWeight: 800 }}>
-                        {srv.titulo}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div style={{
-                    display: 'inline-block',
-                    backgroundColor: 'var(--cielo)',
-                    color: 'var(--rey)',
-                    fontWeight: 700,
-                    fontSize: '0.88rem',
-                    padding: '6px 14px',
-                    borderRadius: '8px',
-                    marginBottom: '16px'
-                  }}>
-                    ✓ {srv.destacado}
-                  </div>
-
-                  <p style={{ fontSize: '1rem', color: 'var(--texto-2)', lineHeight: 1.6, margin: '0 0 20px 0' }}>
-                    {srv.desc}
-                  </p>
-
-                  <div style={{
-                    padding: '12px 16px',
-                    backgroundColor: '#f8fafc',
-                    borderRadius: '12px',
-                    border: '1px solid var(--linea)',
-                    fontSize: '0.88rem',
-                    color: 'var(--marino)'
-                  }}>
-                    <strong>Telas recomendadas:</strong> {srv.telas}
-                  </div>
-                </div>
-
-                <div style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid var(--linea)',
-                  borderRadius: '18px',
-                  padding: '28px'
-                }}>
-                  <h3 style={{ fontSize: '1.05rem', color: 'var(--marino)', margin: '0 0 16px 0', fontWeight: 800 }}>
-                    Ventajas y Especificaciones Técnicas:
-                  </h3>
-                  <ul style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    {srv.caracteristicas.map((c, i) => (
-                      <li key={i} style={{ fontSize: '0.92rem', color: 'var(--texto-2)', lineHeight: 1.45 }}>
-                        {c}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
-                    <Link
-                      href="/configurador"
-                      className="btn"
-                      style={{ fontSize: '0.85rem', padding: '9px 16px', backgroundColor: 'var(--rey)', color: '#ffffff' }}
-                    >
-                      Probar en Configurador 3D &rarr;
-                    </Link>
-                  </div>
+                  <span style={{ fontSize: '0.8rem', fontFamily: 'var(--mono)', color: 'var(--rey)', fontWeight: 700, textTransform: 'uppercase' }}>
+                    Técnica 0{idxActivo + 1}
+                  </span>
+                  <h2 style={{ fontSize: '1.6rem', color: 'var(--marino)', margin: 0, fontWeight: 800 }}>
+                    {srvActivo.titulo}
+                  </h2>
                 </div>
               </div>
-            ))}
+
+              <div style={{
+                display: 'inline-block',
+                backgroundColor: 'var(--cielo)',
+                color: 'var(--rey)',
+                fontWeight: 700,
+                fontSize: '0.88rem',
+                padding: '6px 14px',
+                borderRadius: '8px',
+                marginBottom: '16px'
+              }}>
+                ✓ {srvActivo.destacado}
+              </div>
+
+              <p style={{ fontSize: '1rem', color: 'var(--texto-2)', lineHeight: 1.6, margin: '0 0 20px 0' }}>
+                {srvActivo.desc}
+              </p>
+
+              <div style={{
+                padding: '12px 16px',
+                backgroundColor: '#f8fafc',
+                borderRadius: '12px',
+                border: '1px solid var(--linea)',
+                fontSize: '0.88rem',
+                color: 'var(--marino)'
+              }}>
+                <strong>Telas recomendadas:</strong> {srvActivo.telas}
+              </div>
+            </div>
+
+            <div style={{
+              backgroundColor: '#f8fafc',
+              border: '1px solid var(--linea)',
+              borderRadius: '18px',
+              padding: '28px'
+            }}>
+              <h3 style={{ fontSize: '1.05rem', color: 'var(--marino)', margin: '0 0 16px 0', fontWeight: 800 }}>
+                Ventajas y Especificaciones Técnicas:
+              </h3>
+              <ul style={{ margin: 0, paddingLeft: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {srvActivo.caracteristicas.map((c, i) => (
+                  <li key={i} style={{ fontSize: '0.92rem', color: 'var(--texto-2)', lineHeight: 1.45 }}>
+                    {c}
+                  </li>
+                ))}
+              </ul>
+
+              <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
+                <Link
+                  href="/configurador"
+                  className="btn"
+                  style={{ fontSize: '0.85rem', padding: '9px 16px', backgroundColor: 'var(--rey)', color: '#ffffff' }}
+                >
+                  Probar en Configurador 3D &rarr;
+                </Link>
+              </div>
+            </div>
           </div>
 
           {/* Banner de Asesoría */}
