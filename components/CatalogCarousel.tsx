@@ -210,14 +210,14 @@ export default function CatalogCarousel() {
               Categorías:
             </span>
             {[
-              { slug: 'playeras', icon: IconPlayeras, label: 'Playeras y Polos', count: textilesProducts.length, bg: '#f8fafc', border: '#cbd5e1', color: 'var(--marino)' },
-              { slug: 'calzado', icon: IconCalzado, label: 'Calzado Duty Gear', count: footwearProducts.length, bg: '#f8fafc', border: '#cbd5e1', color: 'var(--marino)' },
-              { slug: 'cabeza', icon: IconCabeza, label: 'Protección Cabeza', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length, bg: '#fef3c7', border: '#fde68a', color: '#92400e' },
-              { slug: 'visual', icon: IconVisual, label: 'Protección Visual', count: PRODUCTS.filter(p => p.categoria === 'visual').length, bg: '#e0f2fe', border: '#bae6fd', color: '#0369a1' },
-              { slug: 'manos', icon: IconManos, label: 'Protección Manos', count: PRODUCTS.filter(p => p.categoria === 'manos').length, bg: '#fce7f3', border: '#fbcfe8', color: '#9d174d' },
-              { slug: 'ropa-trabajo', icon: IconRopaTrabajo, label: 'Ropa de Trabajo', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length, bg: '#dcfce7', border: '#bbf7d0', color: '#166534' },
-              { slug: 'alturas', icon: IconAlturas, label: 'Protección Alturas', count: PRODUCTS.filter(p => p.categoria === 'alturas').length, bg: '#ede9fe', border: '#ddd6fe', color: '#5b21b6' },
-              { slug: 'vial', icon: IconVial, label: 'Limitación Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length, bg: '#fee2e2', border: '#fecaca', color: '#991b1b' },
+              { slug: 'playeras', icon: IconPlayeras, label: 'Playeras y Polos', count: textilesProducts.length },
+              { slug: 'calzado', icon: IconCalzado, label: 'Calzado Duty Gear', count: footwearProducts.length },
+              { slug: 'cabeza', icon: IconCabeza, label: 'Protección Cabeza', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
+              { slug: 'visual', icon: IconVisual, label: 'Protección Visual', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
+              { slug: 'manos', icon: IconManos, label: 'Protección Manos', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
+              { slug: 'ropa-trabajo', icon: IconRopaTrabajo, label: 'Ropa de Trabajo', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
+              { slug: 'alturas', icon: IconAlturas, label: 'Protección Alturas', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
+              { slug: 'vial', icon: IconVial, label: 'Limitación Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length },
             ].map(btn => {
               const IconComp = btn.icon;
               return (
@@ -228,9 +228,9 @@ export default function CatalogCarousel() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '7px',
-                    backgroundColor: btn.bg,
-                    border: `1.5px solid ${btn.border}`,
-                    color: btn.color,
+                    backgroundColor: '#ffffff',
+                    border: '1.5px solid #cbd5e1',
+                    color: 'var(--marino)',
                     textDecoration: 'none',
                     fontSize: '0.84rem',
                     fontWeight: 700,
@@ -241,19 +241,22 @@ export default function CatalogCarousel() {
                     whiteSpace: 'nowrap'
                   }}
                   onMouseEnter={e => {
+                    e.currentTarget.style.borderColor = 'var(--rey)';
                     e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(36,86,196,0.12)';
                   }}
                   onMouseLeave={e => {
+                    e.currentTarget.style.borderColor = '#cbd5e1';
                     e.currentTarget.style.transform = 'translateY(0)';
                     e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.03)';
                   }}
                 >
-                  <IconComp size={16} color={btn.color} />
+                  <IconComp size={16} color="var(--marino)" />
                   <span>{btn.label}</span>
                   <span style={{
                     fontSize: '0.72rem',
-                    backgroundColor: 'rgba(0,0,0,0.06)',
+                    backgroundColor: '#f1f5f9',
+                    color: 'var(--marino)',
                     padding: '2px 7px',
                     borderRadius: '10px',
                     fontWeight: 800
@@ -537,7 +540,7 @@ export default function CatalogCarousel() {
               <span className="eyebrow" style={{ color: '#0369a1' }}>Línea de Protección Industrial · Duty Gear</span>
               <h2 style={{ marginBottom: '6px', fontSize: '1.8rem', display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <Link href="/categoria/calzado" style={{ color: 'var(--marino)', textDecoration: 'none' }}>
-                  🥾 Calzado de Seguridad y Accesorios
+                  Calzado de Seguridad y Accesorios
                 </Link>
                 <Link href="/categoria/calzado" style={{ fontSize: '0.85rem', color: 'var(--rey)', fontWeight: 700, textDecoration: 'none' }}>
                   Ver todo ({footwearProducts.length}) &rarr;
