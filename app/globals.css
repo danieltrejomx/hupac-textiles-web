@@ -221,7 +221,7 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
 /* ---------- LAPTOP ADAPTACIÓN RESPONSIVA ---------- */
 @media (max-width: 1440px) and (min-width: 961px) {
   .hero { padding-top: 24px; padding-bottom: 24px; gap: 32px; }
-  .hero-foto { height: 520px; }
+  .hero-foto { height: 520px; background: #ffffff; }
   .hero p.lead { font-size: 16.5px; margin: 16px 0 24px; }
   .hero-ctas { margin-bottom: 32px; }
 }
@@ -236,8 +236,8 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .stats div { padding: 10px 12px; }
   .stats b { font-size: 18px; }
   .stats span { font-size: 11px; }
-  .hero-foto { height: 490px; }
-  .hero-slide img { object-fit: cover; object-position: top center; }
+  .hero-foto { height: 490px; background: #ffffff; }
+  .hero-slide img { object-fit: contain; object-position: center; }
   .hero-caption { margin-top: 8px; padding: 8px 14px; }
   .hero-caption b { font-size: 13px; }
   .hero-caption span { font-size: 11px; }
@@ -253,8 +253,8 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   .hero p.lead { font-size: 13.5px; margin: 6px 0 10px; }
   .hero-ctas { margin-bottom: 12px; }
   .stats div { padding: 8px 10px; }
-  .hero-foto { height: 440px; }
-  .hero-slide img { object-fit: cover; object-position: top center; }
+  .hero-foto { height: 440px; background: #ffffff; }
+  .hero-slide img { object-fit: contain; object-position: center; }
   .cifras-in { padding: 14px 20px; }
 }
 
