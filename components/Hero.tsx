@@ -64,7 +64,7 @@ export default function Hero() {
 
   return (
     <section id="inicio" className="hero">
-      <div>
+      <div className="hero-text">
         <span className="badge-mx"><i></i> 100% Hecho en México</span>
         <h1>Tu negocio con una imagen superior.</h1>
         <p className="lead">Fabricamos y personalizamos uniformes empresariales que transmiten confianza, orgullo y profesionalismo en cada hilo.</p>
