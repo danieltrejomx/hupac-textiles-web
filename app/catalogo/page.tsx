@@ -352,6 +352,33 @@ export default function CatalogoPage() {
                 )}
               </div>
 
+              {/* Botón Catálogo PDF */}
+              <a
+                href="/catalogo-hupac.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Catalogo_HUPAC_Textiles.pdf"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  backgroundColor: '#ffffff',
+                  color: 'var(--rey)',
+                  border: '1.5px solid var(--rey)',
+                  borderRadius: '12px',
+                  padding: '10px 18px',
+                  fontSize: '0.9rem',
+                  fontWeight: 750,
+                  textDecoration: 'none',
+                  whiteSpace: 'nowrap',
+                  boxShadow: '0 2px 6px rgba(36,86,196,0.08)',
+                  transition: 'all 0.15s ease'
+                }}
+                title="Descargar Catálogo Completo HUPAC en formato PDF"
+              >
+                <span>📄</span> Catálogo PDF
+              </a>
+
               <div style={{
                 backgroundColor: 'var(--cielo)',
                 color: 'var(--marino)',
