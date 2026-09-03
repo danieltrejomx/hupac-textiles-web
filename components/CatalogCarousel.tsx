@@ -172,7 +172,7 @@ export default function CatalogCarousel() {
                 title="Explorar Catálogo Completo en Línea"
               >
                 <IconCatalog size={15} color="#ffffff" />
-                <span>COMPRAR</span>
+                <span>EXPLORAR CATÁLOGO COMPLETO EN LÍNEA</span>
               </Link>
 
               <a
@@ -365,7 +365,7 @@ export default function CatalogCarousel() {
                 title="Explorar Catálogo Completo en Línea"
               >
                 <IconCatalog size={15} color="#ffffff" />
-                <span>COMPRAR</span>
+                <span>EXPLORAR CATÁLOGO COMPLETO EN LÍNEA</span>
               </Link>
 
               <a
