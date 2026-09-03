@@ -75,7 +75,7 @@ export default function CatalogCarousel() {
                 margin: '0 auto 28px auto',
                 lineHeight: 1.55
               }}>
-                Fabricación 100% nacional en prendas empresariales, polos piqué, camisas de vestir y calzado dieléctrico de alta gama.
+                Fabricación 100% nacional en prendas empresariales, polos piqué, camisas de vestir, ropa de trabajo y calzado dieléctrico.
               </p>
 
               {/* Grid de Categorías de Prendas y Calzado */}
@@ -222,7 +222,7 @@ export default function CatalogCarousel() {
           </div>
 
 
-          {/* ================= TARJETA 2: CATÁLOGO EPC Y EQUIPO DE PROTECCIÓN ================= */}
+          {/* ================= TARJETA 2: CATÁLOGO EPC Y EQUIPO DE PROTECCIÓN (100% EPP) ================= */}
           <div style={{
             backgroundColor: 'var(--marino)',
             borderRadius: '24px',
@@ -273,7 +273,7 @@ export default function CatalogCarousel() {
                 Disponibilidad permanente y certificación en equipo de protección personal (EPP), cascos, lentes, guantes, arneses y señalización.
               </p>
 
-              {/* Grid de 6 Categorías EPC */}
+              {/* Grid de 6 Categorías Exclusivas de EPP & Equipo de Protección */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
@@ -282,11 +282,11 @@ export default function CatalogCarousel() {
               }}>
                 {[
                   { slug: 'cabeza', icon: IconCabeza, titulo: 'Protección para la Cabeza', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
-                  { slug: 'visual', icon: IconVisual, titulo: 'Protección Visual', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
+                  { slug: 'visual', icon: IconVisual, titulo: 'Protección Visual y Faciales', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
                   { slug: 'manos', icon: IconManos, titulo: 'Protección para Manos', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
-                  { slug: 'ropa-trabajo', icon: IconRopaTrabajo, titulo: 'Ropa de Trabajo', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length },
                   { slug: 'alturas', icon: IconAlturas, titulo: 'Protección a las Alturas', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
-                  { slug: 'vial', icon: IconVial, titulo: 'Limitación Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length }
+                  { slug: 'vial', icon: IconVial, titulo: 'Limitación y Señalización Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length },
+                  { slug: 'equipamiento', icon: IconShield, titulo: 'Protección Respiratoria y EPP', count: 12 }
                 ].map(cat => {
                   const IconComp = cat.icon;
                   return (
