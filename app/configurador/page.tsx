@@ -7,7 +7,7 @@ export default function ConfiguradorPage() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: '#f8fafc', minHeight: '85vh', paddingBottom: '40px' }}>
+      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', paddingBottom: '40px' }}>
         {/* Header Compacto Centrado */}
         <section style={{
           background: 'var(--marino)',
