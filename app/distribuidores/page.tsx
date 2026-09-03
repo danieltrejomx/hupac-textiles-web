@@ -72,17 +72,22 @@ export default function DistribuidoresPage() {
 
         <div style={{ maxWidth: '1200px', margin: '-10px auto 0 auto', padding: '0 24px' }}>
           {/* Formulario y Requisitos */}
-          <div style={{
-            backgroundColor: '#ffffff',
-            border: '1px solid var(--linea)',
-            borderRadius: '24px',
-            padding: '24px 32px 32px 32px',
-            boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '32px',
-            marginBottom: '36px'
-          }}>
+          <div
+            className="interactive-card-box"
+            style={{
+              animationDelay: '0.05s',
+              backgroundColor: '#ffffff',
+              border: '1px solid var(--linea)',
+              borderRadius: '24px',
+              padding: '24px 32px 32px 32px',
+              boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gap: '32px',
+              marginBottom: '36px',
+              cursor: 'default'
+            }}
+          >
             <div>
               <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>Inicia hoy</span>
               <h2 style={{ fontSize: '2rem', color: 'var(--marino)', margin: '0 0 16px 0', lineHeight: 1.3 }}>
@@ -276,15 +281,13 @@ export default function DistribuidoresPage() {
             ].map((ben, i) => {
               const IconComp = ben.icon;
               return (
-                <div key={i} style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid var(--linea)',
-                  borderRadius: '18px',
-                  padding: '28px',
-                  boxShadow: '0 4px 16px rgba(19, 42, 82, 0.04)'
-                }}>
+                <div
+                  key={i}
+                  className="interactive-card-box"
+                  style={{ animationDelay: `${(i + 1) * 0.08}s`, padding: '28px' }}
+                >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                    <div style={{
+                    <div className="card-icon-badge" style={{
                       width: '42px',
                       height: '42px',
                       borderRadius: '12px',
@@ -295,7 +298,7 @@ export default function DistribuidoresPage() {
                       justifyContent: 'center',
                       color: 'var(--rey)'
                     }}>
-                      <IconComp size={22} color="var(--rey)" />
+                      <IconComp size={22} color="currentColor" />
                     </div>
 
                     <span style={{

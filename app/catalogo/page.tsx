@@ -465,8 +465,10 @@ export default function CatalogoPage() {
               gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
               gap: '24px'
             }}>
-              {productosFiltrados.map((prod) => (
-                <ProductCatalogCard key={prod.id} prod={prod} handleQuickAdd={handleQuickAdd} />
+              {productosFiltrados.map((prod, idx) => (
+                <div key={prod.id} className="interactive-card-box" style={{ animationDelay: `${idx * 0.04}s`, padding: 0 }}>
+                  <ProductCatalogCard prod={prod} handleQuickAdd={handleQuickAdd} />
+                </div>
               ))}
             </div>
           )}
