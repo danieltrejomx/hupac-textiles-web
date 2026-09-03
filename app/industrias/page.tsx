@@ -256,7 +256,7 @@ export default function IndustriasPage() {
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
-          padding: '12px 24px 20px 24px',
+          padding: '14px 24px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           textAlign: 'center'
         }}>
@@ -266,8 +266,6 @@ export default function IndustriasPage() {
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center', 
-            gap: '10px 18px', 
-            flexWrap: 'wrap',
             textAlign: 'center'
           }}>
             <h1 style={{ 
@@ -275,22 +273,10 @@ export default function IndustriasPage() {
               fontWeight: 850, 
               margin: 0, 
               color: '#ffffff',
-              display: 'inline-flex',
-              alignItems: 'center'
+              textAlign: 'center'
             }}>
               Un uniforme específico para cada operación
             </h1>
-
-            <span style={{ 
-              fontSize: '0.86rem', 
-              color: '#cbd5e1',
-              fontWeight: 500,
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px'
-            }}>
-              <span style={{ opacity: 0.5, fontSize: '0.9rem' }}>•</span> Haz clic en cualquiera de las 6 industrias para desplegar sus productos y dotaciones recomendadas.
-            </span>
           </div>
         </section>
 
