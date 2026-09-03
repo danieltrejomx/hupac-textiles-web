@@ -69,7 +69,7 @@ export default function Hero() {
         <h1>Tu negocio con una imagen superior.</h1>
         <p className="lead">Fabricamos y personalizamos uniformes empresariales que transmiten confianza, orgullo y profesionalismo en cada hilo.</p>
         <div className="hero-ctas">
-          <Link href="#catalogo" className="btn">Ver catálogo de línea</Link>
+          <Link href="#catalogo" className="btn">Comprar</Link>
           <Link href="#cotizador" className="btn sec">Cotizar para mi equipo</Link>
         </div>
       </div>
