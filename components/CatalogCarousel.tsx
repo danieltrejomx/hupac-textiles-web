@@ -1,6 +1,5 @@
 'use client';
 import Link from 'next/link';
-import { PRODUCTS } from '@/data/products';
 import { 
   IconPlayeras, 
   IconCalzado, 
@@ -78,7 +77,7 @@ export default function CatalogCarousel() {
                 Fabricación 100% nacional en prendas empresariales, polos piqué, camisas de vestir, ropa de trabajo y calzado dieléctrico.
               </p>
 
-              {/* Grid de Categorías de Prendas y Calzado */}
+              {/* Grid Estético de Categorías (Sin enlaces ni cantidades) */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -86,42 +85,30 @@ export default function CatalogCarousel() {
                 margin: '0 auto 28px auto'
               }}>
                 {[
-                  { slug: 'textiles', icon: IconPlayeras, titulo: 'Playeras y Polos de Línea', count: PRODUCTS.filter(p => !p.categoria || p.categoria === 'textiles').length },
-                  { slug: 'calzado', icon: IconCalzado, titulo: 'Calzado Duty Gear y Botas', count: PRODUCTS.filter(p => p.categoria === 'calzado' || p.categoria === 'accesorios').length },
-                  { slug: 'ropa-trabajo', icon: IconRopaTrabajo, titulo: 'Ropa de Trabajo e Industrial', count: PRODUCTS.filter(p => p.categoria === 'ropa-trabajo').length }
+                  { slug: 'textiles', icon: IconPlayeras, titulo: 'Playeras y Polos de Línea' },
+                  { slug: 'calzado', icon: IconCalzado, titulo: 'Calzado Duty Gear y Botas' },
+                  { slug: 'ropa-trabajo', icon: IconRopaTrabajo, titulo: 'Ropa de Trabajo e Industrial' }
                 ].map(cat => {
                   const IconComp = cat.icon;
                   return (
-                    <Link
+                    <div
                       key={cat.slug}
-                      href={`/catalogo?categoria=${cat.slug}`}
                       style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.06)',
                         border: '1px solid rgba(255, 255, 255, 0.14)',
                         borderRadius: '12px',
-                        padding: '12px 14px',
+                        padding: '14px 16px',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '10px',
-                        textDecoration: 'none',
-                        transition: 'all 0.2s ease',
+                        gap: '12px',
                         textAlign: 'left',
-                        color: '#ffffff'
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)';
-                        e.currentTarget.style.borderColor = '#38bdf8';
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.06)';
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.14)';
-                        e.currentTarget.style.transform = 'translateY(0)';
+                        color: '#ffffff',
+                        cursor: 'default'
                       }}
                     >
                       <div style={{
-                        width: '32px',
-                        height: '32px',
+                        width: '34px',
+                        height: '34px',
                         borderRadius: '50%',
                         backgroundColor: 'rgba(56, 189, 248, 0.15)',
                         border: '1px solid rgba(56, 189, 248, 0.3)',
@@ -133,14 +120,11 @@ export default function CatalogCarousel() {
                         <IconComp size={16} color="#38bdf8" />
                       </div>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: '0.84rem', fontWeight: 750, color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <div style={{ fontSize: '0.86rem', fontWeight: 750, color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {cat.titulo}
                         </div>
-                        <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 600 }}>
-                          {cat.count} productos disponibles
-                        </div>
                       </div>
-                    </Link>
+                    </div>
                   );
                 })}
               </div>
@@ -283,7 +267,7 @@ export default function CatalogCarousel() {
                 Disponibilidad permanente y certificación en equipo de protección personal (EPP), cascos, lentes, guantes, arneses y señalización.
               </p>
 
-              {/* Grid de 6 Categorías Exclusivas EPP */}
+              {/* Grid Estético de Categorías EPP (Sin enlaces ni cantidades) */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -291,45 +275,33 @@ export default function CatalogCarousel() {
                 margin: '0 auto 28px auto'
               }}>
                 {[
-                  { slug: 'cabeza', icon: IconCabeza, titulo: 'Protección para la Cabeza', count: PRODUCTS.filter(p => p.categoria === 'cabeza').length },
-                  { slug: 'visual', icon: IconVisual, titulo: 'Protección Visual y Faciales', count: PRODUCTS.filter(p => p.categoria === 'visual').length },
-                  { slug: 'manos', icon: IconManos, titulo: 'Protección para Manos', count: PRODUCTS.filter(p => p.categoria === 'manos').length },
-                  { slug: 'alturas', icon: IconAlturas, titulo: 'Protección a las Alturas', count: PRODUCTS.filter(p => p.categoria === 'alturas').length },
-                  { slug: 'vial', icon: IconVial, titulo: 'Limitación y Señalización Vial', count: PRODUCTS.filter(p => p.categoria === 'vial').length },
-                  { slug: 'equipamiento', icon: IconShield, titulo: 'Protección Respiratoria y EPP', count: 12 }
+                  { slug: 'cabeza', icon: IconCabeza, titulo: 'Protección para la Cabeza' },
+                  { slug: 'visual', icon: IconVisual, titulo: 'Protección Visual y Faciales' },
+                  { slug: 'manos', icon: IconManos, titulo: 'Protección para Manos' },
+                  { slug: 'alturas', icon: IconAlturas, titulo: 'Protección a las Alturas' },
+                  { slug: 'vial', icon: IconVial, titulo: 'Limitación y Señalización' },
+                  { slug: 'equipamiento', icon: IconShield, titulo: 'Protección Respiratoria y EPP' }
                 ].map(cat => {
                   const IconComp = cat.icon;
                   return (
-                    <Link
+                    <div
                       key={cat.slug}
-                      href={`/catalogo?categoria=${cat.slug}`}
                       style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.06)',
                         border: '1px solid rgba(255, 255, 255, 0.14)',
                         borderRadius: '12px',
-                        padding: '12px 14px',
+                        padding: '14px 16px',
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '10px',
-                        textDecoration: 'none',
-                        transition: 'all 0.2s ease',
+                        gap: '12px',
                         textAlign: 'left',
-                        color: '#ffffff'
-                      }}
-                      onMouseEnter={e => {
-                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)';
-                        e.currentTarget.style.borderColor = '#38bdf8';
-                        e.currentTarget.style.transform = 'translateY(-2px)';
-                      }}
-                      onMouseLeave={e => {
-                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.06)';
-                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.14)';
-                        e.currentTarget.style.transform = 'translateY(0)';
+                        color: '#ffffff',
+                        cursor: 'default'
                       }}
                     >
                       <div style={{
-                        width: '32px',
-                        height: '32px',
+                        width: '34px',
+                        height: '34px',
                         borderRadius: '50%',
                         backgroundColor: 'rgba(56, 189, 248, 0.15)',
                         border: '1px solid rgba(56, 189, 248, 0.3)',
@@ -341,14 +313,11 @@ export default function CatalogCarousel() {
                         <IconComp size={16} color="#38bdf8" />
                       </div>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: '0.84rem', fontWeight: 750, color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        <div style={{ fontSize: '0.86rem', fontWeight: 750, color: '#ffffff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                           {cat.titulo}
                         </div>
-                        <div style={{ fontSize: '0.72rem', color: '#94a3b8', fontWeight: 600 }}>
-                          {cat.count} productos disponibles
-                        </div>
                       </div>
-                    </Link>
+                    </div>
                   );
                 })}
               </div>
