@@ -31,7 +31,7 @@ export default function CatalogCarousel() {
           <div style={{
             backgroundColor: 'var(--marino)',
             borderRadius: '24px',
-            padding: '40px 28px',
+            padding: '40px 24px',
             border: '1px solid rgba(255, 255, 255, 0.12)',
             boxShadow: '0 20px 50px rgba(19, 42, 82, 0.25)',
             textAlign: 'center',
@@ -81,7 +81,7 @@ export default function CatalogCarousel() {
               {/* Grid de Categorías de Prendas y Calzado */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                 gap: '12px',
                 margin: '0 auto 28px auto'
               }}>
@@ -146,29 +146,36 @@ export default function CatalogCarousel() {
               </div>
             </div>
 
-            {/* Par de Botones CTA en Tarjeta 1 */}
-            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {/* Par de Botones CTA en 1 Sola Línea Exacta */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '10px',
+              width: '100%',
+              boxSizing: 'border-box'
+            }}>
               <Link
                 href="/catalogo"
                 style={{
-                  flex: '1 1 200px',
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px',
+                  gap: '6px',
                   backgroundColor: 'var(--rey)',
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '999px',
-                  padding: '12px 18px',
-                  fontSize: '0.82rem',
+                  padding: '11px 12px',
+                  fontSize: '0.76rem',
                   fontWeight: 850,
-                  letterSpacing: '0.4px',
+                  letterSpacing: '0.3px',
                   textDecoration: 'none',
-                  boxShadow: '0 6px 18px rgba(36, 86, 196, 0.35)',
+                  boxShadow: '0 4px 14px rgba(36, 86, 196, 0.35)',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = '#1d4ed8';
@@ -178,9 +185,10 @@ export default function CatalogCarousel() {
                   e.currentTarget.style.backgroundColor = 'var(--rey)';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
+                title="Explorar Catálogo Completo en Línea"
               >
-                <IconCatalog size={16} color="#ffffff" />
-                EXPLORAR CATÁLOGO COMPLETO EN LÍNEA
+                <IconCatalog size={15} color="#ffffff" />
+                <span>CATÁLOGO EN LÍNEA</span>
               </Link>
 
               <a
@@ -189,23 +197,24 @@ export default function CatalogCarousel() {
                 rel="noopener noreferrer"
                 download="Catalogo_HUPAC_Textiles.pdf"
                 style={{
-                  flex: '1 1 180px',
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px',
+                  gap: '6px',
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   color: '#ffffff',
                   border: '1px solid rgba(255, 255, 255, 0.22)',
                   borderRadius: '999px',
-                  padding: '12px 18px',
-                  fontSize: '0.82rem',
+                  padding: '11px 12px',
+                  fontSize: '0.76rem',
                   fontWeight: 850,
-                  letterSpacing: '0.4px',
+                  letterSpacing: '0.3px',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
@@ -215,18 +224,19 @@ export default function CatalogCarousel() {
                   e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
+                title="Descargar Catálogo en PDF"
               >
-                📄 DESCARGAR CATÁLOGO EN PDF
+                <span>📄 DESCARGAR PDF</span>
               </a>
             </div>
           </div>
 
 
-          {/* ================= TARJETA 2: CATÁLOGO EPC Y EQUIPO DE PROTECCIÓN (100% EPP) ================= */}
+          {/* ================= TARJETA 2: CATÁLOGO EPC Y EQUIPO DE PROTECCIÓN ================= */}
           <div style={{
             backgroundColor: 'var(--marino)',
             borderRadius: '24px',
-            padding: '40px 28px',
+            padding: '40px 24px',
             border: '1px solid rgba(255, 255, 255, 0.12)',
             boxShadow: '0 20px 50px rgba(19, 42, 82, 0.25)',
             textAlign: 'center',
@@ -273,10 +283,10 @@ export default function CatalogCarousel() {
                 Disponibilidad permanente y certificación en equipo de protección personal (EPP), cascos, lentes, guantes, arneses y señalización.
               </p>
 
-              {/* Grid de 6 Categorías Exclusivas de EPP & Equipo de Protección */}
+              {/* Grid de 6 Categorías Exclusivas EPP */}
               <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
                 gap: '12px',
                 margin: '0 auto 28px auto'
               }}>
@@ -344,29 +354,36 @@ export default function CatalogCarousel() {
               </div>
             </div>
 
-            {/* Par de Botones CTA en Tarjeta 2 */}
-            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+            {/* Par de Botones CTA en 1 Sola Línea Exacta */}
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: '1fr 1fr',
+              gap: '10px',
+              width: '100%',
+              boxSizing: 'border-box'
+            }}>
               <Link
                 href="/catalogo"
                 style={{
-                  flex: '1 1 200px',
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px',
+                  gap: '6px',
                   backgroundColor: 'var(--rey)',
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '999px',
-                  padding: '12px 18px',
-                  fontSize: '0.82rem',
+                  padding: '11px 12px',
+                  fontSize: '0.76rem',
                   fontWeight: 850,
-                  letterSpacing: '0.4px',
+                  letterSpacing: '0.3px',
                   textDecoration: 'none',
-                  boxShadow: '0 6px 18px rgba(36, 86, 196, 0.35)',
+                  boxShadow: '0 4px 14px rgba(36, 86, 196, 0.35)',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = '#1d4ed8';
@@ -376,9 +393,10 @@ export default function CatalogCarousel() {
                   e.currentTarget.style.backgroundColor = 'var(--rey)';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
+                title="Explorar Catálogo Completo en Línea"
               >
-                <IconCatalog size={16} color="#ffffff" />
-                EXPLORAR CATÁLOGO COMPLETO EN LÍNEA
+                <IconCatalog size={15} color="#ffffff" />
+                <span>CATÁLOGO EN LÍNEA</span>
               </Link>
 
               <a
@@ -387,23 +405,24 @@ export default function CatalogCarousel() {
                 rel="noopener noreferrer"
                 download="Catalogo_HUPAC_Textiles.pdf"
                 style={{
-                  flex: '1 1 180px',
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '8px',
+                  gap: '6px',
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   color: '#ffffff',
                   border: '1px solid rgba(255, 255, 255, 0.22)',
                   borderRadius: '999px',
-                  padding: '12px 18px',
-                  fontSize: '0.82rem',
+                  padding: '11px 12px',
+                  fontSize: '0.76rem',
                   fontWeight: 850,
-                  letterSpacing: '0.4px',
+                  letterSpacing: '0.3px',
                   textDecoration: 'none',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
-                  whiteSpace: 'nowrap'
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
@@ -413,8 +432,9 @@ export default function CatalogCarousel() {
                   e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
                   e.currentTarget.style.transform = 'translateY(0)';
                 }}
+                title="Descargar Catálogo en PDF"
               >
-                📄 DESCARGAR CATÁLOGO EN PDF
+                <span>📄 DESCARGAR PDF</span>
               </a>
             </div>
           </div>
