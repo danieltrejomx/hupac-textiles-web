@@ -146,42 +146,78 @@ export default function CatalogCarousel() {
               </div>
             </div>
 
-            {/* Botón CTA Tarjeta 1 */}
-            <div>
+            {/* Par de Botones CTA en Tarjeta 1 */}
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link
                 href="/catalogo"
                 style={{
+                  flex: '1 1 200px',
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '8px',
-                  backgroundColor: '#2456C4',
+                  backgroundColor: 'var(--rey)',
                   color: '#ffffff',
                   border: 'none',
                   borderRadius: '999px',
-                  padding: '14px 28px',
-                  fontSize: '0.9rem',
+                  padding: '12px 18px',
+                  fontSize: '0.82rem',
                   fontWeight: 850,
-                  letterSpacing: '0.5px',
+                  letterSpacing: '0.4px',
                   textDecoration: 'none',
-                  boxShadow: '0 8px 24px rgba(36, 86, 196, 0.4)',
+                  boxShadow: '0 6px 18px rgba(36, 86, 196, 0.35)',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
-                  width: '100%',
-                  boxSizing: 'border-box'
+                  whiteSpace: 'nowrap'
                 }}
                 onMouseEnter={e => {
                   e.currentTarget.style.backgroundColor = '#1d4ed8';
-                  e.currentTarget.style.transform = 'scale(1.02)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.backgroundColor = '#2456C4';
-                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.backgroundColor = 'var(--rey)';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                <IconCatalog size={18} color="#ffffff" />
-                VER PRENDAS Y CALZADO EN LÍNEA
+                <IconCatalog size={16} color="#ffffff" />
+                EXPLORAR CATÁLOGO COMPLETO EN LÍNEA
               </Link>
+
+              <a
+                href="/catalogo-hupac.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                download="Catalogo_HUPAC_Textiles.pdf"
+                style={{
+                  flex: '1 1 180px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  color: '#ffffff',
+                  border: '1px solid rgba(255, 255, 255, 0.22)',
+                  borderRadius: '999px',
+                  padding: '12px 18px',
+                  fontSize: '0.82rem',
+                  fontWeight: 850,
+                  letterSpacing: '0.4px',
+                  textDecoration: 'none',
+                  transition: 'all 0.2s ease',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap'
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                📄 DESCARGAR CATÁLOGO EN PDF
+              </a>
             </div>
           </div>
 
@@ -308,44 +344,77 @@ export default function CatalogCarousel() {
               </div>
             </div>
 
-            {/* Botón CTA Tarjeta 2 */}
-            <div>
+            {/* Par de Botones CTA en Tarjeta 2 */}
+            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link
+                href="/catalogo"
+                style={{
+                  flex: '1 1 200px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  backgroundColor: 'var(--rey)',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '999px',
+                  padding: '12px 18px',
+                  fontSize: '0.82rem',
+                  fontWeight: 850,
+                  letterSpacing: '0.4px',
+                  textDecoration: 'none',
+                  boxShadow: '0 6px 18px rgba(36, 86, 196, 0.35)',
+                  transition: 'all 0.2s ease',
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap'
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.backgroundColor = '#1d4ed8';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.backgroundColor = 'var(--rey)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                <IconCatalog size={16} color="#ffffff" />
+                EXPLORAR CATÁLOGO COMPLETO EN LÍNEA
+              </Link>
+
               <a
                 href="/catalogo-hupac.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 download="Catalogo_HUPAC_Textiles.pdf"
                 style={{
+                  flex: '1 1 180px',
                   display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   gap: '8px',
-                  backgroundColor: '#2456C4',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
                   color: '#ffffff',
-                  border: 'none',
+                  border: '1px solid rgba(255, 255, 255, 0.22)',
                   borderRadius: '999px',
-                  padding: '14px 28px',
-                  fontSize: '0.9rem',
+                  padding: '12px 18px',
+                  fontSize: '0.82rem',
                   fontWeight: 850,
-                  letterSpacing: '0.5px',
+                  letterSpacing: '0.4px',
                   textDecoration: 'none',
-                  boxShadow: '0 8px 24px rgba(36, 86, 196, 0.4)',
                   transition: 'all 0.2s ease',
                   cursor: 'pointer',
-                  width: '100%',
-                  boxSizing: 'border-box'
+                  whiteSpace: 'nowrap'
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.backgroundColor = '#1d4ed8';
-                  e.currentTarget.style.transform = 'scale(1.02)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={e => {
-                  e.currentTarget.style.backgroundColor = '#2456C4';
-                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                <IconCatalog size={18} color="#ffffff" />
-                DESCARGAR CATÁLOGO EN PDF
+                📄 DESCARGAR CATÁLOGO EN PDF
               </a>
             </div>
           </div>
