@@ -339,32 +339,59 @@ export default function CatalogoPage() {
                 )}
               </div>
 
-              {/* Botón Catálogo PDF */}
-              <a
-                href="/catalogo-hupac.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                download="Catalogo_HUPAC_Textiles.pdf"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  backgroundColor: '#ffffff',
-                  color: 'var(--rey)',
-                  border: '1.5px solid var(--rey)',
-                  borderRadius: '12px',
-                  padding: '10px 18px',
-                  fontSize: '0.9rem',
-                  fontWeight: 750,
-                  textDecoration: 'none',
-                  whiteSpace: 'nowrap',
-                  boxShadow: '0 2px 6px rgba(36,86,196,0.08)',
-                  transition: 'all 0.15s ease'
-                }}
-                title="Descargar Catálogo Completo HUPAC en formato PDF"
-              >
-                <IconCatalog size={18} color="var(--rey)" /> Catálogo PDF
-              </a>
+              {/* Botones Catálogo PDF */}
+              <div style={{ display: 'inline-flex', gap: '8px', flexWrap: 'wrap' }}>
+                <a
+                  href="/catalogo-textil-hupac.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="Catalogo_HUPAC_Textiles_y_Calzado.pdf"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    backgroundColor: '#ffffff',
+                    color: 'var(--rey)',
+                    border: '1.5px solid var(--rey)',
+                    borderRadius: '12px',
+                    padding: '10px 14px',
+                    fontSize: '0.85rem',
+                    fontWeight: 750,
+                    textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 2px 6px rgba(36,86,196,0.08)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  title="Descargar Catálogo Textil y Calzado en PDF"
+                >
+                  <IconCatalog size={16} color="var(--rey)" /> PDF Textil
+                </a>
+                <a
+                  href="/catalogo-epc-industrial-2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="Catalogo_HUPAC_Industrial_EPC_2026.pdf"
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    backgroundColor: '#ffffff',
+                    color: 'var(--marino)',
+                    border: '1.5px solid var(--marino)',
+                    borderRadius: '12px',
+                    padding: '10px 14px',
+                    fontSize: '0.85rem',
+                    fontWeight: 750,
+                    textDecoration: 'none',
+                    whiteSpace: 'nowrap',
+                    boxShadow: '0 2px 6px rgba(19,42,82,0.08)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  title="Descargar Catálogo Industrial EPC 2026 en PDF"
+                >
+                  <IconCatalog size={16} color="var(--marino)" /> PDF Industrial
+                </a>
+              </div>
 
               <div style={{
                 backgroundColor: 'var(--cielo)',

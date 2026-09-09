@@ -176,10 +176,10 @@ export default function CatalogCarousel() {
               </Link>
 
               <a
-                href="/catalogo-hupac.pdf"
+                href="/catalogo-textil-hupac.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                download="Catalogo_HUPAC_Textiles.pdf"
+                download="Catalogo_HUPAC_Textiles_y_Calzado.pdf"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -369,10 +369,10 @@ export default function CatalogCarousel() {
               </Link>
 
               <a
-                href="/catalogo-hupac.pdf"
+                href="/catalogo-epc-industrial-2026.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                download="Catalogo_HUPAC_Textiles.pdf"
+                download="Catalogo_HUPAC_Industrial_EPC_2026.pdf"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
