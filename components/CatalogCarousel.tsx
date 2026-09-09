@@ -91,8 +91,9 @@ export default function CatalogCarousel() {
                 ].map(cat => {
                   const IconComp = cat.icon;
                   return (
-                    <div
+                    <Link
                       key={cat.slug}
+                      href={`/catalogo?catalogo=textil&cat=${cat.slug}`}
                       style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.06)',
                         border: '1px solid rgba(255, 255, 255, 0.14)',
@@ -103,8 +104,19 @@ export default function CatalogCarousel() {
                         gap: '12px',
                         textAlign: 'left',
                         color: '#ffffff',
-                        cursor: 'default'
+                        cursor: 'pointer',
+                        textDecoration: 'none',
+                        transition: 'all 0.2s ease'
                       }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.06)';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                      }}
+                      title={`Ver ${cat.titulo} en catálogo en línea`}
                     >
                       <div style={{
                         width: '34px',
@@ -124,7 +136,7 @@ export default function CatalogCarousel() {
                           {cat.titulo}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -139,7 +151,7 @@ export default function CatalogCarousel() {
               boxSizing: 'border-box'
             }}>
               <Link
-                href="/catalogo"
+                href="/catalogo?catalogo=textil"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -280,12 +292,13 @@ export default function CatalogCarousel() {
                   { slug: 'manos', icon: IconManos, titulo: 'Protección para Manos' },
                   { slug: 'alturas', icon: IconAlturas, titulo: 'Protección a las Alturas' },
                   { slug: 'vial', icon: IconVial, titulo: 'Limitación y Señalización' },
-                  { slug: 'equipamiento', icon: IconShield, titulo: 'Protección Respiratoria y EPP' }
+                  { slug: 'cabeza', icon: IconShield, titulo: 'Protección Respiratoria y EPP' }
                 ].map(cat => {
                   const IconComp = cat.icon;
                   return (
-                    <div
-                      key={cat.slug}
+                    <Link
+                      key={cat.titulo}
+                      href={`/catalogo?catalogo=epc&cat=${cat.slug}`}
                       style={{
                         backgroundColor: 'rgba(255, 255, 255, 0.06)',
                         border: '1px solid rgba(255, 255, 255, 0.14)',
@@ -296,8 +309,19 @@ export default function CatalogCarousel() {
                         gap: '12px',
                         textAlign: 'left',
                         color: '#ffffff',
-                        cursor: 'default'
+                        cursor: 'pointer',
+                        textDecoration: 'none',
+                        transition: 'all 0.2s ease'
                       }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.12)';
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.06)';
+                        e.currentTarget.style.transform = 'translateY(0)';
+                      }}
+                      title={`Ver ${cat.titulo} en catálogo en línea`}
                     >
                       <div style={{
                         width: '34px',
@@ -317,7 +341,7 @@ export default function CatalogCarousel() {
                           {cat.titulo}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
@@ -332,7 +356,7 @@ export default function CatalogCarousel() {
               boxSizing: 'border-box'
             }}>
               <Link
-                href="/catalogo"
+                href="/catalogo?catalogo=epc"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',

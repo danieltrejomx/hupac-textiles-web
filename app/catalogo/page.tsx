@@ -1,5 +1,6 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -20,15 +21,22 @@ import {
   IconCatalog
 } from '@/components/Icons';
 
-const CATEGORIAS_FILTRO = [
-  { id: 'textiles', label: 'Playeras y Polos', icon: IconPlayeras },
-  { id: 'calzado', label: 'Calzado y Accesorios', icon: IconCalzado },
-  { id: 'cabeza', label: 'Protección Cabeza', icon: IconCabeza },
-  { id: 'visual', label: 'Protección Visual', icon: IconVisual },
-  { id: 'manos', label: 'Protección Manos', icon: IconManos },
-  { id: 'ropa-trabajo', label: 'Ropa de Trabajo', icon: IconRopaTrabajo },
-  { id: 'alturas', label: 'Alturas', icon: IconAlturas },
-  { id: 'vial', label: 'Limitación Vial', icon: IconVial },
+interface CategoriaConfig {
+  id: string;
+  label: string;
+  icon: any;
+  catalogo: 'textil' | 'epc';
+}
+
+const CATEGORIAS_CONFIG: CategoriaConfig[] = [
+  { id: 'textiles', label: 'Playeras y Polos', icon: IconPlayeras, catalogo: 'textil' },
+  { id: 'calzado', label: 'Calzado y Accesorios', icon: IconCalzado, catalogo: 'textil' },
+  { id: 'ropa-trabajo', label: 'Ropa de Trabajo', icon: IconRopaTrabajo, catalogo: 'textil' },
+  { id: 'cabeza', label: 'Protección Cabeza', icon: IconCabeza, catalogo: 'epc' },
+  { id: 'visual', label: 'Protección Visual', icon: IconVisual, catalogo: 'epc' },
+  { id: 'manos', label: 'Protección Manos', icon: IconManos, catalogo: 'epc' },
+  { id: 'alturas', label: 'Alturas', icon: IconAlturas, catalogo: 'epc' },
+  { id: 'vial', label: 'Limitación Vial', icon: IconVial, catalogo: 'epc' },
 ];
 
 function ProductCatalogCard({ prod, handleQuickAdd }: { prod: Product; handleQuickAdd: (e: React.MouseEvent, p: Product) => void }) {
@@ -205,10 +213,37 @@ function ProductCatalogCard({ prod, handleQuickAdd }: { prod: Product; handleQui
   );
 }
 
-export default function CatalogoPage() {
-  const [categoriaActiva, setCategoriaActiva] = useState('todos');
+function CatalogoContent() {
+  const searchParams = useSearchParams();
+  const catalogoParam = searchParams.get('catalogo');
+  const catParam = searchParams.get('cat');
+
+  const [catalogoActivo, setCatalogoActivo] = useState<'todos' | 'textil' | 'epc'>(() => {
+    if (catalogoParam === 'epc') return 'epc';
+    if (catalogoParam === 'textil') return 'textil';
+    return 'todos';
+  });
+
+  const [categoriaActiva, setCategoriaActiva] = useState<string>(() => {
+    return catParam || 'todos';
+  });
+
   const [busqueda, setBusqueda] = useState('');
   const { addToCart } = useCart();
+
+  useEffect(() => {
+    if (catalogoParam === 'epc' || catalogoParam === 'textil') {
+      setCatalogoActivo(catalogoParam);
+    } else if (catalogoParam === 'todos') {
+      setCatalogoActivo('todos');
+    }
+  }, [catalogoParam]);
+
+  useEffect(() => {
+    if (catParam) {
+      setCategoriaActiva(catParam);
+    }
+  }, [catParam]);
 
   const handleQuickAdd = (e: React.MouseEvent, prod: Product) => {
     e.preventDefault();
@@ -231,9 +266,31 @@ export default function CatalogoPage() {
     });
   };
 
+  const isEpcProduct = (p: Product) => {
+    return ['cabeza', 'visual', 'manos', 'alturas', 'vial'].includes(p.categoria || '');
+  };
+
+  const isTextilProduct = (p: Product) => {
+    return !p.categoria || ['textiles', 'calzado', 'accesorios', 'ropa-trabajo'].includes(p.categoria);
+  };
+
+  const categoriasVisibles = useMemo(() => {
+    if (catalogoActivo === 'epc') {
+      return CATEGORIAS_CONFIG.filter(c => c.catalogo === 'epc');
+    }
+    if (catalogoActivo === 'textil') {
+      return CATEGORIAS_CONFIG.filter(c => c.catalogo === 'textil');
+    }
+    return CATEGORIAS_CONFIG;
+  }, [catalogoActivo]);
+
   const productosFiltrados = useMemo(() => {
     return PRODUCTS.filter((p) => {
-      // Filtro por categoría
+      // 1. Filtro por Catálogo Mayor
+      if (catalogoActivo === 'epc' && !isEpcProduct(p)) return false;
+      if (catalogoActivo === 'textil' && !isTextilProduct(p)) return false;
+
+      // 2. Filtro por categoría específica
       if (categoriaActiva === 'textiles') {
         if (p.categoria && p.categoria !== 'textiles') return false;
       } else if (categoriaActiva === 'calzado') {
@@ -242,7 +299,7 @@ export default function CatalogoPage() {
         if (p.categoria !== categoriaActiva) return false;
       }
 
-      // Filtro por búsqueda
+      // 3. Filtro por búsqueda
       if (busqueda.trim()) {
         const q = busqueda.toLowerCase().trim();
         const matchNombre = p.nombre.toLowerCase().includes(q);
@@ -254,7 +311,7 @@ export default function CatalogoPage() {
 
       return true;
     });
-  }, [categoriaActiva, busqueda]);
+  }, [catalogoActivo, categoriaActiva, busqueda]);
 
   return (
     <>
@@ -264,7 +321,7 @@ export default function CatalogoPage() {
         <section style={{
           background: 'var(--marino)',
           color: '#ffffff',
-          padding: '14px 24px',
+          padding: '16px 24px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
           textAlign: 'center'
         }}>
@@ -283,7 +340,11 @@ export default function CatalogoPage() {
               color: '#ffffff',
               textAlign: 'center'
             }}>
-              Confección Textil, Calzado y Seguridad Industrial
+              {catalogoActivo === 'epc'
+                ? '🛡️ Catálogo EPC y Equipo de Protección Industrial'
+                : catalogoActivo === 'textil'
+                ? '👕 Catálogo de Confección Textil y Calzado'
+                : 'Confección Textil, Calzado y Seguridad Industrial'}
             </h1>
           </div>
         </section>
@@ -302,6 +363,97 @@ export default function CatalogoPage() {
             flexDirection: 'column',
             gap: '20px'
           }}>
+
+            {/* Selector de Catálogo Principal */}
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '10px',
+              flexWrap: 'wrap',
+              paddingBottom: '16px',
+              borderBottom: '1px solid var(--linea)'
+            }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setCatalogoActivo('todos');
+                  setCategoriaActiva('todos');
+                }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 18px',
+                  borderRadius: '999px',
+                  border: catalogoActivo === 'todos' ? '2px solid var(--rey)' : '1px solid var(--linea)',
+                  backgroundColor: catalogoActivo === 'todos' ? 'var(--rey)' : '#f8fafc',
+                  color: catalogoActivo === 'todos' ? '#ffffff' : 'var(--texto)',
+                  fontWeight: 800,
+                  fontSize: '0.86rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  boxShadow: catalogoActivo === 'todos' ? '0 4px 12px rgba(36, 86, 196, 0.25)' : 'none'
+                }}
+              >
+                <span>📦 Todos los Catálogos (123)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setCatalogoActivo('textil');
+                  if (['cabeza', 'visual', 'manos', 'alturas', 'vial'].includes(categoriaActiva)) {
+                    setCategoriaActiva('todos');
+                  }
+                }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 18px',
+                  borderRadius: '999px',
+                  border: catalogoActivo === 'textil' ? '2px solid var(--rey)' : '1px solid var(--linea)',
+                  backgroundColor: catalogoActivo === 'textil' ? 'var(--rey)' : '#f8fafc',
+                  color: catalogoActivo === 'textil' ? '#ffffff' : 'var(--texto)',
+                  fontWeight: 800,
+                  fontSize: '0.86rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  boxShadow: catalogoActivo === 'textil' ? '0 4px 12px rgba(36, 86, 196, 0.25)' : 'none'
+                }}
+              >
+                <span>👕 Confección Textil y Calzado (73)</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setCatalogoActivo('epc');
+                  if (['textiles', 'calzado', 'accesorios', 'ropa-trabajo'].includes(categoriaActiva)) {
+                    setCategoriaActiva('todos');
+                  }
+                }}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '10px 18px',
+                  borderRadius: '999px',
+                  border: catalogoActivo === 'epc' ? '2px solid var(--marino)' : '1px solid var(--linea)',
+                  backgroundColor: catalogoActivo === 'epc' ? 'var(--marino)' : '#f8fafc',
+                  color: catalogoActivo === 'epc' ? '#ffffff' : 'var(--texto)',
+                  fontWeight: 800,
+                  fontSize: '0.86rem',
+                  cursor: 'pointer',
+                  transition: 'all 0.15s ease',
+                  boxShadow: catalogoActivo === 'epc' ? '0 4px 12px rgba(19, 42, 82, 0.25)' : 'none'
+                }}
+              >
+                <span>🛡️ Catálogo EPC y Protección (50)</span>
+              </button>
+            </div>
+
             {/* Input de Búsqueda */}
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
               <div style={{ flex: 1, minWidth: '260px', position: 'relative' }}>
@@ -350,8 +502,8 @@ export default function CatalogoPage() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px',
-                    backgroundColor: '#ffffff',
-                    color: 'var(--rey)',
+                    backgroundColor: catalogoActivo === 'textil' ? 'var(--rey)' : '#ffffff',
+                    color: catalogoActivo === 'textil' ? '#ffffff' : 'var(--rey)',
                     border: '1.5px solid var(--rey)',
                     borderRadius: '12px',
                     padding: '10px 14px',
@@ -364,7 +516,7 @@ export default function CatalogoPage() {
                   }}
                   title="Descargar Catálogo Textil y Calzado en PDF"
                 >
-                  <IconCatalog size={16} color="var(--rey)" /> PDF Textil
+                  <IconCatalog size={16} color={catalogoActivo === 'textil' ? '#ffffff' : 'var(--rey)'} /> PDF Textil
                 </a>
                 <a
                   href="/catalogo-epc-industrial-2026.pdf"
@@ -375,8 +527,8 @@ export default function CatalogoPage() {
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '6px',
-                    backgroundColor: '#ffffff',
-                    color: 'var(--marino)',
+                    backgroundColor: catalogoActivo === 'epc' ? 'var(--marino)' : '#ffffff',
+                    color: catalogoActivo === 'epc' ? '#ffffff' : 'var(--marino)',
                     border: '1.5px solid var(--marino)',
                     borderRadius: '12px',
                     padding: '10px 14px',
@@ -389,7 +541,7 @@ export default function CatalogoPage() {
                   }}
                   title="Descargar Catálogo Industrial EPC 2026 en PDF"
                 >
-                  <IconCatalog size={16} color="var(--marino)" /> PDF Industrial
+                  <IconCatalog size={16} color={catalogoActivo === 'epc' ? '#ffffff' : 'var(--marino)'} /> PDF Industrial
                 </a>
               </div>
 
@@ -418,7 +570,32 @@ export default function CatalogoPage() {
                 scrollBehavior: 'smooth'
               }}
             >
-              {CATEGORIAS_FILTRO.map((cat) => {
+              <button
+                type="button"
+                onClick={() => setCategoriaActiva('todos')}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  padding: '10px 16px',
+                  borderRadius: '12px',
+                  border: categoriaActiva === 'todos' ? '1.5px solid var(--rey)' : '1px solid var(--linea)',
+                  backgroundColor: categoriaActiva === 'todos' ? 'var(--marino)' : '#ffffff',
+                  color: categoriaActiva === 'todos' ? '#ffffff' : 'var(--marino)',
+                  fontSize: '0.88rem',
+                  fontWeight: categoriaActiva === 'todos' ? 750 : 600,
+                  cursor: 'pointer',
+                  whiteSpace: 'nowrap',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                <IconTodos size={16} color={categoriaActiva === 'todos' ? '#ffffff' : 'var(--rey)'} />
+                <span>
+                  {catalogoActivo === 'epc' ? 'Todos en EPC' : catalogoActivo === 'textil' ? 'Todos en Textil y Calzado' : 'Todos los Modelos'}
+                </span>
+              </button>
+
+              {categoriasVisibles.map((cat) => {
                 const isActive = categoriaActiva === cat.id;
                 const IconComp = cat.icon;
                 return (
@@ -557,3 +734,16 @@ export default function CatalogoPage() {
     </>
   );
 }
+
+export default function CatalogoPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--marino)', fontWeight: 750 }}>
+        Cargando catálogo HUPAC...
+      </div>
+    }>
+      <CatalogoContent />
+    </Suspense>
+  );
+}
+
