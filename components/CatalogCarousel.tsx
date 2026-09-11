@@ -86,8 +86,10 @@ export default function CatalogCarousel() {
               }}>
                 {[
                   { slug: 'textiles', icon: IconPlayeras, titulo: 'Playeras y Polos de Línea' },
-                  { slug: 'calzado', icon: IconCalzado, titulo: 'Calzado Duty Gear y Botas' },
-                  { slug: 'ropa-trabajo', icon: IconRopaTrabajo, titulo: 'Ropa de Trabajo e Industrial' }
+                  { slug: 'felpas', icon: IconPlayeras, titulo: 'Sudaderas y Felpas' },
+                  { slug: 'camisas', icon: IconRopaTrabajo, titulo: 'Camisas de Vestir' },
+                  { slug: 'pantalones', icon: IconRopaTrabajo, titulo: 'Pantalones y Mezclilla' },
+                  { slug: 'calzado', icon: IconCalzado, titulo: 'Calzado Duty Gear y Botas' }
                 ].map(cat => {
                   const IconComp = cat.icon;
                   return (
@@ -290,9 +292,9 @@ export default function CatalogCarousel() {
                   { slug: 'cabeza', icon: IconCabeza, titulo: 'Protección para la Cabeza' },
                   { slug: 'visual', icon: IconVisual, titulo: 'Protección Visual y Faciales' },
                   { slug: 'manos', icon: IconManos, titulo: 'Protección para Manos' },
+                  { slug: 'ropa-trabajo', icon: IconRopaTrabajo, titulo: 'Ropa Industrial y Chalecos' },
                   { slug: 'alturas', icon: IconAlturas, titulo: 'Protección a las Alturas' },
-                  { slug: 'vial', icon: IconVial, titulo: 'Limitación y Señalización' },
-                  { slug: 'cabeza', icon: IconShield, titulo: 'Protección Respiratoria y EPP' }
+                  { slug: 'vial', icon: IconVial, titulo: 'Limitación y Señalización' }
                 ].map(cat => {
                   const IconComp = cat.icon;
                   return (

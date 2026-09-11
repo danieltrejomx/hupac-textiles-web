@@ -22,7 +22,7 @@ export interface Product {
   sku: string;
   estilo?: string;
   nombre: string;
-  categoria?: 'textiles' | 'calzado' | 'accesorios' | 'cabeza' | 'visual' | 'manos' | 'ropa-trabajo' | 'alturas' | 'vial';
+  categoria?: 'textiles' | 'calzado' | 'accesorios' | 'cabeza' | 'visual' | 'manos' | 'ropa-trabajo' | 'alturas' | 'vial' | 'felpas' | 'camisas' | 'pantalones';
   subtitulo: string;
   descripcion: string;
   composicion: string;
@@ -853,6 +853,390 @@ export const PRODUCTS: Product[] = [
       'CH-EG': {
         Blanco: { '12-71': 40.00, '72-503': 39.20, '504+': 38.00 },
         Colores: { '12-71': 44.00, '72-503': 43.12, '504+': 41.80 }
+      }
+    }
+  },
+  {
+    id: '32692-playera-heavy-manga-larga-caballero',
+    sku: '32692',
+    estilo: '32692',
+    nombre: 'Playera Heavy Manga Larga',
+    categoria: 'textiles',
+    subtitulo: 'Caballero · 100% Algodón · 190 g/m²',
+    descripcion: 'Playera manga larga de corte regular para caballero, confeccionada en algodón pesado de 190 g/m² para una estructura firme y excelente durabilidad. Cuenta con cuello y puños en cárdigan rib.',
+    composicion: '100% Algodón (Heather: 90% Algodón / 10% Poliéster)',
+    gramaje: '190 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
+    detalles: ['Corte regular caballero', 'Cuello redondo con cárdigan rib', 'Puños acanalados en cárdigan', 'Estructura pesada de 190 g/m²', 'Tacto suave y resistente'],
+    tecnicas: ['Impresión Directa (DTG)', 'Serigrafía', 'Termotransferencia', 'Bordado'],
+    imagenPrincipal: '/images/products/32692_playera_heavy_manga_larga_caballero.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Heather', hex: '#9E9E9E' },
+      { nombre: 'Negro', hex: '#1F1F1F' },
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Rojo', hex: '#C62828' }
+    ],
+    precios: {
+      'CH-EG': {
+        Blanco: { '12-71': 53.50, '72-503': 52.43, '504+': 50.83 },
+        Colores: { '12-71': 66.00, '72-503': 64.68, '504+': 62.70 }
+      },
+      '2EG': {
+        Blanco: { '12-71': 64.00, '72-503': 62.72, '504+': 60.80 },
+        Colores: { '12-71': 77.00, '72-503': 75.46, '504+': 73.15 }
+      }
+    }
+  },
+  {
+    id: '38103-sudadera-supreme-capucha-cangurera',
+    sku: '38103',
+    estilo: '38103',
+    nombre: 'Sudadera Supreme Capucha y Cangurera',
+    categoria: 'felpas',
+    subtitulo: 'Caballero / Unisex · 52% Algodón / 48% Poliéster · 267 g/m²',
+    descripcion: 'Sudadera premium afelpada con bolsa delantera tipo canguro y capucha forrada con jareta plana funcional. Su interior afelpado brinda suavidad al contacto con la piel y protección térmica superior.',
+    composicion: '52% Algodón / 48% Poliéster (Heather: 75% Algodón / 25% Poliéster)',
+    gramaje: '267 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
+    detalles: ['Fit regular', 'Afelpado interior suave al tacto', 'Bolsa tipo canguro y capucha funcional', 'Jareta plana de ajuste', 'Pretina y puños en rib con elastano'],
+    tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia', 'DTF'],
+    imagenPrincipal: '/images/products/38103_sudadera_capucha_cangurera.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Negro', hex: '#1F1F1F' },
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Oxford', hex: '#4A4A4A' },
+      { nombre: 'Heather', hex: '#9E9E9E' },
+      { nombre: 'Vino', hex: '#6B1724' }
+    ],
+    precios: {
+      'CH-2EG': {
+        Colores: { '12-71': 134.00, '72-503': 129.98, '504+': 127.30 }
+      }
+    }
+  },
+  {
+    id: '38102-sudadera-supreme-cuello-redondo',
+    sku: '38102',
+    estilo: '38102',
+    nombre: 'Sudadera Supreme Cuello Redondo',
+    categoria: 'felpas',
+    subtitulo: 'Caballero / Unisex · 52% Algodón / 48% Poliéster · 267 g/m²',
+    descripcion: 'Sudadera clásica cuello redondo con afelpado interno terso y cálido. Cuello, puños y pretina confeccionados en cárdigan de algodón-elastano que asegura retención de forma tras múltiples lavadas.',
+    composicion: '52% Algodón / 48% Poliéster (Heather: 75% Algodón / 25% Poliéster)',
+    gramaje: '267 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
+    detalles: ['Fit regular', 'Afelpado interior suave al tacto', 'Cuello, puños y cintura algodón-elastano', 'Costuras reforzadas en hombros y sisas'],
+    tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia', 'DTF'],
+    imagenPrincipal: '/images/products/38102_sudadera_cuello_redondo.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Negro', hex: '#1F1F1F' },
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Oxford', hex: '#4A4A4A' },
+      { nombre: 'Heather', hex: '#9E9E9E' },
+      { nombre: 'Vino', hex: '#6B1724' }
+    ],
+    precios: {
+      'CH-2EG': {
+        Colores: { '12-71': 98.00, '72-503': 95.06, '504+': 93.10 }
+      }
+    }
+  },
+  {
+    id: '38105-sudadera-supreme-capucha-cierre',
+    sku: '38105',
+    estilo: '38105',
+    nombre: 'Sudadera Supreme Capucha con Cierre',
+    categoria: 'felpas',
+    subtitulo: 'Caballero / Unisex · 52% Algodón / 48% Poliéster · 267 g/m²',
+    descripcion: 'Sudadera con cierre completo frontal, capucha con jareta y dos bolsas frontales independientes. Confección en tejido afelpado confortable de alto gramaje para uso corporativo y cotidiano.',
+    composicion: '52% Algodón / 48% Poliéster (Heather: 75% Algodón / 25% Poliéster)',
+    gramaje: '267 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
+    detalles: ['Fit regular', 'Cierre metálico frontal completo', 'Afelpado interior suave', 'Bolsas laterales frontales', 'Capucha con jareta plana de ajuste', 'Puños y cintura en cárdigan rib'],
+    tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia', 'DTF'],
+    imagenPrincipal: '/images/products/38105_sudadera_capucha_cierre.jpg',
+    colores: [
+      { nombre: 'Negro', hex: '#1F1F1F' },
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Oxford', hex: '#4A4A4A' },
+      { nombre: 'Heather', hex: '#9E9E9E' },
+      { nombre: 'Vino', hex: '#6B1724' }
+    ],
+    precios: {
+      'CH-2EG': {
+        Colores: { '12-71': 150.00, '72-503': 145.50, '504+': 142.50 }
+      }
+    }
+  },
+  {
+    id: '38106-pantalon-jogger-caballero',
+    sku: '38106',
+    estilo: '38106',
+    nombre: 'Pantalón Tipo Jogger Caballero',
+    categoria: 'felpas',
+    subtitulo: 'Caballero · 52% Algodón / 48% Poliéster · 267 g/m²',
+    descripcion: 'Pantalón deportivo casual estilo jogger para caballero. Diseñado con afelpado interior térmico, bolsas laterales profundas, costura de refuerzo en cintura con jareta funcional y tobillos acanalados.',
+    composicion: '52% Algodón / 48% Poliéster (Heather: 75% Algodón / 25% Poliéster)',
+    gramaje: '267 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG'],
+    detalles: ['Corte jogger regular', 'Afelpado interior suave al tacto', 'Bolsas laterales', 'Cintura elástica con costura de refuerzo', 'Jareta plana funcional', 'Puños de tobillo en cárdigan'],
+    tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
+    imagenPrincipal: '/images/products/38106_pantalon_jogger_caballero.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Negro', hex: '#1F1F1F' },
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Oxford', hex: '#4A4A4A' },
+      { nombre: 'Heather', hex: '#9E9E9E' }
+    ],
+    precios: {
+      'CH-EG': {
+        Colores: { '12-71': 128.00, '72-503': 124.16, '504+': 121.60 }
+      }
+    }
+  },
+  {
+    id: '38132-pantalon-jogger-juvenil',
+    sku: '38132',
+    estilo: '38132',
+    nombre: 'Pants Jogger Juvenil con Bolsas Laterales',
+    categoria: 'felpas',
+    subtitulo: 'Juvenil · 52% Algodón / 48% Poliéster · 300 g/m²',
+    descripcion: 'Pants deportivo y escolar juvenil en felpa pesada de 300 g/m². Gran durabilidad y confort térmico para actividades deportivas y uniformes estudiantiles.',
+    composicion: '52% Algodón / 48% Poliéster (Heather: 75% Algodón / 25% Poliéster)',
+    gramaje: '300 g/m²',
+    tallas: ['10-12', '14-16'],
+    detalles: ['Fit regular juvenil', 'Felpa pesada de 300 g/m²', 'Afelpado interior suave', 'Bolsas laterales', 'Jareta funcional en cintura', 'Tobilleras ajustables con elástico'],
+    tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
+    imagenPrincipal: '/images/products/38132_pantalon_jogger_juvenil.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Oxford', hex: '#4A4A4A' },
+      { nombre: 'Heather', hex: '#9E9E9E' }
+    ],
+    precios: {
+      '10/12-14/16': {
+        Colores: { '12-71': 88.50, '72-503': 85.85, '504+': 84.08 }
+      }
+    }
+  },
+  {
+    id: '38129-sudadera-capucha-juvenil',
+    sku: '38129',
+    estilo: '38129',
+    nombre: 'Sudadera Capucha y Cangurera Juvenil',
+    categoria: 'felpas',
+    subtitulo: 'Juvenil · 52% Algodón / 48% Poliéster · 250 g/m²',
+    descripcion: 'Sudadera juvenil con capucha integrada y bolsa delantera tipo canguro. Tejido afelpado cálido y flexible con acabado suave para uniformes y uso escolar.',
+    composicion: '52% Algodón / 48% Poliéster (Heather: 75% Algodón / 25% Poliéster)',
+    gramaje: '250 g/m²',
+    tallas: ['10-12', '14-16'],
+    detalles: ['Fit regular juvenil', 'Afelpado interior suave al tacto', 'Bolsa canguro delantera', 'Capucha forrada', 'Puños y pretina elásticos'],
+    tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia', 'DTF'],
+    imagenPrincipal: '/images/products/38129_sudadera_capucha_juvenil.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Oxford', hex: '#4A4A4A' },
+      { nombre: 'Heather', hex: '#9E9E9E' }
+    ],
+    precios: {
+      '10/12-14/16': {
+        Colores: { '12-71': 94.00, '72-503': 91.18, '504+': 89.30 }
+      }
+    }
+  },
+  {
+    id: '35003-camisa-manga-larga-caballero',
+    sku: '35003',
+    estilo: '35003',
+    nombre: 'Camisa Manga Larga Caballero',
+    categoria: 'camisas',
+    subtitulo: 'Caballero · Algodón / Poliéster · 145 g/m²',
+    descripcion: 'Camisa ejecutiva de corte regular en manga larga para caballero. Diseñada para dotaciones corporativas con cuello camisero formal, aletilla frontal reforzada, bolsa en pecho y puños con botón ajustable.',
+    composicion: '50% Algodón / 50% Poliéster',
+    gramaje: '145 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
+    detalles: ['Corte regular caballero', 'Cuello camisero formal estructurado', 'Aletilla con botones', 'Bolsa delantera en pecho', 'Manga con puño y botones ajustables', 'Tela resistente de fácil planchado'],
+    tecnicas: ['Bordado', 'Termotransferencia'],
+    imagenPrincipal: '/images/products/35003_camisa_ml_pantalon_gabardina_caballero.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Cielo', hex: '#7BA4D0' }
+    ],
+    precios: {
+      'CH-2EG': {
+        Colores: { '12-71': 195.50, '72-503': 189.64, '504+': 183.77 }
+      }
+    }
+  },
+  {
+    id: '35001-camisa-manga-larga-dama',
+    sku: '35001',
+    estilo: '35001',
+    nombre: 'Camisa Manga Larga Dama',
+    categoria: 'camisas',
+    subtitulo: 'Dama · Algodón / Poliéster · 145 g/m²',
+    descripcion: 'Camisa ejecutiva de silueta estilizada en manga larga para dama. Corte femenino con pinzas de entalle, cuello camisero estructurado y aletilla frontal con botones.',
+    composicion: '50% Algodón / 50% Poliéster',
+    gramaje: '145 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
+    detalles: ['Corte asiluetado dama', 'Pinzas de entalle frontal y trasero', 'Cuello camisero formal', 'Aletilla delantera con botones', 'Manga larga con puño y botón'],
+    tecnicas: ['Bordado', 'Termotransferencia'],
+    imagenPrincipal: '/images/products/35001_camisa_ml_pantalon_gabardina_dama.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Cielo', hex: '#7BA4D0' }
+    ],
+    precios: {
+      'CH-2EG': {
+        Colores: { '12-71': 180.00, '72-503': 174.60, '504+': 169.20 }
+      }
+    }
+  },
+  {
+    id: '35002-camisa-manga-corta-caballero',
+    sku: '35002',
+    estilo: '35002',
+    nombre: 'Camisa Manga Corta Caballero',
+    categoria: 'camisas',
+    subtitulo: 'Caballero · Algodón / Poliéster · 145 g/m²',
+    descripcion: 'Camisa de trabajo y uniforme empresarial en manga corta para caballero. Corte regular fresco y ergonómico, con cuello camisero, bolsa frontal y tela transpirable.',
+    composicion: '50% Algodón / 50% Poliéster',
+    gramaje: '145 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
+    detalles: ['Corte regular', 'Cuello camisero estructurado', 'Aletilla delantera con botones', 'Bolsa delantera en pecho', 'Manga corta con dobladillo fino'],
+    tecnicas: ['Bordado', 'Termotransferencia'],
+    imagenPrincipal: '/images/products/35002_camisa_mc_pantalon_mezclilla_caballero.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Cielo', hex: '#7BA4D0' }
+    ],
+    precios: {
+      'CH-2EG': {
+        Colores: { '12-71': 172.30, '72-503': 167.13, '504+': 161.96 }
+      }
+    }
+  },
+  {
+    id: '35000-camisa-manga-corta-dama',
+    sku: '35000',
+    estilo: '35000',
+    nombre: 'Camisa Manga Corta Dama',
+    categoria: 'camisas',
+    subtitulo: 'Dama · Algodón / Poliéster · 145 g/m²',
+    descripcion: 'Camisa corporativa manga corta para dama. Confección fresca y cómoda con corte asiluetado femenino, cuello camisero y aletilla frontal.',
+    composicion: '50% Algodón / 50% Poliéster',
+    gramaje: '145 g/m²',
+    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
+    detalles: ['Corte asiluetado favorecedor', 'Cuello camisero formal', 'Aletilla delantera con botones', 'Manga corta con dobladillo', 'Costuras reforzadas'],
+    tecnicas: ['Bordado', 'Termotransferencia'],
+    imagenPrincipal: '/images/products/35000_camisa_mc_pantalon_mezclilla_dama.jpg',
+    colores: [
+      { nombre: 'Blanco', hex: '#FFFFFF' },
+      { nombre: 'Cielo', hex: '#7BA4D0' }
+    ],
+    precios: {
+      'CH-2EG': {
+        Colores: { '12-71': 157.50, '72-503': 152.78, '504+': 148.05 }
+      }
+    }
+  },
+  {
+    id: '51774-pantalon-gabardina-caballero',
+    sku: '51774',
+    estilo: '51774',
+    nombre: 'Pantalón de Gabardina Caballero',
+    categoria: 'pantalones',
+    subtitulo: 'Caballero · 100% Algodón · 7 oz/yd²',
+    descripcion: 'Pantalón de gabardina 100% algodón de 7 oz/yd² para caballero. Ideal para uniformes industriales, operativos y administrativos. Con presillas reforzadas en cintura, bolsas delanteras y traseras funcionales y costura de refuerzo interna.',
+    composicion: '100% Algodón',
+    gramaje: '7 oz/yd²',
+    tallas: ['28', '30', '32', '34', '36', '38', '40', '42'],
+    detalles: ['Corte regular recto caballero', 'Presillas en cintura para cinturón', '2 bolsas delanteras inclinadas', '2 bolsas traseras funcionales', 'Cierre metálico frontal', 'Costura de refuerzo interna en tiro'],
+    tecnicas: ['Bordado'],
+    imagenPrincipal: '/images/products/35003_camisa_ml_pantalon_gabardina_caballero.jpg',
+    colores: [
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Khaki', hex: '#C2B280' }
+    ],
+    precios: {
+      '28-42': {
+        Colores: { '12-71': 243.00, '72-503': 243.00, '504+': 243.00 }
+      }
+    }
+  },
+  {
+    id: '51783-pantalon-gabardina-dama',
+    sku: '51783',
+    estilo: '51783',
+    nombre: 'Pantalón de Gabardina Dama',
+    categoria: 'pantalones',
+    subtitulo: 'Dama · 100% Algodón · 7 oz/yd²',
+    descripcion: 'Pantalón de gabardina 100% algodón de 7 oz/yd² diseñado anatómicamente para dama. Brinda máxima comodidad y durabilidad con presillas reforzadas, 4 bolsas prácticas y costura reforzada interior.',
+    composicion: '100% Algodón',
+    gramaje: '7 oz/yd²',
+    tallas: ['05', '07', '09', '11', '13', '15'],
+    detalles: ['Corte diseñado para anatomía dama', 'Presillas reforzadas en pretina', '2 bolsas delanteras y 2 traseras', 'Cierre metálico frontal resistente', 'Costura de refuerzo interna'],
+    tecnicas: ['Bordado'],
+    imagenPrincipal: '/images/products/35001_camisa_ml_pantalon_gabardina_dama.jpg',
+    colores: [
+      { nombre: 'Marino', hex: '#1A2B4C' },
+      { nombre: 'Khaki', hex: '#C2B280' }
+    ],
+    precios: {
+      '05-15': {
+        Colores: { '12-71': 243.00, '72-503': 243.00, '504+': 243.00 }
+      }
+    }
+  },
+  {
+    id: '55151-jeans-vaquero-classic-caballero',
+    sku: '55151',
+    estilo: '55151',
+    nombre: 'Jeans Vaquero Classic Caballero',
+    categoria: 'pantalones',
+    subtitulo: 'Caballero · 100% Algodón · 14 oz/yd²',
+    descripcion: 'Pantalón de mezclilla vaquera pesada de 14 oz/yd² para caballero. 100% algodón resistente al desgaste rudo con lavado dark stone, remaches de refuerzo en puntos de esfuerzo y tiro cómodo.',
+    composicion: '100% Algodón',
+    gramaje: '14 oz/yd²',
+    tallas: ['28', '30', '32', '34', '36', '38', '40', '42'],
+    detalles: ['Mezclilla pesada de 14 oz/yd²', 'Corte regular vaquero', 'Presillas reforzadas en cintura', '5 bolsas tradicionales con relojera', 'Cierre metálico frontal de uso pesado', 'Costura de refuerzo interna'],
+    tecnicas: ['Bordado'],
+    imagenPrincipal: '/images/products/35002_camisa_mc_pantalon_mezclilla_caballero.jpg',
+    colores: [
+      { nombre: 'Dark Stone', hex: '#26374A' }
+    ],
+    precios: {
+      '28-42': {
+        Colores: { '12-71': 209.00, '72-503': 202.73, '504+': 196.46 }
+      }
+    }
+  },
+  {
+    id: '55152-jeans-vaquero-classic-dama',
+    sku: '55152',
+    estilo: '55152',
+    nombre: 'Jeans Vaquero Classic Dama',
+    categoria: 'pantalones',
+    subtitulo: 'Dama · 100% Algodón · 12 oz/yd²',
+    descripcion: 'Pantalón de mezclilla para dama en 12 oz/yd² 100% algodón. Confeccionado con lavado dark stone, ajuste cómodo en cadera y cintura, presillas dobles y costuras reforzadas para jornadas de trabajo exigentes.',
+    composicion: '100% Algodón',
+    gramaje: '12 oz/yd²',
+    tallas: ['05', '07', '09', '11', '13', '15'],
+    detalles: ['Mezclilla confortable de 12 oz/yd²', 'Corte clásico para dama', '5 bolsas funcionales con remaches', 'Cierre frontal metálico', 'Costuras reforzadas en tiro'],
+    tecnicas: ['Bordado'],
+    imagenPrincipal: '/images/products/35000_camisa_mc_pantalon_mezclilla_dama.jpg',
+    colores: [
+      { nombre: 'Dark Stone', hex: '#26374A' }
+    ],
+    precios: {
+      '05-15': {
+        Colores: { '12-71': 209.00, '72-503': 202.73, '504+': 196.46 }
       }
     }
   },

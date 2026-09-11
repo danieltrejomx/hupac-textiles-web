@@ -30,8 +30,11 @@ interface CategoriaConfig {
 
 const CATEGORIAS_CONFIG: CategoriaConfig[] = [
   { id: 'textiles', label: 'Playeras y Polos', icon: IconPlayeras, catalogo: 'textil' },
+  { id: 'felpas', label: 'Sudaderas y Felpas', icon: IconPlayeras, catalogo: 'textil' },
+  { id: 'camisas', label: 'Camisas de Vestir', icon: IconRopaTrabajo, catalogo: 'textil' },
+  { id: 'pantalones', label: 'Pantalones y Jeans', icon: IconRopaTrabajo, catalogo: 'textil' },
   { id: 'calzado', label: 'Calzado y Accesorios', icon: IconCalzado, catalogo: 'textil' },
-  { id: 'ropa-trabajo', label: 'Ropa de Trabajo', icon: IconRopaTrabajo, catalogo: 'textil' },
+  { id: 'ropa-trabajo', label: 'Ropa Industrial y Chalecos', icon: IconRopaTrabajo, catalogo: 'epc' },
   { id: 'cabeza', label: 'Protección Cabeza', icon: IconCabeza, catalogo: 'epc' },
   { id: 'visual', label: 'Protección Visual', icon: IconVisual, catalogo: 'epc' },
   { id: 'manos', label: 'Protección Manos', icon: IconManos, catalogo: 'epc' },
@@ -267,11 +270,11 @@ function CatalogoContent() {
   };
 
   const isEpcProduct = (p: Product) => {
-    return ['cabeza', 'visual', 'manos', 'alturas', 'vial'].includes(p.categoria || '');
+    return p.id.startsWith('epc-');
   };
 
   const isTextilProduct = (p: Product) => {
-    return !p.categoria || ['textiles', 'calzado', 'accesorios', 'ropa-trabajo'].includes(p.categoria);
+    return !p.id.startsWith('epc-');
   };
 
   const categoriasVisibles = useMemo(() => {
@@ -396,14 +399,14 @@ function CatalogoContent() {
                   boxShadow: catalogoActivo === 'todos' ? '0 4px 12px rgba(36, 86, 196, 0.25)' : 'none'
                 }}
               >
-                <span>📦 Todos los Catálogos (123)</span>
+                <span>📦 Todos los Catálogos ({PRODUCTS.length})</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => {
                   setCatalogoActivo('textil');
-                  if (['cabeza', 'visual', 'manos', 'alturas', 'vial'].includes(categoriaActiva)) {
+                  if (['cabeza', 'visual', 'manos', 'alturas', 'vial', 'ropa-trabajo'].includes(categoriaActiva)) {
                     setCategoriaActiva('todos');
                   }
                 }}
@@ -423,14 +426,14 @@ function CatalogoContent() {
                   boxShadow: catalogoActivo === 'textil' ? '0 4px 12px rgba(36, 86, 196, 0.25)' : 'none'
                 }}
               >
-                <span>👕 Confección Textil y Calzado (73)</span>
+                <span>👕 Confección Textil y Calzado ({PRODUCTS.filter(isTextilProduct).length})</span>
               </button>
 
               <button
                 type="button"
                 onClick={() => {
                   setCatalogoActivo('epc');
-                  if (['textiles', 'calzado', 'accesorios', 'ropa-trabajo'].includes(categoriaActiva)) {
+                  if (['textiles', 'calzado', 'accesorios', 'felpas', 'camisas', 'pantalones'].includes(categoriaActiva)) {
                     setCategoriaActiva('todos');
                   }
                 }}
@@ -450,7 +453,7 @@ function CatalogoContent() {
                   boxShadow: catalogoActivo === 'epc' ? '0 4px 12px rgba(19, 42, 82, 0.25)' : 'none'
                 }}
               >
-                <span>🛡️ Catálogo EPC y Protección (50)</span>
+                <span>🛡️ Catálogo EPC y Protección ({PRODUCTS.filter(isEpcProduct).length})</span>
               </button>
             </div>
 
