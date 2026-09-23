@@ -3,8 +3,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import TypewriterTitle from '@/components/TypewriterTitle';
-import { IconBordado, IconSerigrafia, IconDTG, IconSublimacion, IconTransfer, IconWhatsApp, IconConfigurator } from '@/components/Icons';
+import { 
+  IconBordado, 
+  IconSerigrafia, 
+  IconDTG, 
+  IconSublimacion, 
+  IconTransfer, 
+  IconWhatsApp, 
+  IconConfigurator 
+} from '@/components/Icons';
 
 export default function ServiciosPage() {
   const [modalServicio, setModalServicio] = useState<any | null>(null);
@@ -13,6 +20,7 @@ export default function ServiciosPage() {
     {
       id: 'bordado',
       titulo: 'Bordado Industrial Computarizado',
+      buttonLabel: 'Bordado Industrial',
       iconComp: IconBordado,
       resumen: 'Hilos de alta resistencia, acabados premium y relieve 3D de máxima durabilidad.',
       destacado: 'Más de 2 millones de piezas bordadas',
@@ -28,6 +36,7 @@ export default function ServiciosPage() {
     {
       id: 'serigrafia',
       titulo: 'Serigrafía Textil de Alto Rendimiento',
+      buttonLabel: 'Serigrafía Textil',
       iconComp: IconSerigrafia,
       resumen: 'Tintas plastisol y ahuladas ideales para medianos y grandes volúmenes.',
       destacado: 'La técnica más eficiente para medianos y grandes volúmenes',
@@ -43,6 +52,7 @@ export default function ServiciosPage() {
     {
       id: 'dtg',
       titulo: 'Impresión Directa a Prenda (DTG)',
+      buttonLabel: 'Impresión DTG',
       iconComp: IconDTG,
       resumen: 'Resolución fotográfica sin límite de colores y tacto suave e impalpable.',
       destacado: 'Resolución fotográfica sin límite de colores',
@@ -58,6 +68,7 @@ export default function ServiciosPage() {
     {
       id: 'sublimacion',
       titulo: 'Sublimación Textil HD',
+      buttonLabel: 'Sublimación HD',
       iconComp: IconSublimacion,
       resumen: 'Impresión molecular 100% transpirable que nunca se despinta ni cuartea.',
       destacado: 'Impresión molecular 100% transpirable',
@@ -73,6 +84,7 @@ export default function ServiciosPage() {
     {
       id: 'transfer',
       titulo: 'Termotransferencia y Vinil Textil',
+      buttonLabel: 'Termotransferencia y Vinil',
       iconComp: IconTransfer,
       resumen: 'Precisión nítida para folios, nombres y logotipos reflectivos de seguridad.',
       destacado: 'Precisión nítida para números, nombres y logotipos reflectivos',
@@ -90,151 +102,230 @@ export default function ServiciosPage() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', paddingBottom: '80px' }}>
-        {/* Header Compacto Centrado */}
-        <section style={{
-          background: 'var(--marino)',
-          color: '#ffffff',
-          padding: '14px 24px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          textAlign: 'center'
+      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', position: 'relative' }}>
+        <div style={{
+          position: 'relative',
+          zIndex: 1,
+          maxWidth: '1260px',
+          margin: '0 auto',
+          padding: '16px 20px 48px 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
         }}>
-          <div style={{ 
-            maxWidth: '1320px', 
-            margin: '0 auto', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            textAlign: 'center'
+
+          {/* ================= TARJETA PRINCIPAL: TÉCNICAS DE PERSONALIZACIÓN ================= */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            border: '1px solid var(--linea)',
+            borderRadius: '24px',
+            padding: '36px 44px 32px 44px',
+            width: '100%',
+            position: 'relative',
+            boxShadow: '0 12px 36px rgba(19, 42, 82, 0.07)'
           }}>
-            <h1 style={{ 
-              fontSize: '1.25rem', 
-              fontWeight: 850, 
-              margin: 0, 
-              color: '#ffffff',
-              textAlign: 'center'
+            {/* Línea superior con gradiente de luz institucional */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: '8%',
+              right: '8%',
+              height: '3px',
+              background: 'linear-gradient(90deg, transparent, #2456C4, #38bdf8, #132A52, transparent)'
+            }} />
+
+            {/* Tag Superior */}
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              color: 'var(--rey)',
+              fontSize: '0.78rem',
+              fontWeight: 800,
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              marginBottom: '10px'
+            }}>
+              <span style={{ width: '22px', height: '2px', backgroundColor: 'var(--rey)', display: 'inline-block' }} />
+              HUPAC TEXTILES
+            </div>
+
+            {/* Título Principal */}
+            <h1 style={{
+              fontSize: '2.3rem',
+              fontWeight: 850,
+              color: 'var(--marino)',
+              letterSpacing: '-0.02em',
+              margin: '0 0 6px 0',
+              lineHeight: 1.15
+            }}>
+              CINCO TÉCNICAS DE PERSONALIZACIÓN
+            </h1>
+
+            {/* Subtítulo */}
+            <p style={{
+              fontSize: '0.95rem',
+              fontStyle: 'italic',
+              color: 'var(--texto-2)',
+              margin: '0 0 20px 0'
             }}>
               Cinco técnicas de personalización. Un solo fabricante.
-            </h1>
+            </p>
+
+            {/* Cita Destacada con Barra Azul Royal */}
+            <div style={{
+              backgroundColor: '#F0F7FF',
+              border: '1px solid #D0E3FF',
+              borderLeft: '5px solid var(--rey)',
+              borderRadius: '0 14px 14px 0',
+              padding: '20px 24px',
+              marginBottom: '16px'
+            }}>
+              <p style={{
+                fontSize: '1.05rem',
+                fontWeight: 600,
+                fontStyle: 'italic',
+                lineHeight: 1.6,
+                color: 'var(--marino)',
+                margin: 0,
+                letterSpacing: '-0.01em'
+              }}>
+                &ldquo;En <strong style={{ color: 'var(--rey)', fontWeight: 850 }}>HUPAC TEXTILES</strong> evaluamos el tipo de tela, la complejidad de tu logotipo y tu presupuesto para garantizar la mejor durabilidad y acabado visual.&rdquo;
+              </p>
+            </div>
+
+            {/* Párrafo Descriptivo */}
+            <p style={{
+              fontSize: '0.92rem',
+              lineHeight: 1.65,
+              color: 'var(--texto-2)',
+              margin: '0 0 26px 0',
+              maxWidth: '100%'
+            }}>
+              Contamos con tecnología de punta y procesos industriales para aplicar tu logotipo con la máxima fidelidad y resistencia. Selecciona cualquiera de nuestras técnicas para consultar sus especificaciones técnicas y aplicaciones recomendadas.
+            </p>
+
+            {/* ================= FILA DE BOTONES DE CÁPSULA (LAS 5 TÉCNICAS) ================= */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '12px',
+              borderTop: '1px solid var(--linea)',
+              paddingTop: '24px',
+              flexWrap: 'wrap'
+            }}>
+              {serviciosDetalle.map((srv) => {
+                const IconComponent = srv.iconComp;
+                return (
+                  <button
+                    key={srv.id}
+                    type="button"
+                    onClick={() => setModalServicio(srv)}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '11px 22px',
+                      borderRadius: '100px',
+                      backgroundColor: '#ffffff',
+                      border: '1.5px solid var(--rey)',
+                      color: 'var(--rey)',
+                      fontSize: '0.84rem',
+                      fontWeight: 800,
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      userSelect: 'none'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--rey)';
+                      e.currentTarget.style.color = '#ffffff';
+                      e.currentTarget.style.boxShadow = '0 6px 18px rgba(26, 58, 112, 0.18)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = '#ffffff';
+                      e.currentTarget.style.color = 'var(--rey)';
+                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                    }}
+                  >
+                    <IconComponent size={18} color="currentColor" />
+                    <span>{srv.buttonLabel || srv.titulo}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
-        </section>
 
-        {/* GRID DE LAS 5 TÉCNICAS (EN UNA SOLA LÍNEA) */}
-        <div style={{ maxWidth: '1280px', margin: '-10px auto 0 auto', padding: '0 24px' }}>
-          
+          {/* ================= BANNER INFERIOR DE ACCIÓN ================= */}
           <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '16px',
-            marginBottom: '36px'
-          }}>
-            {serviciosDetalle.map((srv, idx) => {
-              const IconComponent = srv.iconComp;
-              return (
-                <div
-                  key={srv.id}
-                  className="interactive-card-box"
-                  onClick={() => setModalServicio(srv)}
-                  style={{ animationDelay: `${idx * 0.08}s` }}
-                >
-                  <div style={{ textAlign: 'center' }}>
-                    {/* Badge Centrado con Ícono + Técnica 1..5 */}
-                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '14px' }}>
-                      <span className="card-icon-badge" style={{
-                        fontSize: '0.78rem',
-                        fontFamily: 'var(--mono)',
-                        fontWeight: 800,
-                        color: 'var(--rey)',
-                        backgroundColor: 'var(--cielo)',
-                        border: '1px solid var(--cielo-2)',
-                        padding: '5px 14px',
-                        borderRadius: '20px',
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px'
-                      }}>
-                        <IconComponent size={18} color="currentColor" />
-                        <span>Técnica {idx + 1}</span>
-                      </span>
-                    </div>
-
-                    {/* Título de la Técnica Centrado */}
-                    <h3 style={{ 
-                      fontSize: '1.05rem', 
-                      fontWeight: 850, 
-                      color: 'var(--marino)', 
-                      margin: '0 0 8px 0', 
-                      lineHeight: 1.25,
-                      textAlign: 'center'
-                    }}>
-                      {srv.titulo}
-                    </h3>
-
-                    {/* Resumen Centrado */}
-                    <p style={{ fontSize: '0.82rem', color: 'var(--texto-2)', margin: 0, lineHeight: 1.45, fontWeight: 500, textAlign: 'center' }}>
-                      {srv.resumen}
-                    </p>
-                  </div>
-
-                  <div className="card-action-link" style={{
-                    fontSize: '0.84rem',
-                    fontWeight: 850,
-                    color: 'var(--rey)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: '4px',
-                    textAlign: 'center',
-                    marginTop: '12px'
-                  }}>
-                    <span>Ver especificaciones</span>
-                    <span className="card-arrow-icon">→</span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Banner de Asesoría */}
-          <div style={{
-            marginTop: '44px',
-            backgroundColor: 'var(--marino)',
-            color: '#ffffff',
-            borderRadius: '24px',
-            padding: '36px 32px',
+            marginTop: '28px',
+            width: '100%',
+            backgroundColor: '#ffffff',
+            border: '1px solid var(--linea)',
+            borderRadius: '20px',
+            padding: '24px 32px',
             display: 'flex',
-            alignItems: 'center',
             justifyContent: 'space-between',
-            gap: '24px',
+            alignItems: 'center',
             flexWrap: 'wrap',
-            boxShadow: '0 12px 36px rgba(19, 42, 82, 0.12)'
+            gap: '16px',
+            boxShadow: '0 6px 20px rgba(19, 42, 82, 0.04)'
           }}>
             <div>
-              <span style={{ fontSize: '0.8rem', color: '#cbd5e1', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', display: 'block', marginBottom: '6px' }}>
+              <span style={{ fontSize: '0.78rem', color: 'var(--rey)', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: '4px' }}>
                 ¿Tienes dudas sobre qué técnica elegir?
               </span>
-              <h2 style={{ fontSize: '1.45rem', fontWeight: 850, margin: '0 0 6px 0', color: '#ffffff' }}>
+              <h2 style={{ color: 'var(--marino)', margin: '0 0 4px 0', fontSize: '1.18rem', fontWeight: 850 }}>
                 Te asesoramos sin costo en la técnica ideal para tus uniformes
               </h2>
-              <p style={{ fontSize: '0.92rem', color: '#cbd5e1', margin: 0, maxWidth: '640px' }}>
+              <p style={{ color: 'var(--texto-2)', margin: 0, fontSize: '0.88rem' }}>
                 Evaluamos el tipo de tela, la complejidad de tu logotipo y tu presupuesto para garantizar la mejor durabilidad y acabado visual.
               </p>
             </div>
+
             <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
               <Link
                 href="https://wa.me/525516257933?text=Hola,%20quisiera%20asesoria%20sobre%20las%20tecnicas%20de%20personalizacion"
                 target="_blank"
-                className="btn-primary"
-                style={{ backgroundColor: '#22c55e', color: '#ffffff', padding: '12px 22px', fontSize: '0.9rem', borderRadius: '12px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                className="btn"
+                style={{
+                  backgroundColor: '#22c55e',
+                  color: '#ffffff',
+                  fontWeight: 750,
+                  fontSize: '0.88rem',
+                  padding: '10px 20px',
+                  borderRadius: '10px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  textDecoration: 'none'
+                }}
               >
-                <IconWhatsApp size={18} color="#ffffff" /> Asesoría por WhatsApp
+                <IconWhatsApp size={18} color="#ffffff" />
+                Asesoría por WhatsApp
               </Link>
               <Link
                 href="/configurador"
-                className="btn-outline"
-                style={{ borderColor: 'rgba(255, 255, 255, 0.3)', color: '#ffffff', padding: '12px 22px', fontSize: '0.9rem', borderRadius: '12px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+                className="btn"
+                style={{
+                  backgroundColor: 'var(--rey)',
+                  color: '#ffffff',
+                  fontWeight: 750,
+                  fontSize: '0.88rem',
+                  padding: '10px 20px',
+                  borderRadius: '10px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  textDecoration: 'none'
+                }}
               >
-                <IconConfigurator size={18} color="#ffffff" /> Probar Configurador 3D
+                <IconConfigurator size={18} color="#ffffff" />
+                Probar Configurador 3D
               </Link>
             </div>
           </div>
