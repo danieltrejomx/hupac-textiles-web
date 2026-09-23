@@ -21,12 +21,43 @@ export default function NosotrosPage() {
     <>
       <Navbar />
       <main style={{ backgroundColor: 'transparent', minHeight: '85vh', position: 'relative' }}>
+        {/* Header Compacto Centrado */}
+        <section style={{
+          background: 'var(--marino)',
+          color: '#ffffff',
+          padding: '14px 24px',
+          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 10,
+          boxShadow: '0 4px 18px rgba(19, 42, 82, 0.14)'
+        }}>
+          <div style={{ 
+            maxWidth: '1320px', 
+            margin: '0 auto', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center', 
+            textAlign: 'center'
+          }}>
+            <h1 style={{ 
+              fontSize: '1.25rem', 
+              fontWeight: 850, 
+              margin: 0, 
+              color: '#ffffff',
+              textAlign: 'center'
+            }}>
+              Política de Calidad · HUPAC Textiles
+            </h1>
+          </div>
+        </section>
+
         <div style={{
           position: 'relative',
           zIndex: 1,
           maxWidth: '1260px',
-          margin: '0 auto',
-          padding: '16px 20px 48px 20px',
+          margin: '-10px auto 0 auto',
+          padding: '0 20px 48px 20px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
@@ -37,7 +68,7 @@ export default function NosotrosPage() {
             backgroundColor: '#ffffff',
             border: '1px solid var(--linea)',
             borderRadius: '24px',
-            padding: '36px 44px 32px 44px',
+            padding: '28px 36px 32px 36px',
             width: '100%',
             position: 'relative',
             boxShadow: '0 12px 36px rgba(19, 42, 82, 0.07)'
@@ -51,44 +82,6 @@ export default function NosotrosPage() {
               height: '3px',
               background: 'linear-gradient(90deg, transparent, #2456C4, #38bdf8, #132A52, transparent)'
             }} />
-
-            {/* Tag Superior */}
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              color: 'var(--rey)',
-              fontSize: '0.78rem',
-              fontWeight: 800,
-              letterSpacing: '0.16em',
-              textTransform: 'uppercase',
-              marginBottom: '10px'
-            }}>
-              <span style={{ width: '22px', height: '2px', backgroundColor: 'var(--rey)', display: 'inline-block' }} />
-              HUPAC TEXTILES
-            </div>
-
-            {/* Título Principal */}
-            <h1 style={{
-              fontSize: '2.3rem',
-              fontWeight: 850,
-              color: 'var(--marino)',
-              letterSpacing: '-0.02em',
-              margin: '0 0 6px 0',
-              lineHeight: 1.15
-            }}>
-              POLÍTICA DE CALIDAD
-            </h1>
-
-            {/* Subtítulo */}
-            <p style={{
-              fontSize: '0.95rem',
-              fontStyle: 'italic',
-              color: 'var(--texto-2)',
-              margin: '0 0 20px 0'
-            }}>
-              Más de 21 años creando soluciones textiles que proyectan tu marca.
-            </p>
 
             {/* Cita Destacada con Barra Azul Royal */}
             <div style={{
