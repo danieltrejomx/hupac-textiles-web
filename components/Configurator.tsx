@@ -219,7 +219,7 @@ export default function Configurator() {
   const [logoName, setLogoName] = useState<string>('');
   const [isProcessingCanvas, setIsProcessingCanvas] = useState(false);
   const [showTicketModal, setShowTicketModal] = useState(false);
-  const folioRef = useRef<string>('');
+  const [folio, setFolio] = useState<string>('');
 
   const getColoresParaPrenda = (p: Prenda): ColorOption[] => {
     if (p === 'camisa') return COLORES_CAMISA;
@@ -243,10 +243,6 @@ export default function Configurator() {
     }
   };
 
-  if (!folioRef.current) {
-    folioRef.current = 'HUP-' + Math.floor(100000 + Math.random() * 900000);
-  }
-
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -254,6 +250,10 @@ export default function Configurator() {
   const activePositionId = vista === 'frente' ? posicionFrente : posicionEspalda;
   const currentPositions = vista === 'frente' ? prendaActual.posicionesFrente : prendaActual.posicionesEspalda;
   const activePositionObj = currentPositions.find(p => p.id === activePositionId) || currentPositions[0];
+
+  useEffect(() => {
+    setFolio('HUP-' + Math.floor(100000 + Math.random() * 900000));
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
@@ -423,7 +423,7 @@ export default function Configurator() {
 `📄 *TICKET DE COTIZACIÓN FORMAL*
 🏢 *HUPAC TEXTILES S.A. DE C.V.*
 ────────────────────────────
-🆔 *Folio:* #${folioRef.current}
+🆔 *Folio:* #${folio}
 📅 *Fecha:* ${fechaActualStr}
 ────────────────────────────
 👔 *ESPECIFICACIONES DE PRENDA*
@@ -1072,7 +1072,7 @@ export default function Configurator() {
                 fontWeight: 800,
                 border: '1px solid #bfdbfe'
               }}>
-                #{folioRef.current}
+                #{folio}
               </span>
             </div>
 
@@ -1123,7 +1123,7 @@ export default function Configurator() {
               try {
                 await addDoc(collection(db, 'orders'), {
                   tipo: 'Cotización Personalizada',
-                  folio: folioRef.current,
+                  folio: folio,
                   prenda: prendaActual.nombre,
                   color: activeColorLabel,
                   vista: vista === 'frente' ? 'Frente' : 'Espalda',
@@ -1224,7 +1224,7 @@ export default function Configurator() {
                       TICKET OFICIAL
                     </span>
                     <p style={{ margin: '4px 0 0', fontSize: '0.85rem', fontWeight: 800, color: 'var(--marino)' }}>
-                      #{folioRef.current}
+                      #{folio}
                     </p>
                   </div>
                 </div>
