@@ -73,11 +73,6 @@ export function AnimacionBordado() {
             50% { transform: translateY(22px); }
             60% { transform: translateY(18px); }
           }
-          @keyframes stitchSpark {
-            0%, 40% { opacity: 0; transform: scale(0.4); }
-            50% { opacity: 1; transform: scale(1.4); }
-            65%, 100% { opacity: 0; transform: scale(2); }
-          }
           @keyframes pantografoCNC {
             0%, 100% { transform: translate(0, 0); }
             20% { transform: translate(-8px, 4px); }
@@ -206,9 +201,6 @@ export function AnimacionBordado() {
             <line x1="-10" y1="0" x2="10" y2="0" stroke="#ef4444" strokeWidth="1" opacity="0.8" />
             <line x1="0" y1="-10" x2="0" y2="10" stroke="#ef4444" strokeWidth="1" opacity="0.8" />
           </g>
-
-          {/* Destello de impacto del penetrado de la aguja con el hilo */}
-          <circle cx="250" cy="148" r="8" fill="#fef08a" style={{ animation: 'stitchSpark 0.5s infinite ease-out' }} />
         </g>
 
         {/* ================================================================= */}
