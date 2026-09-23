@@ -1,5 +1,4 @@
 'use client';
-import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -10,13 +9,7 @@ import {
   IconConfigurator
 } from '@/components/Icons';
 
-type ModalType = 'mision' | 'vision' | 'valores' | null;
-
 export default function NosotrosPage() {
-  const [activeModal, setActiveModal] = useState<ModalType>(null);
-
-  const closeModal = () => setActiveModal(null);
-
   return (
     <>
       <Navbar />
@@ -116,126 +109,145 @@ export default function NosotrosPage() {
               Con más de 21 años de experiencia, asumimos el compromiso de brindar productos confiables, atención personalizada y soluciones que fortalezcan la imagen de cada empresa.
             </p>
 
-            {/* ================= FILA DE BOTONES EMERGENTES (MISIÓN, VISIÓN, VALORES) ================= */}
+            {/* ================= FILA EN UNA SOLA LÍNEA: MISIÓN, VISIÓN Y VALORES ================= */}
             <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '14px',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '20px',
               borderTop: '1px solid var(--linea)',
-              paddingTop: '24px',
-              flexWrap: 'wrap'
+              paddingTop: '26px',
+              width: '100%'
             }}>
-              <button
-                type="button"
-                onClick={() => setActiveModal('mision')}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '11px 22px',
-                  borderRadius: '100px',
-                  backgroundColor: '#ffffff',
-                  border: '1.5px solid var(--rey)',
-                  color: 'var(--rey)',
-                  fontSize: '0.84rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  userSelect: 'none'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--rey)';
-                  e.currentTarget.style.color = '#ffffff';
-                  e.currentTarget.style.boxShadow = '0 6px 18px rgba(26, 58, 112, 0.18)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#ffffff';
-                  e.currentTarget.style.color = 'var(--rey)';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <IconTarget size={18} color="currentColor" />
-                NUESTRA MISIÓN
-              </button>
+              {/* Tarjeta 1: NUESTRA MISIÓN */}
+              <div style={{
+                backgroundColor: '#F8FAFC',
+                border: '1px solid #E2E8F0',
+                borderTop: '3px solid var(--rey)',
+                borderRadius: '16px',
+                padding: '22px 20px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                boxShadow: '0 4px 14px rgba(19, 42, 82, 0.03)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '10px',
+                    backgroundColor: '#EAF3FC',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <IconTarget size={22} color="var(--rey)" />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--rey)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block' }}>
+                      Propósito y Dirección
+                    </span>
+                    <h3 style={{ fontSize: '1.12rem', fontWeight: 850, color: 'var(--marino)', margin: 0 }}>
+                      Nuestra Misión
+                    </h3>
+                  </div>
+                </div>
+                <p style={{ fontSize: '0.88rem', lineHeight: 1.6, color: 'var(--texto-2)', margin: 0 }}>
+                  Transformamos la identidad de las empresas en uniformes y soluciones textiles de calidad, combinando diseño, funcionalidad y personalización para proyectar la mejor imagen de cada cliente.
+                </p>
+              </div>
 
-              <button
-                type="button"
-                onClick={() => setActiveModal('vision')}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '11px 22px',
-                  borderRadius: '100px',
-                  backgroundColor: '#ffffff',
-                  border: '1.5px solid var(--rey)',
-                  color: 'var(--rey)',
-                  fontSize: '0.84rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  userSelect: 'none'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--rey)';
-                  e.currentTarget.style.color = '#ffffff';
-                  e.currentTarget.style.boxShadow = '0 6px 18px rgba(26, 58, 112, 0.18)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#ffffff';
-                  e.currentTarget.style.color = 'var(--rey)';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <IconEye size={18} color="currentColor" />
-                VISIÓN CORPORATIVA
-              </button>
+              {/* Tarjeta 2: VISIÓN CORPORATIVA */}
+              <div style={{
+                backgroundColor: '#F8FAFC',
+                border: '1px solid #E2E8F0',
+                borderTop: '3px solid var(--marino)',
+                borderRadius: '16px',
+                padding: '22px 20px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                boxShadow: '0 4px 14px rgba(19, 42, 82, 0.03)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '10px',
+                    backgroundColor: '#EAF3FC',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <IconEye size={22} color="var(--rey)" />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--rey)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block' }}>
+                      Horizonte Futuro
+                    </span>
+                    <h3 style={{ fontSize: '1.12rem', fontWeight: 850, color: 'var(--marino)', margin: 0 }}>
+                      Visión Corporativa
+                    </h3>
+                  </div>
+                </div>
+                <p style={{ fontSize: '0.88rem', lineHeight: 1.6, color: 'var(--texto-2)', margin: 0 }}>
+                  Ser el aliado estratégico de las empresas en soluciones textiles, reconocidos por nuestra calidad, innovación y servicio, llevando la imagen de nuestros clientes a nuevos niveles.
+                </p>
+              </div>
 
-              <button
-                type="button"
-                onClick={() => setActiveModal('valores')}
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  padding: '11px 22px',
-                  borderRadius: '100px',
-                  backgroundColor: '#ffffff',
-                  border: '1.5px solid var(--rey)',
-                  color: 'var(--rey)',
-                  fontSize: '0.84rem',
-                  fontWeight: 800,
-                  letterSpacing: '0.06em',
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  userSelect: 'none'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--rey)';
-                  e.currentTarget.style.color = '#ffffff';
-                  e.currentTarget.style.boxShadow = '0 6px 18px rgba(26, 58, 112, 0.18)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#ffffff';
-                  e.currentTarget.style.color = 'var(--rey)';
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                <IconAward size={18} color="currentColor" />
-                NUESTROS VALORES
-              </button>
+              {/* Tarjeta 3: NUESTROS VALORES */}
+              <div style={{
+                backgroundColor: '#F8FAFC',
+                border: '1px solid #E2E8F0',
+                borderTop: '3px solid #0284c7',
+                borderRadius: '16px',
+                padding: '22px 20px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '12px',
+                boxShadow: '0 4px 14px rgba(19, 42, 82, 0.03)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                  <div style={{
+                    width: '40px',
+                    height: '40px',
+                    borderRadius: '10px',
+                    backgroundColor: '#EAF3FC',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <IconAward size={22} color="var(--rey)" />
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '0.68rem', fontWeight: 800, color: 'var(--rey)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block' }}>
+                      Pilar Institucional
+                    </span>
+                    <h3 style={{ fontSize: '1.12rem', fontWeight: 850, color: 'var(--marino)', margin: 0 }}>
+                      Nuestros Valores
+                    </h3>
+                  </div>
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div style={{ fontSize: '0.82rem', lineHeight: 1.45, color: 'var(--texto-2)' }}>
+                    <strong style={{ color: 'var(--marino)' }}>• Calidad:</strong> Cada detalle para superar expectativas.
+                  </div>
+                  <div style={{ fontSize: '0.82rem', lineHeight: 1.45, color: 'var(--texto-2)' }}>
+                    <strong style={{ color: 'var(--marino)' }}>• Compromiso:</strong> Responsabilidad y cumplimiento.
+                  </div>
+                  <div style={{ fontSize: '0.82rem', lineHeight: 1.45, color: 'var(--texto-2)' }}>
+                    <strong style={{ color: 'var(--marino)' }}>• Confianza:</strong> Transparencia en cada relación.
+                  </div>
+                  <div style={{ fontSize: '0.82rem', lineHeight: 1.45, color: 'var(--texto-2)' }}>
+                    <strong style={{ color: 'var(--marino)' }}>• Innovación:</strong> Soluciones textiles que destacan.
+                  </div>
+                  <div style={{ fontSize: '0.82rem', lineHeight: 1.45, color: 'var(--texto-2)' }}>
+                    <strong style={{ color: 'var(--marino)' }}>• Servicio:</strong> Soluciones a la medida de tu empresa.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -297,195 +309,6 @@ export default function NosotrosPage() {
             </div>
           </div>
         </div>
-
-        {/* ================= VENTANA MODAL EMERGENTE ================= */}
-        {activeModal && (
-          <div
-            style={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: 'rgba(15, 23, 42, 0.6)',
-              backdropFilter: 'blur(8px)',
-              WebkitBackdropFilter: 'blur(8px)',
-              zIndex: 10000,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '20px'
-            }}
-            onClick={closeModal}
-          >
-            <div
-              style={{
-                backgroundColor: '#ffffff',
-                border: '1px solid var(--linea)',
-                borderRadius: '24px',
-                padding: '36px 40px',
-                maxWidth: '680px',
-                width: '100%',
-                boxShadow: '0 25px 60px rgba(19, 42, 82, 0.2)',
-                position: 'relative',
-                color: 'var(--texto)'
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Botón cerrar */}
-              <button
-                type="button"
-                onClick={closeModal}
-                style={{
-                  position: 'absolute',
-                  top: '20px',
-                  right: '20px',
-                  backgroundColor: '#f1f5f9',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '50%',
-                  width: '36px',
-                  height: '36px',
-                  color: '#64748b',
-                  fontSize: '1rem',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'all 0.15s ease'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#fee2e2';
-                  e.currentTarget.style.color = '#ef4444';
-                  e.currentTarget.style.borderColor = '#fca5a5';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = '#f1f5f9';
-                  e.currentTarget.style.color = '#64748b';
-                  e.currentTarget.style.borderColor = '#e2e8f0';
-                }}
-              >
-                ✕
-              </button>
-
-              {/* MISIÓN */}
-              {activeModal === 'mision' && (
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '18px' }}>
-                    <div style={{
-                      width: '46px',
-                      height: '46px',
-                      borderRadius: '12px',
-                      backgroundColor: '#EAF3FC',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0
-                    }}>
-                      <IconTarget size={26} color="var(--rey)" />
-                    </div>
-                    <div>
-                      <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--rey)', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-                        PROPÓSITO Y DIRECCIÓN
-                      </span>
-                      <h2 style={{ fontSize: '1.75rem', fontWeight: 850, color: 'var(--marino)', margin: 0 }}>
-                        Nuestra Misión
-                      </h2>
-                    </div>
-                  </div>
-                  <p style={{ fontSize: '1.02rem', lineHeight: 1.65, color: 'var(--texto-2)', marginBottom: '0' }}>
-                    Transformamos la identidad de las empresas en uniformes y soluciones textiles de calidad, combinando diseño, funcionalidad y personalización para proyectar la mejor imagen de cada cliente.
-                  </p>
-                </div>
-              )}
-
-              {/* VISIÓN */}
-              {activeModal === 'vision' && (
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '18px' }}>
-                    <div style={{
-                      width: '46px',
-                      height: '46px',
-                      borderRadius: '12px',
-                      backgroundColor: '#EAF3FC',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0
-                    }}>
-                      <IconEye size={26} color="var(--rey)" />
-                    </div>
-                    <div>
-                      <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--rey)', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-                        HORIZONTE FUTURO
-                      </span>
-                      <h2 style={{ fontSize: '1.75rem', fontWeight: 850, color: 'var(--marino)', margin: 0 }}>
-                        Visión Corporativa
-                      </h2>
-                    </div>
-                  </div>
-                  <p style={{ fontSize: '1.02rem', lineHeight: 1.65, color: 'var(--texto-2)', marginBottom: '0' }}>
-                    Ser el aliado estratégico de las empresas en soluciones textiles, reconocidos por nuestra calidad, innovación y servicio, llevando la imagen de nuestros clientes a nuevos niveles.
-                  </p>
-                </div>
-              )}
-
-              {/* VALORES */}
-              {activeModal === 'valores' && (
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '18px' }}>
-                    <div style={{
-                      width: '46px',
-                      height: '46px',
-                      borderRadius: '12px',
-                      backgroundColor: '#EAF3FC',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexShrink: 0
-                    }}>
-                      <IconAward size={26} color="var(--rey)" />
-                    </div>
-                    <div>
-                      <span style={{ fontSize: '0.74rem', fontWeight: 800, color: 'var(--rey)', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-                        PILAR ÉTICO E INSTITUCIONAL
-                      </span>
-                      <h2 style={{ fontSize: '1.75rem', fontWeight: 850, color: 'var(--marino)', margin: 0 }}>
-                        Nuestros Valores
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                    {[
-                      { val: 'Calidad', desc: 'Cada detalle cuenta. Creamos prendas que cumplen y superan expectativas.' },
-                      { val: 'Compromiso', desc: 'Tu proyecto es nuestro compromiso. Respondemos con responsabilidad y cumplimiento.' },
-                      { val: 'Confianza', desc: 'Construimos relaciones duraderas con transparencia y profesionalismo.' },
-                      { val: 'Innovación', desc: 'Evolucionamos para ofrecer soluciones textiles que destacan.' },
-                      { val: 'Servicio', desc: 'Escuchamos, entendemos y creamos soluciones a la medida de cada cliente.' },
-                    ].map((v, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          backgroundColor: '#F8FAFC',
-                          border: '1px solid #E2E8F0',
-                          borderRadius: '12px',
-                          padding: '14px 16px'
-                        }}
-                      >
-                        <b style={{ color: 'var(--marino)', fontSize: '0.92rem', display: 'block', marginBottom: '4px' }}>
-                          • {v.val}
-                        </b>
-                        <p style={{ color: 'var(--texto-2)', fontSize: '0.82rem', margin: 0, lineHeight: 1.45 }}>
-                          {v.desc}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
       </main>
       <Footer />
     </>
