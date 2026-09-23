@@ -10,6 +10,7 @@ interface Message {
   text: string;
   time: string;
   isFallback?: boolean;
+  links?: { label: string; url: string }[];
 }
 
 export default function ChatWidget() {
@@ -21,7 +22,12 @@ export default function ChatWidget() {
       id: 'welcome',
       sender: 'assistant',
       text: '¡Hola! Bienvenido(a) a Hupac Textiles. Con gusto te ayudamos a encontrar los uniformes, prendas o productos de seguridad industrial que necesitas.\n\n¿Qué estás buscando hoy?',
-      time: 'Ahora'
+      time: 'Ahora',
+      links: [
+        { label: '👕 Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
+        { label: '🛡️ Seguridad Industrial (EPP)', url: '/catalogo?catalogo=epc' },
+        { label: '🎨 Abrir Configurador 3D', url: '/configurador' }
+      ]
     }
   ]);
 
@@ -71,7 +77,8 @@ export default function ChatWidget() {
         sender: 'assistant',
         text: replyText,
         time: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }),
-        isFallback
+        isFallback,
+        links: data.links || []
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -81,7 +88,8 @@ export default function ChatWidget() {
         sender: 'assistant',
         text: FALLBACK_MESSAGE,
         time: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }),
-        isFallback: true
+        isFallback: true,
+        links: [{ label: '💬 Contactar a Soporte por WhatsApp', url: 'https://wa.me/525612870780' }]
       };
       setMessages((prev) => [...prev, botMsg]);
     } finally {
@@ -265,26 +273,60 @@ export default function ChatWidget() {
               </div>
             </div>
 
-            <button
-              type="button"
-              onClick={() => setIsOpen(false)}
-              aria-label="Cerrar chat"
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#ffffff',
-                cursor: 'pointer',
-                padding: '6px',
-                borderRadius: '8px',
-                opacity: 0.8,
-                transition: 'opacity 0.15s ease'
-              }}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setMessages([
+                    {
+                      id: 'welcome',
+                      sender: 'assistant',
+                      text: '¡Hola! Bienvenido(a) a Hupac Textiles. Con gusto te ayudamos a encontrar los uniformes, prendas o productos de seguridad industrial que necesitas.\n\n¿Qué estás buscando hoy?',
+                      time: 'Ahora',
+                      links: [
+                        { label: '👕 Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
+                        { label: '🛡️ Seguridad Industrial (EPP)', url: '/catalogo?catalogo=epc' },
+                        { label: '🎨 Abrir Configurador 3D', url: '/configurador' }
+                      ]
+                    }
+                  ]);
+                }}
+                title="Reiniciar chat"
+                style={{
+                  background: 'rgba(255,255,255,0.1)',
+                  border: 'none',
+                  color: '#ffffff',
+                  cursor: 'pointer',
+                  padding: '4px 8px',
+                  borderRadius: '6px',
+                  fontSize: '0.72rem',
+                  fontWeight: 600
+                }}
+              >
+                Reiniciar
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                aria-label="Cerrar chat"
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: '#ffffff',
+                  cursor: 'pointer',
+                  padding: '6px',
+                  borderRadius: '8px',
+                  opacity: 0.8,
+                  transition: 'opacity 0.15s ease'
+                }}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
           </div>
 
           {/* Historial de Mensajes */}
@@ -325,6 +367,37 @@ export default function ChatWidget() {
                 >
                   {m.text}
                 </div>
+
+                {/* Botones de acción directa / Enlaces a la web */}
+                {m.links && m.links.length > 0 && (
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px', maxWidth: '90%' }}>
+                    {m.links.map((lnk, i) => (
+                      <a
+                        key={i}
+                        href={lnk.url}
+                        target={lnk.url.startsWith('http') ? '_blank' : '_self'}
+                        rel={lnk.url.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                          backgroundColor: '#ffffff',
+                          color: 'var(--marino)',
+                          border: '1.5px solid var(--rey)',
+                          textDecoration: 'none',
+                          padding: '6px 14px',
+                          borderRadius: '100px',
+                          fontSize: '0.78rem',
+                          fontWeight: 750,
+                          boxShadow: '0 2px 6px rgba(19, 42, 82, 0.08)',
+                          transition: 'all 0.15s ease'
+                        }}
+                      >
+                        {lnk.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
 
                 {/* Si es mensaje de fallback, botón de soporte directo por WhatsApp */}
                 {m.isFallback && (

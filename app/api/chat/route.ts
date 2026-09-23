@@ -24,6 +24,7 @@ export async function POST(req: Request) {
     return NextResponse.json({
       reply,
       found: kbResult.found,
+      links: kbResult.links || [],
       contact: CONTACT_INFO
     });
   } catch (error) {
