@@ -2,8 +2,26 @@
 import { useState, useRef, useEffect, ChangeEvent } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import {
+  IconPolo,
+  IconPlayeraRound,
+  IconCamisa,
+  IconMezclilla,
+  IconReflectiveStripes,
+  IconBordado,
+  IconDTG,
+  IconSparkles,
+  IconUploadCloud,
+  IconCheckSimple,
+  IconInfoCircle,
+  IconRotate,
+  IconDownload,
+  IconTicket,
+  IconWhatsApp
+} from '@/components/Icons';
 
-type Prenda = 'polo' | 'playera' | 'camisa' | 'mezclilla' | 'mezclilla_reflejante';
+type Prenda = 'polo' | 'playera' | 'camisa' | 'mezclilla';
+type VersionMezclilla = 'sin_reflejante' | 'con_reflejante';
 type Vista = 'frente' | 'espalda';
 type PosicionFrente = 'pecho_izq' | 'centro_pecho' | 'pecho_der';
 type PosicionEspalda = 'espalda_cuello' | 'espalda_centro' | 'espalda_baja';
@@ -80,34 +98,16 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
     nombre: 'CAMISA DE MEZCLILLA INDUSTRIAL',
     subtitulo: '100% Algodón de uso rudo · Confección reforzada y doble bolsa',
     frenteImgWhite: '/images/epc/camisa_mezclilla.png',
-    espaldaImgWhite: '/images/epc/camisa_mezclilla.png',
-    frenteImgColor: '/images/epc/camisa_mezclilla.png',
-    espaldaImgColor: '/images/epc/camisa_mezclilla.png',
-    posicionesFrente: [
-      { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 62, y: 34, maxW: 85 },
-      { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 44, maxW: 120 },
-      { id: 'pecho_der', label: 'Pecho Derecho', x: 38, y: 34, maxW: 85 },
-    ],
-    posicionesEspalda: [
-      { id: 'espalda_cuello', label: 'Espalda Superior (Cuello)', x: 50, y: 22, maxW: 95 },
-      { id: 'espalda_centro', label: 'Espalda Centro (Grande)', x: 50, y: 44, maxW: 170 },
-      { id: 'espalda_baja', label: 'Espalda Baja', x: 50, y: 68, maxW: 150 },
-    ]
-  },
-  mezclilla_reflejante: {
-    nombre: 'CAMISA DE MEZCLILLA CON REFLEJANTE',
-    subtitulo: '100% Algodón · Cintas reflejantes de alta visibilidad bicolor',
-    frenteImgWhite: '/images/configurator/camisa_mezclilla_reflejante_front.jpg',
-    espaldaImgWhite: '/images/configurator/camisa_mezclilla_reflejante_front.jpg',
+    espaldaImgWhite: '/images/configurator/camisa_mezclilla_back.png',
     frenteImgColor: '/images/configurator/camisa_mezclilla_reflejante_front.jpg',
-    espaldaImgColor: '/images/configurator/camisa_mezclilla_reflejante_front.jpg',
+    espaldaImgColor: '/images/configurator/camisa_mezclilla_reflejante_back.jpg',
     posicionesFrente: [
-      { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 29, maxW: 85 },
-      { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 35, maxW: 120 },
-      { id: 'pecho_der', label: 'Pecho Derecho', x: 37, y: 29, maxW: 85 },
+      { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 32, maxW: 85 },
+      { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 40, maxW: 120 },
+      { id: 'pecho_der', label: 'Pecho Derecho', x: 37, y: 32, maxW: 85 },
     ],
     posicionesEspalda: [
-      { id: 'espalda_cuello', label: 'Espalda Superior (Cuello)', x: 50, y: 22, maxW: 95 },
+      { id: 'espalda_cuello', label: 'Espalda Superior (Cuello)', x: 50, y: 20, maxW: 95 },
       { id: 'espalda_centro', label: 'Espalda Centro (Grande)', x: 50, y: 44, maxW: 170 },
       { id: 'espalda_baja', label: 'Espalda Baja', x: 50, y: 68, maxW: 150 },
     ]
@@ -134,14 +134,6 @@ const COLORES_CAMISA: ColorOption[] = [
   { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
   { c: '#7BA4D0', n: 'Azul Cielo (Oxford)', rgb: [123, 164, 208], textColor: '#132A52' },
   { c: '#22262E', n: 'Negro Profundo', rgb: [34, 38, 46], textColor: '#FFFFFF' },
-];
-
-const COLORES_MEZCLILLA: ColorOption[] = [
-  { c: '#2E4A7D', n: 'Azul Mezclilla Original', rgb: null, textColor: '#FFFFFF' },
-];
-
-const COLORES_MEZCLILLA_REFLEJANTE: ColorOption[] = [
-  { c: '#2B4268', n: 'Azul Mezclilla c/ Reflejante', rgb: null, textColor: '#FFFFFF' },
 ];
 
 function removeImageBackground(dataUrl: string): Promise<string> {
@@ -216,6 +208,7 @@ function removeImageBackground(dataUrl: string): Promise<string> {
 
 export default function Configurator() {
   const [prenda, setPrenda] = useState<Prenda>('polo');
+  const [versionMezclilla, setVersionMezclilla] = useState<VersionMezclilla>('sin_reflejante');
   const [vista, setVista] = useState<Vista>('frente');
   const [colorOption, setColorOption] = useState<ColorOption>(COLORES_POLO_PLAYERA[0]);
   const [tec, setTec] = useState<Tecnica>('Bordado');
@@ -230,8 +223,6 @@ export default function Configurator() {
 
   const getColoresParaPrenda = (p: Prenda): ColorOption[] => {
     if (p === 'camisa') return COLORES_CAMISA;
-    if (p === 'mezclilla') return COLORES_MEZCLILLA;
-    if (p === 'mezclilla_reflejante') return COLORES_MEZCLILLA_REFLEJANTE;
     return COLORES_POLO_PLAYERA;
   };
 
@@ -239,6 +230,9 @@ export default function Configurator() {
 
   const handlePrendaChange = (nuevaPrenda: Prenda) => {
     setPrenda(nuevaPrenda);
+    if (nuevaPrenda === 'mezclilla') {
+      return;
+    }
     const listaActual = getColoresParaPrenda(nuevaPrenda);
     const listaAnterior = getColoresParaPrenda(prenda);
     const idx = listaAnterior.findIndex(c => c.n === colorOption.n || c.c === colorOption.c);
@@ -302,10 +296,30 @@ export default function Configurator() {
     if (!ctx) return;
 
     setIsProcessingCanvas(true);
-    const isWhite = !colorOption.rgb;
-    const isDenim = prenda === 'mezclilla' || prenda === 'mezclilla_reflejante';
 
-    const imgSrc = (isWhite || isDenim)
+    if (prenda === 'mezclilla') {
+      const isReflective = versionMezclilla === 'con_reflejante';
+      const imgSrc = isReflective
+        ? (vista === 'frente' ? prendaActual.frenteImgColor : prendaActual.espaldaImgColor)
+        : (vista === 'frente' ? prendaActual.frenteImgWhite : prendaActual.espaldaImgWhite);
+
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = imgSrc;
+
+      img.onload = () => {
+        cvs.width = img.naturalWidth;
+        cvs.height = img.naturalHeight;
+        ctx.clearRect(0, 0, cvs.width, cvs.height);
+        ctx.drawImage(img, 0, 0);
+        setIsProcessingCanvas(false);
+      };
+      return;
+    }
+
+    const isWhite = !colorOption.rgb;
+
+    const imgSrc = isWhite
       ? (vista === 'frente' ? prendaActual.frenteImgWhite : prendaActual.espaldaImgWhite)
       : (vista === 'frente' ? prendaActual.frenteImgColor : prendaActual.espaldaImgColor);
 
@@ -320,7 +334,7 @@ export default function Configurator() {
 
       ctx.drawImage(img, 0, 0);
 
-      if (isWhite || isDenim) {
+      if (isWhite) {
         setIsProcessingCanvas(false);
         return;
       }
@@ -348,7 +362,11 @@ export default function Configurator() {
       ctx.putImageData(imgData, 0, 0);
       setIsProcessingCanvas(false);
     };
-  }, [prenda, vista, colorOption]);
+  }, [prenda, vista, colorOption, versionMezclilla]);
+
+  const activeColorLabel = prenda === 'mezclilla'
+    ? (versionMezclilla === 'con_reflejante' ? 'Azul Mezclilla c/ Reflejante' : 'Azul Mezclilla Clásica')
+    : colorOption.n;
 
   const handleDownloadMockup = () => {
     const cvs = canvasRef.current;
@@ -363,6 +381,8 @@ export default function Configurator() {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, exportCvs.width, exportCvs.height);
     ctx.drawImage(cvs, 0, 0);
+
+    const filenamePrefix = `HUPAC_${prenda.toUpperCase()}_${activeColorLabel.replace(/\s+/g, '_')}_${vista}.png`;
 
     if (logo) {
       const logoImg = new Image();
@@ -384,13 +404,13 @@ export default function Configurator() {
         ctx.restore();
 
         const link = document.createElement('a');
-        link.download = `HUPAC_${prenda.toUpperCase()}_${colorOption.n.replace(/\s+/g, '_')}_${vista}.png`;
+        link.download = filenamePrefix;
         link.href = exportCvs.toDataURL('image/png');
         link.click();
       };
     } else {
       const link = document.createElement('a');
-      link.download = `HUPAC_${prenda.toUpperCase()}_${colorOption.n.replace(/\s+/g, '_')}_${vista}.png`;
+      link.download = filenamePrefix;
       link.href = exportCvs.toDataURL('image/png');
       link.click();
     }
@@ -408,7 +428,7 @@ export default function Configurator() {
 ────────────────────────────
 👔 *ESPECIFICACIONES DE PRENDA*
 • *Modelo:* ${prendaActual.nombre}
-• *Color Institucional:* ${colorOption.n}
+• *Color / Versión:* ${activeColorLabel}
 • *Descripción:* ${prendaActual.subtitulo}
 
 🪡 *PERSONALIZACIÓN Y BORDADO*
@@ -434,7 +454,7 @@ export default function Configurator() {
         <div className="panel">
           <div className="rv" style={{ marginBottom: '16px' }}>
             <span className="eyebrow" style={{ color: 'var(--rey)', display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: 'rgba(36,86,196,0.06)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 800 }}>
-              🎨 Personaliza tu Uniforme con tu Logo
+              <IconSparkles size={14} color="var(--rey)" /> Personaliza tu Uniforme con tu Logo
             </span>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 850, color: 'var(--marino)', margin: '8px 0 6px 0', lineHeight: 1.25 }}>
               Prueba cómo luce tu logotipo sobre prendas reales en alta definición.
@@ -444,90 +464,127 @@ export default function Configurator() {
             </p>
           </div>
           
-          {/* 1. Prenda Base */}
+          {/* 1. Prenda Base (4 botones limpios con SVG) */}
           <div className="grupo rv">
             <label className="tit">1 · Modelo de Prenda</label>
-            <div className="opciones" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '8px' }}>
+            <div className="opciones" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '8px' }}>
               <button 
+                type="button"
                 className={`op ${prenda === 'polo' ? 'on' : ''}`} 
                 onClick={() => handlePrendaChange('polo')}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
-                <span>👕</span> Polo Piqué
+                <IconPolo size={19} color={prenda === 'polo' ? '#ffffff' : 'var(--rey)'} />
+                <span>Polo Piqué</span>
               </button>
               <button 
+                type="button"
                 className={`op ${prenda === 'playera' ? 'on' : ''}`} 
                 onClick={() => handlePrendaChange('playera')}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
-                <span>🎽</span> Playera Cuello Redondo
+                <IconPlayeraRound size={19} color={prenda === 'playera' ? '#ffffff' : 'var(--rey)'} />
+                <span>Playera Cuello Redondo</span>
               </button>
               <button 
+                type="button"
                 className={`op ${prenda === 'camisa' ? 'on' : ''}`} 
                 onClick={() => handlePrendaChange('camisa')}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
-                <span>👔</span> Camisa de Vestir
+                <IconCamisa size={19} color={prenda === 'camisa' ? '#ffffff' : 'var(--rey)'} />
+                <span>Camisa de Vestir</span>
               </button>
               <button 
+                type="button"
                 className={`op ${prenda === 'mezclilla' ? 'on' : ''}`} 
                 onClick={() => handlePrendaChange('mezclilla')}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
-                <span>🧥</span> Camisa de Mezclilla
-              </button>
-              <button 
-                className={`op ${prenda === 'mezclilla_reflejante' ? 'on' : ''}`} 
-                onClick={() => handlePrendaChange('mezclilla_reflejante')}
-                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-              >
-                <span>🦺</span> Mezclilla c/ Reflejante
+                <IconMezclilla size={19} color={prenda === 'mezclilla' ? '#ffffff' : 'var(--rey)'} />
+                <span>Camisa de Mezclilla</span>
               </button>
             </div>
           </div>
           
-          {/* 2. Color de Línea */}
-          <div className="grupo rv">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
-              <label className="tit" style={{ margin: 0 }}>2 · Color de Línea HUPAC</label>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--marino)' }}>
-                {colorOption.n}
-              </span>
+          {/* 2. Color de Línea o Selector de Reflejante para Mezclilla */}
+          {prenda === 'mezclilla' ? (
+            <div className="grupo rv">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                <label className="tit" style={{ margin: 0 }}>2 · Versión / Cintas Reflejantes</label>
+                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--marino)' }}>
+                  {versionMezclilla === 'con_reflejante' ? 'Con Cintas Reflejantes' : 'Sin Reflejante'}
+                </span>
+              </div>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  type="button"
+                  className={`op ${versionMezclilla === 'sin_reflejante' ? 'on' : ''}`}
+                  onClick={() => setVersionMezclilla('sin_reflejante')}
+                  style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px 14px' }}
+                >
+                  <IconMezclilla size={18} color={versionMezclilla === 'sin_reflejante' ? '#ffffff' : 'var(--marino)'} />
+                  <span>Sin Reflejante</span>
+                </button>
+                <button
+                  type="button"
+                  className={`op ${versionMezclilla === 'con_reflejante' ? 'on' : ''}`}
+                  onClick={() => setVersionMezclilla('con_reflejante')}
+                  style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px 14px' }}
+                >
+                  <IconReflectiveStripes size={18} color={versionMezclilla === 'con_reflejante' ? '#ffffff' : 'var(--marino)'} />
+                  <span>Con Reflejante</span>
+                </button>
+              </div>
             </div>
-            <div className="swatches">
-              {coloresActuales.map(opt => (
-                <button 
-                  key={opt.c}
-                  className={`sw ${colorOption.c === opt.c ? 'on' : ''}`} 
-                  style={{ 
-                    background: opt.c,
-                    border: opt.c === '#FFFFFF' ? '2px solid #cbd5e1' : '2px solid rgba(0,0,0,0.1)'
-                  }} 
-                  aria-label={opt.n}
-                  title={opt.n}
-                  onClick={() => setColorOption(opt)}
-                />
-              ))}
+          ) : (
+            <div className="grupo rv">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '8px' }}>
+                <label className="tit" style={{ margin: 0 }}>2 · Color de Línea HUPAC</label>
+                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--marino)' }}>
+                  {colorOption.n}
+                </span>
+              </div>
+              <div className="swatches">
+                {coloresActuales.map(opt => (
+                  <button 
+                    key={opt.c}
+                    type="button"
+                    className={`sw ${colorOption.c === opt.c ? 'on' : ''}`} 
+                    style={{ 
+                      background: opt.c,
+                      border: opt.c === '#FFFFFF' ? '2px solid #cbd5e1' : '2px solid rgba(0,0,0,0.1)'
+                    }} 
+                    aria-label={opt.n}
+                    title={opt.n}
+                    onClick={() => setColorOption(opt)}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* 3. Vista de la Prenda (Frente / Espalda) */}
           <div className="grupo rv">
             <label className="tit">3 · Vista de la Prenda</label>
             <div style={{ display: 'flex', gap: '10px' }}>
               <button 
+                type="button"
                 className={`op ${vista === 'frente' ? 'on' : ''}`} 
                 onClick={() => setVista('frente')}
-                style={{ flex: 1, textAlign: 'center', padding: '12px 16px' }}
+                style={{ flex: 1, textAlign: 'center', padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
-                👕 Vista Frontal (Frente)
+                <IconPlayeraRound size={17} color={vista === 'frente' ? '#ffffff' : 'var(--rey)'} />
+                <span>Vista Frontal (Frente)</span>
               </button>
               <button 
+                type="button"
                 className={`op ${vista === 'espalda' ? 'on' : ''}`} 
                 onClick={() => setVista('espalda')}
-                style={{ flex: 1, textAlign: 'center', padding: '12px 16px' }}
+                style={{ flex: 1, textAlign: 'center', padding: '12px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
               >
-                🔄 Vista Trasera (Espalda)
+                <IconRotate size={17} color={vista === 'espalda' ? '#ffffff' : 'var(--rey)'} />
+                <span>Vista Trasera (Espalda)</span>
               </button>
             </div>
           </div>
@@ -542,6 +599,7 @@ export default function Configurator() {
                 prendaActual.posicionesFrente.map(p => (
                   <button 
                     key={p.id}
+                    type="button"
                     className={`op ${posicionFrente === p.id ? 'on' : ''}`} 
                     onClick={() => setPosicionFrente(p.id)}
                   >
@@ -552,6 +610,7 @@ export default function Configurator() {
                 prendaActual.posicionesEspalda.map(p => (
                   <button 
                     key={p.id}
+                    type="button"
                     className={`op ${posicionEspalda === p.id ? 'on' : ''}`} 
                     onClick={() => setPosicionEspalda(p.id)}
                   >
@@ -587,18 +646,22 @@ export default function Configurator() {
             <label className="tit">5 · Técnica de Personalización</label>
             <div className="opciones">
               <button 
+                type="button"
                 className={`op ${tec === 'Bordado' ? 'on' : ''}`} 
                 onClick={() => setTec('Bordado')}
                 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
-                <span>🧵</span> Bordado (Relieve de Hilo)
+                <IconBordado size={18} color={tec === 'Bordado' ? '#ffffff' : 'var(--rey)'} />
+                <span>Bordado (Relieve de Hilo)</span>
               </button>
               <button 
+                type="button"
                 className={`op ${tec === 'Estampado' ? 'on' : ''}`} 
                 onClick={() => setTec('Estampado')}
                 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
-                <span>🎨</span> Estampado / DTG / Serigrafía
+                <IconDTG size={18} color={tec === 'Estampado' ? '#ffffff' : 'var(--rey)'} />
+                <span>Estampado / DTG / Serigrafía</span>
               </button>
             </div>
           </div>
@@ -633,10 +696,9 @@ export default function Configurator() {
                 justifyContent: 'center',
                 marginBottom: '10px',
                 boxShadow: '0 4px 10px rgba(36, 86, 196, 0.08)',
-                color: logo ? '#16a34a' : 'var(--rey)',
-                fontSize: '1.4rem'
+                color: logo ? '#16a34a' : 'var(--rey)'
               }}>
-                {logo ? '✓' : '☁️'}
+                {logo ? <IconCheckSimple size={24} color="#16a34a" /> : <IconUploadCloud size={24} color="var(--rey)" />}
               </div>
 
               <span style={{ fontSize: '0.98rem', fontWeight: 750, color: 'var(--marino)', display: 'block', marginBottom: '4px' }}>
@@ -705,7 +767,9 @@ export default function Configurator() {
               gap: '10px',
               lineHeight: 1.45
             }}>
-              <span style={{ fontSize: '1.1rem', flexShrink: 0, marginTop: '-1px' }}>💡</span>
+              <div style={{ flexShrink: 0, marginTop: '1px' }}>
+                <IconInfoCircle size={18} color="#0369a1" />
+              </div>
               <div>
                 <strong>Recomendación:</strong> Es preferible adjuntar tu imagen en formato <strong>PNG con fondo transparente</strong> para un acabado óptimo. Si tu imagen tiene fondo blanco, nuestro sistema intentará removerlo automáticamente.
               </div>
@@ -737,16 +801,18 @@ export default function Configurator() {
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span style={{
-                  width: '12px',
-                  height: '12px',
-                  borderRadius: '50%',
-                  backgroundColor: colorOption.c,
-                  border: colorOption.c === '#FFFFFF' ? '1px solid #cbd5e1' : 'none',
-                  display: 'inline-block'
-                }} />
+                {prenda !== 'mezclilla' && (
+                  <span style={{
+                    width: '12px',
+                    height: '12px',
+                    borderRadius: '50%',
+                    backgroundColor: colorOption.c,
+                    border: colorOption.c === '#FFFFFF' ? '1px solid #cbd5e1' : 'none',
+                    display: 'inline-block'
+                  }} />
+                )}
                 <span style={{ fontWeight: 700, color: 'var(--marino)', fontSize: '0.85rem' }}>
-                  {colorOption.n}
+                  {activeColorLabel}
                 </span>
               </div>
             </div>
@@ -774,10 +840,15 @@ export default function Configurator() {
                   fontSize: '0.85rem',
                   cursor: 'pointer',
                   boxShadow: vista === 'frente' ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
-                  transition: 'all 0.15s ease'
+                  transition: 'all 0.15s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
                 }}
               >
-                👕 Vista Frente
+                <IconPlayeraRound size={15} color={vista === 'frente' ? 'var(--rey)' : 'var(--texto-2)'} />
+                <span>Vista Frente</span>
               </button>
               <button
                 type="button"
@@ -793,10 +864,15 @@ export default function Configurator() {
                   fontSize: '0.85rem',
                   cursor: 'pointer',
                   boxShadow: vista === 'espalda' ? '0 2px 6px rgba(0,0,0,0.06)' : 'none',
-                  transition: 'all 0.15s ease'
+                  transition: 'all 0.15s ease',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
                 }}
               >
-                🔄 Vista Espalda
+                <IconRotate size={15} color={vista === 'espalda' ? 'var(--rey)' : 'var(--texto-2)'} />
+                <span>Vista Espalda</span>
               </button>
             </div>
 
@@ -906,7 +982,7 @@ export default function Configurator() {
                 alignItems: 'center',
                 gap: '6px'
               }}>
-                <span>{tec === 'Bordado' ? '🧵' : '🎨'}</span>
+                {tec === 'Bordado' ? <IconBordado size={14} color="var(--rey)" /> : <IconDTG size={14} color="var(--rey)" />}
                 <span>Acabado: {tec}</span>
               </div>
 
@@ -934,7 +1010,8 @@ export default function Configurator() {
                 }}
                 title="Voltear prenda"
               >
-                🔄 Ver {vista === 'frente' ? 'Espalda' : 'Frente'}
+                <IconRotate size={13} color="var(--rey)" />
+                <span>Ver {vista === 'frente' ? 'Espalda' : 'Frente'}</span>
               </button>
             </div>
 
@@ -962,7 +1039,8 @@ export default function Configurator() {
                 }}
                 title="Descargar imagen del diseño"
               >
-                <span>📥</span> Descargar Vista
+                <IconDownload size={14} color="var(--marino)" />
+                <span>Descargar Vista</span>
               </button>
             </div>
           </div>
@@ -982,7 +1060,7 @@ export default function Configurator() {
                   HUPAC TEXTILES S.A. DE C.V.
                 </span>
                 <b style={{ color: 'var(--marino)', fontSize: '1rem', display: 'block' }}>
-                  📄 Ticket de Cotización Digital
+                  Ticket de Cotización Digital
                 </b>
               </div>
               <span style={{ 
@@ -1000,7 +1078,7 @@ export default function Configurator() {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px 14px', fontSize: '0.86rem', color: '#334155', marginBottom: '14px' }}>
               <div>Prenda: <b style={{ color: 'var(--marino)' }}>{prendaActual.nombre}</b></div>
-              <div>Color: <b style={{ color: colorOption.c === '#FFFFFF' ? '#475569' : colorOption.c }}>{colorOption.n}</b></div>
+              <div>Versión / Color: <b style={{ color: 'var(--marino)' }}>{activeColorLabel}</b></div>
               <div>Técnica: <b>{tec}</b></div>
               <div>Vista: <b>{vista === 'frente' ? 'Frontal (Frente)' : 'Trasera (Espalda)'}</b></div>
               <div>Posición Logo: <b>{activePositionName}</b></div>
@@ -1031,13 +1109,15 @@ export default function Configurator() {
                   transition: 'all 0.15s ease'
                 }}
               >
-                📄 Ver Ticket PDF / Formato
+                <IconTicket size={16} color="var(--marino)" />
+                <span>Ver Ticket PDF / Formato</span>
               </button>
             </div>
           </div>
           
           {/* ================= BOTÓN ENVIAR TICKET POR WHATSAPP (LADO DERECHO) ================= */}
           <button 
+            type="button"
             className="btn" 
             onClick={async () => {
               try {
@@ -1045,7 +1125,7 @@ export default function Configurator() {
                   tipo: 'Cotización Personalizada',
                   folio: folioRef.current,
                   prenda: prendaActual.nombre,
-                  color: colorOption.n,
+                  color: activeColorLabel,
                   vista: vista === 'frente' ? 'Frente' : 'Espalda',
                   tecnica: tec,
                   posicion: activePositionName,
@@ -1074,7 +1154,8 @@ export default function Configurator() {
               boxShadow: '0 8px 20px rgba(36, 86, 196, 0.25)'
             }}
           >
-            <span>💬</span> Enviar Ticket por WhatsApp
+            <IconWhatsApp size={20} />
+            <span>Enviar Ticket por WhatsApp</span>
           </button>
         </div>
 
@@ -1169,8 +1250,8 @@ export default function Configurator() {
                     <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800, color: 'var(--marino)' }}>{prendaActual.nombre}</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
-                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Color Institucional</td>
-                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800 }}>{colorOption.n}</td>
+                    <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Versión / Color</td>
+                    <td style={{ padding: '8px 0', textAlign: 'right', fontWeight: 800 }}>{activeColorLabel}</td>
                   </tr>
                   <tr style={{ borderBottom: '1px solid #f1f5f9' }}>
                     <td style={{ padding: '8px 0', color: '#64748b', fontWeight: 600 }}>Técnica de Personalización</td>
