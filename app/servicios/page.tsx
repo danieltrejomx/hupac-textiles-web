@@ -279,7 +279,7 @@ export default function ServiciosPage() {
                 boxShadow: '0 8px 30px rgba(19, 42, 82, 0.12)',
                 border: '1px solid #1e293b'
               }}>
-                <TecnicaAnimacion id={activeTecnicaId} height={250} />
+                <TecnicaAnimacion id={activeTecnicaId} height={320} />
               </div>
 
               {/* Barra de descripción y botón de especificaciones */}
@@ -503,7 +503,7 @@ export default function ServiciosPage() {
               border: '1px solid #1e293b',
               boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)'
             }}>
-              <TecnicaAnimacion id={modalServicio.id} height={190} />
+              <TecnicaAnimacion id={modalServicio.id} height={230} />
             </div>
 
             <p style={{ fontSize: '0.98rem', color: 'var(--texto-2)', lineHeight: 1.6, marginBottom: '20px' }}>

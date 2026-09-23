@@ -6,8 +6,8 @@ import React from 'react';
 // =========================================================================
 export function AnimacionBordado() {
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-      <svg viewBox="0 0 500 240" style={{ width: '100%', height: '100%', display: 'block' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg viewBox="0 0 500 240" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%', maxWidth: '620px', maxHeight: '100%', display: 'block', margin: '0 auto' }}>
         <defs>
           {/* Trama de tejido de tela */}
           <pattern id="telaWeave" width="8" height="8" patternUnits="userSpaceOnUse">
@@ -161,8 +161,8 @@ export function AnimacionBordado() {
 // =========================================================================
 export function AnimacionSerigrafia() {
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-      <svg viewBox="0 0 500 240" style={{ width: '100%', height: '100%', display: 'block' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg viewBox="0 0 500 240" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%', maxWidth: '620px', maxHeight: '100%', display: 'block', margin: '0 auto' }}>
         <defs>
           {/* Clip path para revelar la tinta conforme avanza el rasero */}
           <clipPath id="inkRevealClip">
@@ -271,8 +271,8 @@ export function AnimacionSerigrafia() {
 // =========================================================================
 export function AnimacionDTG() {
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-      <svg viewBox="0 0 500 240" style={{ width: '100%', height: '100%', display: 'block' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg viewBox="0 0 500 240" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%', maxWidth: '620px', maxHeight: '100%', display: 'block', margin: '0 auto' }}>
         <defs>
           {/* Gradiente arcoíris de alta resolución (fotográfico) */}
           <linearGradient id="dtgGraphic" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -364,8 +364,8 @@ export function AnimacionDTG() {
 // =========================================================================
 export function AnimacionSublimacion() {
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-      <svg viewBox="0 0 500 240" style={{ width: '100%', height: '100%', display: 'block' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg viewBox="0 0 500 240" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%', maxWidth: '620px', maxHeight: '100%', display: 'block', margin: '0 auto' }}>
         <defs>
           {/* Calor térmico radiante */}
           <radialGradient id="calorTermico" cx="50%" cy="50%" r="50%">
@@ -468,8 +468,8 @@ export function AnimacionSublimacion() {
 // =========================================================================
 export function AnimacionTransfer() {
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
-      <svg viewBox="0 0 500 240" style={{ width: '100%', height: '100%', display: 'block' }}>
+    <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <svg viewBox="0 0 500 240" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%', maxWidth: '620px', maxHeight: '100%', display: 'block', margin: '0 auto' }}>
         <defs>
           {/* Brillo reflectivo metálico */}
           <linearGradient id="vinilReflectivo" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -572,7 +572,7 @@ interface TecnicaAnimacionProps {
   height?: number | string;
 }
 
-export default function TecnicaAnimacion({ id, height = 240 }: TecnicaAnimacionProps) {
+export default function TecnicaAnimacion({ id, height = 310 }: TecnicaAnimacionProps) {
   const getBadgeInfo = () => {
     switch (id) {
       case 'bordado':
@@ -671,7 +671,18 @@ export default function TecnicaAnimacion({ id, height = 240 }: TecnicaAnimacionP
       </div>
 
       {/* Visor de Animación Central */}
-      <div style={{ flex: 1, position: 'relative' }}>
+      <div style={{
+        flex: 1,
+        position: 'relative',
+        width: '100%',
+        minHeight: 0,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '38px 16px 36px 16px',
+        boxSizing: 'border-box',
+        overflow: 'hidden'
+      }}>
         {id === 'bordado' && <AnimacionBordado />}
         {id === 'serigrafia' && <AnimacionSerigrafia />}
         {id === 'dtg' && <AnimacionDTG />}
