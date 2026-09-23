@@ -102,6 +102,68 @@ export default function Navbar() {
           {/* Right actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
             
+            {/* Botón Asistente Virtual HUPAC en Barra Superior */}
+            <button
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.dispatchEvent(new CustomEvent('open-hupac-chat'));
+                }
+              }}
+              style={{
+                position: 'relative',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%)',
+                border: '1.5px solid rgba(36, 86, 196, 0.35)',
+                borderRadius: '10px',
+                padding: '6px 12px 6px 7px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: 'var(--marino)',
+                fontWeight: 750,
+                fontSize: '13px',
+                flexShrink: 0,
+                boxShadow: '0 2px 8px rgba(19, 42, 82, 0.08)',
+                transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              aria-label="Abrir Asistente Virtual HUPAC"
+              title="Hablar con Asistente Virtual HUPAC"
+            >
+              <div
+                style={{
+                  width: '24px',
+                  height: '24px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  backgroundColor: '#0B192C',
+                  border: '1.5px solid #38bdf8',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+              >
+                <img
+                  src="/images/asistente-hupac.jpg"
+                  alt="Asistente Virtual HUPAC"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
+                />
+              </div>
+              <span style={{ fontSize: '13px', color: 'var(--marino)' }}>
+                Asistente Virtual
+              </span>
+              <span
+                style={{
+                  width: '7px',
+                  height: '7px',
+                  borderRadius: '50%',
+                  backgroundColor: '#22c55e',
+                  boxShadow: '0 0 6px #22c55e',
+                  flexShrink: 0
+                }}
+              />
+            </button>
+
             {/* Lupa / Botón de Búsqueda */}
             <button
               onClick={() => setIsSearchOpen(true)}
@@ -378,7 +440,37 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <div style={{ marginTop: '16px', borderTop: '1px solid var(--linea)', paddingTop: '16px' }}>
+          <div style={{ marginTop: '16px', borderTop: '1px solid var(--linea)', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <button
+              onClick={() => {
+                setMenuOpen(false);
+                if (typeof window !== 'undefined') {
+                  window.dispatchEvent(new CustomEvent('open-hupac-chat'));
+                }
+              }}
+              style={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '10px',
+                backgroundColor: '#ffffff',
+                border: '1.5px solid rgba(36, 86, 196, 0.35)',
+                borderRadius: '8px',
+                padding: '12px 16px',
+                cursor: 'pointer',
+                fontWeight: 750,
+                color: 'var(--marino)',
+                fontSize: '14px',
+                boxShadow: '0 2px 6px rgba(19, 42, 82, 0.08)'
+              }}
+            >
+              <div style={{ width: '24px', height: '24px', borderRadius: '50%', overflow: 'hidden', backgroundColor: '#0B192C', border: '1px solid #38bdf8' }}>
+                <img src="/images/asistente-hupac.jpg" alt="Asistente" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              Hablar con Asistente Virtual
+              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#22c55e', boxShadow: '0 0 6px #22c55e' }} />
+            </button>
             <Link href="/#cotizador" className="btn" style={{ width: '100%', justifyContent: 'center' }} onClick={() => setMenuOpen(false)}>
               Cotizar pedido
             </Link>

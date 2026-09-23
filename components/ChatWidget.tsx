@@ -13,10 +13,22 @@ interface Message {
   links?: { label: string; url: string }[];
 }
 
+const ROTATING_PROMPTS = [
+  '¿Dudas? Habla con nuestro Asistente Virtual',
+  '👕 ¿Buscas uniformes para tu empresa? Te asesoro',
+  '🎨 ¡Prueba tu logotipo en 3D en el configurador!',
+  '🥾 Cotiza calzado, cascos y equipo EPP aquí',
+  '⚡ Precios de mayoreo directo de fábrica',
+  '💬 ¿Necesitas cotización formal? Escríbeme'
+];
+
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [promptIndex, setPromptIndex] = useState(0);
+  const [fadePrompt, setFadePrompt] = useState(true);
+
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome',
@@ -33,6 +45,25 @@ export default function ChatWidget() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  // Escuchar evento global desde el Navbar u otros botones del sitio
+  useEffect(() => {
+    const handleOpenChat = () => setIsOpen(true);
+    window.addEventListener('open-hupac-chat', handleOpenChat);
+    return () => window.removeEventListener('open-hupac-chat', handleOpenChat);
+  }, []);
+
+  // Animación del texto dinámico rotativo (segunda captura)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFadePrompt(false);
+      setTimeout(() => {
+        setPromptIndex((prev) => (prev + 1) % ROTATING_PROMPTS.length);
+        setFadePrompt(true);
+      }, 250);
+    }, 3800);
+    return () => clearInterval(interval);
+  }, []);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -128,8 +159,7 @@ export default function ChatWidget() {
           gap: '8px'
         }}
       >
-        {/* Tooltip pequeño si está cerrado */}
-        {/* Tooltip pequeño si está cerrado */}
+        {/* Tooltip con texto dinámico y rotativo (no estático) */}
         {!isOpen && (
           <div
             onClick={() => setIsOpen(true)}
@@ -147,7 +177,8 @@ export default function ChatWidget() {
               gap: '8px',
               cursor: 'pointer',
               animation: 'bounceSoft 3s infinite ease-in-out',
-              userSelect: 'none'
+              userSelect: 'none',
+              maxWidth: '340px'
             }}
           >
             <div
@@ -167,8 +198,20 @@ export default function ChatWidget() {
                 style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
               />
             </div>
-            <span>¿Dudas? Habla con nuestro Asistente Virtual</span>
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block' }} />
+            <span
+              style={{
+                display: 'inline-block',
+                opacity: fadePrompt ? 1 : 0,
+                transform: fadePrompt ? 'translateY(0)' : 'translateY(-3px)',
+                transition: 'opacity 0.25s ease, transform 0.25s ease',
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+              }}
+            >
+              {ROTATING_PROMPTS[promptIndex]}
+            </span>
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block', flexShrink: 0 }} />
           </div>
         )}
 
