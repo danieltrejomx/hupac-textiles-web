@@ -3,7 +3,7 @@ import { useState, useRef, useEffect, ChangeEvent } from 'react';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
 
-type Prenda = 'polo' | 'playera' | 'camisa';
+type Prenda = 'polo' | 'playera' | 'camisa' | 'mezclilla' | 'mezclilla_reflejante';
 type Vista = 'frente' | 'espalda';
 type PosicionFrente = 'pecho_izq' | 'centro_pecho' | 'pecho_der';
 type PosicionEspalda = 'espalda_cuello' | 'espalda_centro' | 'espalda_baja';
@@ -75,6 +75,42 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
       { id: 'espalda_centro', label: 'Espalda Centro (Grande)', x: 50, y: 44, maxW: 170 },
       { id: 'espalda_baja', label: 'Espalda Baja', x: 50, y: 68, maxW: 150 },
     ]
+  },
+  mezclilla: {
+    nombre: 'CAMISA DE MEZCLILLA INDUSTRIAL',
+    subtitulo: '100% Algodón de uso rudo · Confección reforzada y doble bolsa',
+    frenteImgWhite: '/images/epc/camisa_mezclilla.png',
+    espaldaImgWhite: '/images/epc/camisa_mezclilla.png',
+    frenteImgColor: '/images/epc/camisa_mezclilla.png',
+    espaldaImgColor: '/images/epc/camisa_mezclilla.png',
+    posicionesFrente: [
+      { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 62, y: 34, maxW: 85 },
+      { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 44, maxW: 120 },
+      { id: 'pecho_der', label: 'Pecho Derecho', x: 38, y: 34, maxW: 85 },
+    ],
+    posicionesEspalda: [
+      { id: 'espalda_cuello', label: 'Espalda Superior (Cuello)', x: 50, y: 22, maxW: 95 },
+      { id: 'espalda_centro', label: 'Espalda Centro (Grande)', x: 50, y: 44, maxW: 170 },
+      { id: 'espalda_baja', label: 'Espalda Baja', x: 50, y: 68, maxW: 150 },
+    ]
+  },
+  mezclilla_reflejante: {
+    nombre: 'CAMISA DE MEZCLILLA CON REFLEJANTE',
+    subtitulo: '100% Algodón · Cintas reflejantes de alta visibilidad bicolor',
+    frenteImgWhite: '/images/configurator/camisa_mezclilla_reflejante_front.jpg',
+    espaldaImgWhite: '/images/configurator/camisa_mezclilla_reflejante_front.jpg',
+    frenteImgColor: '/images/configurator/camisa_mezclilla_reflejante_front.jpg',
+    espaldaImgColor: '/images/configurator/camisa_mezclilla_reflejante_front.jpg',
+    posicionesFrente: [
+      { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 29, maxW: 85 },
+      { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 35, maxW: 120 },
+      { id: 'pecho_der', label: 'Pecho Derecho', x: 37, y: 29, maxW: 85 },
+    ],
+    posicionesEspalda: [
+      { id: 'espalda_cuello', label: 'Espalda Superior (Cuello)', x: 50, y: 22, maxW: 95 },
+      { id: 'espalda_centro', label: 'Espalda Centro (Grande)', x: 50, y: 44, maxW: 170 },
+      { id: 'espalda_baja', label: 'Espalda Baja', x: 50, y: 68, maxW: 150 },
+    ]
   }
 };
 
@@ -97,10 +133,15 @@ const COLORES_POLO_PLAYERA: ColorOption[] = [
 const COLORES_CAMISA: ColorOption[] = [
   { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
   { c: '#7BA4D0', n: 'Azul Cielo (Oxford)', rgb: [123, 164, 208], textColor: '#132A52' },
-  { c: '#142236', n: 'Azul Marino Corporativo', rgb: [20, 34, 54], textColor: '#FFFFFF' },
-  { c: '#4E5664', n: 'Gris Oxford Industrial', rgb: [78, 86, 100], textColor: '#FFFFFF' },
-  { c: '#A31F2D', n: 'Rojo Empresarial', rgb: [163, 31, 45], textColor: '#FFFFFF' },
   { c: '#22262E', n: 'Negro Profundo', rgb: [34, 38, 46], textColor: '#FFFFFF' },
+];
+
+const COLORES_MEZCLILLA: ColorOption[] = [
+  { c: '#2E4A7D', n: 'Azul Mezclilla Original', rgb: null, textColor: '#FFFFFF' },
+];
+
+const COLORES_MEZCLILLA_REFLEJANTE: ColorOption[] = [
+  { c: '#2B4268', n: 'Azul Mezclilla c/ Reflejante', rgb: null, textColor: '#FFFFFF' },
 ];
 
 function removeImageBackground(dataUrl: string): Promise<string> {
@@ -187,15 +228,24 @@ export default function Configurator() {
   const [showTicketModal, setShowTicketModal] = useState(false);
   const folioRef = useRef<string>('');
 
-  const coloresActuales = prenda === 'camisa' ? COLORES_CAMISA : COLORES_POLO_PLAYERA;
+  const getColoresParaPrenda = (p: Prenda): ColorOption[] => {
+    if (p === 'camisa') return COLORES_CAMISA;
+    if (p === 'mezclilla') return COLORES_MEZCLILLA;
+    if (p === 'mezclilla_reflejante') return COLORES_MEZCLILLA_REFLEJANTE;
+    return COLORES_POLO_PLAYERA;
+  };
+
+  const coloresActuales = getColoresParaPrenda(prenda);
 
   const handlePrendaChange = (nuevaPrenda: Prenda) => {
     setPrenda(nuevaPrenda);
-    const listaActual = nuevaPrenda === 'camisa' ? COLORES_CAMISA : COLORES_POLO_PLAYERA;
-    const listaAnterior = prenda === 'camisa' ? COLORES_CAMISA : COLORES_POLO_PLAYERA;
+    const listaActual = getColoresParaPrenda(nuevaPrenda);
+    const listaAnterior = getColoresParaPrenda(prenda);
     const idx = listaAnterior.findIndex(c => c.n === colorOption.n || c.c === colorOption.c);
     if (idx >= 0 && listaActual[idx]) {
       setColorOption(listaActual[idx]);
+    } else {
+      setColorOption(listaActual[0]);
     }
   };
 
@@ -253,8 +303,9 @@ export default function Configurator() {
 
     setIsProcessingCanvas(true);
     const isWhite = !colorOption.rgb;
+    const isDenim = prenda === 'mezclilla' || prenda === 'mezclilla_reflejante';
 
-    const imgSrc = isWhite
+    const imgSrc = (isWhite || isDenim)
       ? (vista === 'frente' ? prendaActual.frenteImgWhite : prendaActual.espaldaImgWhite)
       : (vista === 'frente' ? prendaActual.frenteImgColor : prendaActual.espaldaImgColor);
 
@@ -269,7 +320,7 @@ export default function Configurator() {
 
       ctx.drawImage(img, 0, 0);
 
-      if (isWhite) {
+      if (isWhite || isDenim) {
         setIsProcessingCanvas(false);
         return;
       }
@@ -396,7 +447,7 @@ export default function Configurator() {
           {/* 1. Prenda Base */}
           <div className="grupo rv">
             <label className="tit">1 · Modelo de Prenda</label>
-            <div className="opciones">
+            <div className="opciones" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '8px' }}>
               <button 
                 className={`op ${prenda === 'polo' ? 'on' : ''}`} 
                 onClick={() => handlePrendaChange('polo')}
@@ -417,6 +468,20 @@ export default function Configurator() {
                 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
                 <span>👔</span> Camisa de Vestir
+              </button>
+              <button 
+                className={`op ${prenda === 'mezclilla' ? 'on' : ''}`} 
+                onClick={() => handlePrendaChange('mezclilla')}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              >
+                <span>🧥</span> Camisa de Mezclilla
+              </button>
+              <button 
+                className={`op ${prenda === 'mezclilla_reflejante' ? 'on' : ''}`} 
+                onClick={() => handlePrendaChange('mezclilla_reflejante')}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              >
+                <span>🦺</span> Mezclilla c/ Reflejante
               </button>
             </div>
           </div>
