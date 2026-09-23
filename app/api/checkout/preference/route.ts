@@ -1,16 +1,21 @@
 import { MercadoPagoConfig, Preference } from 'mercadopago';
 import { NextResponse } from 'next/server';
 
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || ''
-});
-
 export async function POST(request: Request) {
   try {
+    const accessToken = process.env.MERCADOPAGO_ACCESS_TOKEN || '';
+    if (!accessToken) {
+      return NextResponse.json(
+        { error: 'Credenciales de Mercado Pago no configuradas (MERCADOPAGO_ACCESS_TOKEN requerido).' },
+        { status: 500 }
+      );
+    }
+
+    const client = new MercadoPagoConfig({ accessToken });
+    const preference = new Preference(client);
+
     const body = await request.json();
     const { items, cliente, orderId, envio } = body;
-
-    const preference = new Preference(client);
 
     const host = request.headers.get('host') || 'hupac-textiles-web.vercel.app';
     const protocol = host.includes('localhost') ? 'http' : 'https';

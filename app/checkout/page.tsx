@@ -32,7 +32,7 @@ function CheckoutContent() {
 
   const total = subtotal; // El cliente paga únicamente el precio del producto (sin IVA adicional)
 
-  const [metodoPago, setMetodoPago] = useState<'tarjeta' | 'mercadopago'>('tarjeta');
+  const [metodoPago, setMetodoPago] = useState<'tarjeta' | 'mercadopago'>('mercadopago');
   const [cardData, setCardData] = useState({
     numero: '',
     nombre: '',
@@ -161,32 +161,38 @@ function CheckoutContent() {
       }
 
       // Si seleccionó Mercado Pago oficial
-      const docRef = await addDoc(collection(db, 'orders'), {
-        tipo: 'Venta E-Commerce',
-        cliente: {
-          nombre: formData.nombre,
-          email: formData.email,
-          telefono: formData.telefono,
-          direccion: `${formData.direccion}, Col. ${formData.colonia}, ${formData.ciudad}, ${formData.estado}, C.P. ${formData.cp}`
-        },
-        items: cart.map(i => ({
-          nombre: i.nombre,
-          estilo: i.estilo || '',
-          color: i.color || '',
-          talla: i.talla || '',
-          cantidad: i.cantidad,
-          precioUnitario: i.precioUnitario,
-          subtotal: i.precioUnitario * i.cantidad
-        })),
-        totalItems,
-        subtotal,
-        iva: 0,
-        envio: 0,
-        total,
-        metodoPago: 'Mercado Pago (Tarjeta / SPEI / OXXO)',
-        estadoPago: 'Pendiente',
-        fecha: serverTimestamp(),
-      });
+      let orderId = `HUP-${Date.now().toString().slice(-6)}`;
+      try {
+        const docRef = await addDoc(collection(db, 'orders'), {
+          tipo: 'Venta E-Commerce (Mercado Pago)',
+          cliente: {
+            nombre: formData.nombre,
+            email: formData.email,
+            telefono: formData.telefono,
+            direccion: `${formData.direccion}, Col. ${formData.colonia}, ${formData.ciudad}, ${formData.estado}, C.P. ${formData.cp}`
+          },
+          items: cart.map(i => ({
+            nombre: i.nombre,
+            estilo: i.estilo || '',
+            color: i.color || '',
+            talla: i.talla || '',
+            cantidad: i.cantidad,
+            precioUnitario: i.precioUnitario,
+            subtotal: i.precioUnitario * i.cantidad
+          })),
+          totalItems,
+          subtotal,
+          iva: 0,
+          envio: 0,
+          total,
+          metodoPago: 'Mercado Pago (Tarjeta / SPEI / OXXO)',
+          estadoPago: 'Pendiente',
+          fecha: serverTimestamp(),
+        });
+        orderId = docRef.id;
+      } catch (dbErr) {
+        console.warn('Firestore offline o credenciales demo, continuando con ID:', orderId, dbErr);
+      }
 
       // Crear Preferencia de Pago en Mercado Pago (solo precio del producto, sin IVA)
       const response = await fetch('/api/checkout/preference', {
@@ -197,7 +203,7 @@ function CheckoutContent() {
         body: JSON.stringify({
           items: cart,
           cliente: formData,
-          orderId: docRef.id,
+          orderId,
           envio: 0
         }),
       });
@@ -517,6 +523,7 @@ function CheckoutContent() {
                         💳 Medios aceptados con Mercado Pago:
                       </span>
                       <ul style={{ margin: 0, paddingLeft: '20px', color: '#0284c7', fontSize: '0.84rem', lineHeight: 1.6 }}>
+                        <li>Tarjetas de Crédito y Débito (Visa, Mastercard, American Express)</li>
                         <li>Transferencia bancaria SPEI con acreditación inmediata</li>
                         <li>Depósito en efectivo en tiendas OXXO y 7-Eleven</li>
                         <li>Saldo en cuenta de Mercado Pago y Mercado Crédito</li>
