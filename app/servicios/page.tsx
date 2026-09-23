@@ -138,22 +138,6 @@ export default function ServiciosPage() {
               background: 'linear-gradient(90deg, transparent, #2456C4, #38bdf8, #132A52, transparent)'
             }} />
 
-            {/* Tag Superior */}
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              color: 'var(--rey)',
-              fontSize: '0.78rem',
-              fontWeight: 800,
-              letterSpacing: '0.16em',
-              textTransform: 'uppercase',
-              marginBottom: '10px'
-            }}>
-              <span style={{ width: '22px', height: '2px', backgroundColor: 'var(--rey)', display: 'inline-block' }} />
-              HUPAC TEXTILES
-            </div>
-
             {/* Título Principal */}
             <h1 style={{
               fontSize: '2.3rem',
@@ -161,7 +145,8 @@ export default function ServiciosPage() {
               color: 'var(--marino)',
               letterSpacing: '-0.02em',
               margin: '0 0 6px 0',
-              lineHeight: 1.15
+              lineHeight: 1.15,
+              textAlign: 'center'
             }}>
               CINCO TÉCNICAS DE PERSONALIZACIÓN
             </h1>
@@ -171,7 +156,8 @@ export default function ServiciosPage() {
               fontSize: '0.95rem',
               fontStyle: 'italic',
               color: 'var(--texto-2)',
-              margin: '0 0 24px 0'
+              margin: '0 0 24px 0',
+              textAlign: 'center'
             }}>
               Cinco técnicas de personalización. Un solo fabricante.
             </p>
