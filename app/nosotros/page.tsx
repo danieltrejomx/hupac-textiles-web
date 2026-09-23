@@ -22,27 +22,13 @@ export default function NosotrosPage() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: '#060B13', minHeight: '90vh', position: 'relative', overflow: 'hidden' }}>
-        
-        {/* Glow de fondo atmosférico institucional */}
-        <div style={{
-          position: 'absolute',
-          top: '25%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '900px',
-          height: '450px',
-          background: 'radial-gradient(ellipse at center, rgba(36, 86, 196, 0.22) 0%, rgba(56, 189, 248, 0.08) 40%, transparent 70%)',
-          pointerEvents: 'none',
-          zIndex: 0
-        }} />
-
+      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', position: 'relative' }}>
         <div style={{
           position: 'relative',
           zIndex: 1,
           maxWidth: '1280px',
           margin: '0 auto',
-          padding: '48px 20px 64px 20px',
+          padding: '20px 20px 56px 20px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
@@ -56,7 +42,7 @@ export default function NosotrosPage() {
             padding: '40px 48px 36px 48px',
             width: '100%',
             position: 'relative',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
+            boxShadow: '0 20px 50px rgba(11, 25, 44, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
           }}>
             {/* Línea superior con gradiente de luz */}
             <div style={{
