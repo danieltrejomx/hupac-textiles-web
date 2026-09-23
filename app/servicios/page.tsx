@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import TecnicaAnimacion from '@/components/TecnicasAnimadas';
 import { 
   IconBordado, 
   IconSerigrafia, 
@@ -15,6 +16,7 @@ import {
 
 export default function ServiciosPage() {
   const [modalServicio, setModalServicio] = useState<any | null>(null);
+  const [activeTecnicaId, setActiveTecnicaId] = useState<string>('bordado');
 
   const serviciosDetalle = [
     {
@@ -98,6 +100,8 @@ export default function ServiciosPage() {
       telas: 'Algodón, Poliéster, Nylon, Mezclas y Ropa de Trabajo'
     }
   ];
+
+  const activeServicio = serviciosDetalle.find((s) => s.id === activeTecnicaId) || serviciosDetalle[0];
 
   return (
     <>
@@ -205,58 +209,137 @@ export default function ServiciosPage() {
               Contamos con tecnología de punta y procesos industriales para aplicar tu logotipo con la máxima fidelidad y resistencia. Selecciona cualquiera de nuestras técnicas para consultar sus especificaciones técnicas y aplicaciones recomendadas.
             </p>
 
-            {/* ================= FILA DE BOTONES DE CÁPSULA (LAS 5 TÉCNICAS) ================= */}
+            {/* ================= SIMULADOR ANIMADO Y SELECTOR DE LAS 5 TÉCNICAS ================= */}
             <div style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '12px',
               borderTop: '1px solid var(--linea)',
               paddingTop: '24px',
-              flexWrap: 'wrap'
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '18px'
             }}>
-              {serviciosDetalle.map((srv) => {
-                const IconComponent = srv.iconComp;
-                return (
-                  <button
-                    key={srv.id}
-                    type="button"
-                    onClick={() => setModalServicio(srv)}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      padding: '11px 22px',
-                      borderRadius: '100px',
-                      backgroundColor: '#ffffff',
-                      border: '1.5px solid var(--rey)',
-                      color: 'var(--rey)',
-                      fontSize: '0.84rem',
-                      fontWeight: 800,
-                      letterSpacing: '0.04em',
-                      textTransform: 'uppercase',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                      userSelect: 'none'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = 'var(--rey)';
-                      e.currentTarget.style.color = '#ffffff';
-                      e.currentTarget.style.boxShadow = '0 6px 18px rgba(26, 58, 112, 0.18)';
-                      e.currentTarget.style.transform = 'translateY(-2px)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = '#ffffff';
-                      e.currentTarget.style.color = 'var(--rey)';
-                      e.currentTarget.style.boxShadow = 'none';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                    }}
-                  >
-                    <IconComponent size={18} color="currentColor" />
-                    <span>{srv.buttonLabel || srv.titulo}</span>
-                  </button>
-                );
-              })}
+              {/* Fila de botones de cápsula (Las 5 técnicas) */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                gap: '10px',
+                flexWrap: 'wrap'
+              }}>
+                {serviciosDetalle.map((srv) => {
+                  const IconComponent = srv.iconComp;
+                  const isActive = srv.id === activeTecnicaId;
+                  return (
+                    <button
+                      key={srv.id}
+                      type="button"
+                      onClick={() => setActiveTecnicaId(srv.id)}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        padding: '10px 20px',
+                        borderRadius: '100px',
+                        backgroundColor: isActive ? 'var(--rey)' : '#ffffff',
+                        border: `1.5px solid ${isActive ? 'var(--rey)' : '#cbd5e1'}`,
+                        color: isActive ? '#ffffff' : 'var(--marino)',
+                        fontSize: '0.84rem',
+                        fontWeight: isActive ? 850 : 750,
+                        letterSpacing: '0.03em',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                        boxShadow: isActive ? '0 4px 14px rgba(36, 86, 196, 0.28)' : 'none',
+                        userSelect: 'none'
+                      }}
+                      onMouseEnter={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.borderColor = 'var(--rey)';
+                          e.currentTarget.style.color = 'var(--rey)';
+                          e.currentTarget.style.transform = 'translateY(-1px)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (!isActive) {
+                          e.currentTarget.style.borderColor = '#cbd5e1';
+                          e.currentTarget.style.color = 'var(--marino)';
+                          e.currentTarget.style.transform = 'translateY(0)';
+                        }
+                      }}
+                    >
+                      <IconComponent size={18} color={isActive ? '#ffffff' : 'var(--rey)'} />
+                      <span>{srv.buttonLabel || srv.titulo}</span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Visor de Animación de la técnica activa */}
+              <div style={{
+                borderRadius: '18px',
+                overflow: 'hidden',
+                boxShadow: '0 8px 30px rgba(19, 42, 82, 0.12)',
+                border: '1px solid #1e293b'
+              }}>
+                <TecnicaAnimacion id={activeTecnicaId} height={250} />
+              </div>
+
+              {/* Barra de descripción y botón de especificaciones */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                gap: '12px',
+                padding: '12px 18px',
+                backgroundColor: '#f8fafc',
+                borderRadius: '14px',
+                border: '1px solid var(--linea)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+                  <span style={{
+                    fontSize: '0.75rem',
+                    backgroundColor: 'var(--cielo)',
+                    color: 'var(--rey)',
+                    fontWeight: 800,
+                    padding: '3px 10px',
+                    borderRadius: '10px',
+                    letterSpacing: '0.04em'
+                  }}>
+                    ✓ {activeServicio.destacado}
+                  </span>
+                  <span style={{ fontSize: '0.88rem', color: 'var(--texto-2)', lineHeight: 1.4 }}>
+                    {activeServicio.resumen}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setModalServicio(activeServicio)}
+                  style={{
+                    backgroundColor: '#ffffff',
+                    border: '1.5px solid var(--rey)',
+                    color: 'var(--rey)',
+                    fontWeight: 800,
+                    fontSize: '0.82rem',
+                    padding: '8px 18px',
+                    borderRadius: '10px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--rey)';
+                    e.currentTarget.style.color = '#ffffff';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = '#ffffff';
+                    e.currentTarget.style.color = 'var(--rey)';
+                  }}
+                >
+                  Ver ficha y especificaciones &rarr;
+                </button>
+              </div>
             </div>
           </div>
 
@@ -410,6 +493,17 @@ export default function ServiciosPage() {
                   <span>{modalServicio.titulo}</span>
                 </h2>
               </div>
+            </div>
+
+            {/* Simulación Animada en el Modal */}
+            <div style={{
+              borderRadius: '16px',
+              overflow: 'hidden',
+              marginBottom: '20px',
+              border: '1px solid #1e293b',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.15)'
+            }}>
+              <TecnicaAnimacion id={modalServicio.id} height={190} />
             </div>
 
             <p style={{ fontSize: '0.98rem', color: 'var(--texto-2)', lineHeight: 1.6, marginBottom: '20px' }}>
