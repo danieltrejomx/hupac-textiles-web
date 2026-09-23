@@ -9,147 +9,304 @@ export function AnimacionBordado() {
     <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <svg viewBox="0 0 500 240" preserveAspectRatio="xMidYMid meet" style={{ width: '100%', height: '100%', maxWidth: '620px', maxHeight: '100%', display: 'block', margin: '0 auto' }}>
         <defs>
-          {/* Trama de tejido de tela */}
-          <pattern id="telaWeave" width="8" height="8" patternUnits="userSpaceOnUse">
-            <path d="M0 4h8M4 0v8" stroke="#1e293b" strokeWidth="1" />
-            <circle cx="2" cy="2" r="0.8" fill="#334155" opacity="0.6" />
-            <circle cx="6" cy="6" r="0.8" fill="#334155" opacity="0.6" />
+          {/* Trama de tejido de tela piqué/gabardina industrial */}
+          <pattern id="telaIndustrial" width="6" height="6" patternUnits="userSpaceOnUse">
+            <rect width="6" height="6" fill="#132a52" />
+            <path d="M0 3h6M3 0v6" stroke="#1e3a8a" strokeWidth="0.8" opacity="0.6" />
+            <circle cx="1.5" cy="1.5" r="0.6" fill="#2563eb" opacity="0.4" />
+            <circle cx="4.5" cy="4.5" r="0.6" fill="#2563eb" opacity="0.4" />
           </pattern>
 
-          {/* Gradiente cromado de aguja industrial */}
-          <linearGradient id="metalAguja" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#94a3b8" />
-            <stop offset="40%" stopColor="#f8fafc" />
-            <stop offset="70%" stopColor="#cbd5e1" />
-            <stop offset="100%" stopColor="#64748b" />
+          {/* Textura de puntadas de satín bordadas con ángulo */}
+          <pattern id="satinHilos" width="4" height="8" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="4" y2="4" stroke="#fef08a" strokeWidth="1.2" opacity="0.9" />
+            <line x1="0" y1="4" x2="4" y2="8" stroke="#ca8a04" strokeWidth="1.2" opacity="0.8" />
+          </pattern>
+
+          {/* Gradiente cromado de acero y aluminio aeroespacial */}
+          <linearGradient id="aceroCNC" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#475569" />
+            <stop offset="25%" stopColor="#94a3b8" />
+            <stop offset="50%" stopColor="#f8fafc" />
+            <stop offset="75%" stopColor="#cbd5e1" />
+            <stop offset="100%" stopColor="#334155" />
           </linearGradient>
 
-          {/* Brillo de hilo dorado */}
-          <linearGradient id="hiloOro" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#fef08a" />
-            <stop offset="50%" stopColor="#eab308" />
-            <stop offset="100%" stopColor="#ca8a04" />
+          {/* Gradiente dorado metálico para hilo de bordar Madeira */}
+          <linearGradient id="hiloOro3D" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#fef9c3" />
+            <stop offset="30%" stopColor="#facc15" />
+            <stop offset="70%" stopColor="#ca8a04" />
+            <stop offset="100%" stopColor="#854d0e" />
           </linearGradient>
 
-          {/* Resplandor de puntada */}
-          <filter id="glowPuntada" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="2" result="blur" />
+          {/* Gradiente para hilo azul eléctrico reflectivo */}
+          <linearGradient id="hiloAzul3D" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#e0f2fe" />
+            <stop offset="40%" stopColor="#38bdf8" />
+            <stop offset="80%" stopColor="#0284c7" />
+            <stop offset="100%" stopColor="#0c4a6e" />
+          </linearGradient>
+
+          {/* Sombra de relieve tridimensional bordado */}
+          <filter id="relevoBordado" x="-10%" y="-10%" width="120%" height="130%">
+            <feDropShadow dx="0" dy="2.5" stdDeviation="1.5" floodColor="#050b14" floodOpacity="0.8" />
+          </filter>
+
+          {/* Resplandor láser CNC */}
+          <filter id="laserGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
             <feComposite in="SourceGraphic" in2="blur" operator="over" />
           </filter>
         </defs>
 
         <style>{`
-          @keyframes agujaStitch {
+          @keyframes agujaPunzona {
             0%, 100% { transform: translateY(0); }
-            45% { transform: translateY(32px); }
-            50% { transform: translateY(34px); }
-            55% { transform: translateY(32px); }
+            45% { transform: translateY(28px); }
+            50% { transform: translateY(30px); }
+            55% { transform: translateY(28px); }
           }
-          @keyframes stitchImpact {
-            0%, 40% { opacity: 0; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.6); }
-            70%, 100% { opacity: 0; transform: scale(2); }
+          @keyframes footBounce {
+            0%, 100% { transform: translateY(0); }
+            40% { transform: translateY(18px); }
+            50% { transform: translateY(22px); }
+            60% { transform: translateY(18px); }
           }
-          @keyframes hilosDraw {
-            0% { stroke-dashoffset: 400; }
-            100% { stroke-dashoffset: 0; }
+          @keyframes stitchSpark {
+            0%, 40% { opacity: 0; transform: scale(0.4); }
+            50% { opacity: 1; transform: scale(1.4); }
+            65%, 100% { opacity: 0; transform: scale(2); }
           }
-          @keyframes bastidorMove {
+          @keyframes pantografoCNC {
             0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(-8px, 4px); }
-            50% { transform: translate(6px, -4px); }
-            75% { transform: translate(-4px, -6px); }
+            20% { transform: translate(-8px, 4px); }
+            40% { transform: translate(7px, -5px); }
+            65% { transform: translate(-5px, -3px); }
+            85% { transform: translate(6px, 5px); }
           }
-          @keyframes threadVibrate {
-            0%, 100% { d: path("M 250 10 Q 248 50 250 85"); }
-            50% { d: path("M 250 10 Q 256 50 250 85"); }
+          @keyframes threadFlutter {
+            0%, 100% { d: path("M 250 42 Q 248 75 250 110"); }
+            50% { d: path("M 250 42 Q 254 75 250 110"); }
+          }
+          @keyframes laserPulse {
+            0%, 100% { opacity: 0.65; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+          }
+          @keyframes satinGrowth {
+            0% { stroke-dashoffset: 600; }
+            100% { stroke-dashoffset: 0; }
           }
         `}</style>
 
-        {/* Fondo de Prenda Textil */}
-        <rect width="500" height="240" fill="#0b1329" />
-        <rect width="500" height="240" fill="url(#telaWeave)" />
+        {/* Fondo: Cama de la bordadora industrial con guías CNC */}
+        <rect width="500" height="240" fill="#090f1d" />
 
-        {/* Bastidor de Bordado en Movimiento CNC */}
-        <g style={{ animation: 'bastidorMove 8s infinite ease-in-out' }}>
-          {/* Aro exterior de madera */}
-          <ellipse cx="250" cy="140" rx="170" ry="75" fill="none" stroke="#78350f" strokeWidth="12" />
-          <ellipse cx="250" cy="140" rx="170" ry="75" fill="none" stroke="#b45309" strokeWidth="6" />
-          {/* Tornillo tensor del bastidor */}
-          <rect x="70" y="134" width="20" height="12" rx="3" fill="#cbd5e1" stroke="#475569" strokeWidth="2" />
-          <rect x="62" y="137" width="10" height="6" rx="2" fill="#94a3b8" />
-
-          {/* Tela tensada interior */}
-          <ellipse cx="250" cy="140" rx="164" ry="70" fill="#132a52" opacity="0.85" />
-
-          {/* Líneas de Guía de Bordado Digital (Vector / Ponchado) */}
-          <path 
-            d="M 190 140 L 250 100 L 310 140 L 250 175 Z" 
-            fill="none" 
-            stroke="rgba(56, 189, 248, 0.25)" 
-            strokeWidth="1" 
-            strokeDasharray="4 4" 
-          />
-
-          {/* Puntadas Bordadas Progresivas (Efecto Relleno 3D) */}
-          <g filter="url(#glowPuntada)">
-            {/* Letra 'H' bordada con relieve */}
-            <path
-              d="M 215 115 L 215 165 M 285 115 L 285 165 M 215 140 L 285 140"
-              stroke="url(#hiloOro)"
-              strokeWidth="10"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeDasharray="400"
-              style={{ animation: 'hilosDraw 4s infinite linear' }}
-            />
-            {/* Puntadas de satín en zigzag */}
-            <path
-              d="M 210 115 Q 250 95 290 115 Q 250 135 210 115"
-              fill="none"
-              stroke="url(#hiloOro)"
-              strokeWidth="4"
-              strokeDasharray="6 3"
-            />
-            <path
-              d="M 210 165 Q 250 185 290 165 Q 250 145 210 165"
-              fill="none"
-              stroke="#38bdf8"
-              strokeWidth="3"
-              strokeDasharray="4 2"
-            />
-          </g>
-
-          {/* Destello de impacto donde la aguja penetra */}
-          <circle cx="250" cy="140" r="10" fill="#fef08a" style={{ animation: 'stitchImpact 0.6s infinite ease-out' }} />
+        {/* Rieles de medición CNC en los costados */}
+        <g opacity="0.35">
+          <line x1="20" y1="50" x2="20" y2="230" stroke="#334155" strokeWidth="1" />
+          <line x1="480" y1="50" x2="480" y2="230" stroke="#334155" strokeWidth="1" />
+          {[60, 90, 120, 150, 180, 210].map((y) => (
+            <g key={y}>
+              <line x1="16" y1={y} x2="24" y2={y} stroke="#64748b" strokeWidth="1.5" />
+              <line x1="476" y1={y} x2="484" y2={y} stroke="#64748b" strokeWidth="1.5" />
+            </g>
+          ))}
         </g>
 
-        {/* Hilo superior que baja del cono a la aguja */}
+        {/* ================================================================= */}
+        {/* PANTÓGRAFO INDUSTRIAL CNC Y BASTIDOR DE ALUMINIO CON PRENDA */}
+        {/* ================================================================= */}
+        <g style={{ animation: 'pantografoCNC 7s infinite ease-in-out' }}>
+          {/* Brazos mecánicos del pantógrafo (Izquierda y Derecha) */}
+          <rect x="25" y="142" width="55" height="12" rx="2" fill="url(#aceroCNC)" stroke="#1e293b" strokeWidth="1" />
+          <rect x="420" y="142" width="55" height="12" rx="2" fill="url(#aceroCNC)" stroke="#1e293b" strokeWidth="1" />
+          <circle cx="50" cy="148" r="3.5" fill="#1e293b" />
+          <circle cx="450" cy="148" r="3.5" fill="#1e293b" />
+
+          {/* Bastidor Industrial Rectangular de Aluminio Aeroespacial */}
+          {/* Sombra del bastidor sobre la cama */}
+          <rect x="74" y="80" width="352" height="136" rx="20" fill="none" stroke="rgba(0,0,0,0.6)" strokeWidth="16" />
+
+          {/* Marco exterior de aluminio pulido */}
+          <rect x="74" y="80" width="352" height="136" rx="20" fill="none" stroke="url(#aceroCNC)" strokeWidth="12" />
+          <rect x="74" y="80" width="352" height="136" rx="20" fill="none" stroke="#1e293b" strokeWidth="1" />
+
+          {/* Mordazas de fijación y tensión rápida (Quick-lock clamps) */}
+          <rect x="68" y="136" width="12" height="24" rx="3" fill="#cbd5e1" stroke="#334155" strokeWidth="1.5" />
+          <rect x="420" y="136" width="12" height="24" rx="3" fill="#cbd5e1" stroke="#334155" strokeWidth="1.5" />
+          <line x1="68" y1="148" x2="80" y2="148" stroke="#0f172a" strokeWidth="2" />
+          <line x1="420" y1="148" x2="432" y2="148" stroke="#0f172a" strokeWidth="2" />
+
+          {/* Prenda Textil Tensada (Tela Azul Marino HUPAC) */}
+          <rect x="80" y="86" width="340" height="124" rx="16" fill="url(#telaIndustrial)" />
+
+          {/* Guías vectoriales del software de ponchado (Wilcom / Tajima) */}
+          <g opacity="0.3">
+            <line x1="120" y1="148" x2="380" y2="148" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="4 4" />
+            <line x1="250" y1="95" x2="250" y2="200" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="4 4" />
+            <circle cx="250" cy="148" r="45" fill="none" stroke="#38bdf8" strokeWidth="0.8" strokeDasharray="2 3" />
+          </g>
+
+          {/* =============================================================== */}
+          {/* LOGOTIPO BORDADO REAL CON VOLUMEN 3D Y PUNTADAS DE SATÍN */}
+          {/* =============================================================== */}
+          <g filter="url(#relevoBordado)">
+            {/* Escudo heráldico exterior bordado en hilo azul eléctrico */}
+            <path
+              d="M 195 110 L 250 96 L 305 110 C 305 155 250 182 250 182 C 250 182 195 155 195 110 Z"
+              fill="none"
+              stroke="url(#hiloAzul3D)"
+              strokeWidth="5"
+              strokeLinejoin="round"
+              strokeDasharray="600"
+              style={{ animation: 'satinGrowth 6s infinite linear' }}
+            />
+            {/* Cordón interior de satín en hilo dorado */}
+            <path
+              d="M 203 114 L 250 102 L 297 114 C 297 150 250 174 250 174 C 250 174 203 150 203 114 Z"
+              fill="rgba(2, 6, 23, 0.45)"
+              stroke="url(#hiloOro3D)"
+              strokeWidth="2.5"
+              strokeDasharray="400"
+              style={{ animation: 'satinGrowth 6s infinite linear' }}
+            />
+
+            {/* Letra 'H' en relieve 3D bordado (Puntadas de columna satinada) */}
+            <g>
+              {/* Columna Izquierda 'H' */}
+              <rect x="220" y="118" width="14" height="42" rx="2" fill="url(#hiloOro3D)" />
+              {/* Rayas de puntadas de satín para textura de hilo real */}
+              {[120, 124, 128, 132, 136, 140, 144, 148, 152, 156].map((sy) => (
+                <line key={`lh-${sy}`} x1="220" y1={sy} x2="234" y2={sy + 2} stroke="#fef08a" strokeWidth="0.9" opacity="0.6" />
+              ))}
+
+              {/* Columna Derecha 'H' */}
+              <rect x="266" y="118" width="14" height="42" rx="2" fill="url(#hiloOro3D)" />
+              {[120, 124, 128, 132, 136, 140, 144, 148, 152, 156].map((sy) => (
+                <line key={`rh-${sy}`} x1="266" y1={sy} x2="280" y2={sy + 2} stroke="#fef08a" strokeWidth="0.9" opacity="0.6" />
+              ))}
+
+              {/* Travesaño Central 'H' */}
+              <rect x="234" y="133" width="32" height="12" fill="url(#hiloOro3D)" />
+              {[236, 242, 248, 254, 260].map((sx) => (
+                <line key={`mh-${sx}`} x1={sx} y1="133" x2={sx} y2="145" stroke="#fef08a" strokeWidth="0.9" opacity="0.6" />
+              ))}
+            </g>
+
+            {/* Texto bordado "HUPAC" en puntada corrida de alta definición */}
+            <text x="250" y="171" textAnchor="middle" fill="#ffffff" fontSize="7.5" fontWeight="900" fontFamily="sans-serif" letterSpacing="2.5">
+              HUPAC
+            </text>
+          </g>
+
+          {/* Puntero Láser CNC de Posicionamiento (Cruz roja de precisión) */}
+          <g transform="translate(250, 148)" filter="url(#laserGlow)" style={{ animation: 'laserPulse 1.5s infinite ease-in-out' }}>
+            <circle cx="0" cy="0" r="2.5" fill="#ef4444" />
+            <line x1="-10" y1="0" x2="10" y2="0" stroke="#ef4444" strokeWidth="1" opacity="0.8" />
+            <line x1="0" y1="-10" x2="0" y2="10" stroke="#ef4444" strokeWidth="1" opacity="0.8" />
+          </g>
+
+          {/* Destello de impacto del penetrado de la aguja con el hilo */}
+          <circle cx="250" cy="148" r="8" fill="#fef08a" style={{ animation: 'stitchSpark 0.5s infinite ease-out' }} />
+        </g>
+
+        {/* ================================================================= */}
+        {/* CABEZAL INDUSTRIAL MULTICABEZAL TAJIMA / BARUDAN (PARTE SUPERIOR) */}
+        {/* ================================================================= */}
+        {/* Estante de conos de hilo (Thread Stand Tree) */}
+        <g>
+          {/* Barra soporte de conos */}
+          <rect x="160" y="2" width="180" height="5" rx="1.5" fill="url(#aceroCNC)" />
+          
+          {/* 5 Conos industriales de hilo de bordar (Diferentes colores oficiales) */}
+          {[
+            { x: 175, col: '#ca8a04', label: 'ORO' },
+            { x: 212, col: '#0284c7', label: 'AZUL' },
+            { x: 250, col: '#f8fafc', label: 'BLANCO' },
+            { x: 288, col: '#ef4444', label: 'ROJO' },
+            { x: 325, col: '#94a3b8', label: 'PLATA' }
+          ].map((cono, i) => (
+            <g key={i}>
+              {/* Carrete cónico de hilo */}
+              <polygon
+                points={`${cono.x - 7},${7} ${cono.x + 7},${7} ${cono.x + 10},${22} ${cono.x - 10},${22}`}
+                fill={cono.col}
+                stroke="#0f172a"
+                strokeWidth="0.8"
+              />
+              {/* Base del cono */}
+              <rect x={cono.x - 11} y="22" width="22" height="3" rx="1" fill="#334155" />
+              {/* Ojal guía de hilo superior */}
+              <circle cx={cono.x} cy="4" r="1.5" fill="#f8fafc" />
+            </g>
+          ))}
+
+          {/* Hilo dorado activo que desciende desde el cono 1 hacia el tensor */}
+          <path d="M 175 4 L 175 18 L 246 36" stroke="url(#hiloOro3D)" strokeWidth="1.2" fill="none" opacity="0.85" />
+        </g>
+
+        {/* Carcasa Principal del Cabezal de Bordado Industrial */}
+        <g>
+          {/* Bloque masivo del cabezal */}
+          <path d="M 215 28 L 285 28 L 280 82 L 220 82 Z" fill="#1e293b" stroke="#334155" strokeWidth="2" />
+          <path d="M 224 34 L 276 34 L 272 76 L 228 76 Z" fill="url(#aceroCNC)" opacity="0.9" />
+
+          {/* Discos de tensión rotativos cromados */}
+          <circle cx="236" cy="46" r="6" fill="url(#aceroCNC)" stroke="#0f172a" strokeWidth="1" />
+          <circle cx="250" cy="46" r="6" fill="url(#aceroCNC)" stroke="#0f172a" strokeWidth="1" />
+          <circle cx="264" cy="46" r="6" fill="url(#aceroCNC)" stroke="#0f172a" strokeWidth="1" />
+          
+          {/* Indicador LED de cabezal activo Tajima */}
+          <circle cx="250" cy="62" r="3" fill="#22c55e" filter="url(#laserGlow)" />
+
+          {/* Tirahilos articulado en movimiento (Take-up lever) */}
+          <line x1="250" y1="46" x2="250" y2="78" stroke="#cbd5e1" strokeWidth="3" strokeLinecap="round" />
+        </g>
+
+        {/* Hilo vibrando entre el tirahilos y la aguja */}
         <path
-          d="M 250 0 L 250 85"
-          stroke="url(#hiloOro)"
-          strokeWidth="2.5"
+          d="M 250 78 Q 252 105 250 125"
+          stroke="url(#hiloOro3D)"
+          strokeWidth="1.8"
           fill="none"
+          style={{ animation: 'threadFlutter 0.25s infinite linear' }}
         />
 
-        {/* Cabezal y Barra de Aguja Mecánica */}
-        <g style={{ animation: 'agujaStitch 0.6s infinite ease-in-out' }}>
-          {/* Bloque porta-aguja superior */}
-          <rect x="238" y="20" width="24" height="45" rx="4" fill="url(#metalAguja)" stroke="#334155" strokeWidth="1.5" />
-          <line x1="238" y1="35" x2="262" y2="35" stroke="#475569" strokeWidth="2" />
-          <line x1="238" y1="50" x2="262" y2="50" stroke="#475569" strokeWidth="2" />
-          
-          {/* Barra de la aguja cromada */}
-          <rect x="248" y="65" width="4" height="60" fill="url(#metalAguja)" />
-          
-          {/* Punta afilada de aguja */}
-          <polygon points="248,125 252,125 250,140" fill="url(#metalAguja)" />
-          
-          {/* Ojo de la aguja */}
-          <ellipse cx="250" cy="133" rx="1" ry="2.5" fill="#0f172a" />
+        {/* ================================================================= */}
+        {/* BARRA DE AGUJA ACTIVA Y PRENSATELAS CIRCULAR EN PUNZONADO RÁPIDO */}
+        {/* ================================================================= */}
+        {/* Prensa-telas circular móvil (Presser Foot) */}
+        <g style={{ animation: 'footBounce 0.5s infinite ease-in-out' }}>
+          <path d="M 238 90 L 238 132 L 243 138 M 262 90 L 262 132 L 257 138" fill="none" stroke="url(#aceroCNC)" strokeWidth="2.5" strokeLinecap="round" />
+          {/* Anillo del prensatelas */}
+          <ellipse cx="250" cy="144" rx="8" ry="3.5" fill="none" stroke="url(#aceroCNC)" strokeWidth="2.5" />
+        </g>
 
-          {/* Prensatelas en 'U' (Presser Foot) */}
-          <path d="M 236 100 L 236 128 L 243 134 M 264 100 L 264 128 L 257 134" fill="none" stroke="#94a3b8" strokeWidth="2.5" strokeLinecap="round" />
+        {/* Barra de la aguja cromada punzonando a 1,200 RPM */}
+        <g style={{ animation: 'agujaPunzona 0.5s infinite ease-in-out' }}>
+          {/* Sujetador de aguja (Needle clamp) */}
+          <rect x="244" y="82" width="12" height="16" rx="2" fill="#0f172a" stroke="#64748b" strokeWidth="1" />
+          <circle cx="250" cy="90" r="2" fill="#f8fafc" />
+
+          {/* Vástago de la aguja cromada */}
+          <rect x="248.8" y="98" width="2.4" height="42" fill="url(#aceroCNC)" />
+
+          {/* Punta cónica de aguja industrial DBxK5 */}
+          <polygon points="248.8,140 251.2,140 250,148" fill="url(#aceroCNC)" />
+
+          {/* Ojo de la aguja por donde pasa el hilo dorado */}
+          <ellipse cx="250" cy="143" rx="0.7" ry="1.8" fill="#090f1d" />
+        </g>
+
+        {/* Telemetría industrial CNC inferior sobre la mesa */}
+        <g opacity="0.6">
+          <text x="35" y="228" fill="#64748b" fontSize="8" fontFamily="monospace" fontWeight="700">
+            TAJIMA INDUSTRIAL CNC · MULTICABEZAL 15-AGUJAS
+          </text>
+          <text x="465" y="228" textAnchor="end" fill="#38bdf8" fontSize="8" fontFamily="monospace" fontWeight="700">
+            X: +124.5mm  Y: -42.0mm
+          </text>
         </g>
       </svg>
     </div>
