@@ -19,6 +19,19 @@ export interface FAQItem {
   catalogo?: string;
   escalamiento?: string;
   links?: ActionLink[];
+  options?: string[];
+}
+
+export interface QueryContext {
+  history?: { sender: string; text: string }[];
+}
+
+export interface QueryResult {
+  found: boolean;
+  respuesta: string;
+  seguimiento?: string;
+  links?: ActionLink[];
+  options?: string[];
 }
 
 export const FALLBACK_MESSAGE =
@@ -274,6 +287,13 @@ export const FAQ_DATABASE: FAQItem[] = [
       { label: "Uniformes Corporativos", url: "/catalogo?catalogo=textil" },
       { label: "Seguridad Industrial (EPP)", url: "/catalogo?catalogo=epc" },
       { label: "Configurador Visual 3D", url: "/configurador" }
+    ],
+    options: [
+      "Uniformes Corporativos",
+      "Playeras Tipo Polo",
+      "Seguridad Industrial (EPP)",
+      "Calzado de Seguridad",
+      "Configurador 3D"
     ]
   },
   {
@@ -286,6 +306,12 @@ export const FAQ_DATABASE: FAQItem[] = [
     links: [
       { label: "Ver Catálogo Completo", url: "/catalogo" },
       { label: "Soluciones por Industria", url: "/industrias" }
+    ],
+    options: [
+      "Playeras Tipo Polo",
+      "Uniformes de Trabajo",
+      "Equipo de Protección EPP",
+      "Cotización de Mayoreo"
     ]
   },
   {
@@ -462,6 +488,12 @@ export const FAQ_DATABASE: FAQItem[] = [
     seguimiento: "¿La playera es para personalizar con bordado o estampado, o la necesitas lisa?",
     links: [
       { label: "Ver Playeras en Catálogo", url: "/catalogo?cat=playeras" }
+    ],
+    options: [
+      "Con bordado computarizado",
+      "Con serigrafía / estampado",
+      "Lisas sin personalización",
+      "Ver modelos de playera"
     ]
   },
   {
@@ -473,6 +505,13 @@ export const FAQ_DATABASE: FAQItem[] = [
     seguimiento: "¿Cuántas personas necesitas uniformar con polo?",
     links: [
       { label: "Ver Polos en Catálogo", url: "/catalogo?cat=polos" }
+    ],
+    options: [
+      "10 a 25 personas",
+      "25 a 50 personas",
+      "50 a 100 personas",
+      "Más de 100 personas",
+      "Ver modelos de Polo"
     ]
   },
   {
@@ -484,6 +523,12 @@ export const FAQ_DATABASE: FAQItem[] = [
     seguimiento: "¿La necesitas lisa o con logo bordado/estampado?",
     links: [
       { label: "Ver Sudaderas en Catálogo", url: "/catalogo?cat=sudaderas" }
+    ],
+    options: [
+      "Con bordado de logotipo",
+      "Con estampado / DTF",
+      "Lisas sin logotipo",
+      "Ver sudaderas en catálogo"
     ]
   },
   {
@@ -860,18 +905,304 @@ export function searchProductsLive(query: string): string | null {
 }
 
 // =========================================================================
-// 4. MOTOR CONVERSACIONAL Y CLASIFICADOR INTELIGENTE
+// 4. RESOLUTOR CONTEXTUAL INTELIGENTE Y OPCIONES SUGERIDAS
 // =========================================================================
 
-export function queryKnowledgeBase(rawQuery: string): {
-  found: boolean;
-  respuesta: string;
-  seguimiento?: string;
-  links?: ActionLink[];
-} {
+function getDefaultOptions(item: FAQItem): string[] {
+  if (item.options && item.options.length > 0) {
+    return item.options;
+  }
+  if (item.categoria === 'Uniformes') {
+    return [
+      "10 a 25 piezas",
+      "Con bordado de logotipo",
+      "Lisas sin logotipo",
+      "Ver catálogo textil"
+    ];
+  }
+  if (item.categoria === 'Seguridad Industrial') {
+    return [
+      "Cascos de seguridad",
+      "Chalecos reflejantes",
+      "Guantes de protección",
+      "Ver catálogo EPP"
+    ];
+  }
+  if (item.categoria === 'Calzado') {
+    return [
+      "Casquillo dieléctrico (poliamida)",
+      "Casquillo de acero",
+      "Ver catálogo de calzado",
+      "Cotizar en WhatsApp"
+    ];
+  }
+  if (item.categoria === 'Personalización') {
+    return [
+      "Bordado Computarizado",
+      "Serigrafía Textil",
+      "DTF de alta fidelidad",
+      "Configurador 3D"
+    ];
+  }
+  if (item.categoria === 'Precios') {
+    return [
+      "10 a 25 piezas",
+      "25 a 50 piezas",
+      "50 a 100 piezas",
+      "Cotizar en WhatsApp"
+    ];
+  }
+  return [
+    "Uniformes Corporativos",
+    "Playeras Tipo Polo",
+    "Seguridad Industrial (EPP)",
+    "Hablar con un asesor"
+  ];
+}
+
+function resolveContextualResponse(rawQuery: string, history?: { sender: string; text: string }[]): QueryResult | null {
+  if (!history || history.length === 0) return null;
+
+  // Buscar el último mensaje del asistente en el historial
+  const lastAssistantMsg = history
+    .slice()
+    .reverse()
+    .find((m) => m.sender === 'assistant')?.text?.toLowerCase() || '';
+
+  if (!lastAssistantMsg) return null;
+
+  const q = rawQuery.trim().toLowerCase();
+
+  // CASO 1: NÚMEROS O CANTIDADES (ej. "10", "15", "20", "25", "50", "100", "10 personas", "10 polos", "10 piezas", "10 a 25 personas", "para 10")
+  const quantityMatch = q.match(/\b(\d+)\b/) || q.match(/\b(un|uno|una|dos|tres|cuatro|cinco|seis|siete|ocho|nueve|diez|once|doce|trece|catorce|quince|dieciseis|diecisiete|dieciocho|diecinueve|veinte|veinticinco|treinta|cuarenta|cincuenta|sesenta|setenta|ochenta|noventa|cien|doscientos|quinientos|mil|docena|millar)\b/i);
+  const isQuantityAnswer = Boolean(quantityMatch) || /\b(personas|piezas|pzas|colaboradores|empleados|unidades)\b/i.test(q);
+
+  if (isQuantityAnswer) {
+    const qtyText = quantityMatch ? quantityMatch[0] : q;
+
+    // A) Contexto de Polos
+    if (lastAssistantMsg.includes('polo') || lastAssistantMsg.includes('supreme') || lastAssistantMsg.includes('pique')) {
+      return {
+        found: true,
+        respuesta: `¡Excelente! Para un pedido de ${qtyText} personas / piezas de playeras tipo polo:\n\n` +
+          `• Escala de Mayoreo: A partir de 10 a 12 piezas accedes a precios de mayoreo preferencial directo de fábrica.\n` +
+          `• Modelos disponibles: Polo Caballero (corte regular clásico), Polo Dama (corte asiluetado estilizado) y Polo Manga Larga.\n` +
+          `• Tejido Institucional: Confeccionadas en tejido piqué 50% algodón / 50% poliéster (230 g/m²), frescas, de alta durabilidad y que no encogen ni deforman con lavados industriales continuos.\n` +
+          `• Personalización: A partir de este volumen podemos bordar tu logotipo empresarial en tecnología computarizada Tajima multicabezal o aplicar DTF.\n` +
+          `• Tallas y Colores: De CH hasta 2EG en más de 20 colores corporativos (azul marino, negro, blanco, royal, rojo, gris, verde, entre otros).`,
+        seguimiento: "¿Te gustaría que las coticemos con tu logotipo bordado o las necesitas lisas sin personalización?",
+        links: [
+          { label: "Ver Polos en Catálogo", url: "/catalogo?cat=polos" },
+          { label: "Abrir Configurador 3D", url: "/configurador" },
+          { label: "Cotizar en WhatsApp", url: `https://wa.me/525612870780?text=${encodeURIComponent('Hola HUPAC Textiles, me interesa cotizar ' + q + ' playeras tipo polo.')}` }
+        ],
+        options: [
+          "Con logotipo bordado",
+          "Lisas sin logotipo",
+          "Ver modelos de Polo",
+          "Cotizar por WhatsApp"
+        ]
+      };
+    }
+
+    // B) Contexto de Playeras Cuello Redondo
+    if (lastAssistantMsg.includes('playera') || lastAssistantMsg.includes('cuello redondo') || lastAssistantMsg.includes('premium') || lastAssistantMsg.includes('stampa')) {
+      return {
+        found: true,
+        respuesta: `¡Perfecto! Para un lote de ${qtyText} playeras cuello redondo:\n\n` +
+          `• Precios de Mayoreo: Aplica escala directa de fabricante a partir de 10-12 piezas.\n` +
+          `• Modelos disponibles:\n` +
+          `  - Premium (34401): 100% algodón peinado extra suave.\n` +
+          `  - Max (30038): 100% algodón peso completo resistente (200 g/m²).\n` +
+          `  - Stampa (30039): Mezcla 50/50 algodón/poliéster para máxima fijación de estampado.\n` +
+          `  - Subli (30041): 100% poliéster para sublimación full color.\n` +
+          `• Tallas: CH, MD, GD, EG, 2EG e infantil/juvenil.`,
+        seguimiento: "¿Las requieres con bordado, serigrafía o lisas sin logotipo?",
+        links: [
+          { label: "Ver Playeras en Catálogo", url: "/catalogo?cat=playeras" },
+          { label: "Cotizar en WhatsApp", url: `https://wa.me/525612870780?text=${encodeURIComponent('Hola HUPAC Textiles, me interesa cotizar ' + q + ' playeras.')}` }
+        ],
+        options: [
+          "Con bordado de logotipo",
+          "Con serigrafía / estampado",
+          "Lisas sin logotipo",
+          "Cotizar por WhatsApp"
+        ]
+      };
+    }
+
+    // C) Contexto de Sudaderas
+    if (lastAssistantMsg.includes('sudadera') || lastAssistantMsg.includes('hoodie') || lastAssistantMsg.includes('felpa')) {
+      return {
+        found: true,
+        respuesta: `¡Excelente! Para ${qtyText} sudaderas corporativas:\n\n` +
+          `• Calidad: Felpa 50% algodón / 50% poliéster de alto gramaje, abrigadora y de gran durabilidad.\n` +
+          `• Estilos: Con capucha y bolsa cangurera, cuello redondo clásico o con cierre metálico completo.\n` +
+          `• Personalización: Bordado computarizado de alta visibilidad o aplicación DTF de tu logotipo.`,
+        seguimiento: "¿Deseas que lleven logotipo bordado o las necesitas lisas?",
+        links: [
+          { label: "Ver Sudaderas en Catálogo", url: "/catalogo?cat=sudaderas" },
+          { label: "Cotizar en WhatsApp", url: `https://wa.me/525612870780?text=${encodeURIComponent('Hola HUPAC Textiles, me interesa cotizar ' + q + ' sudaderas.')}` }
+        ],
+        options: [
+          "Con bordado de logotipo",
+          "Lisas sin logotipo",
+          "Ver sudaderas en catálogo",
+          "Cotizar por WhatsApp"
+        ]
+      };
+    }
+
+    // D) Contexto de Calzado Industrial
+    if (lastAssistantMsg.includes('calzado') || lastAssistantMsg.includes('bota') || lastAssistantMsg.includes('zapato')) {
+      return {
+        found: true,
+        respuesta: `¡Muy bien! Para ${qtyText} pares de calzado de seguridad:\n\n` +
+          `• Certificación NOM-113-STPS: Protección garantizada para tu personal operativo.\n` +
+          `• Tipos de Casquillo: Casquillo de poliamida dieléctrica (ligero y no conduce electricidad) o casquillo de acero tradicional.\n` +
+          `• Suela Antiderrapante: Poliuretano/hule con resistencia a aceites, solventes y abrasión.\n` +
+          `• Marcas: Berrendo, Comando, Cliff y modelos HUPAC.`,
+        seguimiento: "¿Requieres casquillo dieléctrico de poliamida o casquillo de acero?",
+        links: [
+          { label: "Ver Calzado en Catálogo", url: "/catalogo?cat=calzado" },
+          { label: "Cotizar en WhatsApp", url: `https://wa.me/525612870780?text=${encodeURIComponent('Hola HUPAC Textiles, me interesa cotizar ' + q + ' pares de calzado.')}` }
+        ],
+        options: [
+          "Casquillo dieléctrico (poliamida)",
+          "Casquillo de acero",
+          "Ver modelos de calzado",
+          "Cotizar por WhatsApp"
+        ]
+      };
+    }
+
+    // E) Contexto general de piezas o mayoreo
+    return {
+      found: true,
+      respuesta: `¡Excelente! Para un pedido de ${qtyText} piezas estás dentro de nuestra escala de mayoreo directo de fábrica:\n\n` +
+        `• Precios preferenciales y descuento por volumen escalonado.\n` +
+        `• Opción de personalización con bordado computarizado o estampado DTF de tu logotipo a partir de 10-12 piezas.\n` +
+        `• Facturación fiscal CFDI 4.0 al 100% deducible y envío seguro a todo el país o entrega en planta Cuautitlán Izcalli.`,
+      seguimiento: "¿Qué tipo de prenda o equipo deseas cotizar para este lote?",
+      links: [
+        { label: "Ver Catálogo Textil", url: "/catalogo?catalogo=textil" },
+        { label: "Ver Catálogo EPP", url: "/catalogo?catalogo=epc" },
+        { label: "Abrir Configurador 3D", url: "/configurador" }
+      ],
+      options: [
+        "Playeras Tipo Polo",
+        "Playeras Cuello Redondo",
+        "Camisas de Trabajo",
+        "Calzado y EPP"
+      ]
+    };
+  }
+
+  // CASO 2: PERSONALIZACIÓN (Bordado, Estampado, Lisas)
+  if (/\b(bordado|bordadas|bordar|con bordado|con logo|con logotipo|logotipo bordado)\b/i.test(q)) {
+    return {
+      found: true,
+      respuesta: `¡Excelente elección! El bordado computarizado es la técnica insignia más duradera y elegante para proyectar la identidad de tu empresa:\n\n` +
+        `• Maquinaria: Multicabezal Tajima de alta velocidad con tensión de hilo milimétrica.\n` +
+        `• Hilos: Poliéster de alta tenacidad que soporta lavados industriales sin decolorar ni romper.\n` +
+        `• Ubicaciones: Frente (pecho izquierdo o derecho), espalda, mangas o cuello.\n` +
+        `• Digitalización / Ponchado: Convertimos tu archivo de logotipo en matriz de puntadas de alta fidelidad.\n` +
+        `• Mínimo recomendado: A partir de 10 a 12 piezas por diseño.`,
+      seguimiento: "¿En qué prendas te gustaría bordar tu logotipo?",
+      links: [
+        { label: "Ver Técnicas de Bordado", url: "/servicios" },
+        { label: "Probar en Configurador 3D", url: "/configurador" },
+        { label: "Enviar Logotipo por WhatsApp", url: "https://wa.me/525612870780" }
+      ],
+      options: [
+        "Playeras Tipo Polo",
+        "Camisas de Trabajo",
+        "Chalecos Brigadista",
+        "Sudaderas Corporativas"
+      ]
+    };
+  }
+
+  if (/\b(estampado|estampadas|serigrafia|serigrafía|dtf|vinil)\b/i.test(q)) {
+    return {
+      found: true,
+      respuesta: `¡Perfecto! Para estampado textil contamos con dos tecnologías de primer nivel:\n\n` +
+        `1. Serigrafía Textil: Ideal para tirajes medianos y grandes con tintas plastisol o discharge de gran cobertura y tacto suave.\n` +
+        `2. DTF (Direct to Film): Aplicación térmica de alta fidelidad para logotipos a todo color, degradados y fotografías con máxima elasticidad.\n` +
+        `Ambas técnicas garantizan resistencia al lavado y solidez de color.`,
+      seguimiento: "¿Cuántas prendas planeas personalizar y con cuántos colores en tu logotipo?",
+      links: [
+        { label: "Ver Técnicas en Servicios", url: "/servicios" },
+        { label: "Probar en Configurador 3D", url: "/configurador" }
+      ],
+      options: [
+        "10 a 25 piezas",
+        "25 a 50 piezas",
+        "Más de 50 piezas",
+        "Enviar diseño por WhatsApp"
+      ]
+    };
+  }
+
+  if (/\b(lisa|lisas|sin logo|sin logotipo|sin bordar|sin personalizacion|sin personalizar)\b/i.test(q)) {
+    return {
+      found: true,
+      respuesta: `¡Entendido! Manejamos amplio inventario continuo de prendas lisas listas para envío inmediato:\n\n` +
+        `• Playeras cuello redondo (100% algodón y mezclas) en corte unisex e infantil.\n` +
+        `• Playeras polo piqué 50/50 y dry-fit en corte caballero y dama.\n` +
+        `• Sudaderas lisas (con capucha cangurera o cuello redondo).\n` +
+        `• Pantalones de gabardina y mezclilla de trabajo.\n` +
+        `• Tallas CH, MD, GD, EG y 2EG en variedad de colores institucionales.`,
+      seguimiento: "¿Qué modelo de prenda lisa te interesa revisar en el catálogo?",
+      links: [
+        { label: "Ver Catálogo Completo", url: "/catalogo" },
+        { label: "Cotizar en WhatsApp", url: "https://wa.me/525612870780" }
+      ],
+      options: [
+        "Playeras Polo Lisas",
+        "Playeras Cuello Redondo Lisas",
+        "Pantalones y Jeans",
+        "Ver Catálogo"
+      ]
+    };
+  }
+
+  // CASO 3: CONFIRMACIONES AFIRMATIVAS (Sí, claro, por favor, me interesa, cotizar)
+  if (/^(si|sí|claro|por favor|me interesa|ok|adelante|quiero cotizar|cotizar)$/i.test(q)) {
+    return {
+      found: true,
+      respuesta: "¡Con gusto! Nuestro equipo comercial y de atención al cliente está listo para elaborar tu cotización formal con precios de fábrica, tiempos de entrega y muestra digital de tu logotipo.",
+      seguimiento: "¿Cómo prefieres continuar tu atención?",
+      links: [
+        { label: "Cotizar por WhatsApp al 56 1287 0780", url: "https://wa.me/525612870780" },
+        { label: "Ver Catálogo de Uniformes", url: "/catalogo" },
+        { label: "Abrir Configurador 3D", url: "/configurador" }
+      ],
+      options: [
+        "Hablar por WhatsApp al 56 1287 0780",
+        "Ver Catálogo de Uniformes",
+        "Abrir Configurador 3D"
+      ]
+    };
+  }
+
+  return null;
+}
+
+// =========================================================================
+// 5. MOTOR CONVERSACIONAL Y CLASIFICADOR INTELIGENTE
+// =========================================================================
+
+export function queryKnowledgeBase(rawQuery: string, context?: QueryContext): QueryResult {
+  // 1. Verificar resolución contextual de preguntas encadenadas (ej. responder "10" a "¿Cuántas personas?")
+  const contextualMatch = resolveContextualResponse(rawQuery, context?.history);
+  if (contextualMatch) {
+    return contextualMatch;
+  }
+
   const { normalized, decodedWords } = decodeAndNormalizeQuery(rawQuery);
 
-  // 1. Filtrar preguntas totalmente fuera de contexto (no inventar cosas no textiles/industriales)
+  // 2. Filtrar preguntas totalmente fuera de contexto (no inventar cosas no textiles/industriales)
   // Regla INE-001: Declinar de forma amable y profesional enfocando en Hupac Textiles
   const nonHupacPatterns = [
     /\b(receta|cocinar|espagueti|pizza|hamburguesa|comida|restaurante italiano)\b/i,
@@ -894,12 +1225,18 @@ export function queryKnowledgeBase(rawQuery: string): {
           { label: "Ver Catálogo de Uniformes", url: "/catalogo?catalogo=textil" },
           { label: "Ver Catálogo EPP", url: "/catalogo?catalogo=epc" },
           { label: "Configurador 3D", url: "/configurador" }
+        ],
+        options: [
+          "Uniformes Corporativos",
+          "Playeras Tipo Polo",
+          "Seguridad Industrial (EPP)",
+          "Calzado de Seguridad"
         ]
       };
     }
   }
 
-  // 2. Comprobación de palabras clave con tolerancia difusa (Fuzzy Matching)
+  // 3. Comprobación de palabras clave con tolerancia difusa (Fuzzy Matching)
   let bestMatch: FAQItem | null = null;
   let highestScore = 0;
 
@@ -938,17 +1275,18 @@ export function queryKnowledgeBase(rawQuery: string): {
     }
   }
 
-  // 3. Si el puntaje en el banco de conocimiento es sólido (>= 5), responder con el registro
+  // 4. Si el puntaje en el banco de conocimiento es sólido (>= 5), responder con el registro
   if (bestMatch && highestScore >= 5) {
     return {
       found: true,
       respuesta: bestMatch.respuesta,
       seguimiento: bestMatch.seguimiento,
-      links: bestMatch.links
+      links: bestMatch.links,
+      options: getDefaultOptions(bestMatch)
     };
   }
 
-  // 4. Búsqueda en vivo en el catálogo de productos (PRODUCTS)
+  // 5. Búsqueda en vivo en el catálogo de productos (PRODUCTS)
   const productSearchResult = searchProductsLive(rawQuery);
   if (productSearchResult) {
     return {
@@ -959,27 +1297,39 @@ export function queryKnowledgeBase(rawQuery: string): {
         { label: "Ir al Catálogo", url: "/catalogo" },
         { label: "Abrir Configurador 3D", url: "/configurador" },
         { label: "Cotizar por WhatsApp", url: "https://wa.me/525612870780" }
+      ],
+      options: [
+        "Ver Ficha en Catálogo",
+        "Cotizar en WhatsApp",
+        "Probar en Configurador 3D"
       ]
     };
   }
 
-  // 5. Si hubo una coincidencia parcial moderada en FAQ (score >= 3)
+  // 6. Si hubo una coincidencia parcial moderada en FAQ (score >= 3)
   if (bestMatch && highestScore >= 3) {
     return {
       found: true,
       respuesta: bestMatch.respuesta,
       seguimiento: bestMatch.seguimiento,
-      links: bestMatch.links
+      links: bestMatch.links,
+      options: getDefaultOptions(bestMatch)
     };
   }
 
-  // 6. Si no hay información suficiente sobre productos no textiles o temas no documentados:
+  // 7. Si no hay información suficiente sobre temas no documentados:
   return {
     found: false,
     respuesta: FALLBACK_MESSAGE,
     links: [
       { label: "Contactar a Soporte por WhatsApp", url: "https://wa.me/525612870780" },
       { label: "Consultar Catálogos", url: "/catalogo" }
+    ],
+    options: [
+      "Uniformes Corporativos",
+      "Playeras Tipo Polo",
+      "Seguridad Industrial (EPP)",
+      "Hablar con un asesor"
     ]
   };
 }

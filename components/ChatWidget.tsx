@@ -11,6 +11,7 @@ interface Message {
   time: string;
   isFallback?: boolean;
   links?: { label: string; url: string }[];
+  options?: string[];
 }
 
 const ROTATING_PROMPTS = [
@@ -42,6 +43,12 @@ export default function ChatWidget() {
         { label: 'Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
         { label: 'Seguridad Industrial (EPP)', url: '/catalogo?catalogo=epc' },
         { label: 'Abrir Configurador 3D', url: '/configurador' }
+      ],
+      options: [
+        'Uniformes Corporativos',
+        'Playeras Tipo Polo',
+        'Seguridad Industrial (EPP)',
+        'Calzado de Seguridad'
       ]
     }
   ]);
@@ -105,11 +112,19 @@ export default function ChatWidget() {
     setInputMessage('');
     setIsLoading(true);
 
+    const chatHistory = [...messages, userMsg].slice(-8).map((m) => ({
+      sender: m.sender,
+      text: m.text
+    }));
+
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text })
+        body: JSON.stringify({
+          message: text,
+          history: chatHistory
+        })
       });
 
       const data = await res.json();
@@ -122,7 +137,8 @@ export default function ChatWidget() {
         text: replyText,
         time: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }),
         isFallback,
-        links: data.links || []
+        links: data.links || [],
+        options: data.options || []
       };
 
       setMessages((prev) => [...prev, botMsg]);
@@ -133,7 +149,13 @@ export default function ChatWidget() {
         text: FALLBACK_MESSAGE,
         time: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }),
         isFallback: true,
-        links: [{ label: 'Contactar a Soporte por WhatsApp', url: 'https://wa.me/525612870780' }]
+        links: [{ label: 'Contactar a Soporte por WhatsApp', url: 'https://wa.me/525612870780' }],
+        options: [
+          'Uniformes Corporativos',
+          'Playeras Tipo Polo',
+          'Seguridad Industrial (EPP)',
+          'Hablar con un asesor'
+        ]
       };
       setMessages((prev) => [...prev, botMsg]);
     } finally {
@@ -429,6 +451,12 @@ export default function ChatWidget() {
                         { label: 'Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
                         { label: 'Seguridad Industrial (EPP)', url: '/catalogo?catalogo=epc' },
                         { label: 'Abrir Configurador 3D', url: '/configurador' }
+                      ],
+                      options: [
+                        'Uniformes Corporativos',
+                        'Playeras Tipo Polo',
+                        'Seguridad Industrial (EPP)',
+                        'Calzado de Seguridad'
                       ]
                     }
                   ]);
@@ -596,6 +624,59 @@ export default function ChatWidget() {
                       <IconWhatsApp size={16} />
                       <span>Contactar a Soporte por WhatsApp</span>
                     </a>
+                  </div>
+                )}
+
+                {/* Opciones de respuesta rápida para el usuario */}
+                {m.sender === 'assistant' && m.options && m.options.length > 0 && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '6px',
+                      marginTop: '4px',
+                      marginLeft: '36px',
+                      maxWidth: '92%'
+                    }}
+                  >
+                    {m.options.map((opt, optIdx) => (
+                      <button
+                        key={optIdx}
+                        type="button"
+                        onClick={() => handleSendMessage(opt)}
+                        style={{
+                          backgroundColor: '#EFF6FF',
+                          border: '1.5px solid #BFDBFE',
+                          borderRadius: '100px',
+                          padding: '6px 14px',
+                          fontSize: '0.78rem',
+                          fontWeight: 700,
+                          color: 'var(--rey)',
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '5px',
+                          boxShadow: '0 2px 4px rgba(36, 86, 196, 0.08)',
+                          transition: 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.backgroundColor = 'var(--rey)';
+                          e.currentTarget.style.color = '#ffffff';
+                          e.currentTarget.style.borderColor = 'var(--rey)';
+                          e.currentTarget.style.transform = 'translateY(-1px)';
+                          e.currentTarget.style.boxShadow = '0 4px 10px rgba(36, 86, 196, 0.2)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.backgroundColor = '#EFF6FF';
+                          e.currentTarget.style.color = 'var(--rey)';
+                          e.currentTarget.style.borderColor = '#BFDBFE';
+                          e.currentTarget.style.transform = 'translateY(0)';
+                          e.currentTarget.style.boxShadow = '0 2px 4px rgba(36, 86, 196, 0.08)';
+                        }}
+                      >
+                        {opt}
+                      </button>
+                    ))}
                   </div>
                 )}
 
