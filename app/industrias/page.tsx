@@ -50,41 +50,41 @@ export default function IndustriasPage() {
       ]
     },
     {
-      id: 'medico',
-      titulo: 'Médico, Clínico y Farmacéutico',
-      subtitulo: 'Salud, Asepsia y Laboratorio',
-      icono: '🩺',
-      tag: 'Alta Asepsia & Antifluidos',
+      id: 'seguridad',
+      titulo: 'Seguridad Privada y Vigilancia',
+      subtitulo: 'Vigilancia, Custodia y Accesos',
+      icono: '🛡️',
+      tag: 'Presentación & Resistencia',
       color: '#0284c7',
-      descripcion: 'Uniformes con telas de alta asepsia, repelencia a fluidos y máxima comodidad para largas jornadas en hospitales, laboratorios y clínicas dentales.',
+      descripcion: 'Uniformes diseñados para personal de seguridad privada, control de accesos, vigilancia y custodios, proyectando autoridad, pulcritud y confort.',
       productos: [
         {
-          nombre: 'Filipina Médica Antifluidos',
-          desc: 'Tela stretch suave repelente a líquidos y manchas. Bolsas ergonómicas.',
-          link: '/categoria/ropa-trabajo',
-          imagen: '🥼',
-          specs: ['Tecnología Antifluidos', 'Secado rápido', '8 colores clínicos']
+          nombre: 'Camisa de Seguridad Operativa',
+          desc: 'Camisa tipo comando con charreteras en hombros, portapluma y bolsas reforzadas.',
+          link: '/categoria/camisas',
+          imagen: '👔',
+          specs: ['Tela Gabardina / Ripstop', 'Fácil planchado', 'Manga larga o corta']
         },
         {
-          nombre: 'Bata de Laboratorio Profesional',
-          desc: 'Bata blanca corte largo y mediano con botones ocultos y bolsas de parche.',
-          link: '/categoria/ropa-trabajo',
-          imagen: '🩺',
-          specs: ['Gabardina clínica', 'Resistente a lavados', 'Manga larga / corta']
-        },
-        {
-          nombre: 'Pantalón Clínico Jogger',
-          desc: 'Pantalón tipo médico con resorte y jareta ajustable para máximo confort.',
-          link: '/categoria/ropa-trabajo',
+          nombre: 'Pantalón Táctico Comando',
+          desc: 'Pantalón de alta resistencia con 6 bolsas funcionales y refuerzos en rodillas y tiro.',
+          link: '/categoria/pantalones',
           imagen: '👖',
-          specs: ['Tela microfibra stretch', '6 bolsas funcionales', 'Antiarrugas']
+          specs: ['Ripstop Antidesgarro', 'Bolsas cargo', 'Repelente a salpicaduras']
         },
         {
-          nombre: 'Calzado & Protección Clínica',
-          desc: 'Zapatos antideslizantes sin agujetas, cofias quirúrgicas y cubrebocas.',
+          nombre: 'Chamarra / Cazadora de Seguridad',
+          desc: 'Chamarra ejecutiva repelente a lluvia y viento con forro térmico desmontable.',
+          link: '/categoria/ropa-trabajo',
+          imagen: '🧥',
+          specs: ['Impermeable y térmica', 'Espacio para insignias', 'Bolsas de seguridad']
+        },
+        {
+          nombre: 'Bota Táctica de Servicio',
+          desc: 'Bota táctica ligera y ergonómica con suela antiderrapante de alto agarre.',
           link: '/categoria/calzado',
-          imagen: '👟',
-          specs: ['Suela antideslizante', 'Certificado asepsia', 'Hipoalergénico']
+          imagen: '🥾',
+          specs: ['Construcción ligera', 'Suela antiderrapante', 'Cierre lateral rápido']
         }
       ]
     },
@@ -119,7 +119,7 @@ export default function IndustriasPage() {
           specs: ['Gabardina de 280g', 'Bolsas cargo', 'Resistencia a fricción']
         },
         {
-          nombre: 'Botas Duty Gear Dieléctricas',
+          nombre: 'Botas de Seguridad Industrial Dieléctricas',
           desc: 'Calzado de seguridad industrial con casquillo de poliamida y suela antiderrapante.',
           link: '/categoria/calzado',
           imagen: '🥾',

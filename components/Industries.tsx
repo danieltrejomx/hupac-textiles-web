@@ -43,11 +43,11 @@ export default function Industries() {
         <div className="ind rv">
           <div className="ic">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-              <path d="M12 4v16M4 12h16"/><circle cx="12" cy="12" r="9"/>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
           </div>
-          <b>Médico</b>
-          <span>Filipinas, batas y pantalones clínicos.</span>
+          <b>Seguridad Privada</b>
+          <span>Camisas de vestir, pantalones comando y chamarras.</span>
         </div>
         <div className="ind rv">
           <div className="ic">

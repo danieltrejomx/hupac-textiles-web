@@ -3577,7 +3577,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 'accesorio-plantillas-pu-duty-gear',
     sku: 'ACC-PLAN',
-    nombre: 'Plantillas Ergonómicas de PU Duty Gear',
+    nombre: 'Plantillas Ergonómicas de PU Industrial',
     categoria: 'accesorios',
     subtitulo: 'Plantilla de Poliuretano Termoformada · Alta Densidad',
     descripcion: 'Par de plantillas anatómicas de poliuretano antimicótico y transpirable, diseñadas para reducir la fatiga en jornadas de más de 12 horas.',
@@ -3599,7 +3599,7 @@ export const PRODUCTS: Product[] = [
     imagenPrincipal: '/images/calzado/calzado_bota_industrial.jpg',
     colores: [
         {
-            nombre: 'Azul / Amarillo Duty Gear',
+            nombre: 'Azul / Amarillo Industrial',
             hex: '#1e3a8a'
         }
     ],

@@ -326,7 +326,7 @@ export default function Navbar() {
                     BÚSQUEDAS POPULARES
                   </span>
                   <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                    {['Playera Polo', 'Calzado Duty Gear', 'Chaleco Industrial', 'Bata Médica', 'Casco de Seguridad', 'Lentes'].map((term) => (
+                    {['Playera Polo', 'Calzado Industrial', 'Camisa de Mezclilla', 'Chaleco Industrial', 'Casco de Seguridad', 'Lentes'].map((term) => (
                       <button
                         key={term}
                         type="button"

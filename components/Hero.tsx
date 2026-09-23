@@ -29,12 +29,6 @@ const HERO_SLIDES = [
     subtitle: 'Chalecos multibolsillos y equipo para montacarguistas'
   },
   {
-    src: '/images/hero_slide_5.jpg',
-    alt: 'Batas y uniformes médicos y de salud HUPAC',
-    title: 'Línea Médica y Sanitaria',
-    subtitle: 'Batas, filipinas y uniformes para clínicas y hospitales'
-  },
-  {
     src: '/images/hero_slide_6.jpg',
     alt: 'Uniformes para estaciones de servicio y gasolineras HUPAC',
     title: 'Línea de Servicio y Mantenimiento',

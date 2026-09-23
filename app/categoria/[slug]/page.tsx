@@ -18,7 +18,7 @@ const CATEGORIES_META: Record<string, { titulo: string; descripcion: string; emo
   'calzado': {
     titulo: 'Calzado de Seguridad e Industrial',
     emoji: '🥾',
-    descripcion: 'Línea Duty Gear de botas industriales waterproof, dieléctricas, tenis deportivos de seguridad con casquillo y suelas antiderrapantes.',
+    descripcion: 'Línea de calzado industrial, botas waterproof, dieléctricas, tenis deportivos de seguridad con casquillo y suelas antiderrapantes.',
     filtro: (p) => p.categoria === 'calzado' || p.categoria === 'accesorios'
   },
   'cabeza': {

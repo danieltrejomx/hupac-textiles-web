@@ -691,7 +691,7 @@ function CatalogoContent() {
             }}>
               {[
                 { slug: 'playeras', emoji: '👕', titulo: 'Playeras y Polos', desc: 'Peso completo, cuello redondo, cuello V y polos piqué.', color: '#eff6ff', accent: '#2563eb' },
-                { slug: 'calzado', emoji: '🥾', titulo: 'Calzado Duty Gear', desc: 'Botas industriales waterproof, dieléctricas y antiderrapantes.', color: '#f0f9ff', accent: '#0284c7' },
+                { slug: 'calzado', emoji: '🥾', titulo: 'Calzado Industrial', desc: 'Botas industriales waterproof, dieléctricas y antiderrapantes.', color: '#f0f9ff', accent: '#0284c7' },
                 { slug: 'cabeza', emoji: '⛑️', titulo: 'Protección Craneal', desc: 'Cascos dieléctricos, protectores faciales y orejeras.', color: '#fef3c7', accent: '#d97706' },
                 { slug: 'visual', emoji: '🥽', titulo: 'Protección Visual', desc: 'Lentes de seguridad, monogoggles y sobrelentes.', color: '#e0f2fe', accent: '#0284c7' },
                 { slug: 'manos', emoji: '🧤', titulo: 'Protección de Manos', desc: 'Guantes de nitrilo, carnaza, anticorte y electricistas.', color: '#fce7f3', accent: '#db2777' },

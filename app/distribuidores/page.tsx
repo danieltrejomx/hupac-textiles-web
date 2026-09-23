@@ -205,7 +205,7 @@ export default function DistribuidoresPage() {
                       >
                         <option value="Textiles y Calzado">Textiles y Calzado</option>
                         <option value="Solo Confección Textil">Solo Confección Textil</option>
-                        <option value="Solo Calzado Duty Gear">Solo Calzado Duty Gear</option>
+                        <option value="Solo Calzado Industrial">Solo Calzado Industrial</option>
                         <option value="Equipo de Protección (EPC)">Equipo de Protección (EPC)</option>
                         <option value="Catálogo Completo">Catálogo Completo</option>
                       </select>
@@ -250,7 +250,7 @@ export default function DistribuidoresPage() {
                 num: '02',
                 icon: IconBox,
                 titulo: 'Inventario Permanente',
-                desc: 'Stock garantizado de playeras peso completo, polos piqué y calzado Duty Gear para reposición inmediata.'
+                desc: 'Stock garantizado de playeras peso completo, polos piqué y calzado industrial para reposición inmediata.'
               },
               {
                 num: '03',
