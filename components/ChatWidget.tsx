@@ -15,11 +15,11 @@ interface Message {
 
 const ROTATING_PROMPTS = [
   '¿Dudas? Habla con nuestro Asistente Virtual',
-  '👕 ¿Buscas uniformes para tu empresa? Te asesoro',
-  '🎨 ¡Prueba tu logotipo en 3D en el configurador!',
-  '🥾 Cotiza calzado, cascos y equipo EPP aquí',
-  '⚡ Precios de mayoreo directo de fábrica',
-  '💬 ¿Necesitas cotización formal? Escríbeme'
+  '¿Buscas uniformes para tu empresa? Te asesoramos',
+  'Prueba tu logotipo en 3D en el configurador',
+  'Cotiza calzado, cascos y equipo EPP aquí',
+  'Precios de mayoreo directo de fábrica',
+  '¿Necesitas cotización formal? Escríbenos'
 ];
 
 export default function ChatWidget() {
@@ -28,6 +28,9 @@ export default function ChatWidget() {
   const [isLoading, setIsLoading] = useState(false);
   const [promptIndex, setPromptIndex] = useState(0);
   const [fadePrompt, setFadePrompt] = useState(true);
+  const [isHovered, setIsHovered] = useState(false);
+  const [showIntroTip, setShowIntroTip] = useState(false);
+  const [tipDismissed, setTipDismissed] = useState(false);
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -36,9 +39,9 @@ export default function ChatWidget() {
       text: '¡Hola! Bienvenido(a) a Hupac Textiles. Con gusto te ayudamos a encontrar los uniformes, prendas o productos de seguridad industrial que necesitas.\n\n¿Qué estás buscando hoy?',
       time: 'Ahora',
       links: [
-        { label: '👕 Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
-        { label: '🛡️ Seguridad Industrial (EPP)', url: '/catalogo?catalogo=epc' },
-        { label: '🎨 Abrir Configurador 3D', url: '/configurador' }
+        { label: 'Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
+        { label: 'Seguridad Industrial (EPP)', url: '/catalogo?catalogo=epc' },
+        { label: 'Abrir Configurador 3D', url: '/configurador' }
       ]
     }
   ]);
@@ -53,7 +56,17 @@ export default function ChatWidget() {
     return () => window.removeEventListener('open-hupac-chat', handleOpenChat);
   }, []);
 
-  // Animación del texto dinámico rotativo (segunda captura)
+  // Aparición emergente temporal al inicio (5 segundos) para no ser estático ni invasivo
+  useEffect(() => {
+    const showTimer = setTimeout(() => setShowIntroTip(true), 2400);
+    const hideTimer = setTimeout(() => setShowIntroTip(false), 7500);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
+  }, []);
+
+  // Animación del texto dinámico rotativo
   useEffect(() => {
     const interval = setInterval(() => {
       setFadePrompt(false);
@@ -120,7 +133,7 @@ export default function ChatWidget() {
         text: FALLBACK_MESSAGE,
         time: new Date().toLocaleTimeString('es-MX', { hour: '2-digit', minute: '2-digit' }),
         isFallback: true,
-        links: [{ label: '💬 Contactar a Soporte por WhatsApp', url: 'https://wa.me/525612870780' }]
+        links: [{ label: 'Contactar a Soporte por WhatsApp', url: 'https://wa.me/525612870780' }]
       };
       setMessages((prev) => [...prev, botMsg]);
     } finally {
@@ -136,18 +149,22 @@ export default function ChatWidget() {
   };
 
   const QUICK_QUESTIONS = [
-    '👕 ¿Qué tipos de playeras y polos tienen?',
-    '🛡️ ¿Qué cascos y guantes manejan?',
-    '🥾 ¿Tienen calzado industrial?',
-    '🎨 ¿Qué técnicas de personalización ofrecen?',
-    '📦 ¿Dónde están ubicados y qué horarios tienen?',
-    '📋 ¿Cómo puedo consultar sus catálogos?'
+    '¿Qué tipos de playeras y polos tienen?',
+    '¿Qué cascos y guantes manejan?',
+    '¿Tienen calzado industrial?',
+    '¿Qué técnicas de personalización ofrecen?',
+    '¿Dónde están ubicados y qué horarios tienen?',
+    '¿Cómo puedo consultar sus catálogos?'
   ];
+
+  const isTooltipVisible = !isOpen && !tipDismissed && (isHovered || showIntroTip);
 
   return (
     <>
       {/* Botón Flotante en la esquina inferior derecha */}
       <div
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         style={{
           position: 'fixed',
           bottom: '24px',
@@ -159,61 +176,89 @@ export default function ChatWidget() {
           gap: '8px'
         }}
       >
-        {/* Tooltip con texto dinámico y rotativo (no estático) */}
-        {!isOpen && (
+        {/* Burbuja emergente (solo aparece temporalmente o al posar el cursor, no estática) */}
+        <div
+          onClick={() => setIsOpen(true)}
+          style={{
+            backgroundColor: '#ffffff',
+            color: 'var(--marino)',
+            padding: '7px 12px 7px 14px',
+            borderRadius: '100px',
+            fontSize: '0.78rem',
+            fontWeight: 800,
+            boxShadow: '0 8px 24px rgba(19, 42, 82, 0.16)',
+            border: '1px solid var(--linea)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            cursor: 'pointer',
+            userSelect: 'none',
+            maxWidth: '340px',
+            opacity: isTooltipVisible ? 1 : 0,
+            transform: isTooltipVisible ? 'translateY(0) scale(1)' : 'translateY(8px) scale(0.96)',
+            pointerEvents: isTooltipVisible ? 'auto' : 'none',
+            transition: 'opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
+          }}
+        >
           <div
-            onClick={() => setIsOpen(true)}
             style={{
-              backgroundColor: '#ffffff',
-              color: 'var(--marino)',
-              padding: '6px 14px',
-              borderRadius: '100px',
-              fontSize: '0.78rem',
-              fontWeight: 800,
-              boxShadow: '0 6px 20px rgba(19, 42, 82, 0.16)',
-              border: '1px solid var(--linea)',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              cursor: 'pointer',
-              animation: 'bounceSoft 3s infinite ease-in-out',
-              userSelect: 'none',
-              maxWidth: '340px'
+              width: '22px',
+              height: '22px',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              backgroundColor: '#0B192C',
+              border: '1px solid #38bdf8',
+              flexShrink: 0
             }}
           >
-            <div
-              style={{
-                width: '22px',
-                height: '22px',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                backgroundColor: '#0B192C',
-                border: '1px solid #38bdf8',
-                flexShrink: 0
-              }}
-            >
-              <img
-                src="/images/asistente-hupac.jpg"
-                alt="Asistente Virtual HUPAC"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
-              />
-            </div>
-            <span
-              style={{
-                display: 'inline-block',
-                opacity: fadePrompt ? 1 : 0,
-                transform: fadePrompt ? 'translateY(0)' : 'translateY(-3px)',
-                transition: 'opacity 0.25s ease, transform 0.25s ease',
-                whiteSpace: 'nowrap',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}
-            >
-              {ROTATING_PROMPTS[promptIndex]}
-            </span>
-            <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block', flexShrink: 0 }} />
+            <img
+              src="/images/asistente-hupac.jpg"
+              alt="Asistente Virtual HUPAC"
+              style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
+            />
           </div>
-        )}
+          <span
+            style={{
+              display: 'inline-block',
+              opacity: fadePrompt ? 1 : 0,
+              transform: fadePrompt ? 'translateY(0)' : 'translateY(-3px)',
+              transition: 'opacity 0.25s ease, transform 0.25s ease',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}
+          >
+            {ROTATING_PROMPTS[promptIndex]}
+          </span>
+          <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block', flexShrink: 0 }} />
+
+          {/* Botón de cierre para descartar la burbuja si se desea */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setTipDismissed(true);
+            }}
+            title="Cerrar sugerencia"
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#94a3b8',
+              cursor: 'pointer',
+              padding: '0 2px',
+              marginLeft: '2px',
+              fontSize: '1rem',
+              lineHeight: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--marino)')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
+          >
+            &times;
+          </button>
+        </div>
 
         <button
           type="button"
@@ -381,9 +426,9 @@ export default function ChatWidget() {
                       text: '¡Hola! Bienvenido(a) a Hupac Textiles. Con gusto te ayudamos a encontrar los uniformes, prendas o productos de seguridad industrial que necesitas.\n\n¿Qué estás buscando hoy?',
                       time: 'Ahora',
                       links: [
-                        { label: '👕 Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
-                        { label: '🛡️ Seguridad Industrial (EPP)', url: '/catalogo?catalogo=epc' },
-                        { label: '🎨 Abrir Configurador 3D', url: '/configurador' }
+                        { label: 'Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
+                        { label: 'Seguridad Industrial (EPP)', url: '/catalogo?catalogo=epc' },
+                        { label: 'Abrir Configurador 3D', url: '/configurador' }
                       ]
                     }
                   ]);

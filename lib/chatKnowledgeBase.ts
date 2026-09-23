@@ -235,9 +235,9 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "¡Con mucho gusto! Si te surge cualquier otra duda sobre uniformes, equipo de protección industrial o calzado de Hupac Textiles, aquí estaré para ayudarte. ¡Que tengas un excelente día!",
     seguimiento: "¿Hay alguna otra prenda, cotización o detalle que te gustaría revisar?",
     links: [
-      { label: "👕 Ver Catálogo de Uniformes", url: "/catalogo?catalogo=textil" },
-      { label: "🎨 Abrir Configurador 3D", url: "/configurador" },
-      { label: "💬 WhatsApp Directo", url: "https://wa.me/525612870780" }
+      { label: "Ver Catálogo de Uniformes", url: "/catalogo?catalogo=textil" },
+      { label: "Abrir Configurador 3D", url: "/configurador" },
+      { label: "WhatsApp Directo", url: "https://wa.me/525612870780" }
     ]
   },
   {
@@ -248,8 +248,8 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "¡Excelente! Si deseas cotizar alguna prenda específica, consultar tablas de tallas o probar tu logotipo en nuestro Configurador 3D, dime con toda confianza y te acompaño paso a paso.",
     seguimiento: "¿Qué prenda o equipo te gustaría explorar a continuación?",
     links: [
-      { label: "📋 Consultar Catálogo Completo", url: "/catalogo" },
-      { label: "🎨 Abrir Configurador 3D", url: "/configurador" }
+      { label: "Consultar Catálogo Completo", url: "/catalogo" },
+      { label: "Abrir Configurador 3D", url: "/configurador" }
     ]
   },
   {
@@ -260,7 +260,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "¡Hasta pronto! Fue un placer atenderte. Quedo a tus órdenes en Hupac Textiles las 24 horas para cuando lo necesites. ¡Que tengas mucho éxito en tu jornada!",
     seguimiento: "¡Hasta luego!",
     links: [
-      { label: "🌐 Visitar hupactextiles.mx", url: "/" }
+      { label: "Visitar hupactextiles.mx", url: "/" }
     ]
   },
   {
@@ -271,9 +271,9 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "¡Hola! Bienvenido(a) a Hupac Textiles. Con gusto te ayudamos a encontrar los uniformes empresariales, prendas de trabajo o equipo de seguridad industrial (EPP) que necesitas. ¿Qué estás buscando hoy?",
     seguimiento: "¿Buscas uniformes corporativos, equipo de protección industrial o calzado de seguridad?",
     links: [
-      { label: "👕 Uniformes Corporativos", url: "/catalogo?catalogo=textil" },
-      { label: "🛡️ Seguridad Industrial (EPP)", url: "/catalogo?catalogo=epc" },
-      { label: "🎨 Configurador Visual 3D", url: "/configurador" }
+      { label: "Uniformes Corporativos", url: "/catalogo?catalogo=textil" },
+      { label: "Seguridad Industrial (EPP)", url: "/catalogo?catalogo=epc" },
+      { label: "Configurador Visual 3D", url: "/configurador" }
     ]
   },
   {
@@ -296,7 +296,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Sí, soy el Asistente Virtual oficial de Hupac Textiles y estoy aquí para brindarte información inmediata de nuestros productos, telas, precios y servicios en el sitio web. Si en algún momento prefieres hablar directamente con un asesor humano de nuestro equipo comercial, con gusto te canalizo de inmediato.",
     seguimiento: "¿Quieres que continuemos por aquí o prefieres que te conecte con un asesor?",
     links: [
-      { label: "💬 Hablar con Asesor en WhatsApp", url: "https://wa.me/525612870780" }
+      { label: "Hablar con Asesor en WhatsApp", url: "https://wa.me/525612870780" }
     ]
   },
   {
@@ -307,7 +307,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Nuestro horario de atención oficial de oficinas y planta es de lunes a viernes de 9:00 a 19:00 hrs y sábados de 10:00 a 14:00 hrs. Yo, como asistente virtual, estoy disponible las 24 horas del día en el sitio web para resolver tus dudas y ayudarte a cotizar.",
     seguimiento: "¿Deseas dejar tu consulta lista para que el equipo comercial le dé seguimiento?",
     links: [
-      { label: "💬 Contactar en Horario Laboral", url: "https://wa.me/525612870780" }
+      { label: "Contactar en Horario Laboral", url: "https://wa.me/525612870780" }
     ]
   },
   {
@@ -318,7 +318,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Nuestras oficinas y centro de operaciones se encuentran en Av. Laguna Luna 30, Col. Cumbria, Cuautitlán Izcalli, Estado de México, C.P. 54740. Si deseas visitarnos o recoger un pedido, te recomendamos coordinarlo antes con un asesor para confirmar disponibilidad.",
     seguimiento: "¿Te gustaría que un asesor te contacte para agendar tu visita o confirmar recolección?",
     links: [
-      { label: "📍 Conoce Nuestra Ubicación", url: "/nosotros" }
+      { label: "Conoce Nuestra Ubicación", url: "/nosotros" }
     ]
   },
   {
@@ -329,8 +329,8 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Hupac Textiles es una empresa 100% mexicana con más de 30 años de experiencia especializada en:\n1. Uniformes corporativos e industriales (playeras, polos, camisas, pantalones y sudaderas).\n2. Equipo de protección personal e industrial EPP (cascos, guantes, chalecos, lentes, calzado de seguridad y arneses).\n3. Servicios de personalización textil (bordado industrial, serigrafía, DTF, sublimación y vinil textil).",
     seguimiento: "¿Hay alguna categoría en particular que te interese revisar?",
     links: [
-      { label: "📋 Ver Catálogo Completo", url: "/catalogo" },
-      { label: "🏭 Soluciones por Industria", url: "/industrias" }
+      { label: "Ver Catálogo Completo", url: "/catalogo" },
+      { label: "Soluciones por Industria", url: "/industrias" }
     ]
   },
   {
@@ -356,7 +356,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "¡Contamos con un Configurador Visual 3D interactivo en la web! Te permite:\n1. Elegir entre Polo Piqué, Playera Cuello Redondo, Camisa de Vestir o Camisa de Mezclilla (con o sin reflejante).\n2. Seleccionar el color institucional exacto.\n3. Cargar el archivo de tu logotipo (PNG, JPG o SVG).\n4. Mover y escalar libremente tu logo en vista frontal o trasera.\n5. Generar un ticket formal de cotización y enviarlo por WhatsApp.",
     seguimiento: "¿Te gustaría probar el configurador ahora mismo?",
     links: [
-      { label: "🎨 Ir al Configurador Visual 3D", url: "/configurador" }
+      { label: "Ir al Configurador Visual 3D", url: "/configurador" }
     ]
   },
   {
@@ -367,8 +367,8 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Puedes realizar tu compra directamente en nuestra tienda en línea mediante Mercado Pago de forma 100% segura. Aceptamos:\n• Tarjetas de crédito y débito (Visa, Mastercard, American Express).\n• Transferencias interbancarias SPEI.\n• Pagos en efectivo en tiendas de conveniencia (OXXO).\n\nNo cobramos ningún recargo extra por IVA en el checkout; pagas exactamente el precio publicado del producto.",
     seguimiento: "¿Deseas explorar los productos para agregar al carrito?",
     links: [
-      { label: "🛒 Ver Carrito de Compras", url: "/checkout" },
-      { label: "📦 Ver Catálogo", url: "/catalogo" }
+      { label: "Ver Carrito de Compras", url: "/checkout" },
+      { label: "Ver Catálogo", url: "/catalogo" }
     ]
   },
   {
@@ -379,8 +379,8 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Ofrecemos nuestro Programa de Distribuidores Autorizados HUPAC, ideal para comercializadores de uniformes y EPP. Beneficios:\n• Precios preferenciales y márgenes de ganancia directo de fábrica.\n• Inventario garantizado para entrega inmediata sin esperas de confección.\n• Envíos consolidados a toda la República Mexicana.\n• Catálogos digitales y soporte comercial dedicado.\n\nPuedes registrarte con tus datos comerciales en nuestra página de Distribuidores.",
     seguimiento: "¿Te gustaría llenar el formulario de registro para distribuidores?",
     links: [
-      { label: "🤝 Ir a Distribuidores", url: "/distribuidores" },
-      { label: "💬 Contactar por WhatsApp", url: "https://wa.me/525612870780" }
+      { label: "Ir a Distribuidores", url: "/distribuidores" },
+      { label: "Contactar por WhatsApp", url: "https://wa.me/525612870780" }
     ]
   },
   {
@@ -391,7 +391,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "En Hupac Textiles desarrollamos paquetes normativos para 6 sectores industriales clave:\n1. Manufactura & Maquiladora (antiestático, algodón peinado, alta duración).\n2. Automotriz & Talleres (mezclilla ruda, gabardina resistente a grasas).\n3. Construcción & Obra Civil (alta visibilidad con reflejantes, cascos y botas).\n4. Logística & Almacenes (prendas transpirables, chalecos brigadista, fajas).\n5. Seguridad Privada (camisas tácticas, pantalones comando, botas operativas).\n6. Minería, Energía & Petróleo (retardante a flama, dieléctrico y arco eléctrico).",
     seguimiento: "¿De qué sector es tu empresa para darte la recomendación exacta?",
     links: [
-      { label: "🏭 Ver Soluciones por Industria", url: "/industrias" }
+      { label: "Ver Soluciones por Industria", url: "/industrias" }
     ]
   },
 
@@ -406,7 +406,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Sí, manejamos una línea completa de uniformes corporativos de confección 100% nacional:\n• Playeras de cuello redondo (modelos MAX, PRIME, PREMIUM peinado, STAMPA, LONDON, SUBLI).\n• Playeras tipo polo (Caballero, Dama asiluetada, Supreme piqué reforzado, infantil y juvenil).\n• Camisas de vestir (manga larga y corta, en blanco y cielo) y Camisas de mezclilla (con o sin reflejante).\n• Pantalones de gabardina 100% algodón y pantalones de mezclilla dark stone.\n• Sudaderas cuello redondo, con capucha y cangurera.",
     seguimiento: "¿Buscas un uniforme formal de oficina o prendas operativas de uso rudo?",
     links: [
-      { label: "👕 Ver Catálogo Textil", url: "/catalogo?catalogo=textil" }
+      { label: "Ver Catálogo Textil", url: "/catalogo?catalogo=textil" }
     ]
   },
   {
@@ -461,7 +461,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Contamos con varios modelos de playera:\n• Premium (34401): 100% algodón peinado, tacto suave premium.\n• Max (30038): 100% algodón peso completo resistente (200 g/m²).\n• Prime (30037): 100% algodón suave y fresca (155 g/m²).\n• Stampa (30039): Mezcla 50% algodón / 50% poliéster, ideal para serigrafía.\n• London (30040): 100% algodón con efecto jaspeado.\n• Subli (30041): 100% poliéster especial para sublimación.",
     seguimiento: "¿La playera es para personalizar con bordado o estampado, o la necesitas lisa?",
     links: [
-      { label: "👕 Ver Playeras en Catálogo", url: "/catalogo?cat=playeras" }
+      { label: "Ver Playeras en Catálogo", url: "/catalogo?cat=playeras" }
     ]
   },
   {
@@ -520,8 +520,8 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Ofrecemos personalización mediante 5 técnicas profesionales:\n• Bordado Industrial: En relieve con hilos de poliéster de alta tenacidad (ideal para camisas, polos y chamarras).\n• Serigrafía Textil: Tintas plastisol y ecológicas para corridas de alto volumen con excelente costo-beneficio.\n• DTF Textil: Impresión digital directa a film en alta definición (ideal para degradados y detalles finos sobre cualquier tela).\n• Sublimación: Pigmentación transferida por calor en prendas de poliéster (como playera SUBLI), sin tacto.\n• Vinil Textil: Termotransferencia de alta resistencia perfecta para logotipos sólidos, nombres y franjas reflejantes.",
     seguimiento: "¿Tu logo es a un solo color, varios colores, o tiene degradados/fotografía?",
     links: [
-      { label: "🧵 Ver Técnicas y Animaciones", url: "/servicios" },
-      { label: "🎨 Probar en Configurador 3D", url: "/configurador" }
+      { label: "Ver Técnicas y Animaciones", url: "/servicios" },
+      { label: "Probar en Configurador 3D", url: "/configurador" }
     ]
   },
   {
@@ -543,7 +543,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Idealmente recibimos el logotipo en formato vectorial (AI de Illustrator, EPS o PDF vectorizado) o en imagen de alta resolución (PNG o JPG a 300 DPI con fondo transparente). Esto garantiza que el ponchado de bordado o la placa de serigrafía queden con la máxima nitidez.",
     seguimiento: "¿Cuentas con tu logotipo en formato digital para compartirlo con el equipo de diseño?",
     links: [
-      { label: "🎨 Subir y Probar Logo en 3D", url: "/configurador" }
+      { label: "Subir y Probar Logo en 3D", url: "/configurador" }
     ]
   },
   {
@@ -554,7 +554,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Sí, es totalmente posible personalizar más de una zona de la prenda (por ejemplo, logo bordado en el pecho izquierdo, estampado grande en la espalda y bandera o nombre en la manga), e incluso combinar técnicas distintas en la misma prenda.",
     seguimiento: "¿Qué diseño llevaría cada zona de la prenda?",
     links: [
-      { label: "🎨 Probar Vistas en Configurador 3D", url: "/configurador" }
+      { label: "Probar Vistas en Configurador 3D", url: "/configurador" }
     ]
   },
 
@@ -569,7 +569,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Nuestra división de Seguridad Industrial (EPP) incluye:\n• Protección Craneal: Cascos tipo mundial y ala ancha con suspensión de 8 puntos, barboquejos y capuchas.\n• Protección Visual: Lentes Nemesis, goggles Trilogy cerrados, polarizados y sobrelentes.\n• Protección de Manos: Guantes anticorte nivel 5, nylon/nitrilo, carnaza, argonero y soldador con Kevlar.\n• Ropa Industrial: Chalecos clase 2 con reflejante, chalecos brigadista, overoles de gabardina y laminados.\n• Calzado: Botas industriales con casquillo de acero y bota roper vaquera (tallas 22 al 30).\n• Alturas & Vial: Arneses de 1 y 3 aros, líneas de vida, conos reflejantes y trafitambos.",
     seguimiento: "¿Qué actividad realiza el personal que necesita el equipo?",
     links: [
-      { label: "🛡️ Explorar Catálogo EPP", url: "/catalogo?catalogo=epc" }
+      { label: "Explorar Catálogo EPP", url: "/catalogo?catalogo=epc" }
     ]
   },
   {
@@ -635,7 +635,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Manejamos calzado industrial de alta durabilidad en piel de ganado vacuno con suela antiderrapante y resistente a aceites y químicos ligeros. Modelos destacados:\n• Bota Industrial con casquillo de acero (tallas del 22 al 30/31).\n• Bota Roper tipo vaquera de tubo alto (tallas 26 al 30).\n• Accesorios: Plantillas de confort y protectores metatarsales.",
     seguimiento: "¿El calzado es para construcción, manufactura, almacén o trabajo en campo?",
     links: [
-      { label: "🥾 Ver Calzado en Catálogo", url: "/catalogo?cat=calzado" }
+      { label: "Ver Calzado en Catálogo", url: "/catalogo?cat=calzado" }
     ]
   },
   {
@@ -658,13 +658,13 @@ export const FAQ_DATABASE: FAQItem[] = [
     categoria: "Catálogos",
     keywords: ["catalogo", "catalogos", "descargar catalogo", "catalogo pdf", "ver catalogo", "mandar catalogo", "catalogo digital", "catalogos pdf"],
     intencion: "Catálogos digitales en PDF",
-    respuesta: "Contamos con tres catálogos digitales completos que puedes consultar y descargar en línea de forma gratuita:\n1. 👕 Catálogo de Uniformes Corporativos (playeras, polos, camisas, pantalones, sudaderas).\n2. 🛡️ Catálogo Industrial EPP (cascos, guantes, chalecos, lentes, arneses).\n3. 🥾 Catálogo de Calzado Industrial.",
+    respuesta: "Contamos con tres catálogos digitales completos que puedes consultar y descargar en línea de forma gratuita:\n1. Catálogo de Uniformes Corporativos (playeras, polos, camisas, pantalones, sudaderas).\n2. Catálogo Industrial EPP (cascos, guantes, chalecos, lentes, arneses).\n3. Catálogo de Calzado Industrial.",
     seguimiento: "¿Cuál de los tres catálogos te gustaría descargar o revisar primero?",
     links: [
-      { label: "📥 Descargar Catálogo Textil (PDF)", url: "/catalogo-textil-hupac.pdf" },
-      { label: "📥 Descargar Catálogo Industrial EPP (PDF)", url: "/catalogo-epc-industrial-2026.pdf" },
-      { label: "📥 Descargar Catálogo General (PDF)", url: "/catalogo-hupac.pdf" },
-      { label: "🌐 Explorar Catálogo Web", url: "/catalogo" }
+      { label: "Descargar Catálogo Textil (PDF)", url: "/catalogo-textil-hupac.pdf" },
+      { label: "Descargar Catálogo Industrial EPP (PDF)", url: "/catalogo-epc-industrial-2026.pdf" },
+      { label: "Descargar Catálogo General (PDF)", url: "/catalogo-hupac.pdf" },
+      { label: "Explorar Catálogo Web", url: "/catalogo" }
     ]
   },
 
@@ -679,8 +679,8 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Manejamos precios muy competitivos directo de fábrica, escalonados por volumen (a mayor número de piezas, menor precio unitario). Para darte la cifra exacta, compárteme qué prenda o producto te interesa, cantidades aproximadas y si requiere bordado o estampado con tu logotipo.",
     seguimiento: "¿Qué modelo y cantidad aproximada estás considerando para cotizarte?",
     links: [
-      { label: "📋 Consultar Precios en Catálogo", url: "/catalogo" },
-      { label: "💬 Solicitar Cotización en WhatsApp", url: "https://wa.me/525612870780" }
+      { label: "Consultar Precios en Catálogo", url: "/catalogo" },
+      { label: "Solicitar Cotización en WhatsApp", url: "https://wa.me/525612870780" }
     ]
   },
   {
@@ -692,7 +692,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     seguimiento: "¿Cuántas piezas tienes en mente para aplicarte la escala de mayoreo correspondiente?",
     links: [
       { label: "Ver Precios en Catálogo", url: "/catalogo" },
-      { label: "💬 Cotizar Mayoreo en WhatsApp", url: "https://wa.me/525612870780" }
+      { label: "Cotizar Mayoreo en WhatsApp", url: "https://wa.me/525612870780" }
     ]
   },
   {
@@ -703,7 +703,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "En nuestros catálogos impresos los precios se muestran más IVA; en cambio, en nuestra tienda web y checkout los precios se muestran claros. Al solicitar cotización formal con el equipo comercial, se te entrega el desglose exacto con IVA al 16% para facturación fiscal deducible al 100%.",
     seguimiento: "¿Requieres factura con RFC empresarial para tu compra?",
     links: [
-      { label: "🛒 Ver Precios en Tienda", url: "/catalogo" }
+      { label: "Ver Precios en Tienda", url: "/catalogo" }
     ]
   },
 
@@ -718,7 +718,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Realizamos envíos a toda la República Mexicana mediante convenios con las principales paqueterías y transportes de carga consolidada. El tiempo de entrega estándar es de 3 a 7 días hábiles según destino y volumen. También ofrecemos recolección directa en nuestro centro de operaciones de Cuautitlán Izcalli, Estado de México.",
     seguimiento: "¿A qué código postal o ciudad requieres el envío?",
     links: [
-      { label: "📍 Ver en Nosotros", url: "/nosotros" }
+      { label: "Ver en Nosotros", url: "/nosotros" }
     ]
   },
   {
@@ -729,7 +729,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Sí, es posible coordinar la recolección directa en nuestras instalaciones de Cuautitlán Izcalli, Estado de México, previa confirmación de que tu pedido ya se encuentra listo y empacado.",
     seguimiento: "¿Te gustaría coordinar la entrega o cotizar primero tus piezas?",
     links: [
-      { label: "📍 Ubicación y Contacto", url: "/nosotros" }
+      { label: "Ubicación y Contacto", url: "/nosotros" }
     ]
   },
 
@@ -744,8 +744,8 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "El proceso es muy ágil:\n1. Eliges tus prendas o equipo en el Catálogo o en el Configurador 3D.\n2. Defines cantidades, tallas y envías tu logotipo si requieres personalización.\n3. Recibes tu cotización formal con desglose de precios y tiempos.\n4. Confirmas mediante Mercado Pago (tarjetas/SPEI/OXXO) o transferencia directa y se programa entrega o envío a domicilio.",
     seguimiento: "¿Quieres que empecemos cotizando las prendas de tu interés?",
     links: [
-      { label: "📦 Ver Catálogo", url: "/catalogo" },
-      { label: "🎨 Abrir Configurador 3D", url: "/configurador" }
+      { label: "Ver Catálogo", url: "/catalogo" },
+      { label: "Abrir Configurador 3D", url: "/configurador" }
     ]
   },
   {
@@ -756,7 +756,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Sí, emitimos factura fiscal electrónica (CFDI) deducible de impuestos para todas las compras corporativas y de menudeo. Solo requerimos tu Constancia de Situación Fiscal actualizada y uso de CFDI.",
     seguimiento: "¿Deseas generar una cotización formal a nombre de tu empresa?",
     links: [
-      { label: "💬 Enviar Datos Fiscales", url: "https://wa.me/525612870780" }
+      { label: "Enviar Datos Fiscales", url: "https://wa.me/525612870780" }
     ]
   },
   {
@@ -767,7 +767,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Lamentamos mucho cualquier inconveniente; en Hupac Textiles nos tomamos muy en serio la calidad y el servicio al cliente. Para resolver tu caso con la máxima prioridad, compárteme tu número de pedido, tu nombre y una breve descripción de lo ocurrido para canalizarlo de inmediato con el área de Calidad y Gerencia Comercial.",
     seguimiento: "¿Me compartes tu número de pedido o nombre con el que se registró la compra?",
     links: [
-      { label: "💬 Atención Prioritaria en WhatsApp", url: "https://wa.me/525612870780" }
+      { label: "Atención Prioritaria en WhatsApp", url: "https://wa.me/525612870780" }
     ]
   },
   {
@@ -778,7 +778,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     respuesta: "Por supuesto, con gusto te canalizo con un asesor comercial humano. Puedes contactarnos de inmediato por WhatsApp al 56 1287 0780 o llamarnos al 55 1625 7933 de lunes a viernes de 9:00 a 19:00 hrs y sábados de 10:00 a 14:00 hrs.",
     seguimiento: "¿Prefieres que te contacten por WhatsApp o por correo electrónico?",
     links: [
-      { label: "💬 Contactar Asesor Humano en WhatsApp", url: "https://wa.me/525612870780" }
+      { label: "Contactar Asesor Humano en WhatsApp", url: "https://wa.me/525612870780" }
     ]
   }
 ];
@@ -891,9 +891,9 @@ export function queryKnowledgeBase(rawQuery: string): {
         respuesta: "Con gusto platicamos de otras cosas en otro momento; por ahora mi función como Asistente Virtual es ayudarte específicamente con los uniformes corporativos, prendas de trabajo, equipo de protección personal (EPP) y calzado de seguridad de Hupac Textiles.",
         seguimiento: "¿Hay alguna prenda, equipo de seguridad o cotización en la que te pueda apoyar hoy?",
         links: [
-          { label: "👕 Ver Catálogo de Uniformes", url: "/catalogo?catalogo=textil" },
-          { label: "🛡️ Ver Catálogo EPP", url: "/catalogo?catalogo=epc" },
-          { label: "🎨 Configurador 3D", url: "/configurador" }
+          { label: "Ver Catálogo de Uniformes", url: "/catalogo?catalogo=textil" },
+          { label: "Ver Catálogo EPP", url: "/catalogo?catalogo=epc" },
+          { label: "Configurador 3D", url: "/configurador" }
         ]
       };
     }
@@ -956,9 +956,9 @@ export function queryKnowledgeBase(rawQuery: string): {
       respuesta: productSearchResult,
       seguimiento: "¿Te gustaría cotizar este modelo en particular o probarlo en el Configurador 3D?",
       links: [
-        { label: "📦 Ir al Catálogo", url: "/catalogo" },
-        { label: "🎨 Abrir Configurador 3D", url: "/configurador" },
-        { label: "💬 Cotizar por WhatsApp", url: "https://wa.me/525612870780" }
+        { label: "Ir al Catálogo", url: "/catalogo" },
+        { label: "Abrir Configurador 3D", url: "/configurador" },
+        { label: "Cotizar por WhatsApp", url: "https://wa.me/525612870780" }
       ]
     };
   }
@@ -978,8 +978,8 @@ export function queryKnowledgeBase(rawQuery: string): {
     found: false,
     respuesta: FALLBACK_MESSAGE,
     links: [
-      { label: "💬 Contactar a Soporte por WhatsApp", url: "https://wa.me/525612870780" },
-      { label: "📋 Consultar Catálogos", url: "/catalogo" }
+      { label: "Contactar a Soporte por WhatsApp", url: "https://wa.me/525612870780" },
+      { label: "Consultar Catálogos", url: "/catalogo" }
     ]
   };
 }
