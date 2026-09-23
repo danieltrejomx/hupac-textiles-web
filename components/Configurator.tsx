@@ -97,18 +97,18 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
   mezclilla: {
     nombre: 'CAMISA DE MEZCLILLA INDUSTRIAL',
     subtitulo: '100% Algodón de uso rudo · Confección reforzada y doble bolsa',
-    frenteImgWhite: '/images/epc/camisa_mezclilla.png',
-    espaldaImgWhite: '/images/configurator/mezclilla_back.jpg',
-    frenteImgColor: '/images/epc/camisa_mezclilla_reflejante.jpg',
-    espaldaImgColor: '/images/configurator/mezclilla_reflejante_back.jpg',
+    frenteImgWhite: '/images/configurator/camisa_mezclilla_frente.png',
+    espaldaImgWhite: '/images/configurator/camisa_mezclilla_espalda.png',
+    frenteImgColor: '/images/configurator/camisa_mezclilla_reflejante_frente.jpg',
+    espaldaImgColor: '/images/configurator/camisa_mezclilla_reflejante_espalda.jpg',
     posicionesFrente: [
-      { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 30, maxW: 85 },
+      { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 34, maxW: 85 },
       { id: 'centro_pecho', label: 'Centro Pecho', x: 50, y: 38, maxW: 120 },
-      { id: 'pecho_der', label: 'Pecho Derecho', x: 37, y: 30, maxW: 85 },
+      { id: 'pecho_der', label: 'Pecho Derecho', x: 37, y: 34, maxW: 85 },
     ],
     posicionesEspalda: [
-      { id: 'espalda_cuello', label: 'Espalda Superior (Cuello)', x: 50, y: 20, maxW: 95 },
-      { id: 'espalda_centro', label: 'Espalda Centro (Grande)', x: 50, y: 44, maxW: 170 },
+      { id: 'espalda_cuello', label: 'Espalda Superior (Cuello)', x: 50, y: 22, maxW: 95 },
+      { id: 'espalda_centro', label: 'Espalda Centro (Grande)', x: 50, y: 42, maxW: 170 },
       { id: 'espalda_baja', label: 'Espalda Baja', x: 50, y: 68, maxW: 150 },
     ]
   }
