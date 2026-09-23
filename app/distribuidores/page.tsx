@@ -27,61 +27,92 @@ export default function DistribuidoresPage() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', paddingBottom: '80px' }}>
-        {/* Header Compacto Centrado */}
-        <section style={{
-          background: 'var(--marino)',
-          color: '#ffffff',
-          padding: '14px 24px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          textAlign: 'center'
+      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', position: 'relative' }}>
+        <div style={{
+          position: 'relative',
+          zIndex: 1,
+          maxWidth: '1260px',
+          margin: '0 auto',
+          padding: '16px 20px 48px 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
         }}>
-          <div style={{ 
-            maxWidth: '1320px', 
-            margin: '0 auto', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            textAlign: 'center'
+          {/* ================= TARJETA PRINCIPAL: DISTRIBUIDORES ================= */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            border: '1px solid var(--linea)',
+            borderRadius: '24px',
+            padding: '36px 44px 36px 44px',
+            width: '100%',
+            position: 'relative',
+            boxShadow: '0 12px 36px rgba(19, 42, 82, 0.07)',
+            marginBottom: '32px'
           }}>
-            <h1 style={{ 
-              fontSize: '1.25rem', 
-              fontWeight: 850, 
-              margin: 0, 
-              color: '#ffffff',
-              textAlign: 'center'
-            }}>
-              Tus márgenes de ganancia empiezan en la fábrica
-            </h1>
-          </div>
-        </section>
+            {/* Línea superior con gradiente de luz institucional */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: '8%',
+              right: '8%',
+              height: '3px',
+              background: 'linear-gradient(90deg, transparent, #2456C4, #38bdf8, #132A52, transparent)'
+            }} />
 
-        <div style={{ maxWidth: '1200px', margin: '-10px auto 0 auto', padding: '0 24px' }}>
-          {/* Formulario y Requisitos */}
-          <div
-            className="interactive-card-box"
-            style={{
-              animationDelay: '0.05s',
-              backgroundColor: '#ffffff',
-              border: '1px solid var(--linea)',
-              borderRadius: '24px',
-              padding: '24px 32px 32px 32px',
-              boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
+            {/* Tag Superior */}
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              color: 'var(--rey)',
+              fontSize: '0.78rem',
+              fontWeight: 800,
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              marginBottom: '10px'
+            }}>
+              <span style={{ width: '22px', height: '2px', backgroundColor: 'var(--rey)', display: 'inline-block' }} />
+              HUPAC TEXTILES
+            </div>
+
+            {/* Título Principal */}
+            <h1 style={{
+              fontSize: '2.3rem',
+              fontWeight: 850,
+              color: 'var(--marino)',
+              letterSpacing: '-0.02em',
+              margin: '0 0 6px 0',
+              lineHeight: 1.15
+            }}>
+              DISTRIBUIDORES AUTORIZADOS
+            </h1>
+
+            {/* Subtítulo */}
+            <p style={{
+              fontSize: '0.95rem',
+              fontStyle: 'italic',
+              color: 'var(--texto-2)',
+              margin: '0 0 28px 0'
+            }}>
+              Tus márgenes de ganancia empiezan directo en la fábrica. Conviértete en distribuidor autorizado.
+            </p>
+
+            {/* Formulario y Requisitos en Grid */}
+            <div style={{
+              borderTop: '1px solid var(--linea)',
+              paddingTop: '28px',
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-              gap: '32px',
-              marginBottom: '36px',
-              cursor: 'default'
-            }}
-          >
-            <div>
-              <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>Inicia hoy</span>
-              <h2 style={{ fontSize: '2rem', color: 'var(--marino)', margin: '0 0 16px 0', lineHeight: 1.3 }}>
-                Solicita tu registro como Distribuidor Autorizado
-              </h2>
-              <p style={{ fontSize: '1rem', color: 'var(--texto-2)', lineHeight: 1.6, marginBottom: '24px' }}>
-                Completa el formulario y un asesor de cuentas corporativas se comunicará contigo para compartirte nuestra lista de precios mayorista y catálogo con especificaciones.
-              </p>
+              gap: '36px'
+            }}>
+              <div>
+                <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>Inicia hoy</span>
+                <h2 style={{ fontSize: '1.75rem', color: 'var(--marino)', margin: '0 0 14px 0', lineHeight: 1.3, fontWeight: 850 }}>
+                  Solicita tu registro como Distribuidor Autorizado
+                </h2>
+                <p style={{ fontSize: '0.98rem', color: 'var(--texto-2)', lineHeight: 1.6, marginBottom: '24px' }}>
+                  Completa el formulario y un asesor de cuentas corporativas se comunicará contigo para compartirte nuestra lista de precios mayorista y catálogo con especificaciones.
+                </p>
 
               <div style={{ backgroundColor: '#f8fafc', border: '1px solid var(--linea)', borderRadius: '16px', padding: '24px', marginBottom: '24px' }}>
                 <h3 style={{ fontSize: '1.05rem', color: 'var(--marino)', margin: '0 0 12px 0', fontWeight: 800 }}>
@@ -232,8 +263,9 @@ export default function DistribuidoresPage() {
               )}
             </div>
           </div>
+        </div>
 
-          {/* Grid de Beneficios de Distribuidor (Ubicado por DEBAJO de la tarjeta de datos) */}
+        {/* Grid de Beneficios de Distribuidor (Ubicado por DEBAJO de la tarjeta de datos) */}
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',

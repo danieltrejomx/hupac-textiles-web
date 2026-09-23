@@ -327,63 +327,91 @@ function CatalogoContent() {
   return (
     <>
       <Navbar />
-      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', paddingBottom: '80px' }}>
-        {/* Header Compacto Centrado */}
-        <section style={{
-          background: 'var(--marino)',
-          color: '#ffffff',
-          padding: '16px 24px',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          textAlign: 'center'
+      <main style={{ backgroundColor: 'transparent', minHeight: '85vh', position: 'relative' }}>
+        <div style={{
+          position: 'relative',
+          zIndex: 1,
+          maxWidth: '1280px',
+          margin: '0 auto',
+          padding: '16px 20px 48px 20px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
         }}>
-          <div style={{ 
-            maxWidth: '1320px', 
-            margin: '0 auto', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            textAlign: 'center'
-          }}>
-            <h1 style={{ 
-              fontSize: '1.25rem', 
-              fontWeight: 850, 
-              margin: 0, 
-              color: '#ffffff',
-              textAlign: 'center'
-            }}>
-              {catalogoActivo === 'epc'
-                ? '🛡️ Catálogo EPC y Equipo de Protección Industrial'
-                : catalogoActivo === 'textil'
-                ? '👕 Catálogo de Confección Textil y Calzado'
-                : 'Confección Textil, Calzado y Seguridad Industrial'}
-            </h1>
-          </div>
-        </section>
 
-        <div style={{ maxWidth: '1280px', margin: '-10px auto 0 auto', padding: '0 24px' }}>
-          
-          {/* Barra de Filtros y Búsqueda */}
+          {/* ================= TARJETA PRINCIPAL: CABECERA Y FILTROS ================= */}
           <div style={{
             backgroundColor: '#ffffff',
-            borderRadius: '20px',
-            padding: '24px',
-            boxShadow: '0 4px 20px rgba(19, 42, 82, 0.05)',
             border: '1px solid var(--linea)',
-            marginBottom: '32px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '20px'
+            borderRadius: '24px',
+            padding: '36px 44px 32px 44px',
+            width: '100%',
+            position: 'relative',
+            boxShadow: '0 12px 36px rgba(19, 42, 82, 0.07)',
+            marginBottom: '32px'
           }}>
+            {/* Línea superior con gradiente de luz institucional */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: '8%',
+              right: '8%',
+              height: '3px',
+              background: 'linear-gradient(90deg, transparent, #2456C4, #38bdf8, #132A52, transparent)'
+            }} />
 
-            {/* Selector de Catálogo Principal */}
+            {/* Tag Superior */}
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              color: 'var(--rey)',
+              fontSize: '0.78rem',
+              fontWeight: 800,
+              letterSpacing: '0.16em',
+              textTransform: 'uppercase',
+              marginBottom: '10px'
+            }}>
+              <span style={{ width: '22px', height: '2px', backgroundColor: 'var(--rey)', display: 'inline-block' }} />
+              HUPAC TEXTILES
+            </div>
+
+            {/* Título Principal */}
+            <h1 style={{
+              fontSize: '2.3rem',
+              fontWeight: 850,
+              color: 'var(--marino)',
+              letterSpacing: '-0.02em',
+              margin: '0 0 6px 0',
+              lineHeight: 1.15
+            }}>
+              {catalogoActivo === 'epc'
+                ? 'CATÁLOGO DE EQUIPO DE PROTECCIÓN INDUSTRIAL'
+                : catalogoActivo === 'textil'
+                ? 'CATÁLOGO DE CONFECCIÓN TEXTIL Y CALZADO'
+                : 'CATÁLOGO GENERAL DE PRODUCTOS'}
+            </h1>
+
+            {/* Subtítulo */}
+            <p style={{
+              fontSize: '0.95rem',
+              fontStyle: 'italic',
+              color: 'var(--texto-2)',
+              margin: '0 0 24px 0'
+            }}>
+              Confección Textil, Calzado y Seguridad Industrial. Más de 21 años vistiendo a la industria.
+            </p>
+
+            {/* Selector de Catálogo Principal (Botones de Cápsula) */}
             <div style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '10px',
+              gap: '12px',
               flexWrap: 'wrap',
-              paddingBottom: '16px',
-              borderBottom: '1px solid var(--linea)'
+              borderTop: '1px solid var(--linea)',
+              paddingTop: '22px',
+              paddingBottom: '22px'
             }}>
               <button
                 type="button"
@@ -395,16 +423,17 @@ function CatalogoContent() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  padding: '10px 18px',
-                  borderRadius: '999px',
-                  border: catalogoActivo === 'todos' ? '2px solid var(--rey)' : '1px solid var(--linea)',
-                  backgroundColor: catalogoActivo === 'todos' ? 'var(--rey)' : '#f8fafc',
-                  color: catalogoActivo === 'todos' ? '#ffffff' : 'var(--texto)',
-                  fontWeight: 800,
-                  fontSize: '0.86rem',
+                  padding: '10px 22px',
+                  borderRadius: '100px',
+                  border: catalogoActivo === 'todos' ? '1.5px solid var(--rey)' : '1.5px solid #cbd5e1',
+                  backgroundColor: catalogoActivo === 'todos' ? 'var(--rey)' : '#ffffff',
+                  color: catalogoActivo === 'todos' ? '#ffffff' : 'var(--marino)',
+                  fontWeight: catalogoActivo === 'todos' ? 850 : 750,
+                  fontSize: '0.84rem',
+                  letterSpacing: '0.03em',
                   cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  boxShadow: catalogoActivo === 'todos' ? '0 4px 12px rgba(36, 86, 196, 0.25)' : 'none'
+                  transition: 'all 0.2s ease',
+                  boxShadow: catalogoActivo === 'todos' ? '0 4px 14px rgba(36, 86, 196, 0.28)' : 'none'
                 }}
               >
                 <span>📦 Todos los Catálogos ({PRODUCTS.length})</span>
@@ -422,16 +451,17 @@ function CatalogoContent() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  padding: '10px 18px',
-                  borderRadius: '999px',
-                  border: catalogoActivo === 'textil' ? '2px solid var(--rey)' : '1px solid var(--linea)',
-                  backgroundColor: catalogoActivo === 'textil' ? 'var(--rey)' : '#f8fafc',
-                  color: catalogoActivo === 'textil' ? '#ffffff' : 'var(--texto)',
-                  fontWeight: 800,
-                  fontSize: '0.86rem',
+                  padding: '10px 22px',
+                  borderRadius: '100px',
+                  border: catalogoActivo === 'textil' ? '1.5px solid var(--rey)' : '1.5px solid #cbd5e1',
+                  backgroundColor: catalogoActivo === 'textil' ? 'var(--rey)' : '#ffffff',
+                  color: catalogoActivo === 'textil' ? '#ffffff' : 'var(--marino)',
+                  fontWeight: catalogoActivo === 'textil' ? 850 : 750,
+                  fontSize: '0.84rem',
+                  letterSpacing: '0.03em',
                   cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  boxShadow: catalogoActivo === 'textil' ? '0 4px 12px rgba(36, 86, 196, 0.25)' : 'none'
+                  transition: 'all 0.2s ease',
+                  boxShadow: catalogoActivo === 'textil' ? '0 4px 14px rgba(36, 86, 196, 0.28)' : 'none'
                 }}
               >
                 <span>👕 Confección Textil y Calzado ({PRODUCTS.filter(isTextilProduct).length})</span>
@@ -449,16 +479,17 @@ function CatalogoContent() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '8px',
-                  padding: '10px 18px',
-                  borderRadius: '999px',
-                  border: catalogoActivo === 'epc' ? '2px solid var(--marino)' : '1px solid var(--linea)',
-                  backgroundColor: catalogoActivo === 'epc' ? 'var(--marino)' : '#f8fafc',
-                  color: catalogoActivo === 'epc' ? '#ffffff' : 'var(--texto)',
-                  fontWeight: 800,
-                  fontSize: '0.86rem',
+                  padding: '10px 22px',
+                  borderRadius: '100px',
+                  border: catalogoActivo === 'epc' ? '1.5px solid var(--rey)' : '1.5px solid #cbd5e1',
+                  backgroundColor: catalogoActivo === 'epc' ? 'var(--rey)' : '#ffffff',
+                  color: catalogoActivo === 'epc' ? '#ffffff' : 'var(--marino)',
+                  fontWeight: catalogoActivo === 'epc' ? 850 : 750,
+                  fontSize: '0.84rem',
+                  letterSpacing: '0.03em',
                   cursor: 'pointer',
-                  transition: 'all 0.15s ease',
-                  boxShadow: catalogoActivo === 'epc' ? '0 4px 12px rgba(19, 42, 82, 0.25)' : 'none'
+                  transition: 'all 0.2s ease',
+                  boxShadow: catalogoActivo === 'epc' ? '0 4px 14px rgba(36, 86, 196, 0.28)' : 'none'
                 }}
               >
                 <span>🛡️ Catálogo EPC y Protección ({PRODUCTS.filter(isEpcProduct).length})</span>
@@ -588,16 +619,17 @@ function CatalogoContent() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
-                  padding: '10px 16px',
-                  borderRadius: '12px',
-                  border: categoriaActiva === 'todos' ? '1.5px solid var(--rey)' : '1px solid var(--linea)',
-                  backgroundColor: categoriaActiva === 'todos' ? 'var(--marino)' : '#ffffff',
+                  padding: '9px 18px',
+                  borderRadius: '100px',
+                  border: categoriaActiva === 'todos' ? '1.5px solid var(--rey)' : '1.5px solid #cbd5e1',
+                  backgroundColor: categoriaActiva === 'todos' ? 'var(--rey)' : '#ffffff',
                   color: categoriaActiva === 'todos' ? '#ffffff' : 'var(--marino)',
-                  fontSize: '0.88rem',
-                  fontWeight: categoriaActiva === 'todos' ? 750 : 600,
+                  fontSize: '0.84rem',
+                  fontWeight: categoriaActiva === 'todos' ? 800 : 700,
                   cursor: 'pointer',
                   whiteSpace: 'nowrap',
-                  transition: 'all 0.15s ease'
+                  transition: 'all 0.15s ease',
+                  boxShadow: categoriaActiva === 'todos' ? '0 4px 12px rgba(36, 86, 196, 0.22)' : 'none'
                 }}
               >
                 <IconTodos size={16} color={categoriaActiva === 'todos' ? '#ffffff' : 'var(--rey)'} />
@@ -617,16 +649,17 @@ function CatalogoContent() {
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: '6px',
-                      padding: '10px 16px',
-                      borderRadius: '12px',
-                      border: isActive ? '1.5px solid var(--rey)' : '1px solid var(--linea)',
-                      backgroundColor: isActive ? 'var(--marino)' : '#ffffff',
+                      padding: '9px 18px',
+                      borderRadius: '100px',
+                      border: isActive ? '1.5px solid var(--rey)' : '1.5px solid #cbd5e1',
+                      backgroundColor: isActive ? 'var(--rey)' : '#ffffff',
                       color: isActive ? '#ffffff' : 'var(--marino)',
-                      fontSize: '0.88rem',
-                      fontWeight: isActive ? 750 : 600,
+                      fontSize: '0.84rem',
+                      fontWeight: isActive ? 800 : 700,
                       cursor: 'pointer',
                       whiteSpace: 'nowrap',
-                      transition: 'all 0.15s ease'
+                      transition: 'all 0.15s ease',
+                      boxShadow: isActive ? '0 4px 12px rgba(36, 86, 196, 0.22)' : 'none'
                     }}>
                       <IconComp size={16} color={isActive ? '#ffffff' : 'var(--rey)'} />
                       <span>{cat.label}</span>

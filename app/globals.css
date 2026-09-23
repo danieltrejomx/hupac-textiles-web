@@ -261,16 +261,16 @@ h2{font-weight:800;font-stretch:108%;font-size:clamp(28px,3.2vw,40px);line-heigh
 /* ---------- CONFIGURADOR ---------- */
 .config-wrap{background:transparent}
 .config{max-width:1320px;margin:0 auto;padding:clamp(12px, 2vh, 24px) 24px clamp(32px, 4vh, 64px) 24px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
-.visor{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:30px;box-shadow:var(--sombra);position:sticky;top:100px}
+.visor{background:#fff;border:1px solid var(--linea);border-radius:24px;padding:26px;box-shadow:0 12px 32px rgba(19, 42, 82, 0.06);position:sticky;top:100px}
 .visor-head{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:12px;color:var(--texto-2);border-bottom:1px solid var(--linea);padding-bottom:14px;margin-bottom:10px}
 .visor-head b{color:var(--rey);font-weight:600}
 .visor canvas{width:100%;height:auto}
 .panel{display:flex;flex-direction:column;gap:26px}
 .grupo label.tit{display:block;font-weight:750;font-size:15px;color:var(--marino);margin-bottom:12px}
 .opciones{display:flex;gap:10px;flex-wrap:wrap}
-.op{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--texto-2);background:#fff;border:1.5px solid var(--linea);border-radius:10px;padding:11px 18px;cursor:pointer;transition:all .15s}
+.op{font-family:var(--sans);font-size:14px;font-weight:600;color:var(--texto-2);background:#fff;border:1.5px solid var(--linea);border-radius:100px;padding:11px 20px;cursor:pointer;transition:all .15s}
 .op:hover{border-color:var(--rey);color:var(--rey)}
-.op.on{background:var(--rey);border-color:var(--rey);color:#fff}
+.op.on{background:var(--rey);border-color:var(--rey);color:#fff;box-shadow:0 4px 12px rgba(36,86,196,0.2)}
 .swatches{display:flex;gap:12px;flex-wrap:wrap}
 .sw{width:38px;height:38px;border-radius:50%;border:2px solid var(--linea);cursor:pointer;position:relative;transition:transform .15s}
 .sw:hover{transform:scale(1.08)}

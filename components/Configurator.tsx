@@ -533,10 +533,16 @@ export default function Configurator() {
 
   return (
     <div id="configurador" className="config-wrap" ref={containerRef}>
-      <div className="config" style={{ maxWidth: '1320px' }}>
+      <div className="config" style={{ maxWidth: '1320px', padding: 0, gap: '32px' }}>
         
         {/* ================= PANEL IZQUIERDO: CONTROLES ================= */}
-        <div className="panel">
+        <div className="panel" style={{
+          backgroundColor: '#ffffff',
+          border: '1px solid var(--linea)',
+          borderRadius: '24px',
+          padding: '32px 28px',
+          boxShadow: '0 12px 36px rgba(19, 42, 82, 0.06)'
+        }}>
           <div className="rv" style={{ marginBottom: '16px' }}>
             <span className="eyebrow" style={{ color: 'var(--rey)', display: 'inline-flex', alignItems: 'center', gap: '6px', backgroundColor: 'rgba(36,86,196,0.06)', padding: '4px 10px', borderRadius: '6px', fontSize: '0.8rem', fontWeight: 800 }}>
               <IconSparkles size={14} color="var(--rey)" /> Personaliza tu Uniforme con tu Logo
@@ -907,7 +913,19 @@ export default function Configurator() {
         </div>
 
         {/* ================= PANEL DERECHO: VISOR FOTORREALISTA, TICKET Y WHATSAPP ================= */}
-        <div className="visor rv" aria-label="Vista previa fotorrealista de la prenda configurada" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px', position: 'sticky', top: '80px', alignSelf: 'flex-start' }}>
+        <div className="visor rv" aria-label="Vista previa fotorrealista de la prenda configurada" style={{
+          backgroundColor: '#ffffff',
+          border: '1px solid var(--linea)',
+          borderRadius: '24px',
+          padding: '24px',
+          boxShadow: '0 12px 36px rgba(19, 42, 82, 0.06)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+          position: 'sticky',
+          top: '80px',
+          alignSelf: 'flex-start'
+        }}>
           
           {/* TARJETA DEL VISOR MOCKUP FOTORREALISTA */}
           <div style={{ backgroundColor: '#ffffff', border: '1px solid var(--linea)', borderRadius: '20px', padding: '20px', boxShadow: 'var(--sombra)' }}>
@@ -951,7 +969,7 @@ export default function Configurator() {
               display: 'flex',
               backgroundColor: '#f1f5f9',
               padding: '4px',
-              borderRadius: '12px',
+              borderRadius: '100px',
               marginBottom: '16px',
               gap: '4px'
             }}>
@@ -961,7 +979,7 @@ export default function Configurator() {
                 style={{
                   flex: 1,
                   padding: '8px 12px',
-                  borderRadius: '8px',
+                  borderRadius: '100px',
                   border: 'none',
                   backgroundColor: vista === 'frente' ? '#ffffff' : 'transparent',
                   color: vista === 'frente' ? 'var(--rey)' : 'var(--texto-2)',
@@ -985,7 +1003,7 @@ export default function Configurator() {
                 style={{
                   flex: 1,
                   padding: '8px 12px',
-                  borderRadius: '8px',
+                  borderRadius: '100px',
                   border: 'none',
                   backgroundColor: vista === 'espalda' ? '#ffffff' : 'transparent',
                   color: vista === 'espalda' ? 'var(--rey)' : 'var(--texto-2)',
@@ -1203,8 +1221,8 @@ export default function Configurator() {
                 style={{
                   backgroundColor: '#ffffff',
                   border: '1px solid #cbd5e1',
-                  borderRadius: '8px',
-                  padding: '6px 12px',
+                  borderRadius: '100px',
+                  padding: '6px 14px',
                   fontSize: '0.8rem',
                   fontWeight: 700,
                   color: 'var(--marino)',
@@ -1274,8 +1292,8 @@ export default function Configurator() {
                   backgroundColor: '#f8fafc',
                   color: 'var(--marino)',
                   border: '1px solid #cbd5e1',
-                  borderRadius: '10px',
-                  padding: '10px 14px',
+                  borderRadius: '100px',
+                  padding: '10px 16px',
                   fontSize: '0.86rem',
                   fontWeight: 750,
                   cursor: 'pointer',
@@ -1327,7 +1345,7 @@ export default function Configurator() {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '10px',
-              borderRadius: '14px',
+              borderRadius: '100px',
               boxShadow: '0 8px 20px rgba(36, 86, 196, 0.25)'
             }}
           >
@@ -1465,7 +1483,7 @@ export default function Configurator() {
                     backgroundColor: '#ffffff',
                     color: 'var(--marino)',
                     border: '1px solid #cbd5e1',
-                    borderRadius: '12px',
+                    borderRadius: '100px',
                     padding: '12px',
                     fontWeight: 750,
                     cursor: 'pointer',
@@ -1484,7 +1502,7 @@ export default function Configurator() {
                     backgroundColor: '#2456C4',
                     color: '#ffffff',
                     border: 'none',
-                    borderRadius: '12px',
+                    borderRadius: '100px',
                     padding: '12px',
                     fontWeight: 800,
                     cursor: 'pointer',
