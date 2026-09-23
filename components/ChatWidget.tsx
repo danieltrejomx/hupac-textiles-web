@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { FALLBACK_MESSAGE, CONTACT_INFO } from '@/lib/chatKnowledgeBase';
-import { IconWhatsApp, IconSparkles } from '@/components/Icons';
+import { IconWhatsApp, IconSparkles, IconHupacBot } from '@/components/Icons';
 
 interface Message {
   id: string;
@@ -129,6 +129,7 @@ export default function ChatWidget() {
         }}
       >
         {/* Tooltip pequeño si está cerrado */}
+        {/* Tooltip pequeño si está cerrado */}
         {!isOpen && (
           <div
             onClick={() => setIsOpen(true)}
@@ -143,35 +144,54 @@ export default function ChatWidget() {
               border: '1px solid var(--linea)',
               display: 'flex',
               alignItems: 'center',
-              gap: '6px',
+              gap: '8px',
               cursor: 'pointer',
               animation: 'bounceSoft 3s infinite ease-in-out',
               userSelect: 'none'
             }}
           >
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block' }} />
-            ¿Dudas? Habla con nuestro Asistente Virtual
+            <div
+              style={{
+                width: '22px',
+                height: '22px',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                backgroundColor: '#0B192C',
+                border: '1px solid #38bdf8',
+                flexShrink: 0
+              }}
+            >
+              <img
+                src="/images/asistente-hupac.jpg"
+                alt="Asistente Virtual HUPAC"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
+              />
+            </div>
+            <span>¿Dudas? Habla con nuestro Asistente Virtual</span>
+            <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block' }} />
           </div>
         )}
 
         <button
           type="button"
           onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? 'Cerrar chat' : 'Abrir chat'}
+          aria-label={isOpen ? 'Cerrar chat' : 'Abrir Asistente Virtual HUPAC'}
           style={{
-            width: '60px',
-            height: '60px',
+            width: '64px',
+            height: '64px',
             borderRadius: '50%',
             backgroundColor: 'var(--marino)',
             color: '#ffffff',
-            border: '2px solid rgba(255, 255, 255, 0.25)',
-            boxShadow: '0 10px 25px rgba(19, 42, 82, 0.35)',
+            border: '2.5px solid rgba(56, 189, 248, 0.45)',
+            boxShadow: '0 10px 28px rgba(11, 25, 44, 0.4), 0 0 16px rgba(36, 86, 196, 0.25)',
             cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             position: 'relative',
-            transition: 'all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)'
+            transition: 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            padding: 0,
+            overflow: 'visible'
           }}
         >
           {isOpen ? (
@@ -180,20 +200,41 @@ export default function ChatWidget() {
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
           ) : (
-            <div style={{ position: 'relative' }}>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-              </svg>
+            <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div
+                style={{
+                  width: '56px',
+                  height: '56px',
+                  borderRadius: '50%',
+                  overflow: 'hidden',
+                  backgroundColor: '#0B192C',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <img
+                  src="/images/asistente-hupac.jpg"
+                  alt="Asistente Virtual HUPAC"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transform: 'scale(1.2)'
+                  }}
+                />
+              </div>
               <span
                 style={{
                   position: 'absolute',
-                  top: '-2px',
-                  right: '-2px',
-                  width: '10px',
-                  height: '10px',
+                  top: '1px',
+                  right: '1px',
+                  width: '14px',
+                  height: '14px',
                   borderRadius: '50%',
                   backgroundColor: '#22c55e',
-                  border: '2px solid var(--marino)'
+                  border: '2.5px solid #0B192C',
+                  boxShadow: '0 0 8px #22c55e'
                 }}
               />
             </div>
@@ -250,17 +291,30 @@ export default function ChatWidget() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
               <div
                 style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '42px',
+                  height: '42px',
                   borderRadius: '12px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.12)',
+                  overflow: 'hidden',
+                  backgroundColor: '#0B192C',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  border: '1px solid rgba(255, 255, 255, 0.2)'
+                  border: '1.5px solid rgba(56, 189, 248, 0.5)',
+                  boxShadow: '0 0 14px rgba(56, 189, 248, 0.25)',
+                  flexShrink: 0,
+                  position: 'relative'
                 }}
               >
-                <IconSparkles size={20} color="#38bdf8" />
+                <img
+                  src="/images/asistente-hupac.jpg"
+                  alt="Asistente Virtual HUPAC"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    transform: 'scale(1.2)'
+                  }}
+                />
               </div>
               <div>
                 <b style={{ fontSize: '0.98rem', display: 'block', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
@@ -353,24 +407,55 @@ export default function ChatWidget() {
               >
                 <div
                   style={{
-                    maxWidth: '85%',
-                    padding: '12px 16px',
-                    borderRadius: m.sender === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
-                    backgroundColor: m.sender === 'user' ? 'var(--rey)' : '#ffffff',
-                    color: m.sender === 'user' ? '#ffffff' : 'var(--texto)',
-                    fontSize: '0.88rem',
-                    lineHeight: 1.5,
-                    boxShadow: m.sender === 'user' ? '0 4px 14px rgba(26, 58, 112, 0.2)' : '0 2px 10px rgba(0,0,0,0.04)',
-                    border: m.sender === 'user' ? 'none' : '1px solid var(--linea)',
-                    whiteSpace: 'pre-wrap'
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    gap: '8px',
+                    maxWidth: '92%',
+                    flexDirection: m.sender === 'user' ? 'row-reverse' : 'row'
                   }}
                 >
-                  {m.text}
+                  {m.sender === 'assistant' && (
+                    <div
+                      style={{
+                        width: '28px',
+                        height: '28px',
+                        borderRadius: '50%',
+                        overflow: 'hidden',
+                        backgroundColor: '#0B192C',
+                        border: '1.5px solid rgba(56, 189, 248, 0.55)',
+                        boxShadow: '0 2px 6px rgba(19, 42, 82, 0.15)',
+                        flexShrink: 0,
+                        marginBottom: '2px'
+                      }}
+                    >
+                      <img
+                        src="/images/asistente-hupac.jpg"
+                        alt="Asistente Virtual HUPAC"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
+                      />
+                    </div>
+                  )}
+
+                  <div
+                    style={{
+                      padding: '12px 16px',
+                      borderRadius: m.sender === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+                      backgroundColor: m.sender === 'user' ? 'var(--rey)' : '#ffffff',
+                      color: m.sender === 'user' ? '#ffffff' : 'var(--texto)',
+                      fontSize: '0.88rem',
+                      lineHeight: 1.5,
+                      boxShadow: m.sender === 'user' ? '0 4px 14px rgba(26, 58, 112, 0.2)' : '0 2px 10px rgba(0,0,0,0.04)',
+                      border: m.sender === 'user' ? 'none' : '1px solid var(--linea)',
+                      whiteSpace: 'pre-wrap'
+                    }}
+                  >
+                    {m.text}
+                  </div>
                 </div>
 
                 {/* Botones de acción directa / Enlaces a la web */}
                 {m.links && m.links.length > 0 && (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '6px', maxWidth: '90%' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: '4px', marginLeft: m.sender === 'assistant' ? '36px' : '0', maxWidth: '90%' }}>
                     {m.links.map((lnk, i) => (
                       <a
                         key={i}
@@ -401,31 +486,32 @@ export default function ChatWidget() {
 
                 {/* Si es mensaje de fallback, botón de soporte directo por WhatsApp */}
                 {m.isFallback && (
-                  <a
-                    href={`https://wa.me/525612870780?text=${encodeURIComponent('Hola HUPAC Textiles, tengo una duda directa: ')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '8px',
-                      backgroundColor: '#25D366',
-                      color: '#ffffff',
-                      textDecoration: 'none',
-                      padding: '8px 14px',
-                      borderRadius: '100px',
-                      fontSize: '0.8rem',
-                      fontWeight: 800,
-                      marginTop: '4px',
-                      boxShadow: '0 4px 12px rgba(37, 211, 102, 0.25)'
-                    }}
-                  >
-                    <IconWhatsApp size={16} />
-                    <span>Contactar a Soporte por WhatsApp</span>
-                  </a>
+                  <div style={{ marginLeft: '36px', marginTop: '4px' }}>
+                    <a
+                      href={`https://wa.me/525612870780?text=${encodeURIComponent('Hola HUPAC Textiles, tengo una duda directa: ')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                        backgroundColor: '#25D366',
+                        color: '#ffffff',
+                        textDecoration: 'none',
+                        padding: '8px 14px',
+                        borderRadius: '100px',
+                        fontSize: '0.8rem',
+                        fontWeight: 800,
+                        boxShadow: '0 4px 12px rgba(37, 211, 102, 0.25)'
+                      }}
+                    >
+                      <IconWhatsApp size={16} />
+                      <span>Contactar a Soporte por WhatsApp</span>
+                    </a>
+                  </div>
                 )}
 
-                <span style={{ fontSize: '0.7rem', color: '#94a3b8', padding: '0 4px' }}>
+                <span style={{ fontSize: '0.7rem', color: '#94a3b8', padding: '0 4px', marginLeft: m.sender === 'assistant' ? '36px' : '0' }}>
                   {m.time}
                 </span>
               </div>
@@ -433,8 +519,25 @@ export default function ChatWidget() {
 
             {isLoading && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--texto-2)', fontSize: '0.82rem', padding: '4px 8px' }}>
+                <div
+                  style={{
+                    width: '24px',
+                    height: '24px',
+                    borderRadius: '50%',
+                    overflow: 'hidden',
+                    backgroundColor: '#0B192C',
+                    border: '1px solid #38bdf8',
+                    flexShrink: 0
+                  }}
+                >
+                  <img
+                    src="/images/asistente-hupac.jpg"
+                    alt="Asistente"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.25)' }}
+                  />
+                </div>
                 <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--rey)', animation: 'pulse 1s infinite' }} />
-                El asistente está escribiendo...
+                El Asistente Hupac está escribiendo...
               </div>
             )}
 

@@ -520,3 +520,24 @@ export function IconEye({ size = 18, color = 'currentColor', className, style }:
   );
 }
 
+export function IconHupacBot({ size = 20, color = 'currentColor', className, style }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} style={style}>
+      {/* Casco industrial con cresta HUPAC */}
+      <path d="M4 11C4 6.5 7.5 3.5 12 3.5s8 3 8 7.5" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M2.5 11.5h19" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M10.5 3.5V2h3v1.5" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      {/* Auricular con micrófono para atención al cliente */}
+      <path d="M3 10.5v3.5a2 2 0 0 0 2 2" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M21 10.5v3.5a2 2 0 0 1-2 2" stroke={color} strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M5 16l2.5 1.5h2.5" stroke={color} strokeWidth="1.4" strokeLinecap="round" />
+      <circle cx="10.8" cy="17.5" r="0.8" fill={color} />
+      {/* Visor digital con ojos amigables */}
+      <rect x="6" y="11.5" width="12" height="7.5" rx="2.5" stroke={color} strokeWidth="1.6" />
+      <path d="M8.5 15a1 1 0 0 1 1.6 0" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M13.9 15a1 1 0 0 1 1.6 0" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M11 17c.6.4 1.4.4 2 0" stroke={color} strokeWidth="1.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
