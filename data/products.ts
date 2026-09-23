@@ -22,7 +22,7 @@ export interface Product {
   sku: string;
   estilo?: string;
   nombre: string;
-  categoria?: 'textiles' | 'calzado' | 'accesorios' | 'cabeza' | 'visual' | 'manos' | 'ropa-trabajo' | 'alturas' | 'vial' | 'felpas' | 'camisas' | 'pantalones';
+  categoria?: 'textiles' | 'playeras' | 'polos' | 'calzado' | 'accesorios' | 'cabeza' | 'visual' | 'manos' | 'ropa-trabajo' | 'alturas' | 'vial' | 'felpas' | 'camisas' | 'pantalones';
   subtitulo: string;
   descripcion: string;
   composicion: string;

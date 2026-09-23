@@ -29,7 +29,8 @@ interface CategoriaConfig {
 }
 
 const CATEGORIAS_CONFIG: CategoriaConfig[] = [
-  { id: 'textiles', label: 'Playeras y Polos', icon: IconPlayeras, catalogo: 'textil' },
+  { id: 'playeras', label: 'Playeras Cuello Redondo', icon: IconPlayeras, catalogo: 'textil' },
+  { id: 'polos', label: 'Playeras Polo', icon: IconPlayeras, catalogo: 'textil' },
   { id: 'felpas', label: 'Sudaderas y Felpas', icon: IconPlayeras, catalogo: 'textil' },
   { id: 'camisas', label: 'Camisas de Vestir', icon: IconRopaTrabajo, catalogo: 'textil' },
   { id: 'pantalones', label: 'Pantalones y Jeans', icon: IconRopaTrabajo, catalogo: 'textil' },
@@ -294,8 +295,15 @@ function CatalogoContent() {
       if (catalogoActivo === 'textil' && !isTextilProduct(p)) return false;
 
       // 2. Filtro por categoría específica
-      if (categoriaActiva === 'textiles') {
-        if (p.categoria && p.categoria !== 'textiles') return false;
+      if (categoriaActiva === 'playeras') {
+        const isPolo = (p.nombre || '').toLowerCase().includes('polo') || (p.subtitulo || '').toLowerCase().includes('polo');
+        if (p.categoria !== 'textiles' && p.categoria !== 'playeras') return false;
+        if (isPolo) return false;
+      } else if (categoriaActiva === 'polos') {
+        const isPolo = (p.nombre || '').toLowerCase().includes('polo') || (p.subtitulo || '').toLowerCase().includes('polo');
+        if (!isPolo) return false;
+      } else if (categoriaActiva === 'textiles') {
+        if (p.categoria && p.categoria !== 'textiles' && p.categoria !== 'playeras' && p.categoria !== 'polos') return false;
       } else if (categoriaActiva === 'calzado') {
         if (p.categoria !== 'calzado' && p.categoria !== 'accesorios') return false;
       } else if (categoriaActiva !== 'todos') {
@@ -433,7 +441,7 @@ function CatalogoContent() {
                 type="button"
                 onClick={() => {
                   setCatalogoActivo('epc');
-                  if (['textiles', 'calzado', 'accesorios', 'felpas', 'camisas', 'pantalones'].includes(categoriaActiva)) {
+                  if (['textiles', 'playeras', 'polos', 'calzado', 'accesorios', 'felpas', 'camisas', 'pantalones'].includes(categoriaActiva)) {
                     setCategoriaActiva('todos');
                   }
                 }}

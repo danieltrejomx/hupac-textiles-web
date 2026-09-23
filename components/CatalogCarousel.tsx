@@ -85,7 +85,8 @@ export default function CatalogCarousel() {
                 margin: '0 auto 28px auto'
               }}>
                 {[
-                  { slug: 'textiles', icon: IconPlayeras, titulo: 'Playeras y Polos de Línea' },
+                  { slug: 'playeras', icon: IconPlayeras, titulo: 'Playeras Cuello Redondo' },
+                  { slug: 'polos', icon: IconPlayeras, titulo: 'Playeras Polo' },
                   { slug: 'felpas', icon: IconPlayeras, titulo: 'Sudaderas y Felpas' },
                   { slug: 'camisas', icon: IconRopaTrabajo, titulo: 'Camisas de Vestir' },
                   { slug: 'pantalones', icon: IconRopaTrabajo, titulo: 'Pantalones y Mezclilla' },

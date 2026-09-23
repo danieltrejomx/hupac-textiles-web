@@ -85,19 +85,98 @@ interface ColorOption {
   textColor: string;
 }
 
-const COLORES: ColorOption[] = [
+const COLORES_POLO_PLAYERA: ColorOption[] = [
   { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
-  { c: '#7EA9CD', n: 'Azul Turquesa', rgb: [126, 169, 205], textColor: '#132A52' },
+  { c: '#3CC4D6', n: 'Azul Turquesa', rgb: [60, 196, 214], textColor: '#132A52' },
   { c: '#142236', n: 'Azul Marino Corporativo', rgb: [20, 34, 54], textColor: '#FFFFFF' },
   { c: '#4E5664', n: 'Gris Oxford Industrial', rgb: [78, 86, 100], textColor: '#FFFFFF' },
   { c: '#A31F2D', n: 'Rojo Empresarial', rgb: [163, 31, 45], textColor: '#FFFFFF' },
   { c: '#22262E', n: 'Negro Profundo', rgb: [34, 38, 46], textColor: '#FFFFFF' },
 ];
 
+const COLORES_CAMISA: ColorOption[] = [
+  { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
+  { c: '#7BA4D0', n: 'Azul Cielo (Oxford)', rgb: [123, 164, 208], textColor: '#132A52' },
+  { c: '#142236', n: 'Azul Marino Corporativo', rgb: [20, 34, 54], textColor: '#FFFFFF' },
+  { c: '#4E5664', n: 'Gris Oxford Industrial', rgb: [78, 86, 100], textColor: '#FFFFFF' },
+  { c: '#A31F2D', n: 'Rojo Empresarial', rgb: [163, 31, 45], textColor: '#FFFFFF' },
+  { c: '#22262E', n: 'Negro Profundo', rgb: [34, 38, 46], textColor: '#FFFFFF' },
+];
+
+function removeImageBackground(dataUrl: string): Promise<string> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = dataUrl;
+    img.onload = () => {
+      const cvs = document.createElement('canvas');
+      cvs.width = img.naturalWidth;
+      cvs.height = img.naturalHeight;
+      const ctx = cvs.getContext('2d');
+      if (!ctx) {
+        resolve(dataUrl);
+        return;
+      }
+      ctx.drawImage(img, 0, 0);
+      const imgData = ctx.getImageData(0, 0, cvs.width, cvs.height);
+      const d = imgData.data;
+
+      // Muestrear las 4 esquinas para detectar color de fondo
+      const corners = [
+        0,
+        (cvs.width - 1) * 4,
+        cvs.width * (cvs.height - 1) * 4,
+        (cvs.width * cvs.height - 1) * 4
+      ];
+
+      let avgR = 0, avgG = 0, avgB = 0;
+      corners.forEach(idx => {
+        avgR += d[idx];
+        avgG += d[idx + 1];
+        avgB += d[idx + 2];
+      });
+      avgR = Math.round(avgR / 4);
+      avgG = Math.round(avgG / 4);
+      avgB = Math.round(avgB / 4);
+
+      const isLightBg = avgR > 220 && avgG > 220 && avgB > 220;
+
+      for (let i = 0; i < d.length; i += 4) {
+        const r = d[i];
+        const g = d[i + 1];
+        const b = d[i + 2];
+
+        if (isLightBg) {
+          // Remoción de fondo blanco / claro
+          if (r > 235 && g > 235 && b > 235) {
+            d[i + 3] = 0;
+          } else if (r > 208 && g > 208 && b > 208) {
+            const minVal = Math.min(r, g, b);
+            const factor = Math.max(0, Math.min(1, (235 - minVal) / 27));
+            d[i + 3] = Math.round(d[i + 3] * factor);
+          }
+        } else {
+          // Fondo sólido similar al promedio de esquinas
+          const dist = Math.sqrt((r - avgR) ** 2 + (g - avgG) ** 2 + (b - avgB) ** 2);
+          if (dist < 26) {
+            d[i + 3] = 0;
+          } else if (dist < 40) {
+            d[i + 3] = Math.round(d[i + 3] * ((dist - 26) / 14));
+          }
+        }
+      }
+
+      ctx.putImageData(imgData, 0, 0);
+      resolve(cvs.toDataURL('image/png'));
+    };
+    img.onerror = () => resolve(dataUrl);
+  });
+}
+
 export default function Configurator() {
   const [prenda, setPrenda] = useState<Prenda>('polo');
   const [vista, setVista] = useState<Vista>('frente');
-  const [colorOption, setColorOption] = useState<ColorOption>(COLORES[0]);
+  const [colorOption, setColorOption] = useState<ColorOption>(COLORES_POLO_PLAYERA[0]);
   const [tec, setTec] = useState<Tecnica>('Bordado');
   const [posicionFrente, setPosicionFrente] = useState<PosicionFrente>('pecho_izq');
   const [posicionEspalda, setPosicionEspalda] = useState<PosicionEspalda>('espalda_centro');
@@ -107,6 +186,18 @@ export default function Configurator() {
   const [isProcessingCanvas, setIsProcessingCanvas] = useState(false);
   const [showTicketModal, setShowTicketModal] = useState(false);
   const folioRef = useRef<string>('');
+
+  const coloresActuales = prenda === 'camisa' ? COLORES_CAMISA : COLORES_POLO_PLAYERA;
+
+  const handlePrendaChange = (nuevaPrenda: Prenda) => {
+    setPrenda(nuevaPrenda);
+    const listaActual = nuevaPrenda === 'camisa' ? COLORES_CAMISA : COLORES_POLO_PLAYERA;
+    const listaAnterior = prenda === 'camisa' ? COLORES_CAMISA : COLORES_POLO_PLAYERA;
+    const idx = listaAnterior.findIndex(c => c.n === colorOption.n || c.c === colorOption.c);
+    if (idx >= 0 && listaActual[idx]) {
+      setColorOption(listaActual[idx]);
+    }
+  };
 
   if (!folioRef.current) {
     folioRef.current = 'HUP-' + Math.floor(100000 + Math.random() * 900000);
@@ -143,9 +234,12 @@ export default function Configurator() {
     if (!file) return;
     setLogoName(file.name);
     const reader = new FileReader();
-    reader.onload = (ev) => {
+    reader.onload = async (ev) => {
       if (ev.target?.result) {
-        setLogo(ev.target.result as string);
+        const rawSrc = ev.target.result as string;
+        // Remover automáticamente fondo sólido para generar transparencia PNG
+        const transparentSrc = await removeImageBackground(rawSrc);
+        setLogo(transparentSrc);
       }
     };
     reader.readAsDataURL(file);
@@ -305,21 +399,21 @@ export default function Configurator() {
             <div className="opciones">
               <button 
                 className={`op ${prenda === 'polo' ? 'on' : ''}`} 
-                onClick={() => setPrenda('polo')}
+                onClick={() => handlePrendaChange('polo')}
                 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
                 <span>👕</span> Polo Piqué
               </button>
               <button 
                 className={`op ${prenda === 'playera' ? 'on' : ''}`} 
-                onClick={() => setPrenda('playera')}
+                onClick={() => handlePrendaChange('playera')}
                 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
                 <span>🎽</span> Playera Cuello Redondo
               </button>
               <button 
                 className={`op ${prenda === 'camisa' ? 'on' : ''}`} 
-                onClick={() => setPrenda('camisa')}
+                onClick={() => handlePrendaChange('camisa')}
                 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
                 <span>👔</span> Camisa de Vestir
@@ -336,7 +430,7 @@ export default function Configurator() {
               </span>
             </div>
             <div className="swatches">
-              {COLORES.map(opt => (
+              {coloresActuales.map(opt => (
                 <button 
                   key={opt.c}
                   className={`sw ${colorOption.c === opt.c ? 'on' : ''}`} 
@@ -531,6 +625,26 @@ export default function Configurator() {
 
               <input type="file" id="fileLogo" accept="image/*" onChange={handleFileChange} style={{ display: 'none' }} />
             </label>
+
+            {/* Leyenda de recomendación PNG */}
+            <div style={{
+              marginTop: '12px',
+              backgroundColor: '#f0f9ff',
+              border: '1px solid #bae6fd',
+              borderRadius: '12px',
+              padding: '12px 16px',
+              fontSize: '0.82rem',
+              color: '#0369a1',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '10px',
+              lineHeight: 1.45
+            }}>
+              <span style={{ fontSize: '1.1rem', flexShrink: 0, marginTop: '-1px' }}>💡</span>
+              <div>
+                <strong>Recomendación:</strong> Es preferible adjuntar tu imagen en formato <strong>PNG con fondo transparente</strong> para un acabado óptimo. Si tu imagen tiene fondo blanco, nuestro sistema intentará removerlo automáticamente.
+              </div>
+            </div>
           </div>
         </div>
 

@@ -33,40 +33,33 @@ export default function NosotrosPage() {
               color: '#ffffff',
               textAlign: 'center'
             }}>
-              Más de 21 años transformando fibras en identidad
+              Más de 21 años creando soluciones textiles que proyectan tu marca.
             </h1>
           </div>
         </section>
 
         <div style={{ maxWidth: '1200px', margin: '-10px auto 0 auto', padding: '0 24px' }}>
-          {/* Tarjetas Principales: Misión, Visión, Valores */}
+          {/* Tarjetas Principales: Misión, Visión */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
             gap: '20px',
-            marginBottom: '32px'
+            marginBottom: '24px'
           }}>
             {[
               { 
                 tag: 'MISIÓN', 
                 titulo: 'Misión', 
-                desc: 'Información pendiente por actualizar', 
+                desc: 'Transformamos la identidad de las empresas en uniformes y soluciones textiles de calidad, combinando diseño, funcionalidad y personalización para proyectar la mejor imagen de cada cliente.', 
                 icon: IconAward,
                 color: 'var(--rey)'
               },
               { 
                 tag: 'VISIÓN', 
                 titulo: 'Visión', 
-                desc: 'Información pendiente por actualizar', 
+                desc: 'Ser el aliado estratégico de las empresas en soluciones textiles, reconocidos por nuestra calidad, innovación y servicio, llevando la imagen de nuestros clientes a nuevos niveles.', 
                 icon: IconTrending,
                 color: '#0284c7'
-              },
-              { 
-                tag: 'VALORES', 
-                titulo: 'Valores', 
-                desc: 'Información pendiente por actualizar', 
-                icon: IconShield,
-                color: '#059669'
               }
             ].map((pillar, i) => {
               const IconComp = pillar.icon;
@@ -78,7 +71,7 @@ export default function NosotrosPage() {
                     backgroundColor: '#ffffff',
                     border: '1px solid var(--linea)',
                     borderRadius: '18px',
-                    padding: '24px 26px',
+                    padding: '28px 30px',
                     boxShadow: '0 8px 24px rgba(19, 42, 82, 0.05)',
                     display: 'flex',
                     flexDirection: 'column',
@@ -107,24 +100,68 @@ export default function NosotrosPage() {
                     <h2 style={{ fontSize: '1.5rem', fontWeight: 850, color: 'var(--marino)', marginBottom: '12px' }}>
                       {pillar.titulo}
                     </h2>
-                    <div style={{
-                      backgroundColor: '#fef3c7',
-                      border: '1px dashed #d97706',
-                      borderRadius: '10px',
-                      padding: '10px 14px',
-                      color: '#b45309',
-                      fontSize: '0.85rem',
-                      fontWeight: 700,
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px'
-                    }}>
-                      <span>•</span> {pillar.desc}
-                    </div>
+                    <p style={{ color: 'var(--texto-2)', fontSize: '0.96rem', lineHeight: 1.6, margin: 0 }}>
+                      {pillar.desc}
+                    </p>
                   </div>
                 </div>
               );
             })}
+          </div>
+
+          {/* Tarjeta de Valores Corporativos */}
+          <div style={{
+            backgroundColor: '#ffffff',
+            border: '1px solid var(--linea)',
+            borderRadius: '20px',
+            padding: '32px 36px',
+            boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
+            marginBottom: '28px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
+              <span style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontFamily: 'var(--mono)',
+                fontSize: '10px',
+                fontWeight: 750,
+                letterSpacing: '1px',
+                color: '#059669',
+                backgroundColor: 'rgba(5, 150, 105, 0.08)',
+                border: '1px solid rgba(5, 150, 105, 0.25)',
+                padding: '4px 12px',
+                borderRadius: '6px',
+                textTransform: 'uppercase'
+              }}>
+                <IconShield size={13} color="#059669" /> VALORES
+              </span>
+            </div>
+            <h2 style={{ fontSize: '1.6rem', fontWeight: 850, color: 'var(--marino)', margin: '0 0 20px 0' }}>
+              Nuestros Valores
+            </h2>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '16px'
+            }}>
+              {[
+                { val: 'Calidad', desc: 'Cada detalle cuenta. Creamos prendas que cumplen y superan expectativas.' },
+                { val: 'Compromiso', desc: 'Tu proyecto es nuestro compromiso. Respondemos con responsabilidad y cumplimiento.' },
+                { val: 'Confianza', desc: 'Construimos relaciones duraderas con transparencia y profesionalismo.' },
+                { val: 'Innovación', desc: 'Evolucionamos para ofrecer soluciones textiles que destacan.' },
+                { val: 'Servicio', desc: 'Escuchamos, entendemos y creamos soluciones a la medida de cada cliente.' },
+              ].map((v, idx) => (
+                <div key={idx} style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '16px' }}>
+                  <b style={{ color: 'var(--marino)', fontSize: '1.05rem', display: 'block', marginBottom: '6px' }}>
+                    • {v.val}
+                  </b>
+                  <p style={{ color: 'var(--texto-2)', fontSize: '0.88rem', margin: 0, lineHeight: 1.45 }}>
+                    {v.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Sección Destacada: Política de Calidad */}
@@ -136,27 +173,31 @@ export default function NosotrosPage() {
             boxShadow: '0 4px 20px rgba(19, 42, 82, 0.04)',
             marginBottom: '36px'
           }}>
-            {/* Texto de Política de Calidad Arriba */}
-            <div style={{ maxWidth: '880px', marginBottom: '32px' }}>
+            <div style={{ maxWidth: '980px' }}>
               <span className="eyebrow" style={{ color: 'var(--rey)', marginBottom: '10px' }}>Compromiso Institucional</span>
-              <h2 style={{ fontSize: '2.1rem', color: 'var(--marino)', margin: '0 0 16px 0', lineHeight: 1.25, fontWeight: 850 }}>
+              <h2 style={{ fontSize: '1.9rem', color: 'var(--marino)', margin: '0 0 16px 0', lineHeight: 1.25, fontWeight: 850 }}>
                 Política de Calidad
               </h2>
               <div style={{
-                backgroundColor: '#fef3c7',
-                border: '1px dashed #d97706',
-                borderRadius: '12px',
-                padding: '16px 20px',
-                color: '#b45309',
-                fontSize: '0.94rem',
-                fontWeight: 700,
+                backgroundColor: '#f0f9ff',
+                border: '1px solid #bae6fd',
+                borderRadius: '14px',
+                padding: '24px 28px',
+                color: '#0369a1',
+                fontSize: '0.98rem',
+                lineHeight: 1.65,
                 display: 'flex',
-                alignItems: 'center',
-                gap: '10px'
+                flexDirection: 'column',
+                gap: '14px'
               }}>
-                <span style={{ fontSize: '1rem', fontWeight: 800 }}>•</span>
-                <div>
-                  Información pendiente por actualizar
+                <p style={{ margin: 0 }}>
+                  En <strong>HUPAC TEXTILES</strong> trabajamos para ofrecer uniformes y soluciones textiles que cumplan con las expectativas de nuestros clientes, mediante procesos enfocados en la calidad, el cumplimiento y la mejora continua.
+                </p>
+                <p style={{ margin: 0 }}>
+                  Con más de 21 años de experiencia, asumimos el compromiso de brindar productos confiables, atención personalizada y soluciones que fortalezcan la imagen de cada empresa.
+                </p>
+                <div style={{ borderTop: '1px solid #7dd3fc', paddingTop: '12px', fontWeight: 800, color: 'var(--marino)', fontSize: '1.05rem' }}>
+                  Hagamos que tu marca destaque. Solicita una cotización.
                 </div>
               </div>
             </div>

@@ -39,12 +39,11 @@ export default function About() {
           </div>
         </div>
         <div className="valores rv">
-          <div className="valor"><b>Calidad sin compromiso</b><span>La excelencia es nuestra base, desde la prenda hasta la atención.</span></div>
-          <div className="valor"><b>Compromiso</b><span>Damos lo mejor en cada proyecto y en cada entrega.</span></div>
-          <div className="valor"><b>Innovación continua</b><span>Evolucionamos procesos, diseños y servicios constantemente.</span></div>
-          <div className="valor"><b>Integridad</b><span>Actuamos con ética, transparencia y rectitud.</span></div>
-          <div className="valor"><b>Sinergia</b><span>Construimos en equipo para lograr más, juntos.</span></div>
-          <div className="valor"><b>Cumplimiento legal y ambiental</b><span>Operamos conforme a la ley, cuidando el entorno y a nuestra gente.</span></div>
+          <div className="valor"><b>Calidad</b><span>Cada detalle cuenta. Creamos prendas que cumplen y superan expectativas.</span></div>
+          <div className="valor"><b>Compromiso</b><span>Tu proyecto es nuestro compromiso. Respondemos con responsabilidad y cumplimiento.</span></div>
+          <div className="valor"><b>Confianza</b><span>Construimos relaciones duraderas con transparencia y profesionalismo.</span></div>
+          <div className="valor"><b>Innovación</b><span>Evolucionamos para ofrecer soluciones textiles que destacan.</span></div>
+          <div className="valor"><b>Servicio</b><span>Escuchamos, entendemos y creamos soluciones a la medida de cada cliente.</span></div>
         </div>
       </div>
     </div>
