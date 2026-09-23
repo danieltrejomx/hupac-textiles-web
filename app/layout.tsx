@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import ChatWidget from "@/components/ChatWidget";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -30,6 +31,7 @@ export default function RootLayout({
       <body className={`${archivo.variable} ${plexMono.variable} antialiased`}>
         <Providers>
           {children}
+          <ChatWidget />
         </Providers>
       </body>
     </html>
