@@ -4,11 +4,7 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { 
-  IconShield, 
   IconAward, 
-  IconTrending, 
-  IconSparkles, 
-  IconCheckCircle, 
   IconTarget,
   IconEye,
   IconConfigurator
@@ -126,113 +122,6 @@ export default function NosotrosPage() {
             }}>
               Con más de 21 años de experiencia, asumimos el compromiso de brindar productos confiables, atención personalizada y soluciones que fortalezcan la imagen de cada empresa.
             </p>
-
-            {/* ================= GRID DE 5 TARJETAS DE PILARES ================= */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-              gap: '14px',
-              marginBottom: '28px'
-            }}>
-              {[
-                {
-                  icon: IconShield,
-                  iconColor: 'var(--rey)',
-                  badgeBg: '#EAF3FC',
-                  titulo: 'CALIDAD',
-                  desc: 'Cada detalle cuenta. Creamos prendas que cumplen y superan expectativas.'
-                },
-                {
-                  icon: IconAward,
-                  iconColor: '#0284c7',
-                  badgeBg: '#e0f2fe',
-                  titulo: 'COMPROMISO',
-                  desc: 'Tu proyecto es nuestro compromiso. Respondemos con responsabilidad y cumplimiento.'
-                },
-                {
-                  icon: IconTrending,
-                  iconColor: '#2563eb',
-                  badgeBg: '#eff6ff',
-                  titulo: 'CONFIANZA',
-                  desc: 'Construimos relaciones duraderas con transparencia y profesionalismo.'
-                },
-                {
-                  icon: IconCheckCircle,
-                  iconColor: '#16a34a',
-                  badgeBg: '#dcfce7',
-                  titulo: 'INNOVACIÓN',
-                  desc: 'Evolucionamos para ofrecer soluciones textiles que destacan.'
-                },
-                {
-                  icon: IconSparkles,
-                  iconColor: '#d97706',
-                  badgeBg: '#fef3c7',
-                  titulo: 'SERVICIO',
-                  desc: 'Escuchamos, entendemos y creamos soluciones a la medida de cada cliente.'
-                }
-              ].map((card, idx) => {
-                const IconComponent = card.icon;
-                return (
-                  <div
-                    key={idx}
-                    style={{
-                      backgroundColor: '#F8FAFC',
-                      border: '1px solid #E2E8F0',
-                      borderRadius: '16px',
-                      padding: '18px 16px',
-                      display: 'flex',
-                      flexDirection: 'column',
-                      gap: '8px',
-                      transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = 'var(--rey)';
-                      e.currentTarget.style.backgroundColor = '#ffffff';
-                      e.currentTarget.style.transform = 'translateY(-3px)';
-                      e.currentTarget.style.boxShadow = '0 10px 24px rgba(19, 42, 82, 0.08)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = '#E2E8F0';
-                      e.currentTarget.style.backgroundColor = '#F8FAFC';
-                      e.currentTarget.style.transform = 'translateY(0)';
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}
-                  >
-                    <div style={{
-                      width: '36px',
-                      height: '36px',
-                      borderRadius: '10px',
-                      backgroundColor: card.badgeBg,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: card.iconColor,
-                      marginBottom: '2px'
-                    }}>
-                      <IconComponent size={20} color={card.iconColor} />
-                    </div>
-                    <h3 style={{
-                      fontSize: '0.82rem',
-                      fontWeight: 800,
-                      color: 'var(--marino)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.04em',
-                      margin: 0
-                    }}>
-                      {card.titulo}
-                    </h3>
-                    <p style={{
-                      fontSize: '0.78rem',
-                      lineHeight: 1.45,
-                      color: 'var(--texto-2)',
-                      margin: 0
-                    }}>
-                      {card.desc}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
 
             {/* ================= FILA DE BOTONES EMERGENTES (MISIÓN, VISIÓN, VALORES) ================= */}
             <div style={{
