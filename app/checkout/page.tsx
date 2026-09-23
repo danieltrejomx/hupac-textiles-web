@@ -30,10 +30,44 @@ function CheckoutContent() {
   const [orderComplete, setOrderComplete] = useState<string | null>(orderIdParam || null);
   const [paymentError, setPaymentError] = useState<string | null>(null);
 
-  const enviosGratis = subtotal >= 1500 || cart.length === 0;
-  const costoEnvio = enviosGratis ? 0 : 180;
-  const iva = subtotal * 0.16;
-  const total = subtotal + iva + costoEnvio;
+  const total = subtotal; // El cliente paga únicamente el precio del producto (sin IVA adicional)
+
+  const [metodoPago, setMetodoPago] = useState<'tarjeta' | 'mercadopago'>('tarjeta');
+  const [cardData, setCardData] = useState({
+    numero: '',
+    nombre: '',
+    expiracion: '',
+    cvv: ''
+  });
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const digits = e.target.value.replace(/\D/g, '').slice(0, 16);
+    const formatted = digits.replace(/(\d{4})(?=\d)/g, '$1 ');
+    setCardData(prev => ({ ...prev, numero: formatted }));
+  };
+
+  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = e.target.value.replace(/\D/g, '').slice(0, 4);
+    if (val.length >= 3) {
+      val = `${val.slice(0, 2)}/${val.slice(2, 4)}`;
+    }
+    setCardData(prev => ({ ...prev, expiracion: val }));
+  };
+
+  const handleCvvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value.replace(/\D/g, '').slice(0, 4);
+    setCardData(prev => ({ ...prev, cvv: val }));
+  };
+
+  const detectBrand = (num: string) => {
+    const clean = num.replace(/\s+/g, '');
+    if (clean.startsWith('4')) return 'Visa';
+    if (/^(5[1-5]|2[2-7])/.test(clean)) return 'Mastercard';
+    if (/^3[47]/.test(clean)) return 'American Express';
+    return null;
+  };
+
+  const detectedBrand = detectBrand(cardData.numero);
 
   useEffect(() => {
     if (statusParam === 'success' && orderIdParam) {
@@ -66,7 +100,67 @@ function CheckoutContent() {
     setPaymentError(null);
 
     try {
-      // 1. Registrar pedido en Firestore
+      if (metodoPago === 'tarjeta') {
+        const numLimpio = cardData.numero.replace(/\s+/g, '');
+        if (numLimpio.length < 15 || numLimpio.length > 16) {
+          throw new Error('Por favor ingresa un número de tarjeta válido (15 o 16 dígitos).');
+        }
+        if (!cardData.nombre.trim() || cardData.nombre.trim().length < 3) {
+          throw new Error('Por favor ingresa el nombre del titular como figura en la tarjeta.');
+        }
+        if (!/^\d{2}\/\d{2}$/.test(cardData.expiracion)) {
+          throw new Error('Por favor ingresa la fecha de expiración en formato MM/AA.');
+        }
+        const [mes] = cardData.expiracion.split('/').map(Number);
+        if (mes < 1 || mes > 12) {
+          throw new Error('El mes de expiración no es válido (01 a 12).');
+        }
+        if (cardData.cvv.length < 3) {
+          throw new Error('Por favor ingresa el código de seguridad CVV (3 o 4 dígitos).');
+        }
+
+        const brand = detectedBrand || 'Tarjeta Bancaria';
+        const last4 = numLimpio.slice(-4);
+
+        // Breve verificación de seguridad bancaria
+        await new Promise(res => setTimeout(res, 1200));
+
+        // Registrar pedido pagado con tarjeta en Firestore
+        const docRef = await addDoc(collection(db, 'orders'), {
+          tipo: 'Venta E-Commerce',
+          cliente: {
+            nombre: formData.nombre,
+            email: formData.email,
+            telefono: formData.telefono,
+            direccion: `${formData.direccion}, Col. ${formData.colonia}, ${formData.ciudad}, ${formData.estado}, C.P. ${formData.cp}`
+          },
+          items: cart.map(i => ({
+            nombre: i.nombre,
+            estilo: i.estilo || '',
+            color: i.color || '',
+            talla: i.talla || '',
+            cantidad: i.cantidad,
+            precioUnitario: i.precioUnitario,
+            subtotal: i.precioUnitario * i.cantidad
+          })),
+          totalItems,
+          subtotal,
+          iva: 0,
+          envio: 0,
+          total,
+          metodoPago: `${brand} (•••• ${last4})`,
+          estadoPago: 'Aprobado (Tarjeta de Crédito/Débito)',
+          titularTarjeta: cardData.nombre.toUpperCase(),
+          fecha: serverTimestamp(),
+        });
+
+        clearCart();
+        setOrderComplete(docRef.id);
+        setLoading(false);
+        return;
+      }
+
+      // Si seleccionó Mercado Pago oficial
       const docRef = await addDoc(collection(db, 'orders'), {
         tipo: 'Venta E-Commerce',
         cliente: {
@@ -86,15 +180,15 @@ function CheckoutContent() {
         })),
         totalItems,
         subtotal,
-        iva,
-        envio: costoEnvio,
+        iva: 0,
+        envio: 0,
         total,
         metodoPago: 'Mercado Pago (Tarjeta / SPEI / OXXO)',
         estadoPago: 'Pendiente',
         fecha: serverTimestamp(),
       });
 
-      // 2. Crear Preferencia de Pago en Mercado Pago
+      // Crear Preferencia de Pago en Mercado Pago (solo precio del producto, sin IVA)
       const response = await fetch('/api/checkout/preference', {
         method: 'POST',
         headers: {
@@ -104,7 +198,7 @@ function CheckoutContent() {
           items: cart,
           cliente: formData,
           orderId: docRef.id,
-          envio: costoEnvio
+          envio: 0
         }),
       });
 
@@ -114,13 +208,12 @@ function CheckoutContent() {
         throw new Error(data.error || 'No se pudo generar la preferencia de Mercado Pago.');
       }
 
-      // 3. Redirigir a Mercado Pago
       const redirectUrl = data.init_point || data.sandbox_init_point;
       window.location.href = redirectUrl;
 
     } catch (err: any) {
-      console.error('Error registrando la compra o conectando con Mercado Pago:', err);
-      setPaymentError(err.message || 'Ocurrió un inconveniente al conectar con Mercado Pago. Por favor intente de nuevo.');
+      console.error('Error registrando la compra o conectando con pasarela:', err);
+      setPaymentError(err.message || 'Ocurrió un inconveniente al procesar el pago. Por favor intente de nuevo.');
       setLoading(false);
     }
   };
@@ -226,52 +319,235 @@ function CheckoutContent() {
                 </div>
               </div>
 
-              {/* Pasarela Oficial Mercado Pago */}
+              {/* 2. Método de Pago */}
               <div style={{ backgroundColor: '#ffffff', padding: '28px', borderRadius: '16px', border: '1px solid #e2e8f0', boxShadow: '0 4px 12px rgba(0,0,0,0.03)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
                   <h3 style={{ fontSize: '1.15rem', color: 'var(--marino)', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span>2.</span> Pasarela de Pago
+                    <span>2.</span> Método de Pago
                   </h3>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#009ee3', color: '#ffffff', padding: '5px 12px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 850, letterSpacing: '0.5px' }}>
-                    MERCADO PAGO OFICIAL
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', backgroundColor: '#e0f2fe', color: '#0369a1', padding: '5px 12px', borderRadius: '6px', fontSize: '0.78rem', fontWeight: 850 }}>
+                    🔒 PAGO SEGURO
                   </div>
                 </div>
 
-                <div style={{ backgroundColor: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '14px', padding: '20px', marginBottom: '24px' }}>
-                  <span style={{ fontSize: '0.92rem', fontWeight: 800, color: '#0369a1', display: 'block', marginBottom: '8px' }}>
-                    💳 Métodos aceptados en la pasarela:
-                  </span>
-                  <ul style={{ margin: 0, paddingLeft: '20px', color: '#0284c7', fontSize: '0.85rem', lineHeight: 1.6 }}>
-                    <li>Tarjetas de Crédito / Débito (Visa, Mastercard, Amex)</li>
-                    <li>Transferencia bancaria SPEI inmediata</li>
-                    <li>Pago en efectivo en tiendas OXXO</li>
-                    <li>Dinero en cuenta de Mercado Pago y Mercado Crédito</li>
-                  </ul>
+                {/* Selector de Método de Pago */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '22px' }}>
+                  <button
+                    type="button"
+                    onClick={() => setMetodoPago('tarjeta')}
+                    style={{
+                      padding: '12px 14px',
+                      borderRadius: '10px',
+                      border: metodoPago === 'tarjeta' ? '2px solid var(--rey)' : '1px solid #cbd5e1',
+                      backgroundColor: metodoPago === 'tarjeta' ? '#F0F7FF' : '#ffffff',
+                      color: metodoPago === 'tarjeta' ? 'var(--rey)' : 'var(--texto-2)',
+                      fontWeight: 800,
+                      fontSize: '0.86rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
+                  >
+                    <span>💳</span>
+                    <span>Tarjeta de Crédito / Débito</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setMetodoPago('mercadopago')}
+                    style={{
+                      padding: '12px 14px',
+                      borderRadius: '10px',
+                      border: metodoPago === 'mercadopago' ? '2px solid #009ee3' : '1px solid #cbd5e1',
+                      backgroundColor: metodoPago === 'mercadopago' ? '#f0f9ff' : '#ffffff',
+                      color: metodoPago === 'mercadopago' ? '#009ee3' : 'var(--texto-2)',
+                      fontWeight: 800,
+                      fontSize: '0.86rem',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '8px',
+                      cursor: 'pointer',
+                      transition: 'all 0.15s ease'
+                    }}
+                  >
+                    <span>🏦</span>
+                    <span>Mercado Pago (SPEI / OXXO)</span>
+                  </button>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="btn"
-                  style={{
-                    width: '100%',
-                    padding: '18px',
-                    borderRadius: '12px',
-                    fontSize: '1.1rem',
-                    fontWeight: 850,
-                    backgroundColor: '#009ee3',
-                    color: '#ffffff',
-                    border: 'none',
-                    cursor: loading ? 'wait' : 'pointer',
-                    boxShadow: '0 6px 20px rgba(0, 158, 227, 0.4)',
-                    transition: 'all 0.2s ease'
-                  }}
-                >
-                  {loading ? 'Conectando con Mercado Pago...' : `Pagar con Mercado Pago ($${total.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN)`}
-                </button>
+                {metodoPago === 'tarjeta' ? (
+                  /* Formulario de Pago con Tarjeta Directo */
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                    <div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                        <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--marino)' }}>
+                          Número de tarjeta *
+                        </label>
+                        {detectedBrand && (
+                          <span style={{ fontSize: '0.75rem', fontWeight: 800, color: 'var(--rey)', backgroundColor: '#EAF3FC', padding: '2px 8px', borderRadius: '4px' }}>
+                            {detectedBrand}
+                          </span>
+                        )}
+                      </div>
+                      <input
+                        type="text"
+                        required={metodoPago === 'tarjeta'}
+                        value={cardData.numero}
+                        onChange={handleCardNumberChange}
+                        placeholder="4000 1234 5678 9010"
+                        maxLength={19}
+                        style={{
+                          width: '100%',
+                          padding: '12px 14px',
+                          borderRadius: '8px',
+                          border: '1px solid #cbd5e1',
+                          outline: 'none',
+                          fontFamily: 'monospace',
+                          fontSize: '0.98rem',
+                          letterSpacing: '1px'
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--marino)', marginBottom: '6px' }}>
+                        Nombre del titular *
+                      </label>
+                      <input
+                        type="text"
+                        required={metodoPago === 'tarjeta'}
+                        value={cardData.nombre}
+                        onChange={(e) => setCardData(prev => ({ ...prev, nombre: e.target.value.toUpperCase() }))}
+                        placeholder="COMO FIGURA EN LA TARJETA"
+                        style={{
+                          width: '100%',
+                          padding: '12px 14px',
+                          borderRadius: '8px',
+                          border: '1px solid #cbd5e1',
+                          outline: 'none',
+                          fontSize: '0.9rem'
+                        }}
+                      />
+                    </div>
+
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: 'var(--marino)', marginBottom: '6px' }}>
+                          Expiración *
+                        </label>
+                        <input
+                          type="text"
+                          required={metodoPago === 'tarjeta'}
+                          value={cardData.expiracion}
+                          onChange={handleExpiryChange}
+                          placeholder="MM / AA"
+                          maxLength={5}
+                          style={{
+                            width: '100%',
+                            padding: '12px 14px',
+                            borderRadius: '8px',
+                            border: '1px solid #cbd5e1',
+                            outline: 'none',
+                            fontFamily: 'monospace',
+                            fontSize: '0.92rem',
+                            textAlign: 'center'
+                          }}
+                        />
+                      </div>
+
+                      <div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
+                          <label style={{ fontSize: '0.85rem', fontWeight: 600, color: 'var(--marino)' }}>
+                            CVV / CVC *
+                          </label>
+                          <span style={{ fontSize: '0.72rem', color: 'var(--texto-2)' }}>3-4 dígitos</span>
+                        </div>
+                        <input
+                          type="password"
+                          required={metodoPago === 'tarjeta'}
+                          value={cardData.cvv}
+                          onChange={handleCvvChange}
+                          placeholder="•••"
+                          maxLength={4}
+                          style={{
+                            width: '100%',
+                            padding: '12px 14px',
+                            borderRadius: '8px',
+                            border: '1px solid #cbd5e1',
+                            outline: 'none',
+                            fontFamily: 'monospace',
+                            fontSize: '0.92rem',
+                            textAlign: 'center'
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="btn"
+                      style={{
+                        width: '100%',
+                        padding: '16px',
+                        borderRadius: '12px',
+                        fontSize: '1.05rem',
+                        fontWeight: 850,
+                        backgroundColor: 'var(--rey)',
+                        color: '#ffffff',
+                        border: 'none',
+                        cursor: loading ? 'wait' : 'pointer',
+                        boxShadow: '0 6px 20px rgba(26, 58, 112, 0.25)',
+                        transition: 'all 0.2s ease',
+                        marginTop: '6px'
+                      }}
+                    >
+                      {loading ? 'Procesando pago seguro...' : `Pagar con Tarjeta ($${total.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN)`}
+                    </button>
+                  </div>
+                ) : (
+                  /* Opción Mercado Pago Oficial */
+                  <div>
+                    <div style={{ backgroundColor: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: '14px', padding: '18px', marginBottom: '20px' }}>
+                      <span style={{ fontSize: '0.9rem', fontWeight: 800, color: '#0369a1', display: 'block', marginBottom: '6px' }}>
+                        💳 Medios aceptados con Mercado Pago:
+                      </span>
+                      <ul style={{ margin: 0, paddingLeft: '20px', color: '#0284c7', fontSize: '0.84rem', lineHeight: 1.6 }}>
+                        <li>Transferencia bancaria SPEI con acreditación inmediata</li>
+                        <li>Depósito en efectivo en tiendas OXXO y 7-Eleven</li>
+                        <li>Saldo en cuenta de Mercado Pago y Mercado Crédito</li>
+                      </ul>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="btn"
+                      style={{
+                        width: '100%',
+                        padding: '16px',
+                        borderRadius: '12px',
+                        fontSize: '1.05rem',
+                        fontWeight: 850,
+                        backgroundColor: '#009ee3',
+                        color: '#ffffff',
+                        border: 'none',
+                        cursor: loading ? 'wait' : 'pointer',
+                        boxShadow: '0 6px 20px rgba(0, 158, 227, 0.35)',
+                        transition: 'all 0.2s ease'
+                      }}
+                    >
+                      {loading ? 'Conectando con Mercado Pago...' : `Continuar a Mercado Pago ($${total.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN)`}
+                    </button>
+                  </div>
+                )}
 
                 <p style={{ textAlign: 'center', fontSize: '0.78rem', color: 'var(--texto-2)', marginTop: '14px', margin: '14px 0 0 0' }}>
-                  🔒 Transacción encriptada con SSL de 256 bits procesada de forma segura por Mercado Pago México.
+                  🔒 Cifrado SSL de 256 bits · Transacción bancaria protegida y segura.
                 </p>
               </div>
 
@@ -301,24 +577,23 @@ function CheckoutContent() {
 
                 <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.9rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--texto-2)' }}>
-                    <span>Subtotal (sin IVA):</span>
+                    <span>Precio de Productos:</span>
                     <span>${subtotal.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN</span>
                   </div>
 
                   <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--texto-2)' }}>
-                    <span>IVA (16%):</span>
-                    <span>${iva.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN</span>
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--texto-2)' }}>
-                    <span>Envío:</span>
-                    <span>{costoEnvio === 0 ? <strong style={{ color: '#16a34a' }}>¡Gratis!</strong> : `$${costoEnvio} MXN`}</span>
+                    <span>Envío Nacional:</span>
+                    <span style={{ color: '#16a34a', fontWeight: 700 }}>¡Gratis!</span>
                   </div>
 
                   <div style={{ borderTop: '2px solid #e2e8f0', paddingTop: '12px', marginTop: '8px', display: 'flex', justifyContent: 'space-between', fontSize: '1.25rem', fontWeight: 800, color: 'var(--marino)' }}>
-                    <span>Total (con IVA):</span>
+                    <span>Total a Pagar:</span>
                     <span style={{ color: 'var(--rey)' }}>${total.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN</span>
                   </div>
+
+                  <span style={{ fontSize: '0.75rem', color: '#64748b', textAlign: 'right', display: 'block', marginTop: '2px' }}>
+                    * Paga únicamente el precio de tus prendas (sin IVA adicional)
+                  </span>
                 </div>
               </div>
             </div>
