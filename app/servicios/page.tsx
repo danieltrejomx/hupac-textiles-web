@@ -171,42 +171,9 @@ export default function ServiciosPage() {
               fontSize: '0.95rem',
               fontStyle: 'italic',
               color: 'var(--texto-2)',
-              margin: '0 0 20px 0'
+              margin: '0 0 24px 0'
             }}>
               Cinco técnicas de personalización. Un solo fabricante.
-            </p>
-
-            {/* Cita Destacada con Barra Azul Royal */}
-            <div style={{
-              backgroundColor: '#F0F7FF',
-              border: '1px solid #D0E3FF',
-              borderLeft: '5px solid var(--rey)',
-              borderRadius: '0 14px 14px 0',
-              padding: '20px 24px',
-              marginBottom: '16px'
-            }}>
-              <p style={{
-                fontSize: '1.05rem',
-                fontWeight: 600,
-                fontStyle: 'italic',
-                lineHeight: 1.6,
-                color: 'var(--marino)',
-                margin: 0,
-                letterSpacing: '-0.01em'
-              }}>
-                &ldquo;En <strong style={{ color: 'var(--rey)', fontWeight: 850 }}>HUPAC TEXTILES</strong> evaluamos el tipo de tela, la complejidad de tu logotipo y tu presupuesto para garantizar la mejor durabilidad y acabado visual.&rdquo;
-              </p>
-            </div>
-
-            {/* Párrafo Descriptivo */}
-            <p style={{
-              fontSize: '0.92rem',
-              lineHeight: 1.65,
-              color: 'var(--texto-2)',
-              margin: '0 0 26px 0',
-              maxWidth: '100%'
-            }}>
-              Contamos con tecnología de punta y procesos industriales para aplicar tu logotipo con la máxima fidelidad y resistencia. Selecciona cualquiera de nuestras técnicas para consultar sus especificaciones técnicas y aplicaciones recomendadas.
             </p>
 
             {/* ================= SIMULADOR ANIMADO Y SELECTOR DE LAS 5 TÉCNICAS ================= */}
