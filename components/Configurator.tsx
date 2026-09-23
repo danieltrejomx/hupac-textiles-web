@@ -97,9 +97,9 @@ const PRENDAS: Record<Prenda, PrendaConfig> = {
   mezclilla: {
     nombre: 'CAMISA DE MEZCLILLA INDUSTRIAL',
     subtitulo: '100% Algodón de uso rudo · Confección reforzada y doble bolsa',
-    frenteImgWhite: '/images/configurator/mezclilla_front.jpg',
+    frenteImgWhite: '/images/epc/camisa_mezclilla.png',
     espaldaImgWhite: '/images/configurator/mezclilla_back.jpg',
-    frenteImgColor: '/images/configurator/mezclilla_reflejante_front.jpg',
+    frenteImgColor: '/images/epc/camisa_mezclilla_reflejante.jpg',
     espaldaImgColor: '/images/configurator/mezclilla_reflejante_back.jpg',
     posicionesFrente: [
       { id: 'pecho_izq', label: 'Pecho Izquierdo', x: 63, y: 30, maxW: 85 },
