@@ -14,24 +14,10 @@ interface Message {
   options?: string[];
 }
 
-const ROTATING_PROMPTS = [
-  '¿Dudas? Habla con nuestro Asistente Virtual',
-  '¿Buscas uniformes para tu empresa? Te asesoramos',
-  'Prueba tu logotipo en 3D en el configurador',
-  'Cotiza calzado, cascos y equipo EPP aquí',
-  'Precios de mayoreo directo de fábrica',
-  '¿Necesitas cotización formal? Escríbenos'
-];
-
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [promptIndex, setPromptIndex] = useState(0);
-  const [fadePrompt, setFadePrompt] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
-  const [showIntroTip, setShowIntroTip] = useState(false);
-  const [tipDismissed, setTipDismissed] = useState(false);
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -61,28 +47,6 @@ export default function ChatWidget() {
     const handleOpenChat = () => setIsOpen(true);
     window.addEventListener('open-hupac-chat', handleOpenChat);
     return () => window.removeEventListener('open-hupac-chat', handleOpenChat);
-  }, []);
-
-  // Aparición emergente temporal al inicio (5 segundos) para no ser estático ni invasivo
-  useEffect(() => {
-    const showTimer = setTimeout(() => setShowIntroTip(true), 2400);
-    const hideTimer = setTimeout(() => setShowIntroTip(false), 7500);
-    return () => {
-      clearTimeout(showTimer);
-      clearTimeout(hideTimer);
-    };
-  }, []);
-
-  // Animación del texto dinámico rotativo
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFadePrompt(false);
-      setTimeout(() => {
-        setPromptIndex((prev) => (prev + 1) % ROTATING_PROMPTS.length);
-        setFadePrompt(true);
-      }, 250);
-    }, 3800);
-    return () => clearInterval(interval);
   }, []);
 
   const scrollToBottom = () => {
@@ -179,185 +143,14 @@ export default function ChatWidget() {
     '¿Cómo puedo consultar sus catálogos?'
   ];
 
-  const isTooltipVisible = !isOpen && !tipDismissed && (isHovered || showIntroTip);
-
   return (
     <>
-      {/* Botón Flotante en la esquina inferior derecha */}
-      <div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          right: '24px',
-          zIndex: 9999,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'flex-end',
-          gap: '8px'
-        }}
-      >
-        {/* Burbuja emergente (solo aparece temporalmente o al posar el cursor, no estática) */}
-        <div
-          onClick={() => setIsOpen(true)}
-          style={{
-            backgroundColor: '#ffffff',
-            color: 'var(--marino)',
-            padding: '7px 12px 7px 14px',
-            borderRadius: '100px',
-            fontSize: '0.78rem',
-            fontWeight: 800,
-            boxShadow: '0 8px 24px rgba(19, 42, 82, 0.16)',
-            border: '1px solid var(--linea)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            cursor: 'pointer',
-            userSelect: 'none',
-            maxWidth: '340px',
-            opacity: isTooltipVisible ? 1 : 0,
-            transform: isTooltipVisible ? 'translateY(0) scale(1)' : 'translateY(8px) scale(0.96)',
-            pointerEvents: isTooltipVisible ? 'auto' : 'none',
-            transition: 'opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1)'
-          }}
-        >
-          <div
-            style={{
-              width: '22px',
-              height: '22px',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              backgroundColor: '#0B192C',
-              border: '1px solid #38bdf8',
-              flexShrink: 0
-            }}
-          >
-            <img
-              src="/images/asistente-hupac.jpg"
-              alt="Asistente Virtual HUPAC"
-              style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
-            />
-          </div>
-          <span
-            style={{
-              display: 'inline-block',
-              opacity: fadePrompt ? 1 : 0,
-              transform: fadePrompt ? 'translateY(0)' : 'translateY(-3px)',
-              transition: 'opacity 0.25s ease, transform 0.25s ease',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis'
-            }}
-          >
-            {ROTATING_PROMPTS[promptIndex]}
-          </span>
-          <span style={{ width: '7px', height: '7px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block', flexShrink: 0 }} />
-
-          {/* Botón de cierre para descartar la burbuja si se desea */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              setTipDismissed(true);
-            }}
-            title="Cerrar sugerencia"
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#94a3b8',
-              cursor: 'pointer',
-              padding: '0 2px',
-              marginLeft: '2px',
-              fontSize: '1rem',
-              lineHeight: 1,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--marino)')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#94a3b8')}
-          >
-            &times;
-          </button>
-        </div>
-
-        <button
-          type="button"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? 'Cerrar chat' : 'Abrir Asistente Virtual HUPAC'}
-          style={{
-            width: '64px',
-            height: '64px',
-            borderRadius: '50%',
-            backgroundColor: 'var(--marino)',
-            color: '#ffffff',
-            border: '2.5px solid rgba(56, 189, 248, 0.45)',
-            boxShadow: '0 10px 28px rgba(11, 25, 44, 0.4), 0 0 16px rgba(36, 86, 196, 0.25)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            position: 'relative',
-            transition: 'all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1)',
-            padding: 0,
-            overflow: 'visible'
-          }}
-        >
-          {isOpen ? (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          ) : (
-            <div style={{ position: 'relative', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div
-                style={{
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '50%',
-                  overflow: 'hidden',
-                  backgroundColor: '#0B192C',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <img
-                  src="/images/asistente-hupac.jpg"
-                  alt="Asistente Virtual HUPAC"
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transform: 'scale(1.2)'
-                  }}
-                />
-              </div>
-              <span
-                style={{
-                  position: 'absolute',
-                  top: '1px',
-                  right: '1px',
-                  width: '14px',
-                  height: '14px',
-                  borderRadius: '50%',
-                  backgroundColor: '#22c55e',
-                  border: '2.5px solid #0B192C',
-                  boxShadow: '0 0 8px #22c55e'
-                }}
-              />
-            </div>
-          )}
-        </button>
-      </div>
-
-      {/* Ventana Modal / Popover del Chat */}
+      {/* Ventana Modal / Popover del Chat (activado desde el Asistente en la barra superior) */}
       {isOpen && (
         <div
           style={{
             position: 'fixed',
-            bottom: '96px',
+            bottom: '24px',
             right: '24px',
             width: '400px',
             maxWidth: 'calc(100vw - 32px)',
