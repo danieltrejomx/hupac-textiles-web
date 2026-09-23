@@ -214,6 +214,17 @@ export default function Configurator() {
   const [tec, setTec] = useState<Tecnica>('Bordado');
   const [posicionFrente, setPosicionFrente] = useState<PosicionFrente>('pecho_izq');
   const [posicionEspalda, setPosicionEspalda] = useState<PosicionEspalda>('espalda_centro');
+  const [customPosFrente, setCustomPosFrente] = useState<{ x: number; y: number } | null>(null);
+  const [customPosEspalda, setCustomPosEspalda] = useState<{ x: number; y: number } | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartRef = useRef<{ startX: number; startY: number; initialPosX: number; initialPosY: number; hasMoved: boolean }>({
+    startX: 0,
+    startY: 0,
+    initialPosX: 0,
+    initialPosY: 0,
+    hasMoved: false
+  });
+  const mockupContainerRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState<number>(100);
   const [logo, setLogo] = useState<string | null>(null);
   const [logoName, setLogoName] = useState<string>('');
@@ -230,6 +241,8 @@ export default function Configurator() {
 
   const handlePrendaChange = (nuevaPrenda: Prenda) => {
     setPrenda(nuevaPrenda);
+    setCustomPosFrente(null);
+    setCustomPosEspalda(null);
     if (nuevaPrenda === 'mezclilla') {
       return;
     }
@@ -250,6 +263,79 @@ export default function Configurator() {
   const activePositionId = vista === 'frente' ? posicionFrente : posicionEspalda;
   const currentPositions = vista === 'frente' ? prendaActual.posicionesFrente : prendaActual.posicionesEspalda;
   const activePositionObj = currentPositions.find(p => p.id === activePositionId) || currentPositions[0];
+
+  const isCustomActive = vista === 'frente' ? customPosFrente !== null : customPosEspalda !== null;
+  const currentPos = vista === 'frente' 
+    ? (customPosFrente || { x: activePositionObj.x, y: activePositionObj.y })
+    : (customPosEspalda || { x: activePositionObj.x, y: activePositionObj.y });
+  const activePositionName = isCustomActive
+    ? 'Ubicación Libre Personalizada'
+    : activePositionObj.label;
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    const container = mockupContainerRef.current;
+    if (!container) return;
+
+    try {
+      (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    } catch {}
+    setIsDragging(true);
+
+    dragStartRef.current = {
+      startX: e.clientX,
+      startY: e.clientY,
+      initialPosX: currentPos.x,
+      initialPosY: currentPos.y,
+      hasMoved: false
+    };
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const container = mockupContainerRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const dx = ((e.clientX - dragStartRef.current.startX) / rect.width) * 100;
+    const dy = ((e.clientY - dragStartRef.current.startY) / rect.height) * 100;
+
+    if (Math.abs(e.clientX - dragStartRef.current.startX) > 3 || Math.abs(e.clientY - dragStartRef.current.startY) > 3) {
+      dragStartRef.current.hasMoved = true;
+    }
+
+    // Límites estrictos dentro de la prenda para no salirse al fondo blanco:
+    const MIN_X = 22;
+    const MAX_X = 78;
+    const MIN_Y = 16;
+    const MAX_Y = 85;
+
+    const rawNewX = dragStartRef.current.initialPosX + dx;
+    const rawNewY = dragStartRef.current.initialPosY + dy;
+
+    const clampedX = Math.max(MIN_X, Math.min(MAX_X, rawNewX));
+    const clampedY = Math.max(MIN_Y, Math.min(MAX_Y, rawNewY));
+
+    if (vista === 'frente') {
+      setCustomPosFrente({ x: Math.round(clampedX * 10) / 10, y: Math.round(clampedY * 10) / 10 });
+    } else {
+      setCustomPosEspalda({ x: Math.round(clampedX * 10) / 10, y: Math.round(clampedY * 10) / 10 });
+    }
+  };
+
+  const handlePointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    try {
+      (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
+    } catch {}
+    setIsDragging(false);
+
+    if (!dragStartRef.current.hasMoved && !logo) {
+      document.getElementById('fileLogo')?.click();
+    }
+  };
 
   useEffect(() => {
     setFolio('HUP-' + Math.floor(100000 + Math.random() * 900000));
@@ -388,8 +474,8 @@ export default function Configurator() {
       const logoImg = new Image();
       logoImg.src = logo;
       logoImg.onload = () => {
-        const posX = (activePositionObj.x / 100) * exportCvs.width;
-        const posY = (activePositionObj.y / 100) * exportCvs.height;
+        const posX = (currentPos.x / 100) * exportCvs.width;
+        const posY = (currentPos.y / 100) * exportCvs.height;
         const logoWidth = (size / 100) * (activePositionObj.maxW * 2.2);
         const aspect = logoImg.naturalHeight / logoImg.naturalWidth;
         const logoHeight = logoWidth * aspect;
@@ -416,7 +502,6 @@ export default function Configurator() {
     }
   };
 
-  const activePositionName = activePositionObj.label;
   const fechaActualStr = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
 
   const ticketFormattedText = 
@@ -600,8 +685,11 @@ export default function Configurator() {
                   <button 
                     key={p.id}
                     type="button"
-                    className={`op ${posicionFrente === p.id ? 'on' : ''}`} 
-                    onClick={() => setPosicionFrente(p.id)}
+                    className={`op ${(!isCustomActive && posicionFrente === p.id) ? 'on' : ''}`} 
+                    onClick={() => {
+                      setPosicionFrente(p.id);
+                      setCustomPosFrente(null);
+                    }}
                   >
                     {p.label}
                   </button>
@@ -611,14 +699,55 @@ export default function Configurator() {
                   <button 
                     key={p.id}
                     type="button"
-                    className={`op ${posicionEspalda === p.id ? 'on' : ''}`} 
-                    onClick={() => setPosicionEspalda(p.id)}
+                    className={`op ${(!isCustomActive && posicionEspalda === p.id) ? 'on' : ''}`} 
+                    onClick={() => {
+                      setPosicionEspalda(p.id);
+                      setCustomPosEspalda(null);
+                    }}
                   >
                     {p.label}
                   </button>
                 ))
               )}
             </div>
+
+            {isCustomActive && (
+              <div style={{
+                marginTop: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                backgroundColor: '#eff6ff',
+                border: '1px solid #bfdbfe',
+                borderRadius: '8px',
+                padding: '8px 12px',
+                fontSize: '0.8rem',
+                color: 'var(--rey)'
+              }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span>📍</span> <strong>Ubicación libre activa</strong> (arrastrada en prenda)
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (vista === 'frente') setCustomPosFrente(null);
+                    else setCustomPosEspalda(null);
+                  }}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#2563eb',
+                    fontWeight: 750,
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                    padding: '2px 6px',
+                    fontSize: '0.8rem'
+                  }}
+                >
+                  Restablecer
+                </button>
+              </div>
+            )}
 
             {/* Slider de Tamaño */}
             <div className="slider-row" style={{ marginTop: '18px', backgroundColor: '#f8fafc', padding: '12px 16px', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
@@ -877,19 +1006,23 @@ export default function Configurator() {
             </div>
 
             {/* Contenedor del Mockup Fotorrealista */}
-            <div style={{
-              position: 'relative',
-              width: '100%',
-              aspectRatio: '1/1',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: 'inset 0 2px 6px rgba(0,0,0,0.02)'
-            }}>
+            <div 
+              ref={mockupContainerRef}
+              style={{
+                position: 'relative',
+                width: '100%',
+                aspectRatio: '1/1',
+                borderRadius: '16px',
+                overflow: 'hidden',
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: 'inset 0 2px 6px rgba(0,0,0,0.02)',
+                userSelect: 'none'
+              }}
+            >
               
               {/* Canvas con la prenda coloreada con pliegues fotorrealistas */}
               <canvas 
@@ -909,10 +1042,14 @@ export default function Configurator() {
                 pointerEvents: 'none',
               }}>
                 <div 
+                  onPointerDown={handlePointerDown}
+                  onPointerMove={handlePointerMove}
+                  onPointerUp={handlePointerUp}
+                  onPointerCancel={handlePointerUp}
                   style={{
                     position: 'absolute',
-                    left: `${activePositionObj.x}%`,
-                    top: `${activePositionObj.y}%`,
+                    left: `${currentPos.x}%`,
+                    top: `${currentPos.y}%`,
                     transform: 'translate(-50%, -50%)',
                     width: `${(size / 100) * activePositionObj.maxW}px`,
                     maxWidth: '85%',
@@ -920,47 +1057,87 @@ export default function Configurator() {
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    transition: 'all 0.15s ease-out',
-                    zIndex: 20
+                    transition: isDragging ? 'none' : 'left 0.12s ease-out, top 0.12s ease-out',
+                    zIndex: 25,
+                    pointerEvents: 'auto',
+                    touchAction: 'none',
+                    cursor: isDragging ? 'grabbing' : 'grab',
+                    userSelect: 'none'
                   }}
+                  title="Arrastra para mover libremente por la prenda"
                 >
                   {!logo ? (
                     /* Placeholder visual cuando aún no hay logo subido */
                     <div style={{
-                      border: '2px dashed var(--rey)',
-                      backgroundColor: 'rgba(255, 255, 255, 0.85)',
-                      backdropFilter: 'blur(2px)',
+                      border: isDragging ? '2px solid var(--rey)' : '2px dashed var(--rey)',
+                      backgroundColor: isDragging ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.88)',
+                      backdropFilter: 'blur(3px)',
                       padding: '8px 12px',
                       borderRadius: '8px',
                       textAlign: 'center',
-                      boxShadow: '0 4px 12px rgba(36, 86, 196, 0.15)',
-                      pointerEvents: 'auto',
-                      cursor: 'pointer'
-                    }}
-                    onClick={() => document.getElementById('fileLogo')?.click()}
-                    >
+                      boxShadow: isDragging ? '0 8px 24px rgba(36, 86, 196, 0.3)' : '0 4px 12px rgba(36, 86, 196, 0.15)',
+                      transform: isDragging ? 'scale(1.04)' : 'scale(1)',
+                      transition: 'transform 0.1s ease, box-shadow 0.1s ease',
+                      width: '100%',
+                      cursor: isDragging ? 'grabbing' : 'grab',
+                    }}>
                       <span style={{ fontSize: '0.7rem', fontWeight: 800, color: 'var(--marino)', display: 'block', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                         TU LOGO AQUÍ
                       </span>
                       <span style={{ fontSize: '0.62rem', color: 'var(--texto-2)', display: 'block', whiteSpace: 'nowrap' }}>
                         {activePositionName}
                       </span>
+                      <span style={{ fontSize: '0.56rem', color: 'var(--rey)', display: 'block', marginTop: '2px', fontWeight: 700 }}>
+                        {isDragging ? 'Soltar para fijar' : '✋ Arrastra para mover'}
+                      </span>
                     </div>
                   ) : (
                     /* Logotipo aplicado con textura de Bordado o Estampado */
-                    <img
-                      src={logo}
-                      alt="Logotipo del cliente en uniforme"
-                      style={{
-                        maxWidth: '100%',
-                        maxHeight: '140px',
-                        objectFit: 'contain',
-                        filter: tec === 'Bordado'
-                          ? 'drop-shadow(0 2px 2px rgba(0,0,0,0.4)) drop-shadow(0 -0.5px 0.5px rgba(255,255,255,0.5)) contrast(1.1)'
-                          : 'drop-shadow(0 1px 1px rgba(0,0,0,0.2))',
-                        transition: 'all 0.2s ease'
-                      }}
-                    />
+                    <div style={{
+                      position: 'relative',
+                      display: 'inline-flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      padding: '4px',
+                      border: isDragging ? '1.5px dashed var(--rey)' : '1.5px dashed transparent',
+                      borderRadius: '8px',
+                      backgroundColor: isDragging ? 'rgba(36, 86, 196, 0.08)' : 'transparent',
+                      transform: isDragging ? 'scale(1.04)' : 'scale(1)',
+                      transition: 'transform 0.1s ease, background-color 0.15s',
+                      cursor: isDragging ? 'grabbing' : 'grab'
+                    }}>
+                      <img
+                        src={logo}
+                        alt="Logotipo del cliente en uniforme"
+                        draggable={false}
+                        style={{
+                          maxWidth: '100%',
+                          maxHeight: '140px',
+                          objectFit: 'contain',
+                          filter: tec === 'Bordado'
+                            ? 'drop-shadow(0 2px 2px rgba(0,0,0,0.4)) drop-shadow(0 -0.5px 0.5px rgba(255,255,255,0.5)) contrast(1.1)'
+                            : 'drop-shadow(0 1px 1px rgba(0,0,0,0.2))',
+                          pointerEvents: 'none',
+                          userSelect: 'none'
+                        }}
+                      />
+                      {isDragging && (
+                        <span style={{
+                          position: 'absolute',
+                          bottom: '-18px',
+                          backgroundColor: 'var(--marino)',
+                          color: '#fff',
+                          fontSize: '0.6rem',
+                          fontWeight: 700,
+                          padding: '2px 6px',
+                          borderRadius: '4px',
+                          whiteSpace: 'nowrap',
+                          pointerEvents: 'none'
+                        }}>
+                          Moviendo logo...
+                        </span>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
@@ -1017,8 +1194,8 @@ export default function Configurator() {
 
             {/* Acciones del visor: Descargar diseño */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '14px' }}>
-              <p className="nota" style={{ margin: 0, fontSize: '0.78rem' }}>
-                * Vista fotográfica con proporciones para confección y bordado.
+              <p className="nota" style={{ margin: 0, fontSize: '0.78rem', color: 'var(--texto-2)' }}>
+                💡 Puedes arrastrar y mover libremente tu logotipo sobre la prenda con el mouse o dedo.
               </p>
               <button
                 type="button"
