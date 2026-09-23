@@ -258,7 +258,10 @@ export default function IndustriasPage() {
           color: '#ffffff',
           padding: '14px 24px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          textAlign: 'center'
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 10,
+          boxShadow: '0 4px 18px rgba(19, 42, 82, 0.14)'
         }}>
           <div style={{ 
             maxWidth: '1320px', 
@@ -280,7 +283,7 @@ export default function IndustriasPage() {
           </div>
         </section>
 
-        <div style={{ maxWidth: '1200px', margin: '-10px auto 0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1200px', margin: '-10px auto 0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
           {/* GRID DE LAS 6 INDUSTRIAS (3 COLUMNAS X 2 FILAS) */}
           <div style={{
             display: 'grid',

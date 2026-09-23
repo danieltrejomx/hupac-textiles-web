@@ -334,7 +334,10 @@ function CatalogoContent() {
           color: '#ffffff',
           padding: '16px 24px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          textAlign: 'center'
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 10,
+          boxShadow: '0 4px 18px rgba(19, 42, 82, 0.14)'
         }}>
           <div style={{ 
             maxWidth: '1320px', 
@@ -360,7 +363,7 @@ function CatalogoContent() {
           </div>
         </section>
 
-        <div style={{ maxWidth: '1280px', margin: '-10px auto 0 auto', padding: '0 24px' }}>
+        <div style={{ maxWidth: '1280px', margin: '-10px auto 0 auto', padding: '0 24px', position: 'relative', zIndex: 1 }}>
           
           {/* Barra de Filtros y Búsqueda */}
           <div style={{

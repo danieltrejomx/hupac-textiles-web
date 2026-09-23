@@ -14,7 +14,10 @@ export default function ConfiguradorPage() {
           color: '#ffffff',
           padding: '14px 24px',
           borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          textAlign: 'center'
+          textAlign: 'center',
+          position: 'relative',
+          zIndex: 10,
+          boxShadow: '0 4px 18px rgba(19, 42, 82, 0.14)'
         }}>
           <div style={{ 
             maxWidth: '1320px', 
@@ -37,7 +40,7 @@ export default function ConfiguradorPage() {
         </section>
 
         {/* Componente del Configurador */}
-        <div style={{ maxWidth: '1320px', margin: '0 auto', padding: '0 16px' }}>
+        <div style={{ maxWidth: '1320px', margin: '-10px auto 0 auto', padding: '0 16px', position: 'relative', zIndex: 1 }}>
           <Configurator />
         </div>
       </main>
