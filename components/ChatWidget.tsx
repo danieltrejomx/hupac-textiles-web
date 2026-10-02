@@ -23,7 +23,7 @@ export default function ChatWidget() {
     {
       id: 'welcome',
       sender: 'assistant',
-      text: '¡Hola! Bienvenido(a) a Hupac Textiles. Con gusto te ayudamos a encontrar los uniformes, prendas o productos de seguridad industrial que necesitas.\n\n¿Qué estás buscando hoy?',
+      text: '¡Hola! Soy Viko, tu asistente virtual en HUPAC TEXTILES. Con gusto te ayudo a encontrar los uniformes, prendas o productos de seguridad industrial que necesitas.\n\n¿Qué estás buscando hoy?',
       time: 'Ahora',
       links: [
         { label: 'Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
@@ -210,7 +210,7 @@ export default function ChatWidget() {
               >
                 <img
                   src="/images/asistente-hupac.jpg"
-                  alt="Asistente Virtual HUPAC"
+                  alt="Viko — Asistente Virtual HUPAC"
                   style={{
                     width: '100%',
                     height: '100%',
@@ -221,11 +221,11 @@ export default function ChatWidget() {
               </div>
               <div>
                 <b style={{ fontSize: '0.98rem', display: 'block', letterSpacing: '-0.01em', lineHeight: 1.2 }}>
-                  Asistente Virtual HUPAC
+                  Viko — Asistente HUPAC
                 </b>
                 <span style={{ fontSize: '0.75rem', color: '#93c5fd', display: 'flex', alignItems: 'center', gap: '5px' }}>
                   <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#22c55e', display: 'inline-block' }} />
-                  En línea · Base oficial autorizada
+                  En línea · Asistente Oficial
                 </span>
               </div>
             </div>
@@ -238,7 +238,7 @@ export default function ChatWidget() {
                     {
                       id: 'welcome',
                       sender: 'assistant',
-                      text: '¡Hola! Bienvenido(a) a Hupac Textiles. Con gusto te ayudamos a encontrar los uniformes, prendas o productos de seguridad industrial que necesitas.\n\n¿Qué estás buscando hoy?',
+                      text: '¡Hola! Soy Viko, tu asistente virtual en HUPAC TEXTILES. Con gusto te ayudo a encontrar los uniformes, prendas o productos de seguridad industrial que necesitas.\n\n¿Qué estás buscando hoy?',
                       time: 'Ahora',
                       links: [
                         { label: 'Ver Catálogo de Uniformes', url: '/catalogo?catalogo=textil' },
