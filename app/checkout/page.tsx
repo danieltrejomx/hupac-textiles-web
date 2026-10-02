@@ -111,7 +111,9 @@ function CheckoutContent() {
         if (!/^\d{2}\/\d{2}$/.test(cardData.expiracion)) {
           throw new Error('Por favor ingresa la fecha de expiración en formato MM/AA.');
         }
-        const [mes] = cardData.expiracion.split('/').map(Number);
+        const [mesStr, anoStr] = cardData.expiracion.split('/');
+        const mes = Number(mesStr);
+        const ano = 2000 + Number(anoStr);
         if (mes < 1 || mes > 12) {
           throw new Error('El mes de expiración no es válido (01 a 12).');
         }
@@ -119,43 +121,64 @@ function CheckoutContent() {
           throw new Error('Por favor ingresa el código de seguridad CVV (3 o 4 dígitos).');
         }
 
-        const brand = detectedBrand || 'Tarjeta Bancaria';
-        const last4 = numLimpio.slice(-4);
+        const brand = (detectedBrand || 'visa').toLowerCase();
+        const publicKey = process.env.NEXT_PUBLIC_MERCADOPAGO_PUBLIC_KEY || 'APP_USR-dc64ef37-902f-4474-9b19-2c8aca1cceb0';
 
-        // Breve verificación de seguridad bancaria
-        await new Promise(res => setTimeout(res, 1200));
+        let cardToken = '';
+        try {
+          if (typeof window !== 'undefined' && (window as any).MercadoPago) {
+            const mp = new (window as any).MercadoPago(publicKey);
+            const tokenResult = await mp.createCardToken({
+              cardNumber: numLimpio,
+              cardholderName: cardData.nombre.trim(),
+              cardExpirationMonth: String(mes).padStart(2, '0'),
+              cardExpirationYear: String(ano),
+              securityCode: cardData.cvv
+            });
+            if (tokenResult && tokenResult.id) {
+              cardToken = tokenResult.id;
+            }
+          }
+        } catch (tokenErr) {
+          console.warn('Advertencia al generar token de tarjeta:', tokenErr);
+        }
 
-        // Registrar pedido pagado con tarjeta en Firestore
-        const docRef = await addDoc(collection(db, 'orders'), {
-          tipo: 'Venta E-Commerce',
-          cliente: {
-            nombre: formData.nombre,
-            email: formData.email,
-            telefono: formData.telefono,
-            direccion: `${formData.direccion}, Col. ${formData.colonia}, ${formData.ciudad}, ${formData.estado}, C.P. ${formData.cp}`
-          },
-          items: cart.map(i => ({
-            nombre: i.nombre,
-            estilo: i.estilo || '',
-            color: i.color || '',
-            talla: i.talla || '',
-            cantidad: i.cantidad,
-            precioUnitario: i.precioUnitario,
-            subtotal: i.precioUnitario * i.cantidad
-          })),
-          totalItems,
-          subtotal,
-          iva: 0,
-          envio: 0,
-          total,
-          metodoPago: `${brand} (•••• ${last4})`,
-          estadoPago: 'Aprobado (Tarjeta de Crédito/Débito)',
-          titularTarjeta: cardData.nombre.toUpperCase(),
-          fecha: serverTimestamp(),
+        // Procesar cobro real con Mercado Pago API
+        const resProcess = await fetch('/api/mercadopago/process-payment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            paymentData: {
+              token: cardToken || undefined,
+              payment_method_id: brand === 'american express' ? 'amex' : brand,
+            },
+            orderData: {
+              cliente: {
+                nombre: formData.nombre,
+                email: formData.email,
+                telefono: formData.telefono,
+                direccion: formData.direccion,
+                colonia: formData.colonia,
+                ciudad: formData.ciudad,
+                estado: formData.estado,
+                cp: formData.cp
+              },
+              items: cart,
+              totalItems,
+              subtotal,
+              total
+            }
+          })
         });
 
+        const resData = await resProcess.json();
+
+        if (!resProcess.ok || !resData.success || resData.status === 'rejected') {
+          throw new Error(resData.error || 'El pago fue rechazado por el banco emisor de la tarjeta. Verifique sus datos o intente con otra tarjeta.');
+        }
+
         clearCart();
-        setOrderComplete(docRef.id);
+        setOrderComplete(resData.orderId || `MP-${Date.now()}`);
         setLoading(false);
         return;
       }
