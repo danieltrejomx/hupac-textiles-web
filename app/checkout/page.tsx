@@ -80,6 +80,20 @@ function CheckoutContent() {
           estadoPago: 'Aprobado (Mercado Pago)',
           fechaAprobacion: serverTimestamp()
         });
+
+        // Enviar correo de confirmación de pedido
+        fetch('/api/send-confirmation-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId: orderIdParam,
+            cliente: formData,
+            items: cart,
+            total,
+            metodoPago: 'Mercado Pago'
+          })
+        }).catch(err => console.warn('Disparo de correo:', err));
+
       } catch (e) {
         console.error('Error actualizando orden:', e);
       }
@@ -261,14 +275,48 @@ function CheckoutContent() {
             Tu pago con <strong>Mercado Pago</strong> ha sido verificado exitosamente. Hemos registrado tu pedido y prepararemos tus productos.
           </p>
 
-          <div style={{ backgroundColor: '#f1f5f9', padding: '16px', borderRadius: '12px', marginBottom: '28px', border: '1px dashed #cbd5e1' }}>
+          <div style={{ backgroundColor: '#f1f5f9', padding: '16px', borderRadius: '12px', marginBottom: '20px', border: '1px dashed #cbd5e1' }}>
             <span style={{ fontSize: '0.85rem', color: 'var(--texto-2)', display: 'block' }}>Número de Orden:</span>
-            <strong style={{ fontFamily: 'var(--fuente-mono)', color: 'var(--rey)', fontSize: '1.1rem' }}>#{orderComplete}</strong>
+            <strong style={{ fontFamily: 'var(--fuente-mono)', color: 'var(--rey)', fontSize: '1.2rem' }}>#{orderComplete}</strong>
           </div>
 
-          <Link href="/" className="btn" style={{ padding: '14px 28px', textDecoration: 'none', display: 'inline-block' }}>
-            Volver a la Tienda
-          </Link>
+          <div style={{ backgroundColor: '#f0fdf4', border: '1px solid #bbf7d0', padding: '14px', borderRadius: '12px', marginBottom: '24px', fontSize: '0.88rem', color: '#166534', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '1.3rem' }}>📧</span>
+            <div>
+              <strong>Confirmación enviada por correo:</strong>
+              <div style={{ fontSize: '0.82rem', color: '#15803d' }}>Se ha despachado el resumen completo de la compra a la dirección de correo registrada.</div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', alignItems: 'center' }}>
+            <a
+              href={`https://wa.me/525516257933?text=Hola!%20Acabo%20de%20realizar%20el%20pedido%20%23${orderComplete}%20y%20deseo%20darle%20seguimiento.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                backgroundColor: '#25d366',
+                color: '#ffffff',
+                padding: '14px 24px',
+                borderRadius: '999px',
+                fontWeight: 800,
+                fontSize: '0.92rem',
+                textDecoration: 'none',
+                boxShadow: '0 4px 14px rgba(37, 211, 102, 0.35)',
+                width: '100%',
+                boxSizing: 'border-box'
+              }}
+            >
+              💬 Recibir seguimiento por WhatsApp / SMS
+            </a>
+
+            <Link href="/" className="btn" style={{ padding: '14px 28px', textDecoration: 'none', display: 'inline-block', width: '100%', boxSizing: 'border-box' }}>
+              Volver a la Tienda
+            </Link>
+          </div>
         </div>
       </main>
     );
