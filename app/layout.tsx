@@ -19,6 +19,16 @@ const plexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "HUPAC TEXTILES — Uniformes empresariales. Nuestro negocio es tu imagen.",
   description: "Empresa 100% mexicana fundada en 2005. Más de 43 mil clientes y 7 millones de prendas. Bordado, serigrafía, sublimación e impresión directa.",
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/icon.png', type: 'image/png' },
+      { url: '/favicon.ico' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 };
 
 export default function RootLayout({
