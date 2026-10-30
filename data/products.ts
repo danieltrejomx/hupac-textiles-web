@@ -265,14 +265,14 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Bordado', 'Serigrafía'],
     imagenPrincipal: '/images/products/36980_playera_polo_supreme_caballero.jpg',
     colores: [
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Heather', hex: '#c2c8d0' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Marino', hex: '#132A52' },
-      { nombre: 'Rojo', hex: '#B22234' },
-      { nombre: 'Rey', hex: '#2456C4' },
-      { nombre: 'Vino', hex: '#5C1D24' },
-      { nombre: 'Jaspe Negro', hex: '#2A2D34' }
+      { nombre: 'Blanco', hex: '#FFFFFF', imagen: '/images/products/36980_playera_polo_supreme_caballero_blanco.jpg' },
+      { nombre: 'Heather', hex: '#c2c8d0', imagen: '/images/products/36980_playera_polo_supreme_caballero_heather.jpg' },
+      { nombre: 'Negro', hex: '#17222B', imagen: '/images/products/36980_playera_polo_supreme_caballero_negro.jpg' },
+      { nombre: 'Marino', hex: '#132A52', imagen: '/images/products/36980_playera_polo_supreme_caballero_marino.jpg' },
+      { nombre: 'Rojo', hex: '#B22234', imagen: '/images/products/36980_playera_polo_supreme_caballero_rojo.jpg' },
+      { nombre: 'Rey', hex: '#2456C4', imagen: '/images/products/36980_playera_polo_supreme_caballero_rey.jpg' },
+      { nombre: 'Vino', hex: '#5C1D24', imagen: '/images/products/36980_playera_polo_supreme_caballero_vino.jpg' },
+      { nombre: 'Jaspe Negro', hex: '#2A2D34', imagen: '/images/products/36980_playera_polo_supreme_caballero_jaspe_negro.jpg' }
     ]
   },
   {
