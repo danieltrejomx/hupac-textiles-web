@@ -153,12 +153,12 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Serigrafía', 'Termotransferencia'],
     imagenPrincipal: '/images/products/30039_playera_stampa_caballero.jpg',
     colores: [
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Marino', hex: '#132A52' },
-      { nombre: 'Rojo', hex: '#B22234' },
-      { nombre: 'Rey', hex: '#2456C4' },
-      { nombre: 'Vino', hex: '#5C1D24' }
+      { nombre: 'Blanco', hex: '#FFFFFF', imagen: '/images/products/30039_playera_stampa_caballero_blanco.jpg' },
+      { nombre: 'Negro', hex: '#17222B', imagen: '/images/products/30039_playera_stampa_caballero_negro.jpg' },
+      { nombre: 'Marino', hex: '#132A52', imagen: '/images/products/30039_playera_stampa_caballero_marino.jpg' },
+      { nombre: 'Rojo', hex: '#B22234', imagen: '/images/products/30039_playera_stampa_caballero_rojo.jpg' },
+      { nombre: 'Rey', hex: '#2456C4', imagen: '/images/products/30039_playera_stampa_caballero_rey.jpg' },
+      { nombre: 'Vino', hex: '#5C1D24', imagen: '/images/products/30039_playera_stampa_caballero_vino.jpg' }
     ],
     precios: {
       'CH-EG': {
