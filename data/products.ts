@@ -184,14 +184,14 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
     imagenPrincipal: '/images/products/32633_playera_polo_pique_caballero.jpg',
     colores: [
-      { nombre: 'Marino', hex: '#132A52' },
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Heather', hex: '#c2c8d0' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Rojo', hex: '#B22234' },
-      { nombre: 'Rey', hex: '#2456C4' },
-      { nombre: 'Turquesa', hex: '#3cc4d6' },
-      { nombre: 'Amarillo', hex: '#F5BE18' }
+      { nombre: 'Marino', hex: '#132A52', imagen: '/images/products/32633_playera_polo_pique_caballero_marino.jpg' },
+      { nombre: 'Blanco', hex: '#FFFFFF', imagen: '/images/products/32633_playera_polo_pique_caballero_blanco.jpg' },
+      { nombre: 'Heather', hex: '#c2c8d0', imagen: '/images/products/32633_playera_polo_pique_caballero_heather.jpg' },
+      { nombre: 'Negro', hex: '#17222B', imagen: '/images/products/32633_playera_polo_pique_caballero_negro.jpg' },
+      { nombre: 'Rojo', hex: '#B22234', imagen: '/images/products/32633_playera_polo_pique_caballero_rojo.jpg' },
+      { nombre: 'Rey', hex: '#2456C4', imagen: '/images/products/32633_playera_polo_pique_caballero_rey.jpg' },
+      { nombre: 'Turquesa', hex: '#3cc4d6', imagen: '/images/products/32633_playera_polo_pique_caballero_turquesa.jpg' },
+      { nombre: 'Amarillo', hex: '#F5BE18', imagen: '/images/products/32633_playera_polo_pique_caballero_amarillo.jpg' }
     ],
     precios: {
       'CH-EG': {
