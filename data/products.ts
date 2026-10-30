@@ -427,11 +427,11 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Bordado', 'Serigrafía'],
     imagenPrincipal: '/images/products/33981_polo_pique_manga_larga_caballero.jpg',
     colores: [
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Heather', hex: '#c2c8d0' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Marino', hex: '#132A52' },
-      { nombre: 'Rojo', hex: '#B22234' }
+      { nombre: 'Blanco', hex: '#FFFFFF', imagen: '/images/products/33981_polo_pique_manga_larga_caballero_blanco.jpg' },
+      { nombre: 'Heather', hex: '#c2c8d0', imagen: '/images/products/33981_polo_pique_manga_larga_caballero_heather.jpg' },
+      { nombre: 'Negro', hex: '#17222B', imagen: '/images/products/33981_polo_pique_manga_larga_caballero_negro.jpg' },
+      { nombre: 'Marino', hex: '#132A52', imagen: '/images/products/33981_polo_pique_manga_larga_caballero_marino.jpg' },
+      { nombre: 'Rojo', hex: '#B22234', imagen: '/images/products/33981_polo_pique_manga_larga_caballero_rojo.jpg' }
     ],
     precios: {
       'CH-EG': {
