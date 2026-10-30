@@ -402,11 +402,11 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Serigrafía', 'Termotransferencia'],
     imagenPrincipal: '/images/products/34990_playera_snow_cuello_v_dama.jpg',
     colores: [
-      { nombre: 'Jaspe Negro', hex: '#2A2D34' },
-      { nombre: 'Jaspe Acero', hex: '#707A8A' },
-      { nombre: 'Jaspe Jade', hex: '#4F7D6D' },
-      { nombre: 'Jaspe Terracota', hex: '#B35E46' },
-      { nombre: 'Jaspe Rosa Mexicano', hex: '#E04A8A' }
+      { nombre: 'Jaspe Negro', hex: '#2A2D34', imagen: '/images/products/34990_playera_snow_cuello_v_dama_jaspe_negro.jpg' },
+      { nombre: 'Jaspe Acero', hex: '#707A8A', imagen: '/images/products/34990_playera_snow_cuello_v_dama_jaspe_acero.jpg' },
+      { nombre: 'Jaspe Jade', hex: '#4F7D6D', imagen: '/images/products/34990_playera_snow_cuello_v_dama_jaspe_jade.jpg' },
+      { nombre: 'Jaspe Terracota', hex: '#B35E46', imagen: '/images/products/34990_playera_snow_cuello_v_dama_jaspe_terracota.jpg' },
+      { nombre: 'Jaspe Rosa Mexicano', hex: '#E04A8A', imagen: '/images/products/34990_playera_snow_cuello_v_dama_jaspe_rosa_mexicano.jpg' }
     ],
     precios: {
       'CH-EG': {
