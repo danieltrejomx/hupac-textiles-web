@@ -374,11 +374,11 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Serigrafía', 'Termotransferencia'],
     imagenPrincipal: '/images/products/34988_playera_snow_caballero.jpg',
     colores: [
-      { nombre: 'Jaspe Negro', hex: '#2A2D34' },
-      { nombre: 'Jaspe Acero', hex: '#707A8A' },
-      { nombre: 'Jaspe Petróleo', hex: '#2A4D54' },
-      { nombre: 'Jaspe Sepia', hex: '#7A6B58' },
-      { nombre: 'Jaspe Claro', hex: '#E2E8F0' }
+      { nombre: 'Jaspe Negro', hex: '#2A2D34', imagen: '/images/products/34988_playera_snow_caballero_jaspe_negro.jpg' },
+      { nombre: 'Jaspe Acero', hex: '#707A8A', imagen: '/images/products/34988_playera_snow_caballero_jaspe_acero.jpg' },
+      { nombre: 'Jaspe Petróleo', hex: '#2A4D54', imagen: '/images/products/34988_playera_snow_caballero_jaspe_petroleo.jpg' },
+      { nombre: 'Jaspe Sepia', hex: '#7A6B58', imagen: '/images/products/34988_playera_snow_caballero_jaspe_sepia.jpg' },
+      { nombre: 'Jaspe Claro', hex: '#E2E8F0', imagen: '/images/products/34988_playera_snow_caballero_jaspe_claro.jpg' }
     ],
     precios: {
       'CH-EG': {
