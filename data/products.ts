@@ -349,11 +349,11 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Serigrafía', 'Termotransferencia'],
     imagenPrincipal: '/images/products/38387_playera_cuello_v_caballero.jpg',
     colores: [
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Heather', hex: '#c2c8d0' },
-      { nombre: 'Marino', hex: '#132A52' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Vino', hex: '#5C1D24' }
+      { nombre: 'Blanco', hex: '#FFFFFF', imagen: '/images/products/38387_playera_cuello_v_caballero_blanco.jpg' },
+      { nombre: 'Heather', hex: '#c2c8d0', imagen: '/images/products/38387_playera_cuello_v_caballero_heather.jpg' },
+      { nombre: 'Marino', hex: '#132A52', imagen: '/images/products/38387_playera_cuello_v_caballero_marino.jpg' },
+      { nombre: 'Negro', hex: '#17222B', imagen: '/images/products/38387_playera_cuello_v_caballero_negro.jpg' },
+      { nombre: 'Vino', hex: '#5C1D24', imagen: '/images/products/38387_playera_cuello_v_caballero_vino.jpg' }
     ],
     precios: {
       'CH-EG': {
