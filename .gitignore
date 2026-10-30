@@ -40,3 +40,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vite/
+scratch/
+index.html
+script.js
+server.js
+styles.css

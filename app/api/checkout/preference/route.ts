@@ -17,8 +17,8 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { items, cliente, orderId, envio } = body;
 
-    const host = request.headers.get('host') || 'hupac-textiles-web.vercel.app';
-    const protocol = host.includes('localhost') ? 'http' : 'https';
+    const host = request.headers.get('x-forwarded-host') || request.headers.get('host') || 'hupac-textiles-web.vercel.app';
+    const protocol = request.headers.get('x-forwarded-proto') || (host.includes('localhost') ? 'http' : 'https');
     const baseUrl = `${protocol}://${host}`;
 
     const mpItems = items.map((item: any) => ({

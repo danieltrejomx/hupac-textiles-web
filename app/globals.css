@@ -608,15 +608,32 @@ footer{background:#FFFFFF;border-top:1px solid var(--linea);margin-top:56px}
   border-radius: 2px;
 }
 
-/* ---------- HIDE NATIVE SCROLLBAR FOR CUSTOM SCROLL CONTAINER ---------- */
-.custom-scroll-container {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+/* ---------- STYLED HORIZONTAL SCROLLBAR FOR CATEGORY PILLS SLIDER ---------- */
+.styled-horizontal-slider {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rey) #f1f5f9;
 }
-.custom-scroll-container::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
-  width: 0;
-  height: 0;
+
+.styled-horizontal-slider::-webkit-scrollbar {
+  height: 6px;
+  display: block !important;
+}
+
+.styled-horizontal-slider::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 999px;
+  margin: 0 4px;
+}
+
+.styled-horizontal-slider::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 999px;
+  border: 1px solid #f1f5f9;
+  transition: background 0.2s ease;
+}
+
+.styled-horizontal-slider::-webkit-scrollbar-thumb:hover {
+  background: var(--rey);
 }
 
 /* ---------- ANIMATED CARD BOXES (Animaciones Interactivas para Cuadritos) ---------- */

@@ -132,7 +132,7 @@ const COLORES_POLO_PLAYERA: ColorOption[] = [
 
 const COLORES_CAMISA: ColorOption[] = [
   { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
-  { c: '#7BA4D0', n: 'Azul Cielo (Oxford)', rgb: [123, 164, 208], textColor: '#132A52' },
+  { c: '#EAF3FC', n: 'Azul Cielo Tenue (Oxford)', rgb: [240, 247, 255], textColor: '#132A52' },
   { c: '#22262E', n: 'Negro Profundo', rgb: [34, 38, 46], textColor: '#FFFFFF' },
 ];
 
@@ -430,6 +430,8 @@ export default function Configurator() {
       const imgData = ctx.getImageData(0, 0, w, h);
       const data = imgData.data;
       const [tr, tg, tb] = colorOption.rgb!;
+      const isPastelLight = tr > 210 && tg > 210 && tb > 210;
+      const boost = isPastelLight ? 1.10 : 1.0;
 
       for (let i = 0; i < data.length; i += 4) {
         const a = data[i + 3];
@@ -438,7 +440,7 @@ export default function Configurator() {
         const r = data[i];
         const g = data[i + 1];
         const b = data[i + 2];
-        const brightness = (0.299 * r + 0.587 * g + 0.114 * b) / 255.0;
+        const brightness = Math.min(1.0, ((0.299 * r + 0.587 * g + 0.114 * b) / 255.0) * boost);
 
         data[i]     = Math.min(255, Math.round(tr * brightness));
         data[i + 1] = Math.min(255, Math.round(tg * brightness));

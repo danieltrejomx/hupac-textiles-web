@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo, useEffect, Suspense } from 'react';
+import { useState, useMemo, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
@@ -234,6 +234,19 @@ function CatalogoContent() {
 
   const [busqueda, setBusqueda] = useState('');
   const { addToCart } = useCart();
+  const categoryScrollRef = useRef<HTMLDivElement>(null);
+
+  const handleScrollCategoriesLeft = () => {
+    if (categoryScrollRef.current) {
+      categoryScrollRef.current.scrollBy({ left: -260, behavior: 'smooth' });
+    }
+  };
+
+  const handleScrollCategoriesRight = () => {
+    if (categoryScrollRef.current) {
+      categoryScrollRef.current.scrollBy({ left: 260, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     if (catalogoParam === 'epc' || catalogoParam === 'textil') {
@@ -573,70 +586,144 @@ function CatalogoContent() {
               </div>
             </div>
 
-            {/* Categorías Tabs */}
-            <div
-              className="custom-scroll-container"
-              style={{
-                display: 'flex',
-                gap: '8px',
-                overflowX: 'auto',
-                paddingBottom: '8px',
-                scrollBehavior: 'smooth'
-              }}
-            >
+            {/* Categorías Tabs con Barra de Desplazamiento y Botones para Deslizar */}
+            <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: '8px', width: '100%' }}>
               <button
                 type="button"
-                onClick={() => setCategoriaActiva('todos')}
+                onClick={handleScrollCategoriesLeft}
+                title="Deslizar categorías a la izquierda"
+                aria-label="Deslizar a la izquierda"
                 style={{
-                  display: 'inline-flex',
+                  width: '34px',
+                  height: '34px',
+                  borderRadius: '50%',
+                  border: '1.5px solid var(--linea)',
+                  backgroundColor: '#ffffff',
+                  color: 'var(--marino)',
+                  display: 'flex',
                   alignItems: 'center',
-                  gap: '6px',
-                  padding: '10px 16px',
-                  borderRadius: '12px',
-                  border: categoriaActiva === 'todos' ? '1.5px solid var(--rey)' : '1px solid var(--linea)',
-                  backgroundColor: categoriaActiva === 'todos' ? 'var(--marino)' : '#ffffff',
-                  color: categoriaActiva === 'todos' ? '#ffffff' : 'var(--marino)',
-                  fontSize: '0.88rem',
-                  fontWeight: categoriaActiva === 'todos' ? 750 : 600,
+                  justifyContent: 'center',
                   cursor: 'pointer',
-                  whiteSpace: 'nowrap',
+                  boxShadow: '0 2px 6px rgba(19, 42, 82, 0.1)',
+                  flexShrink: 0,
+                  fontSize: '1.1rem',
+                  fontWeight: 'bold',
+                  zIndex: 2,
                   transition: 'all 0.15s ease'
                 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--marino)';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.color = 'var(--marino)';
+                }}
               >
-                <IconTodos size={16} color={categoriaActiva === 'todos' ? '#ffffff' : 'var(--rey)'} />
-                <span>
-                  {catalogoActivo === 'epc' ? 'Todos en EPC' : catalogoActivo === 'textil' ? 'Todos en Textil y Calzado' : 'Todos los Modelos'}
-                </span>
+                ‹
               </button>
 
-              {categoriasVisibles.map((cat) => {
-                const isActive = categoriaActiva === cat.id;
-                const IconComp = cat.icon;
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setCategoriaActiva(isActive ? 'todos' : cat.id)}
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      padding: '10px 16px',
-                      borderRadius: '12px',
-                      border: isActive ? '1.5px solid var(--rey)' : '1px solid var(--linea)',
-                      backgroundColor: isActive ? 'var(--marino)' : '#ffffff',
-                      color: isActive ? '#ffffff' : 'var(--marino)',
-                      fontSize: '0.88rem',
-                      fontWeight: isActive ? 750 : 600,
-                      cursor: 'pointer',
-                      whiteSpace: 'nowrap',
-                      transition: 'all 0.15s ease'
-                    }}>
-                      <IconComp size={16} color={isActive ? '#ffffff' : 'var(--rey)'} />
-                      <span>{cat.label}</span>
-                    </button>
-                  );
-                })}
+              <div
+                ref={categoryScrollRef}
+                className="styled-horizontal-slider"
+                style={{
+                  flex: 1,
+                  display: 'flex',
+                  gap: '8px',
+                  overflowX: 'auto',
+                  paddingBottom: '10px',
+                  scrollBehavior: 'smooth'
+                }}
+              >
+                <button
+                  type="button"
+                  onClick={() => setCategoriaActiva('todos')}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '10px 16px',
+                    borderRadius: '12px',
+                    border: categoriaActiva === 'todos' ? '1.5px solid var(--rey)' : '1px solid var(--linea)',
+                    backgroundColor: categoriaActiva === 'todos' ? 'var(--marino)' : '#ffffff',
+                    color: categoriaActiva === 'todos' ? '#ffffff' : 'var(--marino)',
+                    fontSize: '0.88rem',
+                    fontWeight: categoriaActiva === 'todos' ? 750 : 600,
+                    cursor: 'pointer',
+                    whiteSpace: 'nowrap',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  <IconTodos size={16} color={categoriaActiva === 'todos' ? '#ffffff' : 'var(--rey)'} />
+                  <span>
+                    {catalogoActivo === 'epc' ? 'Todos en EPC' : catalogoActivo === 'textil' ? 'Todos en Textil y Calzado' : 'Todos los Modelos'}
+                  </span>
+                </button>
+
+                {categoriasVisibles.map((cat) => {
+                  const isActive = categoriaActiva === cat.id;
+                  const IconComp = cat.icon;
+                  return (
+                    <button
+                      key={cat.id}
+                      onClick={() => setCategoriaActiva(isActive ? 'todos' : cat.id)}
+                      style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '6px',
+                        padding: '10px 16px',
+                        borderRadius: '12px',
+                        border: isActive ? '1.5px solid var(--rey)' : '1px solid var(--linea)',
+                        backgroundColor: isActive ? 'var(--marino)' : '#ffffff',
+                        color: isActive ? '#ffffff' : 'var(--marino)',
+                        fontSize: '0.88rem',
+                        fontWeight: isActive ? 750 : 600,
+                        cursor: 'pointer',
+                        whiteSpace: 'nowrap',
+                        transition: 'all 0.15s ease'
+                      }}>
+                        <IconComp size={16} color={isActive ? '#ffffff' : 'var(--rey)'} />
+                        <span>{cat.label}</span>
+                      </button>
+                    );
+                  })}
               </div>
+
+              <button
+                type="button"
+                onClick={handleScrollCategoriesRight}
+                title="Deslizar categorías a la derecha"
+                aria-label="Deslizar a la derecha"
+                style={{
+                  width: '34px',
+                  height: '34px',
+                  borderRadius: '50%',
+                  border: '1.5px solid var(--linea)',
+                  backgroundColor: '#ffffff',
+                  color: 'var(--marino)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 6px rgba(19, 42, 82, 0.1)',
+                  flexShrink: 0,
+                  fontSize: '1.1rem',
+                  fontWeight: 'bold',
+                  zIndex: 2,
+                  transition: 'all 0.15s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--marino)';
+                  e.currentTarget.style.color = '#ffffff';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.color = 'var(--marino)';
+                }}
+              >
+                ›
+              </button>
+            </div>
           </div>
 
           {/* Grid de Productos */}

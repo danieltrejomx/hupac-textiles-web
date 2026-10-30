@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import Script from 'next/script';
 import { useSearchParams } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -12,8 +13,11 @@ function CheckoutContent() {
   const searchParams = useSearchParams();
   const { cart, subtotal, totalItems, clearCart } = useCart();
 
-  const statusParam = searchParams.get('status');
-  const orderIdParam = searchParams.get('order_id');
+  const rawStatus = searchParams.get('status');
+  const collectionStatus = searchParams.get('collection_status');
+  const isApproved = rawStatus === 'success' || rawStatus === 'approved' || collectionStatus === 'approved';
+  const isFailure = rawStatus === 'failure' || rawStatus === 'rejected' || collectionStatus === 'rejected';
+  const orderIdParam = searchParams.get('order_id') || searchParams.get('external_reference') || searchParams.get('payment_id');
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -70,9 +74,27 @@ function CheckoutContent() {
   const detectedBrand = detectBrand(cardData.numero);
 
   useEffect(() => {
-    if (statusParam === 'success' && orderIdParam) {
+    if (isApproved && orderIdParam) {
       setOrderComplete(orderIdParam);
       clearCart();
+
+      // Recuperar datos del cliente y orden guardados antes de la redirección a pasarela
+      let storedCliente = formData;
+      let storedItems = cart;
+      let storedTotal = total;
+
+      try {
+        const savedOrderStr = localStorage.getItem('hupac_pending_order');
+        if (savedOrderStr) {
+          const parsed = JSON.parse(savedOrderStr);
+          if (parsed.cliente && parsed.cliente.email) storedCliente = parsed.cliente;
+          if (parsed.items && parsed.items.length > 0) storedItems = parsed.items;
+          if (parsed.total) storedTotal = parsed.total;
+          localStorage.removeItem('hupac_pending_order');
+        }
+      } catch (storageErr) {
+        console.warn('Error leyendo orden pendiente de localStorage:', storageErr);
+      }
 
       try {
         const orderRef = doc(db, 'orders', orderIdParam);
@@ -80,27 +102,28 @@ function CheckoutContent() {
           estadoPago: 'Aprobado (Mercado Pago)',
           fechaAprobacion: serverTimestamp()
         });
+      } catch (e) {
+        console.error('Error actualizando orden en Firebase:', e);
+      }
 
-        // Enviar correo de confirmación de pedido
+      // Enviar correo de confirmación de pedido
+      if (storedCliente?.email) {
         fetch('/api/send-confirmation-email', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             orderId: orderIdParam,
-            cliente: formData,
-            items: cart,
-            total,
+            cliente: storedCliente,
+            items: storedItems,
+            total: storedTotal,
             metodoPago: 'Mercado Pago'
           })
         }).catch(err => console.warn('Disparo de correo:', err));
-
-      } catch (e) {
-        console.error('Error actualizando orden:', e);
       }
-    } else if (statusParam === 'failure') {
+    } else if (isFailure) {
       setPaymentError('El pago fue rechazado o cancelado en Mercado Pago. Puedes intentarlo de nuevo.');
     }
-  }, [statusParam, orderIdParam]);
+  }, [rawStatus, collectionStatus, isApproved, isFailure, orderIdParam]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -229,6 +252,18 @@ function CheckoutContent() {
         orderId = docRef.id;
       } catch (dbErr) {
         console.warn('Firestore offline o credenciales demo, continuando con ID:', orderId, dbErr);
+      }
+
+      // Guardar datos en localStorage para recuperarlos al volver de Mercado Pago
+      try {
+        localStorage.setItem('hupac_pending_order', JSON.stringify({
+          orderId,
+          cliente: formData,
+          items: cart,
+          total
+        }));
+      } catch (storageErr) {
+        console.warn('No se pudo guardar la orden previa en localStorage:', storageErr);
       }
 
       // Crear Preferencia de Pago en Mercado Pago (solo precio del producto, sin IVA)
@@ -444,15 +479,21 @@ function CheckoutContent() {
                       fontWeight: 800,
                       fontSize: '0.86rem',
                       display: 'flex',
+                      flexDirection: 'column',
                       alignItems: 'center',
                       justifyContent: 'center',
-                      gap: '8px',
+                      gap: '4px',
                       cursor: 'pointer',
                       transition: 'all 0.15s ease'
                     }}
                   >
-                    <span>🏦</span>
-                    <span>Mercado Pago (SPEI / OXXO)</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <span>🏦</span>
+                      <span>Mercado Pago Oficial</span>
+                    </div>
+                    <span style={{ fontSize: '0.72rem', color: '#0369a1', fontWeight: 600 }}>
+                      ⚡ Tarjetas, SPEI, OXXO, Débito
+                    </span>
                   </button>
                 </div>
 
@@ -688,6 +729,7 @@ export default function CheckoutPage() {
   return (
     <>
       <Navbar />
+      <Script src="https://sdk.mercadopago.com/js/v2" strategy="afterInteractive" />
       <Suspense fallback={
         <div style={{ minHeight: '70vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <p style={{ fontSize: '1.2rem', color: 'var(--marino)', fontWeight: 700 }}>Cargando Checkout...</p>

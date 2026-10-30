@@ -315,12 +315,30 @@ export const FAQ_DATABASE: FAQItem[] = [
     ]
   },
   {
+    id: "BIE-000",
+    categoria: "Bienvenida",
+    keywords: ["como te llamas", "quien eres", "cual es tu nombre", "tu nombre", "nombre del bot", "quien habla", "eres viko", "viko"],
+    intencion: "Nombre e identidad del asistente",
+    respuesta: "¡Hola! Me llamo Viko y soy el asistente virtual oficial con inteligencia artificial de HUPAC TEXTILES. Estoy aquí para asesorarte en uniformes corporativos, prendas de trabajo, equipo de protección personal (EPP), calzado industrial y personalización textil.",
+    seguimiento: "¿En qué te puedo ayudar el día de hoy?",
+    links: [
+      { label: "Ver Catálogo de Uniformes", url: "/catalogo?catalogo=textil" },
+      { label: "Seguridad Industrial (EPP)", url: "/catalogo?catalogo=epc" }
+    ],
+    options: [
+      "Uniformes Corporativos",
+      "Seguridad Industrial (EPP)",
+      "Configurador 3D",
+      "Cotizar Pedido"
+    ]
+  },
+  {
     id: "BIE-003",
     categoria: "Bienvenida",
     keywords: ["robot", "bot", "inteligencia artificial", "eres una ia", "persona", "humano", "hablo con una persona", "automatico", "eres robot"],
     intencion: "Cliente pregunta si habla con un bot",
-    respuesta: "Sí, soy el Asistente Virtual oficial de Hupac Textiles y estoy aquí para brindarte información inmediata de nuestros productos, telas, precios y servicios en el sitio web. Si en algún momento prefieres hablar directamente con un asesor humano de nuestro equipo comercial, con gusto te canalizo de inmediato.",
-    seguimiento: "¿Quieres que continuemos por aquí o prefieres que te conecte con un asesor?",
+    respuesta: "¡Hola! Soy Viko, el Asistente Virtual oficial de HUPAC TEXTILES y estoy aquí para brindarte información inmediata de nuestros productos, telas, precios y servicios en el sitio web. Si en algún momento prefieres hablar directamente con un asesor humano de nuestro equipo comercial, con gusto te canalizo de inmediato.",
+    seguimiento: "¿Quieres que continuemos por aquí o prefieres que te conecte con un asesor por WhatsApp?",
     links: [
       { label: "Hablar con Asesor en WhatsApp", url: "https://wa.me/525612870780" }
     ]
@@ -330,7 +348,7 @@ export const FAQ_DATABASE: FAQItem[] = [
     categoria: "Bienvenida",
     keywords: ["horario", "abiertos", "hora atienden", "sabados", "atienden hoy", "dias de atencion", "a que hora abren", "hasta que hora"],
     intencion: "Horario de atención oficial",
-    respuesta: "Nuestro horario de atención oficial de oficinas y planta es de lunes a viernes de 9:00 a 19:00 hrs y sábados de 10:00 a 14:00 hrs. Yo, como asistente virtual, estoy disponible las 24 horas del día en el sitio web para resolver tus dudas y ayudarte a cotizar.",
+    respuesta: "Nuestro horario de atención oficial de oficinas y planta es de lunes a viernes de 9:00 a 19:00 hrs y sábados de 10:00 a 14:00 hrs. Yo, Viko, como asistente virtual, estoy disponible las 24 horas del día en el sitio web para resolver tus dudas y ayudarte a cotizar.",
     seguimiento: "¿Deseas dejar tu consulta lista para que el equipo comercial le dé seguimiento?",
     links: [
       { label: "Contactar en Horario Laboral", url: "https://wa.me/525612870780" }
@@ -482,7 +500,7 @@ export const FAQ_DATABASE: FAQItem[] = [
   {
     id: "UNI-006",
     categoria: "Uniformes",
-    keywords: ["playera", "playeras", "playera max", "playera prime", "playera premium", "stampa", "london", "subli", "cuello redondo", "manga larga", "tank top"],
+    keywords: ["playera", "playeras", "playera max", "playera prime", "playera premium", "stampa", "london", "subli", "cuello redondo", "manga larga"],
     intencion: "Modelos de playera",
     respuesta: "Contamos con varios modelos de playera:\n• Premium (34401): 100% algodón peinado, tacto suave premium.\n• Max (30038): 100% algodón peso completo resistente (200 g/m²).\n• Prime (30037): 100% algodón suave y fresca (155 g/m²).\n• Stampa (30039): Mezcla 50% algodón / 50% poliéster, ideal para serigrafía.\n• London (30040): 100% algodón con efecto jaspeado.\n• Subli (30041): 100% poliéster especial para sublimación.",
     seguimiento: "¿La playera es para personalizar con bordado o estampado, o la necesitas lisa?",

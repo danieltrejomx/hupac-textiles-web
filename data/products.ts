@@ -125,13 +125,13 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Impresión Directa (DTG)', 'Serigrafía', 'Termotransferencia'],
     imagenPrincipal: '/images/products/34401_playera_premium_caballero.jpg',
     colores: [
-      { nombre: 'Rey', hex: '#2456C4' },
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Heather', hex: '#c2c8d0' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Marino', hex: '#132A52' },
-      { nombre: 'Rojo', hex: '#B22234' },
-      { nombre: 'Vino', hex: '#5C1D24' }
+      { nombre: 'Rey', hex: '#2456C4', imagen: '/images/products/34401_playera_premium_caballero.jpg' },
+      { nombre: 'Blanco', hex: '#FFFFFF', imagen: '/images/products/34401_playera_premium_caballero_blanco.jpg' },
+      { nombre: 'Heather', hex: '#C2C8D0', imagen: '/images/products/34401_playera_premium_caballero_heather.jpg' },
+      { nombre: 'Negro', hex: '#17222B', imagen: '/images/products/34401_playera_premium_caballero_negro.jpg' },
+      { nombre: 'Marino', hex: '#132A52', imagen: '/images/products/34401_playera_premium_caballero_marino.jpg' },
+      { nombre: 'Rojo', hex: '#B22234', imagen: '/images/products/34401_playera_premium_caballero_rojo.jpg' },
+      { nombre: 'Vino', hex: '#5C1D24', imagen: '/images/products/34401_playera_premium_caballero_vino.jpg' }
     ],
     precios: {
       'CH-EG': {
@@ -358,63 +358,6 @@ export const PRODUCTS: Product[] = [
     precios: {
       'CH-EG': {
         Colores: { '12-71': 46.50, '72-503': 45.57, '504+': 44.18 }
-      }
-    }
-  },
-  {
-    id: '37326-playera-tank-top-caballero',
-    sku: '37326',
-    nombre: 'Playera Tank Top',
-    subtitulo: 'Caballero · Manga Corta · 150 g/m²',
-    descripcion: 'Playera sin mangas tipo Tank Top. Diseñada para actividades deportivas o uso cotidiano en exteriores de altas temperaturas.',
-    composicion: '100% Algodón',
-    gramaje: '150 g/m²',
-    tallas: ['CH', 'MD', 'GD', 'EG'],
-    detalles: ['Sin mangas', 'Sisas ribeteadas', 'Tacto suave'],
-    tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/products/37326_playera_tank_top_caballero.jpg',
-    colores: [
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Marino', hex: '#132A52' },
-      { nombre: 'Rojo', hex: '#B22234' },
-      { nombre: 'Rey', hex: '#2456C4' },
-      { nombre: 'Heather', hex: '#c2c8d0' }
-    ],
-    precios: {
-      'CH-EG': {
-        Colores: { '12-71': 33.60, '72-503': 32.93, '504+': 31.92 }
-      }
-    }
-  },
-  {
-    id: '32873-playera-tank-top-dama',
-    sku: '32873',
-    nombre: 'Playera Tank Top Dama',
-    subtitulo: 'Dama · 50% Algodón, 50% Poliéster · 140 g/m²',
-    descripcion: 'Camiseta sin mangas para dama con espalda atlética y tejido suave de peso extra ligero.',
-    composicion: '50% Algodón / 50% Poliéster',
-    gramaje: '140 g/m²',
-    tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
-    detalles: ['Corte olímpico espalda', 'Tejido jaspeado y liso', 'Ligereza excepcional'],
-    tecnicas: ['Serigrafía', 'Termotransferencia'],
-    imagenPrincipal: '/images/products/32873_playera_tank_top_dama.jpg',
-    colores: [
-      { nombre: 'Fiusha Neón', hex: '#FF007F' },
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Rojo', hex: '#B22234' },
-      { nombre: 'Rosa', hex: '#F3C4D3' },
-      { nombre: 'Morado', hex: '#5A2D63' },
-      { nombre: 'Turquesa', hex: '#3cc4d6' },
-      { nombre: 'Amarillo', hex: '#F5BE18' }
-    ],
-    precios: {
-      'CH-EG': {
-        Colores: { '12-71': 33.00, '72-503': 32.01, '504+': 31.35 }
-      },
-      '2EG': {
-        Colores: { '12-71': 36.00, '72-503': 34.92, '504+': 34.20 }
       }
     }
   },
@@ -1063,10 +1006,10 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Corte regular caballero', 'Cuello camisero formal estructurado', 'Aletilla con botones', 'Bolsa delantera en pecho', 'Manga con puño y botones ajustables', 'Tela resistente de fácil planchado'],
     tecnicas: ['Bordado', 'Termotransferencia'],
-    imagenPrincipal: '/images/products/35003_camisa_ml_pantalon_gabardina_caballero.jpg',
+    imagenPrincipal: '/images/products/35003_camisa_manga_larga_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Cielo', hex: '#7BA4D0' }
+      { nombre: 'Cielo', hex: '#EAF3FC' }
     ],
     precios: {
       'CH-2EG': {
@@ -1087,10 +1030,10 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Corte asiluetado dama', 'Pinzas de entalle frontal y trasero', 'Cuello camisero formal', 'Aletilla delantera con botones', 'Manga larga con puño y botón'],
     tecnicas: ['Bordado', 'Termotransferencia'],
-    imagenPrincipal: '/images/products/35001_camisa_ml_pantalon_gabardina_dama.jpg',
+    imagenPrincipal: '/images/products/35001_camisa_manga_larga_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Cielo', hex: '#7BA4D0' }
+      { nombre: 'Cielo', hex: '#EAF3FC' }
     ],
     precios: {
       'CH-2EG': {
@@ -1111,10 +1054,10 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Corte regular', 'Cuello camisero estructurado', 'Aletilla delantera con botones', 'Bolsa delantera en pecho', 'Manga corta con dobladillo fino'],
     tecnicas: ['Bordado', 'Termotransferencia'],
-    imagenPrincipal: '/images/products/35002_camisa_mc_pantalon_mezclilla_caballero.jpg',
+    imagenPrincipal: '/images/products/35002_camisa_manga_corta_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Cielo', hex: '#7BA4D0' }
+      { nombre: 'Cielo', hex: '#EAF3FC' }
     ],
     precios: {
       'CH-2EG': {
@@ -1135,10 +1078,10 @@ export const PRODUCTS: Product[] = [
     tallas: ['CH', 'MD', 'GD', 'EG', '2EG'],
     detalles: ['Corte asiluetado favorecedor', 'Cuello camisero formal', 'Aletilla delantera con botones', 'Manga corta con dobladillo', 'Costuras reforzadas'],
     tecnicas: ['Bordado', 'Termotransferencia'],
-    imagenPrincipal: '/images/products/35000_camisa_mc_pantalon_mezclilla_dama.jpg',
+    imagenPrincipal: '/images/products/35000_camisa_manga_corta_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Cielo', hex: '#7BA4D0' }
+      { nombre: 'Cielo', hex: '#EAF3FC' }
     ],
     precios: {
       'CH-2EG': {
@@ -1159,7 +1102,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['28', '30', '32', '34', '36', '38', '40', '42'],
     detalles: ['Corte regular recto caballero', 'Presillas en cintura para cinturón', '2 bolsas delanteras inclinadas', '2 bolsas traseras funcionales', 'Cierre metálico frontal', 'Costura de refuerzo interna en tiro'],
     tecnicas: ['Bordado'],
-    imagenPrincipal: '/images/products/35003_camisa_ml_pantalon_gabardina_caballero.jpg',
+    imagenPrincipal: '/images/products/51774_pantalon_gabardina_caballero.jpg',
     colores: [
       { nombre: 'Marino', hex: '#1A2B4C' },
       { nombre: 'Khaki', hex: '#C2B280' }
@@ -1183,7 +1126,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['05', '07', '09', '11', '13', '15'],
     detalles: ['Corte diseñado para anatomía dama', 'Presillas reforzadas en pretina', '2 bolsas delanteras y 2 traseras', 'Cierre metálico frontal resistente', 'Costura de refuerzo interna'],
     tecnicas: ['Bordado'],
-    imagenPrincipal: '/images/products/35001_camisa_ml_pantalon_gabardina_dama.jpg',
+    imagenPrincipal: '/images/products/51783_pantalon_gabardina_dama.jpg',
     colores: [
       { nombre: 'Marino', hex: '#1A2B4C' },
       { nombre: 'Khaki', hex: '#C2B280' }
@@ -1207,7 +1150,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['28', '30', '32', '34', '36', '38', '40', '42'],
     detalles: ['Mezclilla pesada de 14 oz/yd²', 'Corte regular vaquero', 'Presillas reforzadas en cintura', '5 bolsas tradicionales con relojera', 'Cierre metálico frontal de uso pesado', 'Costura de refuerzo interna'],
     tecnicas: ['Bordado'],
-    imagenPrincipal: '/images/products/35002_camisa_mc_pantalon_mezclilla_caballero.jpg',
+    imagenPrincipal: '/images/products/55151_jeans_vaquero_caballero.jpg',
     colores: [
       { nombre: 'Dark Stone', hex: '#26374A' }
     ],
@@ -1230,7 +1173,7 @@ export const PRODUCTS: Product[] = [
     tallas: ['05', '07', '09', '11', '13', '15'],
     detalles: ['Mezclilla confortable de 12 oz/yd²', 'Corte clásico para dama', '5 bolsas funcionales con remaches', 'Cierre frontal metálico', 'Costuras reforzadas en tiro'],
     tecnicas: ['Bordado'],
-    imagenPrincipal: '/images/products/35000_camisa_mc_pantalon_mezclilla_dama.jpg',
+    imagenPrincipal: '/images/products/55152_jeans_vaquero_dama.jpg',
     colores: [
       { nombre: 'Dark Stone', hex: '#26374A' }
     ],

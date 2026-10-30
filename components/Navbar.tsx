@@ -126,8 +126,8 @@ export default function Navbar() {
                 boxShadow: '0 2px 8px rgba(19, 42, 82, 0.08)',
                 transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
               }}
-              aria-label="Abrir Asistente Virtual HUPAC"
-              title="Hablar con Asistente Virtual HUPAC"
+              aria-label="Abrir Asistente Viko"
+              title="Hablar con Viko — Asistente HUPAC"
             >
               <div
                 style={{
@@ -136,7 +136,7 @@ export default function Navbar() {
                   borderRadius: '50%',
                   overflow: 'hidden',
                   backgroundColor: '#0B192C',
-                  border: '1.5px solid #38bdf8',
+                  border: '1.5px solid #2456C4',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -144,13 +144,13 @@ export default function Navbar() {
                 }}
               >
                 <img
-                  src="/images/asistente-hupac.jpg"
-                  alt="Asistente Virtual HUPAC"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
+                  src="/icon.png"
+                  alt="Viko — Logo HUPAC"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
-              <span style={{ fontSize: '13px', color: 'var(--marino)' }}>
-                Asistente Virtual
+              <span style={{ fontSize: '13px', color: 'var(--marino)', fontWeight: 700 }}>
+                Viko (Asistente AI)
               </span>
               <span
                 style={{
@@ -465,10 +465,10 @@ export default function Navbar() {
                 boxShadow: '0 2px 6px rgba(19, 42, 82, 0.08)'
               }}
             >
-              <div style={{ width: '24px', height: '24px', borderRadius: '50%', overflow: 'hidden', backgroundColor: '#0B192C', border: '1px solid #38bdf8' }}>
-                <img src="/images/asistente-hupac.jpg" alt="Asistente" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <div style={{ width: '24px', height: '24px', borderRadius: '50%', overflow: 'hidden', backgroundColor: '#0B192C', border: '1.5px solid #2456C4' }}>
+                <img src="/icon.png" alt="Viko — Logo HUPAC" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
-              Hablar con Asistente Virtual
+              Hablar con Viko (Asistente Virtual)
               <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#22c55e', boxShadow: '0 0 6px #22c55e' }} />
             </button>
             <Link href="/#cotizador" className="btn" style={{ width: '100%', justifyContent: 'center' }} onClick={() => setMenuOpen(false)}>

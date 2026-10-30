@@ -209,13 +209,12 @@ export default function ChatWidget() {
                 }}
               >
                 <img
-                  src="/images/asistente-hupac.jpg"
-                  alt="Viko — Asistente Virtual HUPAC"
+                  src="/icon.png"
+                  alt="Viko — Logo HUPAC"
                   style={{
                     width: '100%',
                     height: '100%',
-                    objectFit: 'cover',
-                    transform: 'scale(1.2)'
+                    objectFit: 'cover'
                   }}
                 />
               </div>
@@ -338,9 +337,9 @@ export default function ChatWidget() {
                       }}
                     >
                       <img
-                        src="/images/asistente-hupac.jpg"
-                        alt="Asistente Virtual HUPAC"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.2)' }}
+                        src="/icon.png"
+                        alt="Viko — Logo HUPAC"
+                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                       />
                     </div>
                   )}
@@ -493,13 +492,13 @@ export default function ChatWidget() {
                   }}
                 >
                   <img
-                    src="/images/asistente-hupac.jpg"
-                    alt="Asistente"
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scale(1.25)' }}
+                    src="/icon.png"
+                    alt="Viko — Logo HUPAC"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
                 </div>
                 <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--rey)', animation: 'pulse 1s infinite' }} />
-                El Asistente Hupac está escribiendo...
+                Viko está escribiendo...
               </div>
             )}
 
@@ -595,6 +594,72 @@ export default function ChatWidget() {
             </button>
           </div>
         </div>
+      )}
+
+      {/* Botón flotante para abrir a Viko desde cualquier parte de la web */}
+      {!isOpen && (
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          aria-label="Abrir asistente Viko"
+          title="Viko — Asistente HUPAC"
+          style={{
+            position: 'fixed',
+            bottom: '24px',
+            right: '24px',
+            zIndex: 9990,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            backgroundColor: 'var(--marino)',
+            color: '#ffffff',
+            border: '2px solid #2456C4',
+            borderRadius: '100px',
+            padding: '8px 18px 8px 8px',
+            boxShadow: '0 10px 28px rgba(19, 42, 82, 0.35)',
+            cursor: 'pointer',
+            transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = 'translateY(-2px) scale(1.03)';
+            e.currentTarget.style.boxShadow = '0 14px 32px rgba(19, 42, 82, 0.45)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = 'translateY(0) scale(1)';
+            e.currentTarget.style.boxShadow = '0 10px 28px rgba(19, 42, 82, 0.35)';
+          }}
+        >
+          <div
+            style={{
+              width: '40px',
+              height: '40px',
+              borderRadius: '50%',
+              backgroundColor: '#132A52',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              overflow: 'hidden',
+              border: '1.5px solid #ffffff',
+              flexShrink: 0
+            }}
+          >
+            <img
+              src="/icon.png"
+              alt="Viko — Logo HUPAC"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
+          </div>
+          <div style={{ textAlign: 'left' }}>
+            <span style={{ fontSize: '0.86rem', fontWeight: 800, display: 'block', lineHeight: 1.1 }}>
+              Viko
+            </span>
+            <span style={{ fontSize: '0.7rem', color: '#93c5fd', display: 'flex', alignItems: 'center', gap: '4px' }}>
+              <span style={{ width: '5px', height: '5px', borderRadius: '50%', backgroundColor: '#22c55e' }} />
+              Asistente HUPAC
+            </span>
+          </div>
+        </button>
       )}
     </>
   );
