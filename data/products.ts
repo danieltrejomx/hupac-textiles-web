@@ -319,14 +319,14 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Serigrafía', 'Impresión Directa (DTG)', 'Termotransferencia'],
     imagenPrincipal: '/images/products/31818_playera_prime_cuello_v_dama.jpg',
     colores: [
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Rojo', hex: '#B22234' },
-      { nombre: 'Amarillo', hex: '#F5BE18' },
-      { nombre: 'Rosa', hex: '#F3C4D3' },
-      { nombre: 'Aqua', hex: '#67C3CF' },
-      { nombre: 'Fiusha', hex: '#E6007E' },
-      { nombre: 'Morado', hex: '#5A2D63' }
+      { nombre: 'Blanco', hex: '#FFFFFF', imagen: '/images/products/31818_playera_prime_cuello_v_dama_blanco.jpg' },
+      { nombre: 'Negro', hex: '#17222B', imagen: '/images/products/31818_playera_prime_cuello_v_dama_negro.jpg' },
+      { nombre: 'Rojo', hex: '#B22234', imagen: '/images/products/31818_playera_prime_cuello_v_dama_rojo.jpg' },
+      { nombre: 'Amarillo', hex: '#F5BE18', imagen: '/images/products/31818_playera_prime_cuello_v_dama_amarillo.jpg' },
+      { nombre: 'Rosa', hex: '#F3C4D3', imagen: '/images/products/31818_playera_prime_cuello_v_dama_rosa.jpg' },
+      { nombre: 'Aqua', hex: '#67C3CF', imagen: '/images/products/31818_playera_prime_cuello_v_dama_aqua.jpg' },
+      { nombre: 'Fiusha', hex: '#E6007E', imagen: '/images/products/31818_playera_prime_cuello_v_dama_fiusha.jpg' },
+      { nombre: 'Morado', hex: '#5A2D63', imagen: '/images/products/31818_playera_prime_cuello_v_dama_morado.jpg' }
     ],
     precios: {
       'CH-EG': {
