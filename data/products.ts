@@ -223,7 +223,7 @@ export const PRODUCTS: Product[] = [
       { nombre: 'Marino', hex: '#132A52', imagen: '/images/products/32626_playera_polo_pique_dama_marino.jpg' },
       { nombre: 'Rojo', hex: '#B22234', imagen: '/images/products/32626_playera_polo_pique_dama_rojo.jpg' },
       { nombre: 'Rey', hex: '#2456C4', imagen: '/images/products/32626_playera_polo_pique_dama_rey.jpg' },
-      { nombre: 'Turquesa', hex: '#3cc4d6' },
+      { nombre: 'Turquesa', hex: '#3cc4d6', imagen: '/images/products/32626_playera_polo_pique_dama_turquesa.jpg' },
       { nombre: 'Amarillo', hex: '#F5BE18', imagen: '/images/products/32626_playera_polo_pique_dama_amarillo.jpg' },
       { nombre: 'Rosa', hex: '#F3C4D3', imagen: '/images/products/32626_playera_polo_pique_dama_rosa.jpg' },
       { nombre: 'Fiusha', hex: '#E6007E', imagen: '/images/products/32626_playera_polo_pique_dama_fiusha.jpg' },
