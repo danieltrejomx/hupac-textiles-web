@@ -217,19 +217,19 @@ export const PRODUCTS: Product[] = [
     tecnicas: ['Bordado', 'Serigrafía', 'Termotransferencia'],
     imagenPrincipal: '/images/products/32626_playera_polo_pique_dama.jpg',
     colores: [
-      { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Heather', hex: '#c2c8d0' },
-      { nombre: 'Negro', hex: '#17222B' },
-      { nombre: 'Marino', hex: '#132A52' },
-      { nombre: 'Rojo', hex: '#B22234' },
-      { nombre: 'Rey', hex: '#2456C4' },
+      { nombre: 'Blanco', hex: '#FFFFFF', imagen: '/images/products/32626_playera_polo_pique_dama_blanco.jpg' },
+      { nombre: 'Heather', hex: '#c2c8d0', imagen: '/images/products/32626_playera_polo_pique_dama_heather.jpg' },
+      { nombre: 'Negro', hex: '#17222B', imagen: '/images/products/32626_playera_polo_pique_dama_negro.jpg' },
+      { nombre: 'Marino', hex: '#132A52', imagen: '/images/products/32626_playera_polo_pique_dama_marino.jpg' },
+      { nombre: 'Rojo', hex: '#B22234', imagen: '/images/products/32626_playera_polo_pique_dama_rojo.jpg' },
+      { nombre: 'Rey', hex: '#2456C4', imagen: '/images/products/32626_playera_polo_pique_dama_rey.jpg' },
       { nombre: 'Turquesa', hex: '#3cc4d6' },
-      { nombre: 'Amarillo', hex: '#F5BE18' },
-      { nombre: 'Rosa', hex: '#F3C4D3' },
-      { nombre: 'Fiusha', hex: '#E6007E' },
-      { nombre: 'Naranja', hex: '#F97316' },
-      { nombre: 'Esmeralda', hex: '#0f9f6e' },
-      { nombre: 'Vino', hex: '#5C1D24' }
+      { nombre: 'Amarillo', hex: '#F5BE18', imagen: '/images/products/32626_playera_polo_pique_dama_amarillo.jpg' },
+      { nombre: 'Rosa', hex: '#F3C4D3', imagen: '/images/products/32626_playera_polo_pique_dama_rosa.jpg' },
+      { nombre: 'Fiusha', hex: '#E6007E', imagen: '/images/products/32626_playera_polo_pique_dama_fiusha.jpg' },
+      { nombre: 'Naranja', hex: '#F97316', imagen: '/images/products/32626_playera_polo_pique_dama_naranja.jpg' },
+      { nombre: 'Esmeralda', hex: '#0f9f6e', imagen: '/images/products/32626_playera_polo_pique_dama_esmeralda.jpg' },
+      { nombre: 'Vino', hex: '#5C1D24', imagen: '/images/products/32626_playera_polo_pique_dama_vino.jpg' }
     ],
     precios: {
       'CH-EG': {
