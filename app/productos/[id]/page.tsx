@@ -106,10 +106,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                   }}
                 />
                 
-                {/* Badge de Estilo */}
-                <span className="prod-tag" style={{ position: 'absolute', top: '16px', right: '16px' }}>
-                  {product.estilo || product.sku}
-                </span>
+
 
                 {/* Badge de Color Seleccionado */}
                 <div style={{
