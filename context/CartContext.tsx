@@ -19,6 +19,8 @@ interface CartContextType {
   addToCart: (item: Omit<CartItem, 'id'>) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, cantidad: number) => void;
+  updateItemColor: (id: string, newColor: { nombre: string; hex: string; imagen?: string }) => void;
+  updateItemSize: (id: string, newSize: string) => void;
   clearCart: () => void;
   isCartOpen: boolean;
   setIsCartOpen: (open: boolean) => void;
@@ -86,6 +88,60 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const updateItemColor = (id: string, newColor: { nombre: string; hex: string; imagen?: string }) => {
+    setCart((prevCart) => {
+      const itemIndex = prevCart.findIndex((item) => item.id === id);
+      if (itemIndex === -1) return prevCart;
+
+      const currentItem = prevCart[itemIndex];
+      const newId = `${currentItem.productId}-${newColor.nombre}-${currentItem.talla}`;
+      if (newId === id) return prevCart;
+
+      const existingIndex = prevCart.findIndex((item) => item.id === newId);
+      if (existingIndex > -1) {
+        const updated = [...prevCart];
+        updated[existingIndex].cantidad += currentItem.cantidad;
+        return updated.filter((_, idx) => idx !== itemIndex);
+      } else {
+        const updated = [...prevCart];
+        updated[itemIndex] = {
+          ...currentItem,
+          id: newId,
+          color: newColor.nombre,
+          colorHex: newColor.hex,
+          imagen: newColor.imagen || currentItem.imagen,
+        };
+        return updated;
+      }
+    });
+  };
+
+  const updateItemSize = (id: string, newSize: string) => {
+    setCart((prevCart) => {
+      const itemIndex = prevCart.findIndex((item) => item.id === id);
+      if (itemIndex === -1) return prevCart;
+
+      const currentItem = prevCart[itemIndex];
+      const newId = `${currentItem.productId}-${currentItem.color}-${newSize}`;
+      if (newId === id) return prevCart;
+
+      const existingIndex = prevCart.findIndex((item) => item.id === newId);
+      if (existingIndex > -1) {
+        const updated = [...prevCart];
+        updated[existingIndex].cantidad += currentItem.cantidad;
+        return updated.filter((_, idx) => idx !== itemIndex);
+      } else {
+        const updated = [...prevCart];
+        updated[itemIndex] = {
+          ...currentItem,
+          id: newId,
+          talla: newSize,
+        };
+        return updated;
+      }
+    });
+  };
+
   const clearCart = () => {
     setCart([]);
   };
@@ -100,6 +156,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         addToCart,
         removeFromCart,
         updateQuantity,
+        updateItemColor,
+        updateItemSize,
         clearCart,
         isCartOpen,
         setIsCartOpen,

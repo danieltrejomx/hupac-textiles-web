@@ -43,7 +43,7 @@ const CATEGORIAS_CONFIG: CategoriaConfig[] = [
   { id: 'vial', label: 'Limitación Vial', icon: IconVial, catalogo: 'epc' },
 ];
 
-function ProductCatalogCard({ prod, handleQuickAdd }: { prod: Product; handleQuickAdd: (e: React.MouseEvent, p: Product) => void }) {
+function ProductCatalogCard({ prod, handleQuickAdd }: { prod: Product; handleQuickAdd: (e: React.MouseEvent, p: Product, color?: { nombre: string; hex: string; imagen?: string }) => void }) {
   const [selectedColor, setSelectedColor] = useState(prod.colores?.[0]);
   const activeImg = selectedColor?.imagen || prod.imagenPrincipal;
 
@@ -115,42 +115,49 @@ function ProductCatalogCard({ prod, handleQuickAdd }: { prod: Product; handleQui
 
           {/* Color swatches */}
           {prod.colores && prod.colores.length > 0 && (
-            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center', marginBottom: '14px' }}>
-              {prod.colores.slice(0, 8).map((c, i) => {
-                const isSelected = selectedColor?.nombre === c.nombre;
-                return (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setSelectedColor(c);
-                    }}
-                    onMouseEnter={() => {
-                      if (c.imagen) setSelectedColor(c);
-                    }}
-                    style={{
-                      width: isSelected ? '18px' : '14px',
-                      height: isSelected ? '18px' : '14px',
-                      borderRadius: '50%',
-                      backgroundColor: c.hex,
-                      border: isSelected ? '2px solid var(--rey)' : (c.hex === '#FFFFFF' ? '1px solid #cbd5e1' : '1px solid rgba(0,0,0,0.12)'),
-                      boxShadow: isSelected ? '0 0 0 2px rgba(36,86,196,0.25)' : 'none',
-                      cursor: 'pointer',
-                      padding: 0,
-                      transition: 'all 0.15s ease',
-                      outline: 'none'
-                    }}
-                    title={c.nombre}
-                    aria-label={`Seleccionar color ${c.nombre}`}
-                  />
-                );
-              })}
-              {prod.colores.length > 8 && (
-                <span style={{ fontSize: '0.72rem', color: 'var(--texto-2)', fontWeight: 600 }}>
-                  +{prod.colores.length - 8}
+            <div style={{ marginBottom: '14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                <span style={{ fontSize: '0.74rem', color: 'var(--texto-2)', fontWeight: 600 }}>
+                  Color: <strong style={{ color: 'var(--marino)' }}>{selectedColor?.nombre || ''}</strong>
                 </span>
-              )}
+                {prod.colores.length > 8 && (
+                  <span style={{ fontSize: '0.72rem', color: 'var(--texto-2)', fontWeight: 600 }}>
+                    +{prod.colores.length - 8}
+                  </span>
+                )}
+              </div>
+              <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
+                {prod.colores.slice(0, 8).map((c, i) => {
+                  const isSelected = selectedColor?.nombre === c.nombre;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setSelectedColor(c);
+                      }}
+                      onMouseEnter={() => {
+                        if (c.imagen) setSelectedColor(c);
+                      }}
+                      style={{
+                        width: isSelected ? '18px' : '14px',
+                        height: isSelected ? '18px' : '14px',
+                        borderRadius: '50%',
+                        backgroundColor: c.hex,
+                        border: isSelected ? '2px solid var(--rey)' : (c.hex === '#FFFFFF' ? '1px solid #cbd5e1' : '1px solid rgba(0,0,0,0.12)'),
+                        boxShadow: isSelected ? '0 0 0 2px rgba(36,86,196,0.25)' : 'none',
+                        cursor: 'pointer',
+                        padding: 0,
+                        transition: 'all 0.15s ease',
+                        outline: 'none'
+                      }}
+                      title={c.nombre}
+                      aria-label={`Seleccionar color ${c.nombre}`}
+                    />
+                  );
+                })}
+              </div>
             </div>
           )}
         </div>
@@ -194,7 +201,7 @@ function ProductCatalogCard({ prod, handleQuickAdd }: { prod: Product; handleQui
             </Link>
 
             <button
-              onClick={(e) => handleQuickAdd(e, prod)}
+              onClick={(e) => handleQuickAdd(e, prod, selectedColor)}
               style={{
                 padding: '10px 12px',
                 borderRadius: '10px',
@@ -262,12 +269,12 @@ function CatalogoContent() {
     }
   }, [catParam]);
 
-  const handleQuickAdd = (e: React.MouseEvent, prod: Product) => {
+  const handleQuickAdd = (e: React.MouseEvent, prod: Product, customColor?: { nombre: string; hex: string; imagen?: string }) => {
     e.preventDefault();
     e.stopPropagation();
 
-    const color = prod.colores[0];
-    const talla = prod.tallas[0] || 'UNICA';
+    const color = customColor || prod.colores?.[0];
+    const talla = prod.tallas?.[0] || 'UNICA';
     const unitPrice = prod.precioDirecto || (prod.precios && Object.values(prod.precios)[0] ? 50 : 100);
 
     addToCart({

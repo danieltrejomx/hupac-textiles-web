@@ -2,9 +2,10 @@
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
 import { IconCart } from '@/components/Icons';
+import { getProductById } from '@/data/products';
 
 export default function CartDrawer() {
-  const { cart, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, subtotal, totalItems } = useCart();
+  const { cart, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, updateItemColor, updateItemSize, subtotal, totalItems } = useCart();
 
   if (!isCartOpen) return null;
 
@@ -97,40 +98,100 @@ export default function CartDrawer() {
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {cart.map((item) => (
-                <div 
-                  key={item.id}
-                  style={{
-                    display: 'flex',
-                    gap: '14px',
-                    padding: '14px',
-                    borderRadius: '12px',
-                    backgroundColor: '#f8fafc',
-                    border: '1px solid #e2e8f0',
-                    alignItems: 'center'
-                  }}
-                >
-                  <img 
-                    src={item.imagen} 
-                    alt={item.nombre} 
-                    style={{ width: '64px', height: '64px', objectFit: 'contain', backgroundColor: '#ffffff', borderRadius: '8px', padding: '4px', border: '1px solid #e2e8f0' }}
-                  />
+              {cart.map((item) => {
+                const prod = getProductById(item.productId);
+                return (
+                  <div 
+                    key={item.id}
+                    style={{
+                      display: 'flex',
+                      gap: '14px',
+                      padding: '14px',
+                      borderRadius: '12px',
+                      backgroundColor: '#f8fafc',
+                      border: '1px solid #e2e8f0',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <img 
+                      src={item.imagen} 
+                      alt={item.nombre} 
+                      style={{ width: '64px', height: '64px', objectFit: 'contain', backgroundColor: '#ffffff', borderRadius: '8px', padding: '4px', border: '1px solid #e2e8f0' }}
+                    />
 
-                  <div style={{ flex: 1 }}>
-                    <h4 style={{ fontSize: '0.9rem', color: 'var(--marino)', margin: '0 0 4px 0', fontWeight: 700 }}>
-                      {item.nombre}
-                    </h4>
-                    
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'var(--texto-2)', marginBottom: '8px' }}>
-                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                        <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: item.colorHex, border: item.colorHex === '#FFFFFF' ? '1px solid #94a3b8' : 'none' }} />
-                        {item.color}
-                      </span>
-                      <span>•</span>
-                      <span>Talla: <strong>{item.talla}</strong></span>
-                    </div>
+                    <div style={{ flex: 1 }}>
+                      <h4 style={{ fontSize: '0.9rem', color: 'var(--marino)', margin: '0 0 4px 0', fontWeight: 700 }}>
+                        {item.nombre}
+                      </h4>
+                      
+                      {/* Color y Talla con Selectores Interactivos */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginBottom: '8px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--texto-2)', flexWrap: 'wrap', gap: '6px' }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+                            <span style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: item.colorHex, border: item.colorHex === '#FFFFFF' ? '1px solid #94a3b8' : 'none' }} />
+                            Color: <strong style={{ color: 'var(--marino)' }}>{item.color}</strong>
+                          </span>
 
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          {prod && prod.tallas && prod.tallas.length > 1 ? (
+                            <label style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', fontSize: '0.78rem' }}>
+                              <span>Talla:</span>
+                              <select
+                                value={item.talla}
+                                onChange={(e) => updateItemSize(item.id, e.target.value)}
+                                style={{
+                                  fontSize: '0.75rem',
+                                  fontWeight: 700,
+                                  color: 'var(--marino)',
+                                  backgroundColor: '#ffffff',
+                                  border: '1px solid #cbd5e1',
+                                  borderRadius: '4px',
+                                  padding: '1px 6px',
+                                  cursor: 'pointer',
+                                  outline: 'none'
+                                }}
+                              >
+                                {prod.tallas.map((t) => (
+                                  <option key={t} value={t}>{t}</option>
+                                ))}
+                              </select>
+                            </label>
+                          ) : (
+                            <span>Talla: <strong>{item.talla}</strong></span>
+                          )}
+                        </div>
+
+                        {/* Swatches de Color en el Carrito */}
+                        {prod && prod.colores && prod.colores.length > 1 && (
+                          <div style={{ display: 'flex', gap: '5px', flexWrap: 'wrap', alignItems: 'center', paddingTop: '2px' }}>
+                            {prod.colores.map((c, cIdx) => {
+                              const isSelected = item.color === c.nombre;
+                              return (
+                                <button
+                                  key={cIdx}
+                                  type="button"
+                                  onClick={() => updateItemColor(item.id, c)}
+                                  title={`Cambiar a color ${c.nombre}`}
+                                  aria-label={`Cambiar a color ${c.nombre}`}
+                                  style={{
+                                    width: isSelected ? '18px' : '13px',
+                                    height: isSelected ? '18px' : '13px',
+                                    borderRadius: '50%',
+                                    backgroundColor: c.hex,
+                                    border: isSelected ? '2px solid var(--rey)' : (c.hex === '#FFFFFF' ? '1px solid #cbd5e1' : '1px solid rgba(0,0,0,0.15)'),
+                                    boxShadow: isSelected ? '0 0 0 2px rgba(36,86,196,0.35)' : 'none',
+                                    cursor: 'pointer',
+                                    padding: 0,
+                                    transition: 'all 0.15s ease',
+                                    outline: 'none'
+                                  }}
+                                />
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       {/* Quantity Controls */}
                       <div style={{ display: 'inline-flex', alignItems: 'center', border: '1px solid #cbd5e1', borderRadius: '6px', backgroundColor: '#ffffff', overflow: 'hidden' }}>
                         <button 
@@ -164,9 +225,10 @@ export default function CartDrawer() {
                     🗑️
                   </button>
                 </div>
-              ))}
-            </div>
-          )}
+              );
+            })}
+          </div>
+        )}
         </div>
 
         {/* Footer / Summary */}
