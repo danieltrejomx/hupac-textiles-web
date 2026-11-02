@@ -132,7 +132,7 @@ const COLORES_POLO_PLAYERA: ColorOption[] = [
 
 const COLORES_CAMISA: ColorOption[] = [
   { c: '#FFFFFF', n: 'Blanco Clásico', rgb: null, textColor: '#17232F' },
-  { c: '#EAF3FC', n: 'Azul Cielo Tenue (Oxford)', rgb: [240, 247, 255], textColor: '#132A52' },
+  { c: '#7CAEE3', n: 'Azul Cielo Oxford', rgb: [124, 174, 227], textColor: '#132A52' },
   { c: '#22262E', n: 'Negro Profundo', rgb: [34, 38, 46], textColor: '#FFFFFF' },
 ];
 
