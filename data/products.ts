@@ -1009,7 +1009,7 @@ export const PRODUCTS: Product[] = [
     imagenPrincipal: '/images/products/35003_camisa_manga_larga_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Cielo', hex: '#7CAEE3' }
+      { nombre: 'Cielo', hex: '#A4C8EA' }
     ],
     precios: {
       'CH-2EG': {
@@ -1033,7 +1033,7 @@ export const PRODUCTS: Product[] = [
     imagenPrincipal: '/images/products/35001_camisa_manga_larga_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Cielo', hex: '#7CAEE3' }
+      { nombre: 'Cielo', hex: '#A4C8EA' }
     ],
     precios: {
       'CH-2EG': {
@@ -1057,7 +1057,7 @@ export const PRODUCTS: Product[] = [
     imagenPrincipal: '/images/products/35002_camisa_manga_corta_caballero.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Cielo', hex: '#7CAEE3' }
+      { nombre: 'Cielo', hex: '#A4C8EA' }
     ],
     precios: {
       'CH-2EG': {
@@ -1081,7 +1081,7 @@ export const PRODUCTS: Product[] = [
     imagenPrincipal: '/images/products/35000_camisa_manga_corta_dama.jpg',
     colores: [
       { nombre: 'Blanco', hex: '#FFFFFF' },
-      { nombre: 'Cielo', hex: '#7CAEE3' }
+      { nombre: 'Cielo', hex: '#A4C8EA' }
     ],
     precios: {
       'CH-2EG': {
