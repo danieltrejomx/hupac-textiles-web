@@ -143,7 +143,7 @@ export default function ServiciosPage() {
           zIndex: 1,
           maxWidth: '1260px',
           margin: '-10px auto 0 auto',
-          padding: '0 20px 48px 20px',
+          padding: '0 clamp(10px, 2.5vw, 20px) 48px clamp(10px, 2.5vw, 20px)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
@@ -154,7 +154,7 @@ export default function ServiciosPage() {
             backgroundColor: '#ffffff',
             border: '1px solid var(--linea)',
             borderRadius: '24px',
-            padding: '26px 36px 32px 36px',
+            padding: 'clamp(18px, 3.5vw, 28px) clamp(14px, 3.5vw, 36px)',
             width: '100%',
             position: 'relative',
             boxShadow: '0 12px 36px rgba(19, 42, 82, 0.07)'
@@ -237,7 +237,7 @@ export default function ServiciosPage() {
                 boxShadow: '0 8px 30px rgba(19, 42, 82, 0.12)',
                 border: '1px solid #1e293b'
               }}>
-                <TecnicaAnimacion id={activeTecnicaId} height={320} />
+                <TecnicaAnimacion id={activeTecnicaId} height="clamp(260px, 46vw, 340px)" />
               </div>
 
               {/* Barra de descripción y botón de especificaciones */}
