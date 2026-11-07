@@ -119,14 +119,6 @@ export function AnimacionBordado({ uid: propUid }: AnimProps) {
             0%, 100% { -webkit-transform: scaleX(1) translate3d(0, 0, 0); transform: scaleX(1) translate3d(0, 0, 0); }
             50% { -webkit-transform: scaleX(1.2) translate3d(-1px, 0, 0); transform: scaleX(1.2) translate3d(-1px, 0, 0); }
           }
-          @-webkit-keyframes laserPulse_${uid} {
-            0%, 100% { opacity: 0.65; -webkit-transform: scale(1); transform: scale(1); }
-            50% { opacity: 1; -webkit-transform: scale(1.25); transform: scale(1.25); }
-          }
-          @keyframes laserPulse_${uid} {
-            0%, 100% { opacity: 0.65; -webkit-transform: scale(1); transform: scale(1); }
-            50% { opacity: 1; -webkit-transform: scale(1.25); transform: scale(1.25); }
-          }
           @-webkit-keyframes satinGrowth_${uid} {
             0% { stroke-dashoffset: 600; }
             100% { stroke-dashoffset: 0; }
@@ -249,24 +241,6 @@ export function AnimacionBordado({ uid: propUid }: AnimProps) {
             <text x="250" y="171" textAnchor="middle" fill="#ffffff" fontSize="7.5" fontWeight="900" fontFamily="sans-serif" letterSpacing="2.5">
               HUPAC
             </text>
-          </g>
-
-          {/* Puntero Láser CNC */}
-          <g
-            transform="translate(250, 148)"
-            filter={`url(#${laserGlowId})`}
-            className={`anim-node-${uid}`}
-            style={{
-              WebkitAnimation: `laserPulse_${uid} 1.5s infinite ease-in-out`,
-              animation: `laserPulse_${uid} 1.5s infinite ease-in-out`,
-              WebkitTransformOrigin: 'center',
-              transformOrigin: '250px 148px',
-              transformBox: 'view-box'
-            }}
-          >
-            <circle cx="0" cy="0" r="2.5" fill="#ef4444" />
-            <line x1="-10" y1="0" x2="10" y2="0" stroke="#ef4444" strokeWidth="1" opacity="0.8" />
-            <line x1="0" y1="-10" x2="0" y2="10" stroke="#ef4444" strokeWidth="1" opacity="0.8" />
           </g>
         </g>
 
